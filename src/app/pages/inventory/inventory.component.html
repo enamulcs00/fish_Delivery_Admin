@@ -1,0 +1,199 @@
+<div class="row">
+    <!-- Column -->
+  
+  
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">  
+            <div class="table-responsive">
+              <table class="table v-middle product-overview" id="zero_config">
+                <thead>
+                  <tr>
+                    <th>Food Name</th>
+                    <th>Food Id</th>                                  
+                    <th>Food Cost</th>                                  
+                    <th>Required Quantity</th>                 
+                    <th>Current Quantity</th>                  
+                    <th class="text-nowrap">Food Quantity</th>
+                    <th class="text-nowrap">Limit Food Quantity</th>
+                    <th class="text-nowrap">Total Available Ingredients  </th>
+                    <th class="text-nowrap">Normal Stock</th>
+                    <th class="text-nowrap">Low Stock</th>                   
+                    <th class="text-nowrap">Out of Stock</th>                   
+                    <th class="text-nowrap">Maximum Puchase Quantity</th>
+                    <th class="text-nowrap">Price</th>
+                    <th class="text-nowrap">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>                    
+                    <td>Soya Chap</td>
+                    <td>#4554</td>
+                    <td>$10</td>
+                    <td>20</td>
+                    <td>10</td>
+                    <td>10</td>
+                    <td>10</td> 
+                    <td>5</td>
+                    <td>10</td> 
+                    <td>10</td> 
+                    <td>20</td>
+                    <td>20</td>
+                    <td>$20</td>
+                    
+                    <td>
+                      <div class="d-flex">
+                        <button class="btn btn-primary mr-2" (click)="inventoryModal(inventory)"><i class="ti-pencil"></i>
+                        </button>
+                        <button class="btn btn-danger" (click)="boxDeleteModal(boxDelete)"><i class="ti-trash"></i>
+                        </button>
+                      </div>
+                    
+                    </td>
+                  </tr>              
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Column -->
+    </div>
+    <ng-template #inventory let-modal>
+      <div class="modal-body">
+        <div class="card">
+          <form action="#">
+            <div class="form-body">
+              <div class="card-body">
+                <div class="row p-t-20">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label"> Name</label>
+                      <input type="text" id="firstName" class="form-control" placeholder="John doe">
+  
+                    </div>
+                  </div>                              
+                  <!--/span-->
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label">Partner ID</label>
+                      <input type="text" id="Partner_ID" class="form-control" placeholder="#San445">
+  
+                    </div>
+                  </div>
+                </div>
+                <!--/row-->
+                <div class="row ">
+                
+                  <!--/span-->
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label">Total Orders</label>
+                      <input type="number" id="orders" class="form-control" placeholder="total Orders">
+  
+                    </div>
+                  </div>
+                  <!--/span-->
+                  <div class="col-md-6">
+                    <div class="form-group has-danger">
+                      <label class="control-label">Hold Orders</label>
+                      <input type="number" id="hold" class="form-control form-control-danger" placeholder="20">
+                    </div>
+                  </div>
+                  <!--/span-->
+                  <div class="col-md-6">
+                    <div class="form-group has-danger">
+                      <label class="control-label">Cancelled Orders</label>
+                      <input type="number" id="Cancelled_Orders" class="form-control form-control-danger" placeholder="10">
+                    </div>
+                  </div>
+                  <!--/span-->
+                  <div class="col-md-6">
+                    <div class="form-group has-danger">
+                      <label class="control-label">Cancelled Orders</label>
+                      <input type="number" id="email" class="form-control form-control-danger" placeholder="00">
+                    </div>
+                  </div>
+                  <!--/span-->
+                  <div class="col-md-6">
+                    <div class="form-group has-danger">
+                      <label class="control-label">Low Stock</label>
+                      <input type="number" id="Low_in_Stock" class="form-control form-control-danger" placeholder="40">
+                    </div>
+                  </div>
+                  <!--/span-->
+                  <div class="col-md-6">
+                    <div class="form-group has-danger">
+                      <label class="control-label">Normal Stock</label>
+                      <input type="number" id="Low_in_Stock" class="form-control form-control-danger" placeholder="5">
+                    </div>
+                  </div>
+                 <!--/span-->
+                  <div class="col-md-6">
+                    <div class="form-group has-danger">
+                      <label class="control-label">Out of Stock</label>
+                      <input type="number" id="Out_of_Stock" class="form-control form-control-danger" placeholder="Out of Stock">
+                    </div>
+                  </div>
+                  <!--/span-->
+                  <div class="col-md-6">
+                    <div class="form-group has-danger">
+                      <label class="control-label">Current Quantity</label>
+                      <input type="number" id="Current_Quantity" class="form-control form-control-danger" placeholder="Current Quantity">
+                    </div>
+                  </div>
+                  <!--/span-->
+                  <div class="col-md-6">
+                    <div class="form-group has-danger">
+                      <label class="control-label">Maximum Puchase Quantity</label>
+                      <input type="number" id="Maximum_Puchase" class="form-control form-control-danger" placeholder="Maximum Puchase Quantity">
+                    </div>
+                  </div>
+                  <!--/span-->
+                  <div class="col-md-6">
+                    <div class="form-group has-danger">
+                      <label class="control-label">Total Available Ingredients</label>
+                      <input type="number" id="Maximum_Puchase" class="form-control form-control-danger" placeholder="Total Available Ingredients">
+                    </div>
+                  </div>
+                  <!--/span-->
+                  <div class="col-md-6">
+                    <div class="form-group has-danger">
+                      <label class="control-label">Price</label>
+                      <input type="number" id="Price" class="form-control form-control-danger" placeholder="Price">
+                    </div>
+                  </div>
+                  <!--/span-->
+                </div>
+                <!--/row-->
+              </div>
+  
+              <div class="form-actions">
+                <div class="card-body">
+                  <button type="submit" class="btn btn-primary mr-3" (click)="modal.dismiss('Cross click')">
+                    <i class="fa fa-check"></i> Update</button>
+                  <button type="button" class="btn btn-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+  
+      </div>
+    </ng-template>
+  
+    <!-- delete modal -->
+    <ng-template #boxDelete let-modal>
+      <div class="modal-body">
+        <p>Are You Sure want to delete this user?</p>
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary mr-2" aria-label="Close"
+            (click)="modal.dismiss('Cross click')">Yes</button>
+          <button type="button" class="btn btn-seconadary" aria-label="Close"
+            (click)="modal.dismiss('Cross click')">No</button>
+        </div>
+      </div>
+    </ng-template>
+  

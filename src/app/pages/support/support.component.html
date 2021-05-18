@@ -1,0 +1,63 @@
+<ul ngbNav #nav="ngbNav" class="nav-tabs">
+    <li ngbNavItem>
+      <a ngbNavLink>Complaints</a>
+      <ng-template ngbNavContent>
+          <div class="row mt-2">
+            <div class="col-md-4">
+                <form>
+                  <div class="mb-2">
+                    <input type="text" class="form-control" id="prenametext" placeholder="Search">
+                  </div>
+                </form>
+              </div>
+          </div>
+      <div class="table-responsive">
+          <table class="table">
+              <tr>
+                  <th>Name</th>
+                  <th>Contact</th>
+                  <th>Email</th>
+                  <th>Message</th>
+              </tr>
+              <tr>
+                  <td>John</td>
+                  <td class="text-nowrap">+91-43434343</td>
+                  <td>john@example.com</td>
+                  <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni voluptas in hic assumenda dolor non aspernatur odio aperiam, tempora harum quasi aliquid sapiente? Maiores quae rerum, qui ex aspernatur vero?</td>
+              </tr>
+          </table>
+      </div>
+      </ng-template>
+    </li>
+    <li ngbNavItem>
+      <a ngbNavLink>Queries </a>
+      <ng-template ngbNavContent>
+        <div class="row mt-2">
+            <div class="col-md-4">
+                <form>
+                  <div class="mb-2">
+                    <input type="text" class="form-control" id="prenametext" placeholder="Search">
+                  </div>
+                </form>
+              </div>
+          </div>
+        <div class="table-responsive"> 
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>Message</th>
+            </tr>
+            <tr>
+                <td>Sandy</td>
+                <td class="text-nowrap">+91-43434343</td>
+                <td>john@example.com</td>
+                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni voluptas in hic assumenda dolor non aspernatur odio aperiam, tempora harum quasi aliquid sapiente? Maiores quae rerum, qui ex aspernatur vero?</td>
+            </tr>
+        </table>
+    </div>
+      </ng-template>
+    </li>
+  </ul>
+  <div [ngbNavOutlet]="nav"></div>

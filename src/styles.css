@@ -1,0 +1,103 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.theme_btn {
+    background: #3591FF;
+    color: #fff !important;
+    cursor: pointer;
+}
+
+.dlt_btn {
+    background: #ef6e6e;
+    color: #fff !important;
+    padding-right: 1px;
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.dlt_btn i {
+    font-size: 17px;
+}
+
+.cstm_tabs {
+    border: 2px solid #3591FF !important;
+    border-bottom: 0px !important;
+}
+
+.ord_tab_hd {
+    border: 0px !important;
+    color: #fff;
+    background: #3591FF;
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+}
+
+.ord_tab_hd:hover {
+    color: #fff;
+}
+
+.ord_tab_hd.active {
+    color: #3591FF !important;
+    background: #fff !important;
+    /* border-bottom: 2px solid #fff !important; */
+}
+
+.sidebar-nav ul .sidebar-item .first-level .sidebar-item.active .sidebar-link {
+    color: #3591FF;
+    font-weight: bold;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+    background-color: #92c1fa !important;
+}
+
+.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+    background-color: #3591FF !important;
+}
+
+.btn-danger {
+    font-size: 17px !important;
+    padding: 5px 10px !important;
+}
+
+
+/* .logo-text {
+  width: 120px;
+  text-align: left;
+  overflow: hidden;
+} */

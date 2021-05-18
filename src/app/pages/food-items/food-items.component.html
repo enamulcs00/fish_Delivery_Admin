@@ -1,0 +1,385 @@
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12 text-right mb-5">
+        <div class="add-categories ">
+          <button class="btn btn-seconadary mb-2" (click)="addCategoryModel(addCategory)"><i class="sl-icon-plus"></i>
+            Add Food Items</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="row">
+        <div class="col-md-2">
+          <img width="150px" class="mr-2" src="assets/images/food/1.jpg" alt="">
+        </div>
+        <div class="col-md-3">
+          <h3 class="mb-0"> Champ </h3>
+          <p>Category : Fast Food </p>
+          <p>Sub-Category : Soya Chap </p>
+          <p>Quantity : 10/pc</p>
+        <p>Price : <i class="fas fa-euro-sign"></i>11/inc tax </p>
+
+        </div>
+        <div class="col-md-5">
+          <label>Description</label>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos voluptatem, recusandae quibusdam.</p>
+        </div>
+        <div class="col-md-2 text-right">
+          <div class="delete-categories">
+            <span class="btn btn-primary mr-2" (click)="editBoxModal(editModel)"><i class="ti-marker-alt"></i> </span>
+            <span class="btn btn-danger" (click)="deleteBoxModal(deleteBox)"><i class="ti-trash"></i> </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- edit user detail -->
+<ng-template #addsubCategory let-modal>
+  <div class="modal-body">
+    <div class="card">
+      <form action="#">
+        <div class="form-body">
+          <div class="card-body">
+            <div class="row p-t-20">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label">Name</label>
+                  <input type="text" id="firstName" class="form-control" placeholder="John doe">
+
+                </div>
+              </div>
+              <!--/span-->
+              <div class="col-md-6">
+                <div class="form-group has-success">
+                  <div class="form-group">
+                    <label class="control-label">Upload Food Image</label>
+                    <div class="custom-file"><input class="custom-file-input" id="inputGroupFile01" type="file"><label
+                        class="custom-file-label" for="inputGroupFile01">Choose file</label></div>
+                  </div>
+                </div>
+              </div>
+              <!--/span-->
+            </div>
+            <!--/row-->
+          </div>
+          <div class="form-actions">
+            <div class="card-body">
+              <button type="submit" class="btn btn-success mr-3" (click)="modal.dismiss('Cross click')">
+                <i class="fa fa-check"></i> Update</button>
+              <button type="button" class="btn btn-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</ng-template>
+
+<!-- delete modal -->
+<ng-template #deleteBox let-modal>
+  <div class="modal-body">
+    <p>Are You Sure want to delete this user?</p>
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary mr-2" aria-label="Close"
+        (click)="modal.dismiss('Cross click')">Yes</button>
+      <button type="button" class="btn btn-seconadary" aria-label="Close"
+        (click)="modal.dismiss('Cross click')">No</button>
+    </div>
+  </div>
+</ng-template>
+
+
+
+
+
+<!-- edit user detail -->
+<ng-template #addsubCategory let-modal>
+  <div class="modal-body">
+    <div class="card">
+      <form action="#">
+        <div class="form-body">
+          <div class="card-body">
+            <div class="row p-t-20">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label">Name</label>
+                  <input type="text" id="firstName" class="form-control" placeholder="John doe">
+
+                </div>
+              </div>
+              <!--/span-->
+              <div class="col-md-6">
+                <div class="form-group has-success">
+                  <div class="form-group">
+                    <label class="control-label">Upload Food Image</label>
+                    <div class="custom-file"><input class="custom-file-input" id="inputGroupFile01" type="file"><label
+                        class="custom-file-label" for="inputGroupFile01">Choose file</label></div>
+                  </div>
+                </div>
+              </div>
+              <!--/span-->
+            </div>
+            <!--/row-->
+
+          </div>
+          <div class="form-actions">
+            <div class="card-body">
+              <button type="submit" class="btn btn-success mr-3" (click)="modal.dismiss('Cross click')">
+                <i class="fa fa-check"></i> Update</button>
+              <button type="button" class="btn btn-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</ng-template>
+
+<!-- edit user detail -->
+<ng-template #editModel let-modal>
+  <div class="modal-body">
+    <div class="card">
+      <form action="#">
+        <div class="form-body">
+          <div class="card-body">
+            <div class="row p-t-20">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label">Category Name</label>
+                  <mat-form-field class="w-100">
+                    <mat-label>Category Name</mat-label>
+                    <mat-select>
+                      <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+
+
+                  <label class="control-label">Sub Category</label>
+                  <mat-form-field class="w-100">
+                    <mat-label>Sub Category</mat-label>
+                    <mat-select [formControl]="toppings" multiple>
+                      <mat-option *ngFor="let topping of dishType" [value]="topping">{{topping}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                </div>
+              </div>
+              <!--/span-->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label">Food Item name</label>
+                  <input type="text" id="firstName" class="form-control" placeholder="Food Item name">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group has-success">
+                  <div class="form-group">
+                    <label class="control-label">Upload Food Image</label>
+                    <div class="custom-file"><input class="custom-file-input" id="inputGroupFile01" type="file"><label
+                        class="custom-file-label" for="inputGroupFile01">Choose file</label></div>
+                  </div>
+                </div>
+              </div>
+              <!--/span-->
+            </div>
+            <!--/row-->
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group has-danger">
+                  <label class="control-label">Quantity </label>
+                  <input type="text" class="form-control" aria-label="Username" placeholder="Quantity">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group has-danger">
+                  <label class="control-label">Price</label>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend"><span class="input-group-text"><i
+                          class="fas fa-euro-sign"></i></span></div><input aria-describedby="basic-addon1"
+                      aria-label="price" class="form-control" placeholder="Price" type="number">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group has-danger">
+                  <label class="control-label">Tax</label>
+                  <input type="text" class="form-control" aria-label="Username" placeholder="10%">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group has-danger">
+                  <label class="control-label">Delivery charges</label>
+                  <input type="text" class="form-control" aria-label="Username" placeholder="$5">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group has-danger">
+                  <label class="control-label">Normal Stock</label>
+                  <input type="text" class="form-control" aria-label="Username" placeholder="35">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group has-danger">
+                  <label class="control-label">Over Stock</label>
+                  <input type="text" class="form-control" aria-label="Username" placeholder="10">
+                </div>
+              </div>
+             
+              <!-- <div class="col-md-6">
+                            <div class="form-group has-danger">
+                                <label class="control-label">User Type</label>
+                                <input type="text" class="form-control" aria-label="Username" placeholder="type of User">
+                            </div>
+                        </div> -->
+              <div class="col-md-12">
+                <div class="form-group has-danger">
+                  <label class="control-label">Description </label>
+                  <textarea name="" id="" cols="30" rows="3" class="form-control"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-actions">
+            <div class="card-body">
+              <button type="submit" class="btn btn-success mr-3" (click)="modal.dismiss('Cross click')">
+                <i class="fa fa-check"></i> Add</button>
+              <button type="button" class="btn btn-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</ng-template>
+
+<!-- edit user detail -->
+<ng-template #addCategory let-modal>
+  <div class="modal-body">
+    <div class="card">
+      <form action="#">
+        <div class="form-body">
+          <div class="card-body">
+            <div class="row p-t-20">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label">Category Name</label>
+                  <mat-form-field class="w-100">
+                    <mat-label>Category Name</mat-label>
+                    <mat-select>
+                      <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+
+
+                  <label class="control-label">Sub Category</label>
+                  <mat-form-field class="w-100">
+                    <mat-label>Sub Category</mat-label>
+                    <mat-select [formControl]="toppings" multiple>
+                      <mat-option *ngFor="let topping of dishType" [value]="topping">{{topping}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                </div>
+              </div>
+              <!--/span-->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label">Food Item name</label>
+                  <input type="text" id="firstName" class="form-control" placeholder="Food Item name">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group has-success">
+                  <div class="form-group">
+                    <label class="control-label">Upload Food Image</label>
+                    <div class="custom-file"><input class="custom-file-input" id="inputGroupFile01" type="file"><label
+                        class="custom-file-label" for="inputGroupFile01">Choose file</label></div>
+                  </div>
+                </div>
+              </div>
+              <!--/span-->
+            </div>
+            <!--/row-->
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group has-danger">
+                  <label class="control-label">Quantity </label>
+                  <input type="text" class="form-control" aria-label="Username" placeholder="Quantity">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group has-danger">
+                  <label class="control-label">Price</label>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend"><span class="input-group-text"><i
+                          class="fas fa-euro-sign"></i></span></div><input aria-describedby="basic-addon1"
+                      aria-label="price" class="form-control" placeholder="Price" type="number">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group has-danger">
+                  <label class="control-label">Tax</label>
+                  <input type="text" class="form-control" aria-label="Username" placeholder="10%">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group has-danger">
+                  <label class="control-label">Delivery charges</label>
+                  <input type="text" class="form-control" aria-label="Username" placeholder="$5">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group has-danger">
+                  <label class="control-label">Normal Stock</label>
+                  <input type="text" class="form-control" aria-label="Username" placeholder="35">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group has-danger">
+                  <label class="control-label">Over Stock</label>
+                  <input type="text" class="form-control" aria-label="Username" placeholder="10">
+                </div>
+              </div>
+             
+              <!-- <div class="col-md-6">
+                            <div class="form-group has-danger">
+                                <label class="control-label">User Type</label>
+                                <input type="text" class="form-control" aria-label="Username" placeholder="type of User">
+                            </div>
+                        </div> -->
+              <div class="col-md-12">
+                <div class="form-group has-danger">
+                  <label class="control-label">Description </label>
+                  <textarea name="" id="" cols="30" rows="3" class="form-control"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-actions">
+            <div class="card-body">
+              <button type="submit" class="btn btn-success mr-3" (click)="modal.dismiss('Cross click')">
+                <i class="fa fa-check"></i> Add</button>
+              <button type="button" class="btn btn-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</ng-template>
