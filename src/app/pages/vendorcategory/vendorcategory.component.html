@@ -5,10 +5,11 @@
           <div class="add-categories ">
             <button class="btn btn-seconadary mb-2" (click)="addCategoryModel(addCategory)"><i class="sl-icon-plus"></i>
               Add Categories</button>
-
+  
           </div>
         </div>
       </div> -->
+
         <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
             <li [ngbNavItem]="1">
                 <!-- <a ngbNavLink>Category</a> -->
@@ -20,19 +21,20 @@
                   class="sl-icon-plus mr-1"></i> Add Category</button>
                         </div>
                     </div>
+
                     <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-1" class="">
                         <ngb-panel id="ngb-panel-1" class="mb-2">
                             <ng-template ngbPanelHeader let-opened="opened">
                                 <div class="row box-tab">
                                     <div class="col-md-2">
-                                        <h5 class="mb-0"> <img width="100px" class="mr-2" src="assets/images/category/category_1.jpg" alt=""> </h5>
+                                        <h5 class="mb-0"> <img width="60px" class="mr-2" src="assets/images/gallery/event.jpg" alt=""> </h5>
                                     </div>
-                                    <div class="col-md-7">
-                                        <h3 class="mb-0"> <span class="d-block mt-2">Cleaning</span> </h3>
+                                    <div class="col-md-2">
+                                        <h3 class="mb-0"> <span class="d-block mt-2">Events</span> </h3>
                                     </div>
-                                    <!-- <div class="col-md-5">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                  </div> -->
+                                    <div class="col-md-5">
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                                    </div>
                                     <div class="col-md-2">
                                         <div class="delete-categories">
                                             <span class="btn btn-primary mr-2" (click)="addCategoryModel(addCategory)"><i class="ti-marker-alt"></i> </span>
@@ -50,30 +52,27 @@
                                         <tr>
                                             <th>Image</th>
                                             <th>Name</th>
-                                            <th>Service Rates For Service Providers </th>
-                                            <th>Service Credits For Users</th>
                                             <th>Action</th>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <span class="img-small"><img src="assets/images/category/sub/cat_1.jpg" alt="clean" width="60" class="rounded"></span>
+                                                <span class="img-small"><img src="assets/images/gallery/wedding.jpg" alt="wedding" width="60"
+                            class="rounded"></span>
                                             </td>
                                             <td>
-                                                Garden Cleaner
+                                                Wedding
                                             </td>
                                             <td>
-                                                $20
-                                            </td>
-                                            <td>
-                                                $25
-                                            </td>
-                                            <td>
-                                                <a href="javascript:void()" (click)="editBoxModal(editModel)" class="mr-2"><i class="ti-marker-alt"></i> </a>
+                                                <a href="javascript:void()" (click)="editBoxModal(editModel)" class="mr-2"><i
+                            class="ti-marker-alt"></i> </a>
                                                 <a href="javascript:void()" (click)="deleteBoxModal(deleteBox)"><i class="ti-trash"></i> </a>
                                             </td>
                                         </tr>
+
                                     </table>
-                                    <div class=""> <button class="btn btn-primary mr-2" (click)="addsubCategoryModel(addsubCategory)"><i class="sl-icon-plus"></i> Add New Sub Categories </button></div>
+
+                                    <div class=""> <button class="btn btn-primary mr-2" (click)="addsubCategoryModel(addsubCategory)"><i
+                        class="sl-icon-plus"></i> Add New Sub Categories </button></div>
                                 </div>
                             </ng-template>
                         </ngb-panel>
@@ -101,44 +100,44 @@
                   <tr>
                     <td>Non-veg</td>
                     <td><img src="assets/images/food/1.jpg" alt="" width="60px"></td>
-
+      
                     <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse blandit nisi enim, sit amet
                       interdum purus commodo in. Fusce non molestie nibh, vitae blandit risus. Vestibulum suscipit suscipit
                       mauris, quis gravida tortor bibendum quis. Sed mollis est at enim consectetur ullamcorper non ac arcu.
                       Pellentesque sit amet lorem malesuada, molestie massa quis, ultricies mi. Etiam nec arcu elementum,
                       pharetra tellus quis, tincidunt nibh. Fusce mollis eget purus at finibus. Vestibulum at lectus in eros
                       tincidunt elementum.</td>
-
+      
                       <td><a href="javascript:void()" (click)="addCategoryModel(cusinine)"><i class="mdi mdi-lead-pencil"></i></a> <a href=javascript:void(); (click)="deleteBoxModal(deleteBox)"><i class="ti-trash"></i> </a></td>
-
+      
                   </tr>
                   <tr>
                     <td>Veg</td>
                     <td><img src="assets/images/food/1.jpg" alt="" width="60px"></td>
-
+      
                     <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse blandit nisi enim, sit amet
                       interdum purus commodo in. Fusce non molestie nibh, vitae blandit risus. Vestibulum suscipit suscipit
                       mauris, quis gravida tortor bibendum quis. Sed mollis est at enim consectetur ullamcorper non ac arcu.
                       Pellentesque sit amet lorem malesuada, molestie massa quis, ultricies mi. Etiam nec arcu elementum,
                       pharetra tellus quis, tincidunt nibh. Fusce mollis eget purus at finibus. Vestibulum at lectus in eros
                       tincidunt elementum.</td>
-
+      
                       <td><a href="javascript:void()" (click)="addCategoryModel(cusinine)"><i class="mdi mdi-lead-pencil"></i></a> <a href=javascript:void(); (click)="deleteBoxModal(deleteBox)"><i class="ti-trash"></i> </a></td>
-
+      
                   </tr>
                   <tr>
                     <td>Vegan</td>
                     <td><img src="assets/images/food/1.jpg" alt="" width="60px"></td>
-
+      
                     <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse blandit nisi enim, sit amet
                       interdum purus commodo in. Fusce non molestie nibh, vitae blandit risus. Vestibulum suscipit suscipit
                       mauris, quis gravida tortor bibendum quis. Sed mollis est at enim consectetur ullamcorper non ac arcu.
                       Pellentesque sit amet lorem malesuada, molestie massa quis, ultricies mi. Etiam nec arcu elementum,
                       pharetra tellus quis, tincidunt nibh. Fusce mollis eget purus at finibus. Vestibulum at lectus in eros
                       tincidunt elementum.</td>
-
+      
                       <td><a href="javascript:void()" (click)="addCategoryModel(cusinine)"><i class="mdi mdi-lead-pencil"></i></a> <a href=javascript:void(); (click)="deleteBoxModal(deleteBox)"><i class="ti-trash"></i> </a></td>
-
+      
                   </tr>
                 </tbody>
               </table>
@@ -171,37 +170,37 @@
                       Pellentesque sit amet lorem malesuada, molestie massa quis, ultricies mi. Etiam nec arcu elementum,
                       pharetra tellus quis, tincidunt nibh. Fusce mollis eget purus at finibus. Vestibulum at lectus in eros
                       tincidunt elementum.</td>
-
+      
                       <td><a href="javascript:void()" (click)="addCategoryModel(cusinine)"><i class="mdi mdi-lead-pencil"></i></a> <a href=javascript:void(); (click)="deleteBoxModal(deleteBox)"><i class="ti-trash"></i> </a></td>
-
+      
                   </tr>
                   <tr>
                     <td>Italian</td>
                     <td><img src="assets/images/food/1.jpg" alt="" width="60px"></td>
-
+      
                     <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse blandit nisi enim, sit amet
                       interdum purus commodo in. Fusce non molestie nibh, vitae blandit risus. Vestibulum suscipit suscipit
                       mauris, quis gravida tortor bibendum quis. Sed mollis est at enim consectetur ullamcorper non ac arcu.
                       Pellentesque sit amet lorem malesuada, molestie massa quis, ultricies mi. Etiam nec arcu elementum,
                       pharetra tellus quis, tincidunt nibh. Fusce mollis eget purus at finibus. Vestibulum at lectus in eros
                       tincidunt elementum.</td>
-
+      
                       <td><a href="javascript:void()" (click)="addCategoryModel(cusinine)"><i class="mdi mdi-lead-pencil"></i></a> <a href=javascript:void(); (click)="deleteBoxModal(deleteBox)"><i class="ti-trash"></i> </a></td>
-
+      
                   </tr>
                   <tr>
                     <td>Chainese</td>
                     <td><img src="assets/images/food/1.jpg" alt="" width="60px"></td>
-
+      
                     <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse blandit nisi enim, sit amet
                       interdum purus commodo in. Fusce non molestie nibh, vitae blandit risus. Vestibulum suscipit suscipit
                       mauris, quis gravida tortor bibendum quis. Sed mollis est at enim consectetur ullamcorper non ac arcu.
                       Pellentesque sit amet lorem malesuada, molestie massa quis, ultricies mi. Etiam nec arcu elementum,
                       pharetra tellus quis, tincidunt nibh. Fusce mollis eget purus at finibus. Vestibulum at lectus in eros
                       tincidunt elementum.</td>
-
+      
                       <td><a href="javascript:void()" (click)="addCategoryModel(cusinine)"><i class="mdi mdi-lead-pencil"></i></a> <a href=javascript:void(); (click)="deleteBoxModal(deleteBox)"><i class="ti-trash"></i> </a></td>
-
+      
                   </tr>
                 </tbody>
               </table>
@@ -224,7 +223,7 @@
                         <div class="row p-t-20">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="control-label">Subcategory</label>
+                                    <label class="control-label">Name</label>
                                     <input type="text" id="firstName" class="form-control" placeholder="Name">
 
                                 </div>
@@ -240,27 +239,13 @@
                                 </div>
                             </div>
                             <!--/span-->
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Service Rates For Service Providers </label>
-                                    <input type="text" id="firstName" class="form-control" placeholder="$20">
-                                </div>
-                            </div>
-                            <!--/span-->
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label"> Service Credits For Users </label>
-                                    <input type="text" id="firstName" class="form-control" placeholder="$25">
-
-                                </div>
-                            </div>
-                            <!--/span-->
                         </div>
                         <!--/row-->
                     </div>
                     <div class="form-actions">
                         <div class="card-body">
-                            <button type="submit" class="btn btn-success mr-3" (click)="modal.dismiss('Cross click')"><i class="fa fa-check"></i> Save </button>
+                            <button type="submit" class="btn btn-success mr-3" (click)="modal.dismiss('Cross click')">
+                  <i class="fa fa-check"></i> Update</button>
                             <button type="button" class="btn btn-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
                         </div>
                     </div>
@@ -274,7 +259,7 @@
 <!-- delete modal -->
 <ng-template #deleteBox let-modal>
     <div class="modal-body">
-        <p>Are You Sure want to delete this?</p>
+        <p>Are You Sure want to delete?</p>
         <div class="btn-group">
             <button type="button" class="btn btn-primary mr-2" aria-label="Close" (click)="modal.dismiss('Cross click')">Yes</button>
             <button type="button" class="btn btn-seconadary" aria-label="Close" (click)="modal.dismiss('Cross click')">No</button>
@@ -292,7 +277,7 @@
                         <div class="row p-t-20">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="control-label">Subcategory</label>
+                                    <label class="control-label">Name</label>
                                     <input type="text" id="firstName" class="form-control" placeholder="Name">
 
                                 </div>
@@ -305,21 +290,6 @@
                                         <div class="custom-file"><input class="custom-file-input" id="inputGroupFile01" type="file"><label class="custom-file-label" for="inputGroupFile01">Choose file</label></div>
                                         <p class="constraints-info afu-constraints-info">(.jpg,.png) Size limit- 1.00 MB</p>
                                     </div>
-                                </div>
-                            </div>
-                            <!--/span-->
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Service Rates For Service Providers </label>
-                                    <input type="text" id="firstName" class="form-control" placeholder="$20">
-                                </div>
-                            </div>
-                            <!--/span-->
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label"> Service Credits For Users </label>
-                                    <input type="text" id="firstName" class="form-control" placeholder="$25">
-
                                 </div>
                             </div>
                             <!--/span-->
@@ -358,7 +328,7 @@
                                   <div class="form-group">
                                       <label class="control-label">Category Name</label>
                                       <input type="text" id="firstName" class="form-control" placeholder="John doe">
-
+  
                                   </div>
                               </div> -->
                             <!--/span-->
@@ -369,7 +339,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Categories</label>
-                                    <input type="text" placeholder="Name" class="form-control">
+                                    <input type="text" class="form-control">
 
                                 </div>
                             </div>
@@ -398,14 +368,14 @@
                   </div>
                 </div> -->
                             <!--/span-->
-                            <!-- <div class="col-md-12">
+                            <div class="col-md-12">
                                 <div class="form-group has-success">
                                     <div class="form-group">
                                         <label class="control-label">Description</label>
                                         <textarea name="" id="" cols="30" rows="5" class="form-control"></textarea>
                                     </div>
                                 </div>
-                            </div> -->
+                            </div>
                             <!--/span-->
                             <!-- <div class="col-md-6">
                   <div class="form-group">

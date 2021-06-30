@@ -1,0 +1,59 @@
+.icon_outr {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+li {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border: solid #000 1px;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+
+li::after {
+    content: "X";
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    background: #000;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    cursor: pointer;
+}
+
+.ad_icn {
+    font-size: 60px;
+}
+
+.ad_icn::after {
+    content: unset;
+}
+
+.ad_icn input {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    font-size: 0;
+    cursor: pointer;
+}
+
+.icn {
+    font-size: 60px;
+}

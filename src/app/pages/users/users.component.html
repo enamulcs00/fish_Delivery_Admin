@@ -38,52 +38,46 @@
                         </ng-container>
 
                         <!-- Progress Column -->
-                        <!-- <ng-container matColumnDef="id">
-              <th mat-header-cell *matHeaderCellDef >User ID </th>
-              <td mat-cell *matCellDef="let row"> {{row.id}} </td>
-            </ng-container> -->
+                        <ng-container matColumnDef="id">
+                            <th mat-header-cell *matHeaderCellDef>User ID </th>
+                            <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+                        </ng-container>
                         <!-- Progress Column -->
                         <ng-container matColumnDef="contact">
-                            <th mat-header-cell *matHeaderCellDef class="text-nowrap">Contact </th>
+                            <th mat-header-cell *matHeaderCellDef class="text-nowrap">Phone Number </th>
                             <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.contact}} </td>
                         </ng-container>
                         <!-- Progress Column -->
-                        <ng-container matColumnDef="email">
-                            <th mat-header-cell *matHeaderCellDef>Email </th>
-                            <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+                        <ng-container matColumnDef="date">
+                            <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Sign-up date </th>
+                            <td mat-cell *matCellDef="let row"> {{row.date}} </td>
                         </ng-container>
                         <!-- Address -->
-                        <ng-container matColumnDef="address">
-                            <th mat-header-cell *matHeaderCellDef>Address </th>
-                            <td mat-cell *matCellDef="let row"> {{row.address}} </td>
+                        <ng-container matColumnDef="events">
+                            <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Number of events attended </th>
+                            <td mat-cell *matCellDef="let row"> {{row.events}} </td>
                         </ng-container>
                         <!-- pendingOrder -->
-                        <!-- <ng-container matColumnDef="pendingOrders">
-              <th mat-header-cell *matHeaderCellDef  class="text-nowrap">Pending Orders </th>
-              <td mat-cell *matCellDef="let row"> {{row.pendingOrders}} </td>
-            </ng-container> -->
+                        <ng-container matColumnDef="hosted">
+                            <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Number of events hosted </th>
+                            <td mat-cell *matCellDef="let row"> {{row.hosted}} </td>
+                        </ng-container>
                         <!-- total Orders -->
-                        <!-- <ng-container matColumnDef="totalOrders">
-                <th mat-header-cell *matHeaderCellDef  class="text-nowrap"> Total Orders </th>
-                <td mat-cell *matCellDef="let row"> {{row.totalOrders}} </td>
-              </ng-container> -->
-                        <!-- Name Column -->
-                        <ng-container matColumnDef="cancelledOrders">
-                            <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Cancelled Orders </th>
-                            <td mat-cell *matCellDef="let row"> {{row.cancelledOrders}} </td>
+                        <ng-container matColumnDef="groups">
+                            <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Number of groups he/she is in </th>
+                            <td mat-cell *matCellDef="let row"> {{row.groups}} </td>
                         </ng-container>
                         <!-- Name Column -->
-                        <ng-container matColumnDef="completedOrders">
-                            <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Completed Orders </th>
-                            <td mat-cell *matCellDef="let row"> {{row.completedOrders}} </td>
-                        </ng-container>
+                        <!-- <ng-container matColumnDef="cancelledOrders">
+              <th mat-header-cell *matHeaderCellDef  class="text-nowrap"> Cancelled Orders </th>
+              <td mat-cell *matCellDef="let row"> {{row.cancelledOrders}} </td>
+            </ng-container> -->
+                        <!-- Name Column -->
+                        <!-- <ng-container matColumnDef="completedOrders">
+              <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Completed Order </th>
+              <td mat-cell *matCellDef="let row"> {{row.completedOrders}} </td>
+            </ng-container> -->
                         <!-- Color Column -->
-
-                        <ng-container matColumnDef="paymentnotcomplete">
-                            <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Payment Not Completed </th>
-                            <td mat-cell *matCellDef="let row"> {{row.paymentnotcomplete}} </td>
-                        </ng-container>
-
                         <ng-container matColumnDef="status">
                             <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Status </th>
                             <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.status}}
@@ -114,7 +108,7 @@
                                         <a class="dropdown-item" routerLink="/pages/users_detail"><i class="ti-eye"></i>
                       View
                     </a>
-                                        <button class="dropdown-item" (click)="userDetailModal(userDetail)"><i _ngcontent-axh-c146=""
+                                        <button class="dropdown-item" (click)="addUserModal(addUser)"><i _ngcontent-axh-c146=""
                         class="ti-marker-alt"></i> Edit</button>
 
                                         <button class="dropdown-item" (click)="userDeleteModal(userDelete)"><i class="ti-trash"></i>
@@ -125,6 +119,7 @@
                         </ng-container>
                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
                         <!-- Row shown when there is no matching data. -->
                         <!-- <tr class="mat-row" *matNoDataRow>
               <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
@@ -155,19 +150,16 @@
             </div>
         </div>
     </ng-template>
-
-
     <!-- delete modal -->
     <ng-template #userDelete let-modal>
         <div class="modal-body">
-            <p>Are You Sure want to delete this user?</p>
+            <p>Are you sure want to delete this user?</p>
             <div class="btn-group">
                 <button type="button" class="btn btn-primary mr-2" aria-label="Close" (click)="modal.dismiss('Cross click')">Yes</button>
                 <button type="button" class="btn btn-seconadary" aria-label="Close" (click)="modal.dismiss('Cross click')">No</button>
             </div>
         </div>
     </ng-template>
-
     <!-- edit user detail -->
     <ng-template #userDetail let-modal>
         <div class="modal-body">
@@ -188,7 +180,7 @@
                                     <div class="form-group has-success">
                                         <div class="form-group">
                                             <label class="control-label">Upload User Profile</label>
-                                            <div class="custom-file"><input class="custom-file-input" id="inputGroupFile01" type="file"><label class="custom-file-label" for="inputGroupFile01">Choose file</label></div>
+                                            <div class="custom-file"><input class="custom-file-input" id="inputGroupFile01" type="file" disabled><label class="custom-file-label" for="inputGroupFile01">Choose file</label></div>
                                         </div>
                                     </div>
                                 </div>
@@ -278,7 +270,6 @@
 
         </div>
     </ng-template>
-
     <!-- add user -->
     <ng-template #addUser let-modal>
         <div class="modal-body">
@@ -291,22 +282,18 @@
                                     <div class="form-group">
                                         <label class="control-label">User Name</label>
                                         <input type="text" id="firstName" class="form-control" placeholder="John doe">
-
                                     </div>
                                 </div>
                                 <!--/span-->
-                                <div class="col-md-6">
+                                <!-- <div class="col-md-6">
                                     <div class="form-group has-success">
                                         <div class="form-group">
                                             <label class="control-label">Upload User Profile</label>
                                             <div class="custom-file"><input class="custom-file-input" id="inputGroupFile01" type="file"><label class="custom-file-label" for="inputGroupFile01">Choose file</label></div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!--/span-->
-                            </div>
-                            <!--/row-->
-                            <div class="row ">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Contact No</label>
@@ -314,27 +301,30 @@
 
                                     </div>
                                 </div>
+                            </div>
+                            <!--/row-->
+                            <div class="row ">
                                 <!--/span-->
-                                <div class="col-md-6">
+                                <!-- <div class="col-md-6">
                                     <div class="form-group has-danger">
                                         <label class="control-label">Email</label>
                                         <input type="email" id="email" class="form-control form-control-danger" placeholder="example@gmail.com">
 
                                     </div>
-                                </div>
+                                </div> -->
                                 <!--/span-->
                             </div>
                             <!--/row-->
                             <div class="row">
-                                <div class="col-md-6">
+                                <!-- <div class="col-md-6">
                                     <div class="form-group has-danger">
                                         <label class="control-label">Address</label>
                                         <input type="text" id="Address" class="form-control form-control-danger" placeholder="Address">
 
                                     </div>
-                                </div>
+                                </div> -->
                                 <!--/span-->
-                                <div class="col-md-6">
+                                <!-- <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Gender</label>
                                         <select class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1">
@@ -342,25 +332,23 @@
                       <option value="Category 2">Female</option>
                     </select>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!--/span-->
                             </div>
                             <!--/row-->
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Bike Name</label>
                                         <input type="text" id="bike_name" name="bike_name" class="form-control" placeholder="Bike name">
                                     </div>
                                 </div>
-                                <!--/span-->
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Bike No</label>
                                         <input type="text" id="bike_no" name="bike_no" class="form-control" placeholder="Bike No">
                                     </div>
                                 </div>
-                                <!--/span-->
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">User Status</label>
@@ -373,10 +361,8 @@
                                             <label class="custom-control-label" for="customRadio2">Inactive</label>
                                         </div>
                                     </div>
-
                                 </div>
-                                <!--/span-->
-                            </div>
+                            </div> -->
                             <!--/row-->
                         </div>
 

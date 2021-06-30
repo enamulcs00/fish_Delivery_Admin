@@ -15,10 +15,10 @@ export const AppsRoutes: Routes = [
         path: 'chat',
         component: ChatComponent,
         data: {
-          title: 'Chat App',
+          title: 'Chat',
           urls: [
             { title: 'Dashboard', url: '/dashboard' },
-            { title: 'Chat App' }
+            { title: 'Chat' }
           ]
         }
       },

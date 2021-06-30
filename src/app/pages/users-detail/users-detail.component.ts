@@ -5,14 +5,13 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource, } from '@angular/material/table';
 
 export interface UserData {
-  hotelName: string,
+  hotelName: string,    
   productname:string,
-  id: string,
-  Reviews_sp:string,
+  id: string,    
   orderdate:string,
   deliverydate:string,
   delivery_man:string,
-  price:string,
+  price:string,    
   status:string,
 }
 @Component({
@@ -20,11 +19,11 @@ export interface UserData {
   templateUrl: './users-detail.component.html',
   styleUrls: ['./users-detail.component.css']
 })
-export class UsersDetailComponent implements AfterViewInit    {
-
+export class UsersDetailComponent implements AfterViewInit    {  
+ 
   closeResult: string;
   //table: any
-  displayedColumns: string[] = [ 'hotelName' ,'productname', 'orderdate', 'Reviews_sp','price','status'];
+  displayedColumns: string[] = [ 'hotelName' ,'productname','id', 'orderdate','deliverydate','delivery_man','price','status'];
   dataSource: MatTableDataSource<UserData>;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -42,43 +41,40 @@ export class UsersDetailComponent implements AfterViewInit    {
     this.dataSource.sort = this.sort;
   }
 
-
+  
   discountModal(discount) {
     this.modalService.open(discount, {backdropClass: 'light-blue-backdrop',centered: true,size: 'sm'});
   }
   table = [
-    {
-      hotelName: 'Sam',
-      productname:"Service 1",
-      id: "#454545",
+    {    
+      hotelName: 'Leuven',    
+      productname:"Soya Chap",
+      id: "#454545",    
       orderdate:"12-05-2021/12:00",
       deliverydate:"12-05-2021/13:00",
       delivery_man:"John",
-      Reviews_sp:"Experience with this client was Good",
-      price:"50",
-      status:"Completed",
+      price:"50",    
+      status:"Completed",      
     },
-    {
-      hotelName: 'Jhon',
-      productname:"Service 2",
-      id: "#454545",
+    {    
+      hotelName: 'Mcdonalds',    
+      productname:"Burger",
+      id: "#454545",    
       orderdate:"12-05-2021/11:00",
       deliverydate:"12-05-2021/14:00",
       delivery_man:"John",
-      Reviews_sp:"Experience with this client was Bad",
-      price:"50",
-      status:"Cancelled",
+      price:"50",    
+      status:"Cancelled",      
     },
-    {
-      hotelName: 'Jason',
-      productname:"Service 3",
-      id: "#454545",
+    {    
+      hotelName: 'Mcdonalds',    
+      productname:"Burger",
+      id: "#454545",    
       orderdate:"12-05-2021/11:00",
       deliverydate:"12-05-2021/14:00",
       delivery_man:"John",
-      Reviews_sp:"",
-      price:"",
-      status:"Pending",
+      price:"50",    
+      status:"Pending",      
     }
   ]
   applyFilter(event: Event) {

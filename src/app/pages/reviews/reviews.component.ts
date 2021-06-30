@@ -7,8 +7,6 @@ import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-
   styleUrls: ['./reviews.component.css']
 })
 export class ReviewsComponent implements OnInit {
-
-  active=1;
   closeResult: string;
   ngOnInit(): void {
   }

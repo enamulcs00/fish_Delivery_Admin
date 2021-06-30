@@ -1,193 +1,96 @@
 <div class="row">
     <!-- Column -->
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <form>
+                            <div class="mb-2">
+                                <input type="text" class="form-control" id="prenametext" placeholder="Search">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-8 text-right">
+                        <!-- <button class="btn btn-seconadary mb-2" (click)="addreviewModal(addreview)"><i class="sl-icon-plus"></i> Add
+              User</button> -->
+                    </div>
+                    <div class="table-responsi">
+                        <table class="table v-middle product-overview" id="zero_config">
+                            <thead>
+                                <tr>
+                                    <th>Photo</th>
+                                    <th>Name</th>
+                                    <th>Email Id</th>
+                                    <!-- <th>Rating</th> -->
+                                    <th>Comments</th>
+                                    <th class="text-nowrap">Reported By</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <img src="assets/images/users/2.jpg" alt="iMac" width="60" class="rounded-circle">
+                                    </td>
+                                    <td>Ronny </td>
+                                    <td>Hannagover@gmail.com </td>
+                                    <!-- <td>
+                                        <p class="text-warning mb-0 text-nowrap"> <i class="fas fa-star "> </i> <i class="fas fa-star"> </i>
+                                            <i class="fas fa-star"> </i> <i class="fas fa-star"> </i> </p>
+                                    </td> -->
+                                    <td>Lorem ipsum dummy content It is useful for all type site and use for dummy content all type site and use for dummy content all type site and use for dummy content..... <a href="javascript:void(0)" (click)="reviewModal(review)">Read More</a></td>
+                                    <td> Jason </td>
+                                    <td>
+                                        <button class="btn btn-danger" routerLink="/apps/chat">view chat</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <img src="assets/images/users/2.jpg" alt="iMac" width="60" class="rounded-circle">
+                                    </td>
+                                    <td>Ronny </td>
+                                    <td>Hannagover@gmail.com </td>
+                                    <!-- <td>
+                                        <p class="text-warning mb-0 text-nowrap"> <i class="fas fa-star "> </i> <i class="fas fa-star"> </i>
+                                            <i class="fas fa-star"> </i> <i class="fas fa-star"> </i> </p>
+                                    </td> -->
+                                    <td>Lorem ipsum dummy content It is useful for all type site and use for dummy content all type site and use for dummy content all type site and use for dummy content..... <a href="javascript:void(0)" (click)="reviewModal(review)">Read More</a></td>
+                                    <td> Jason </td>
+                                    <td>
+                                        <button class="btn btn-danger" routerLink="/apps/chat">view chat</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <img src="assets/images/users/2.jpg" alt="iMac" width="60" class="rounded-circle">
+                                    </td>
+                                    <td>Ronny </td>
+                                    <td>Hannagover@gmail.com </td>
+                                    <!-- <td>
+                                        <p class="text-warning mb-0 text-nowrap"> <i class="fas fa-star "> </i> <i class="fas fa-star"> </i>
+                                            <i class="fas fa-star"> </i> <i class="fas fa-star"> </i> </p>
+                                    </td> -->
+                                    <td>Lorem ipsum dummy content It is useful for all type site and use for dummy content all type site and use for dummy content all type site and use for dummy content..... <a href="javascript:void(0)" (click)="reviewModal(review)">Read More</a></td>
+                                    <td> Jason </td>
+                                    <td>
+                                        <button class="btn btn-danger" routerLink="/apps/chat">view chat</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
 
-    <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs cstm_tabs">
-        <li [ngbNavItem]="1">
-            <a class="ord_tab_hd" ngbNavLink> User Reviews </a>
-            <ng-template ngbNavContent>
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <form>
-                                        <div class="mb-2">
-                                            <input type="text" class="form-control" id="prenametext" placeholder="Search">
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="col-md-8 text-right">
-                                    <!-- <button class="btn btn-seconadary mb-2" (click)="addreviewModal(addreview)"><i class="sl-icon-plus"></i> Add
-                    User</button> -->
-                                </div>
-                                <div class="table-responsi">
-                                    <table class="table v-middle product-overview" id="zero_config">
-                                        <thead>
-                                            <tr>
-                                                <th>Photo</th>
-                                                <th>Name</th>
-                                                <th>Email Id</th>
-                                                <th>Rating</th>
-                                                <th>Review</th>
-                                                <th class="text-nowrap">To Service Provider</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <img src="assets/images/users/2.jpg" alt="iMac" width="60" class="rounded-circle">
-                                                </td>
-                                                <td>Ronny </td>
-                                                <td>Hannagover@gmail.com </td>
-                                                <td>
-                                                    <p class="text-warning mb-0 text-nowrap"> <i class="fas fa-star "> </i> <i class="fas fa-star"> </i>
-                                                        <i class="fas fa-star"> </i> <i class="fas fa-star"> </i> </p>
-                                                </td>
-                                                <td>Lorem ipsum dummy content It is useful for all type site and use for dummy content all type site and use for dummy content all type site and use for dummy content..... <a href="javascript:void(0)" (click)="reviewModal(review)">Read More</a></td>
-                                                <td> James </td>
-                                                <td>
-                                                    <button class="btn btn-danger" (click)="reviewDeleteModal(reviewDelete)"><i class="ti-trash"></i></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <img src="assets/images/users/2.jpg" alt="iMac" width="60" class="rounded-circle">
-                                                </td>
-                                                <td>Ronny </td>
-                                                <td>Hannagover@gmail.com </td>
-                                                <td>
-                                                    <p class="text-warning mb-0 text-nowrap"> <i class="fas fa-star "> </i> <i class="fas fa-star"> </i>
-                                                        <i class="fas fa-star"> </i> <i class="fas fa-star"> </i> </p>
-                                                </td>
-                                                <td>Lorem ipsum dummy content It is useful for all type site and use for dummy content all type site and use for dummy content all type site and use for dummy content..... <a href="javascript:void(0)" (click)="reviewModal(review)">Read More</a></td>
-                                                <td> Sam </td>
-                                                <td>
-                                                    <button class="btn btn-danger" (click)="reviewDeleteModal(reviewDelete)"><i class="ti-trash"></i></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <img src="assets/images/users/2.jpg" alt="iMac" width="60" class="rounded-circle">
-                                                </td>
-                                                <td>Ronny </td>
-                                                <td>Hannagover@gmail.com </td>
-                                                <td>
-                                                    <p class="text-warning mb-0 text-nowrap"> <i class="fas fa-star "> </i> <i class="fas fa-star"> </i>
-                                                        <i class="fas fa-star"> </i> <i class="fas fa-star"> </i> </p>
-                                                </td>
-                                                <td>Lorem ipsum dummy content It is useful for all type site and use for dummy content all type site and use for dummy content all type site and use for dummy content..... <a href="javascript:void(0)" (click)="reviewModal(review)">Read More</a></td>
-                                                <td> Jason </td>
-                                                <td>
-                                                    <button class="btn btn-danger" (click)="reviewDeleteModal(reviewDelete)"><i class="ti-trash"></i></button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
-                                    </mat-paginator>
-                                </div>
-                            </div>
-                        </div>
+                        <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+                        </mat-paginator>
                     </div>
                 </div>
-            </ng-template>
-        </li>
-        <li [ngbNavItem]="2">
-            <a class="ord_tab_hd" ngbNavLink> Service Provider Reviews </a>
-            <ng-template ngbNavContent>
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <form>
-                                        <div class="mb-2">
-                                            <input type="text" class="form-control" id="prenametext" placeholder="Search">
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="col-md-8 text-right">
-                                    <!-- <button class="btn btn-seconadary mb-2" (click)="addreviewModal(addreview)"><i class="sl-icon-plus"></i> Add
-                      User</button> -->
-                                </div>
-                                <div class="table-responsi">
-                                    <table class="table v-middle product-overview" id="zero_config">
-                                        <thead>
-                                            <tr>
-                                                <th>Photo</th>
-                                                <th>Name</th>
-                                                <th>Email Id</th>
-                                                <th>Rating</th>
-                                                <th>Review</th>
-                                                <th class="text-nowrap">To User</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <img src="assets/images/users/2.jpg" alt="iMac" width="60" class="rounded-circle">
-                                                </td>
-                                                <td> Jason </td>
-                                                <td>Hannagover@gmail.com </td>
-                                                <td>
-                                                    <p class="text-warning mb-0 text-nowrap"> <i class="fas fa-star "> </i> <i class="fas fa-star"> </i>
-                                                        <i class="fas fa-star"> </i> <i class="fas fa-star"> </i> </p>
-                                                </td>
-                                                <td>Lorem ipsum dummy content It is useful for all type site and use for dummy content all type site and use for dummy content all type site and use for dummy content..... <a href="javascript:void(0)" (click)="reviewModal(review)">Read More</a></td>
-                                                <td> Ronny </td>
-                                                <td>
-                                                    <button class="btn btn-danger" (click)="reviewDeleteModal(reviewDelete)"><i class="ti-trash"></i></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <img src="assets/images/users/2.jpg" alt="iMac" width="60" class="rounded-circle">
-                                                </td>
-                                                <td> James </td>
-                                                <td>Hannagover@gmail.com </td>
-                                                <td>
-                                                    <p class="text-warning mb-0 text-nowrap"> <i class="fas fa-star "> </i> <i class="fas fa-star"> </i>
-                                                        <i class="fas fa-star"> </i> <i class="fas fa-star"> </i> </p>
-                                                </td>
-                                                <td>Lorem ipsum dummy content It is useful for all type site and use for dummy content all type site and use for dummy content all type site and use for dummy content..... <a href="javascript:void(0)" (click)="reviewModal(review)">Read More</a></td>
-                                                <td> Misty </td>
-                                                <td>
-                                                    <button class="btn btn-danger" (click)="reviewDeleteModal(reviewDelete)"><i class="ti-trash"></i></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <img src="assets/images/users/2.jpg" alt="iMac" width="60" class="rounded-circle">
-                                                </td>
-                                                <td> Sam </td>
-                                                <td>Hannagover@gmail.com </td>
-                                                <td>
-                                                    <p class="text-warning mb-0 text-nowrap"> <i class="fas fa-star "> </i> <i class="fas fa-star"> </i>
-                                                        <i class="fas fa-star"> </i> <i class="fas fa-star"> </i> </p>
-                                                </td>
-                                                <td>Lorem ipsum dummy content It is useful for all type site and use for dummy content all type site and use for dummy content all type site and use for dummy content..... <a href="javascript:void(0)" (click)="reviewModal(review)">Read More</a></td>
-                                                <td> Martha </td>
-                                                <td>
-                                                    <button class="btn btn-danger" (click)="reviewDeleteModal(reviewDelete)"><i class="ti-trash"></i></button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
-                                    </mat-paginator>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </ng-template>
-        </li>
-    </ul>
-    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+            </div>
+        </div>
+    </div>
     <!-- Column -->
 </div>
+
+
 
 <!-- view modal -->
 <ng-template #review let-modal>
@@ -229,12 +132,17 @@
                                 <div class="form-group">
                                     <label class="control-label">Add Review</label>
                                     <textarea class="form-control" placeholder="Message" rows="10"></textarea>
+
                                 </div>
                             </div>
                             <!--/span-->
+
                         </div>
                         <!--/row-->
+
+
                     </div>
+
                     <div class="form-actions">
                         <div class="card-body">
                             <button type="submit" class="btn btn-success mr-3" (click)="modal.dismiss('Cross click')">
@@ -245,12 +153,16 @@
                 </div>
             </form>
         </div>
+
     </div>
 </ng-template>
+
+
+
 <!-- delete modal -->
 <ng-template #reviewDelete let-modal>
     <div class="modal-body">
-        <p>Are You Sure want to delete this Review ?</p>
+        <p>Are You Sure want to delete this user?</p>
         <div class="btn-group">
             <button type="button" class="btn btn-primary mr-2" aria-label="Close" (click)="modal.dismiss('Cross click')">Yes</button>
             <button type="button" class="btn btn-seconadary" aria-label="Close" (click)="modal.dismiss('Cross click')">No</button>

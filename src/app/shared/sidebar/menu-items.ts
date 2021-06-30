@@ -25,22 +25,30 @@ export const ROUTES: RouteInfo[] = [
         extralink: false,
         submenu: []
     },
+    // {
+    //     path: 'pages/vendors',
+    //     title: 'Vendors',
+    //     icon: 'icon-Car-Wheel',
+    //     class: '',
+    //     extralink: false,
+    //     submenu: []
+    // },
     {
-        path: 'pages/vendors',
-        title: 'Service Provider',
-        icon: 'icon-Car-Wheel',
-        class: '',
-        extralink: false,
-        submenu: []
-    },
-    {
-        path: '/pages/vendorcategory',
-        title: 'Categories',
-        icon: 'fas fa-th',
-        class: '',
-        extralink: false,
-        submenu: [ ]
-    },
+      path: '/pages/manage_admin',
+      title: 'Admin',
+      icon: 'mdi mdi-chart-arc',
+      class: '',
+      extralink: false,
+      submenu: []
+  },
+    // {
+    //     path: '/pages/vendorcategory',
+    //     title: 'Categories',
+    //     icon: 'fas fa-th',
+    //     class: '',
+    //     extralink: false,
+    //     submenu: [ ]
+    // },
     // {
     //     path: '',
     //     title: 'Trucks',
@@ -82,22 +90,22 @@ export const ROUTES: RouteInfo[] = [
     //     extralink: false,
     //     submenu: []
     // },
-//     {
-//       path: '/pages/fooditem',
-//       title: 'Food Items',
-//       icon: 'mdi mdi-bowl',
-//       class: '',
-//       extralink: false,
-//       submenu: []
-//   },
      {
         path: '/pages/orderlist',
-        title: 'Order List',
+        title: 'Events',
         icon: ' far fa-list-alt',
         class: '',
         extralink: false,
         submenu: []
     },
+    {
+      path: '/pages/fooditem',
+      title: 'Groups',
+      icon: ' far fa-list-alt',
+      class: '',
+      extralink: false,
+      submenu: []
+  },
     // {
     //     path: '/pages/banner',
     //     title: 'Banner',
@@ -115,63 +123,30 @@ export const ROUTES: RouteInfo[] = [
     //     submenu: []
     // },
 
-     {
-        path: '/pages/revenue',
-        title: 'Revenue',
-        icon: 'mdi mdi-chart-areaspline',
-        class: '',
-        extralink: false,
-        submenu: []
-    },
+    //  {
+    //     path: '/pages/revenue',
+    //     title: 'Revenue',
+    //     icon: 'mdi mdi-chart-areaspline',
+    //     class: '',
+    //     extralink: false,
+    //     submenu: []
+    // },
     {
         path: '/pages/reviews',
-        title: 'Reviews',
+        title: 'Report',
         icon: 'mdi mdi-account-star-variant',
         class: '',
         extralink: false,
         submenu: []
     },
     {
-      path: '/pages/suggestions',
-      title: 'Suggestions',
-      icon: 'mdi mdi-lightbulb',
-      class: '',
-      extralink: false,
-      submenu: []
-  },
-  {
-    path: '',
-    title: 'Manage Report',
-    icon: 'mdi mdi-account-alert',
-    class: '',
-    extralink: false,
-    submenu: [
-      {
-        path: '/pages/reason',
-        title: 'Reasons',
-        icon: '',
+        path: '/pages/calculator',
+        title: 'Event Types',
+        icon: 'mdi mdi-package-variant',
         class: '',
         extralink: false,
         submenu: []
-      },
-      {
-        path: '/pages/report',
-        title: 'Reports',
-        icon: '',
-        class: '',
-        extralink: false,
-        submenu: []
-      }
-    ]
-  },
-    // {
-    //     path: '/pages/calculator',
-    //     title: 'Calculator',
-    //     icon: 'mdi mdi-calculator',
-    //     class: '',
-    //     extralink: false,
-    //     submenu: []
-    // },
+    },
     // {
     //     path: '/pages/rewards',
     //     title: 'Discount',
@@ -188,14 +163,14 @@ export const ROUTES: RouteInfo[] = [
     //     extralink: false,
     //     submenu: []
     // },
-    // {
-    //     path: '/pages/notification',
-    //     title: 'Broadcast Notification',
-    //     icon: 'sl-icon-bell',
-    //     class: '',
-    //     extralink: false,
-    //     submenu: []
-    // },
+    {
+        path: '/pages/notification',
+        title: 'Notification',
+        icon: 'sl-icon-bell',
+        class: '',
+        extralink: false,
+        submenu: []
+    },
     // {
     //     path: '/pages/analytics',
     //     title: 'Analytics',
@@ -216,14 +191,6 @@ export const ROUTES: RouteInfo[] = [
     //     path: '/pages/geofencelist',
     //     title: 'Geofence',
     //     icon: 'mdi mdi-google-maps',
-    //     class: '',
-    //     extralink: false,
-    //     submenu: []
-    // },
-    // {
-    //     path: '/pages/manage_admin',
-    //     title: 'Admin',
-    //     icon: 'mdi mdi-chart-arc',
     //     class: '',
     //     extralink: false,
     //     submenu: []
@@ -270,6 +237,14 @@ export const ROUTES: RouteInfo[] = [
     //         }
     //     ]
     // },
+  //   {
+  //     path: '/apps/chat',
+  //     title: 'Chat App',
+  //     icon: '',
+  //     class: '',
+  //     extralink: false,
+  //     submenu: []
+  // },
     // {
     //     path: '',
     //     title: 'Extra',
@@ -835,57 +810,57 @@ export const ROUTES: RouteInfo[] = [
     //     extralink: false,
     //     submenu: []
     // },
-//     {
-//         path: '/pages/langingpage',
-//         title: 'Landing Page',
-//         icon: 'fas fa-globe',
-//         class: '',
-//         extralink: false,
-//         submenu: []
-//     },
+    // {
+    //     path: '/pages/langingpage',
+    //     title: 'Landing Page',
+    //     icon: 'fas fa-globe',
+    //     class: '',
+    //     extralink: false,
+    //     submenu: []
+    // },
 
-//      {
-//         path: '',
-//         title: 'CMS Pages',
-//         icon: 'icon-Car-Wheel',
-//         class: 'has-arrow',
-//         extralink: false,
-//         submenu: [
+    //  {
+    //     path: '',
+    //     title: 'CMS Pages',
+    //     icon: 'icon-Car-Wheel',
+    //     class: 'has-arrow',
+    //     extralink: false,
+    //     submenu: [
 
-//             {
-//                 path: '/pages/contact',
-//                 title: 'Contact',
-//                 icon: '',
-//                 class: '',
-//                 extralink: false,
-//                 submenu: []
-//         },
-//         {
-//             path: '/pages/faq',
-//             title: 'Faq',
-//             icon: '',
-//             class: '',
-//             extralink: false,
-//             submenu: []
-// },
-// {
-//     path: '/pages/privacy',
-//     title: 'Privcay',
-//     icon: '',
-//     class: '',
-//     extralink: false,
-//     submenu: []
-// },
-// {
-//     path: '/pages/terms',
-//     title: 'Terms',
-//     icon: '',
-//     class: '',
-//     extralink: false,
-//     submenu: []
-// },
-//         ]
-//     },
+    //         {
+    //             path: '/pages/contact',
+    //             title: 'Contact',
+    //             icon: '',
+    //             class: '',
+    //             extralink: false,
+    //             submenu: []
+    //     },
+    //     {
+    //         path: '/pages/faq',
+    //         title: 'Faq',
+    //         icon: '',
+    //         class: '',
+    //         extralink: false,
+    //         submenu: []
+    //     },
+    //     {
+    //         path: '/pages/privacy',
+    //         title: 'Privacy',
+    //         icon: '',
+    //         class: '',
+    //         extralink: false,
+    //         submenu: []
+    //     },
+    //     {
+    //         path: '/pages/terms',
+    //         title: 'Terms',
+    //         icon: '',
+    //         class: '',
+    //         extralink: false,
+    //         submenu: []
+    //     },
+    //     ]
+    // },
 
     // {
     //     path: '',

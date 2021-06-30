@@ -5,13 +5,13 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource, } from '@angular/material/table';
 
 export interface UserData {
-  hotelName: string,
+  hotelName: string,    
   productname:string,
-  id: string,
+  id: string,    
   orderdate:string,
   deliverydate:string,
   delivery_man:string,
-  price:string,
+  price:string,    
   status:string,
 }
 @Component({
@@ -40,47 +40,40 @@ export class VendorhistoryComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  addsubCategoryModel(addsubCategory) {
-    this.modalService.open(addsubCategory, {backdropClass: 'light-blue-backdrop',centered: true,size: 'lg'});
-  }
-
-  deleteBoxModal(userDelete) {
-    this.modalService.open(userDelete, {backdropClass: 'light-blue-backdrop',centered: true,size: 'sm'});
-  }
-
+  
   discountModal(discount) {
     this.modalService.open(discount, {backdropClass: 'light-blue-backdrop',centered: true,size: 'lg'});
   }
   table = [
-    {
-      hotelName: 'Leuven',
+    {    
+      hotelName: 'Leuven',    
       productname:"Soya Chap",
-      id: "#454545",
+      id: "#454545",    
       orderdate:"12-05-2021/12:00",
       deliverydate:"12-05-2021/13:00",
       delivery_man:"John",
-      price:"50",
-      status:"Completed",
+      price:"50",    
+      status:"Completed",      
     },
-    {
-      hotelName: 'Mcdonalds',
+    {    
+      hotelName: 'Mcdonalds',    
       productname:"Burger",
-      id: "#454545",
+      id: "#454545",    
       orderdate:"12-05-2021/11:00",
       deliverydate:"12-05-2021/14:00",
       delivery_man:"John",
-      price:"50",
-      status:"Cancelled",
+      price:"50",    
+      status:"Cancelled",      
     },
-    {
-      hotelName: 'Mcdonalds',
+    {    
+      hotelName: 'Mcdonalds',    
       productname:"Burger",
-      id: "#454545",
+      id: "#454545",    
       orderdate:"12-05-2021/11:00",
       deliverydate:"12-05-2021/14:00",
       delivery_man:"John",
-      price:"50",
-      status:"Pending",
+      price:"50",    
+      status:"Pending",      
     }
   ]
   applyFilter(event: Event) {

@@ -74,9 +74,6 @@ import { TrucklistComponent } from './trucklist/trucklist.component';
 import { TruckcategoryComponent } from './truckcategory/truckcategory.component';
 import { TrucklocationComponent } from './trucklocation/trucklocation.component';
 import { TermsComponent } from './terms/terms.component';
-import { SuggestionsComponent } from './suggestions/suggestions.component';
-import { ReportComponent } from './report/report.component';
-import { ReasonComponent } from './reason/reason.component';
 
 
 @NgModule({
@@ -156,10 +153,7 @@ CommonModule,
     TrucklistComponent,
     TruckcategoryComponent,
     TrucklocationComponent,
-    TermsComponent,
-    SuggestionsComponent,
-    ReportComponent,
-    ReasonComponent
+    TermsComponent
     
   ]
 })

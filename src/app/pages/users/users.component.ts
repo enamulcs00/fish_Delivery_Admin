@@ -6,16 +6,15 @@ import {MatTableDataSource, } from '@angular/material/table';
 export interface UserData {
   name: string,
   completedOrders:string,
-  // id: string,
+  id: string,
   cancelledOrders:string,
-  totalOrders:string,
-  paymentnotcomplete:string,
+  groups:string,
   contact:string,
-  email:string;
- status:string,
+  date:string;
+  status:string,
   action:string,
-  address:string,
-  pendingOrders:string
+  events:string,
+  hosted:string
 }
 @Component({
   selector: 'app-users',
@@ -26,7 +25,7 @@ export class UsersComponent implements OnInit {
   closeResult: string;
 
   //table: any
-  displayedColumns: string[] = [ 'name' ,'email','contact','address', 'completedOrders', 'cancelledOrders', 'paymentnotcomplete','status','action'];
+  displayedColumns: string[] = [ 'name' ,'id','contact', 'date', 'events', 'hosted', 'groups','status','action'];
   dataSource: MatTableDataSource<UserData>;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -49,43 +48,40 @@ export class UsersComponent implements OnInit {
   table = [
     {
       name: 'Sandy',
-      // id: "#sand334553",
+      id: "#sand334553",
       contact:"+91-33434343",
-      email:"sand@example.com",
-      address:"#454 1st Block, Rammurthy, Bangalore-560016",
+      date:"10/10/20",
+      events:"50",
       completedOrders:"50",
       cancelledOrders:"0",
-      paymentnotcomplete:"0",
-      pendingOrders:"0",
-      totalOrders:"50",
+      hosted:"0",
+      groups:"50",
       status:"",
       action:"1",
     },
     {
       name: 'Rohan',
-      // id: "#rohan334553",
+      id: "#rohan334553",
       contact:"+91-33434343",
-      email:"sand@example.com",
-      address:"#454 1st Block, Rammurthy, Bangalore-560016",
+      date:"10/10/20",
+      events:"45",
       completedOrders:"10",
       cancelledOrders:"0",
-      paymentnotcomplete:"0",
-      pendingOrders:"30",
-      totalOrders:"40",
+      hosted:"30",
+      groups:"40",
       status:"",
       action:"1",
     },
     {
       name: 'john',
-      // id: "#rohan334553",
+      id: "#rohan334553",
       contact:"+91-33434343",
-      email:"sand@example.com",
-      address:"#454 1st Block, Rammurthy, Bangalore-560016",
+      date:"10/10/20",
+      events:"54",
       completedOrders:"20",
       cancelledOrders:"10",
-      paymentnotcomplete:"0",
-      pendingOrders:"10",
-      totalOrders:"30",
+      hosted:"10",
+      groups:"30",
       status:"",
       action:"1",
     },

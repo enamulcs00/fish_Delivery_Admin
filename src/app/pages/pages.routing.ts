@@ -51,9 +51,6 @@ import { VendorbusinessComponent } from './vendorbusiness/vendorbusiness.compone
 import { TrucklistComponent } from './trucklist/trucklist.component';
 import { TruckcategoryComponent } from './truckcategory/truckcategory.component';
 import { TermsComponent } from './terms/terms.component';
-import { SuggestionsComponent } from './suggestions/suggestions.component';
-import { ReportComponent } from './report/report.component';
-import { ReasonComponent } from './reason/reason.component';
 
 
 export const PagesRoutes: Routes = [
@@ -108,10 +105,10 @@ export const PagesRoutes: Routes = [
         path: 'vendors',
         component: VendorsComponent,
         data: {
-          title: 'Service Provider',
+          title: 'Vendors',
           urls: [
             { title: 'Dashboard', url: '/dashboard' },
-            { title: 'Service Provider' }
+            { title: 'Vendors' }
           ]
         }
       },
@@ -141,10 +138,10 @@ export const PagesRoutes: Routes = [
         path: 'fooditem',
         component: FoodItemsComponent,
         data: {
-          title: 'Row Food Items',
+          title: 'Groups',
           urls: [
             { title: 'Dashboard', url: '/dashboard' },
-            { title: 'Food Items' }
+            { title: 'Groups' }
           ]
         }
       },
@@ -218,10 +215,10 @@ export const PagesRoutes: Routes = [
         path: 'vendorHistory',
         component: VendorhistoryComponent,
         data: {
-          title: 'Service Provider Profile',
+          title: 'Vendor History',
           urls: [
             { title: 'Dashboard', url: '/dashboard' },
-            { title: 'Service Provider Profile' }
+            { title: 'Vendor History' }
           ]
         }
       },
@@ -251,10 +248,10 @@ export const PagesRoutes: Routes = [
         path: 'orderlist',
         component: OrderlistComponent,
         data: {
-          title: 'Orders',
+          title: 'Events',
           urls: [
             { title: 'Dashboard', url: '/dashboard' },
-            { title: 'Order List' }
+            { title: 'Events' }
           ]
         }
       },
@@ -351,7 +348,7 @@ export const PagesRoutes: Routes = [
         path: 'calculator',
         component: CalculatorComponent,
         data: {
-          title: 'Calculator',
+          title: 'Event Type',
           urls: [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Caculator' }
@@ -362,43 +359,10 @@ export const PagesRoutes: Routes = [
         path: 'reviews',
         component: ReviewsComponent,
         data: {
-          title: 'Reviews',
-          urls: [
-            { title: 'Dashboard', url: '/dashboard' },
-            { title: 'Reviews' }
-          ]
-        }
-      },
-      {
-        path: 'suggestions',
-        component: SuggestionsComponent,
-        data: {
-          title: 'Suggestions',
-          urls: [
-            { title: 'Dashboard', url: '/dashboard' },
-            { title: 'Suggestions' }
-          ]
-        }
-      },
-      {
-        path: 'report',
-        component: ReportComponent,
-        data: {
           title: 'Report',
           urls: [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Report' }
-          ]
-        }
-      },
-      {
-        path: 'reason',
-        component: ReasonComponent,
-        data: {
-          title: 'Reason',
-          urls: [
-            { title: 'Dashboard', url: '/dashboard' },
-            { title: 'Reason' }
           ]
         }
       },
@@ -480,7 +444,6 @@ export const PagesRoutes: Routes = [
           ]
         }
       },
-
       {
         path: 'langingpage',
         component: AboutComponent,
@@ -507,7 +470,7 @@ export const PagesRoutes: Routes = [
         path: 'faq',
         component: FaqComponent,
         data: {
-          title: 'Faq',
+          title: 'FAQ',
           urls: [
             { title: 'Dashboard', url: '/faq' },
             { title: 'Faq' }
@@ -585,10 +548,10 @@ export const PagesRoutes: Routes = [
         path: 'addvendor',
         component: AddvendorComponent,
         data: {
-          title: 'Add Service Provider',
+          title: 'Add Vendor',
           urls: [
             { title: 'Dashboard', url: '/addvendor' },
-            { title: 'Add Service Provider' }
+            { title: 'Add Vendor' }
           ]
         }
       },
@@ -596,10 +559,10 @@ export const PagesRoutes: Routes = [
         path: 'editvendor',
         component: EditvendorComponent,
         data: {
-          title: 'Edit Service Provider',
+          title: 'Edit Vendor',
           urls: [
             { title: 'Dashboard', url: '/editvendor' },
-            { title: 'Edit Service Provider' }
+            { title: 'Edit Vendor' }
           ]
         }
       },
@@ -618,10 +581,10 @@ export const PagesRoutes: Routes = [
         path: 'vendorcategory',
         component: VendorcategoryComponent,
         data: {
-          title: 'Category',
+          title: 'Vendor Category',
           urls: [
             { title: 'Dashboard', url: '/editvendor' },
-            { title: 'Category' }
+            { title: 'Vendor Category' }
           ]
         }
       },

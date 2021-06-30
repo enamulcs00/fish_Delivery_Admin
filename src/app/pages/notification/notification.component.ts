@@ -12,5 +12,5 @@ export class NotificationComponent implements OnInit {
   ngOnInit(): void {
   }
   toppings = new FormControl();
-  toppingList: string[] = ['All Users','Specific Users','All Vendors','Specific Vendors' ];
+  toppingList: string[] = ['Particular UserIDs','Broadcast Notification' ];
 }

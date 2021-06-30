@@ -1,11 +1,9 @@
 <!-- ============================================================== -->
 <!-- Left Part  -->
 <!-- ============================================================== -->
-<div class="left-part bg-white fixed-left-part" style="overflow: hidden" [ngClass]="{'show-panel': showSidebar}">
-    <!-- Mobile toggle button -->
+<!-- <div class="left-part bg-white fixed-left-part" style="overflow: hidden" [ngClass]="{'show-panel': showSidebar}">
     <a [ngClass]="(showSidebar)?'ti-close':'ti-menu'" class="btn btn-success show-left-part d-block d-md-none" href="javascript:void(0)"
         (click)="mobileSidebar()"></a>
-    <!-- Mobile toggle button -->
     <div class="position-relative" style="height:100%;">
         <div class="p-l-15 p-r-25 p-t-25 p-b-25 d-flex align-items-center">
             <div>
@@ -38,21 +36,21 @@
             </li>
         </ul>
     </div>
-</div>
+</div> -->
 <!-- ============================================================== -->
 <!-- End Left Part  -->
 <!-- ============================================================== -->
 <!-- ============================================================== -->
 <!-- Right Part  Mail Compose -->
 <!-- ============================================================== -->
-<div class="right-part">
+<div class="right-part ml-0 w-100">
     <div class="card">
         <div class="p-l-20 p-r-25 p-t-25 p-b-25 bg-info d-flex align-items-center">
             <div>
                 <img src="{{selectedUser.avtar}}" width="45" alt="user" class="rounded-circle">
             </div>
             <div class="text-white m-b-0 m-l-15 font-18">{{selectedUser.name}}</div>
-            <div class="ml-auto">
+            <!-- <div class="ml-auto">
                 <div ngbDropdown placement="bottom-right">
                     <a ngbDropdownToggle class="text-white" href="javascript: void(0)" id="dropdownMenuLink">
                         <i class="mdi mdi-dots-vertical font-20"></i>
@@ -63,7 +61,7 @@
                         <a class="dropdown-item" href="#">Delete Chat</a>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="card-body p-t-0 p-r-0">
             <div class="chat-box p-r-15" style="height:calc(100vh - 300px); position: relative;" [perfectScrollbar]="config">
@@ -121,7 +119,7 @@
                 </ul>
             </div>
         </div>
-        <div class="card-body border-top">
+        <!-- <div class="card-body border-top">
             <div class="row">
                 <div class="col-9">
                     <div class="input-field m-t-0 m-b-0">
@@ -134,6 +132,6 @@
                     </a>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>

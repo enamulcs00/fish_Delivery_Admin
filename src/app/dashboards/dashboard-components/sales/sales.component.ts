@@ -5,13 +5,16 @@ import * as c3 from 'c3';
 
 declare var require: any;
 
+const data: any = require('./data.json');
+
 export interface Chart {
-    type: ChartType;
-    data: Chartist.IChartistData;
-    options?: any;
-    responsiveOptions?: any;
-    events?: ChartEvent;
+  type: ChartType;
+  data: Chartist.IChartistData;
+  options?: any;
+  responsiveOptions?: any;
+  events?: ChartEvent;
 }
+
 
 @Component({
     selector: 'app-sales',
@@ -19,58 +22,51 @@ export interface Chart {
     styleUrls: ['./sales.component.scss']
 })
 export class SalesComponent implements AfterViewInit {
+
+  barChart1: Chart = {
+    type: 'Bar',
+    data: data['Bar'],
+    options: {
+      seriesBarDistance: 15,
+	  height: 400,
+      axisX: {
+        showGrid: false,
+        offset: 70
+      },
+      axisY: {
+        showGrid: true,
+        offset: 50
+      }
+    },
+    responsiveOptions: [
+      [
+        'screen and (min-width: 640px)',
+        {
+          axisX: {
+            labelInterpolationFnc: function(
+              value: number,
+              index: number
+            ): string {
+              return index % 1 === 0 ? `${value}` : null;
+            }
+          }
+        }
+      ]
+    ]
+  };
+
+  // Line chart
+  lineChart1: Chart = {
+    type: 'Line',
+    data: data['LineWithArea'],
+    options: {
+      low: 0,
+	  height: 400,
+      showArea: true,
+      fullWidth: true
+    }
+  };
     constructor() { }
-
-    // Barchart
-    barChart: Chart = {
-        type: 'Bar',
-        data: {
-            labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
-            series: [[50, 40, 30, 70, 50, 20, 30]]
-        },
-        options: {
-            height: 290,
-            chartPadding: {
-                top: 15,
-                left: -25
-            },
-            axisX: {
-                showLabel: true,
-                showGrid: false
-            },
-            axisY: {
-                showLabel: false,
-                showGrid: false
-            },
-            fullWidth: true
-        }
-    };
-
-    // Line chart
-    lineChart: Chart = {
-        type: 'Line',
-        data: {
-            labels: ['1PM', '2PM', '3PM', '4PM', '5PM', '6PM'],
-            series: [[2, 0, 5, 2, 5, 2]]
-        },
-        options: {
-            showArea: true,
-            showPoint: false,
-
-            chartPadding: {
-                left: -35
-            },
-            axisX: {
-                showLabel: true,
-                showGrid: false
-            },
-            axisY: {
-                showLabel: false,
-                showGrid: true
-            },
-            fullWidth: true
-        }
-    };
 
     ngAfterViewInit() {
         const chart2 = c3.generate({
@@ -111,76 +107,5 @@ export class SalesComponent implements AfterViewInit {
             }
         });
     }
-     // This is line chart
-  // bar chart
-  public lineChartLegend = true;
-  public lineChartType = 'line';
 
-  // events
-  public chartClicked(e: any): void {
-    // console.log(e);
-  }
-
-  public chartHovered(e: any): void {
-    // console.log(e);
-  }
-  public barChartOptions: any = {
-    scaleShowVerticalLines: false,
-    responsive: true,
-    barThickness: 10
-  };
-
-  public barChartLabels: string[] = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'April',
-    'May',
-    'June',
-    'July',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
-  ];
-  public barChartType = 'bar';
-  public barChartLegend = true;
-
-  public barChartData: any[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40, 65, 64, 2, 3, 55], label: 'Sales' },
-  ];
-  public barChartColors: Array<any> = [
-    { backgroundColor: '#36bea6' }
-  ];
-
-//   user
-public barChartLabels1: string[] = [
-    'Area 1',
-    'Area 2',
-    'Area 3',
-    'Area 4',
-    'Area 5',
-    'Area 6',
-    'Area 7',
-    'Area 8',
-    'Area 9',
-  ];
-  public barChartColors1: Array<any> = [
-    { backgroundColor: '#0b1e43' }
-  ];
-  public barChartData1: any[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40, 65, 64, 2, 3, 55], label: 'Revenue' },
-  ];
-  public barChartLabels2: string[] = [
-    'Area 1',
-    'Area 2',
-    'Area 3',
-    'Area 4',
-    'Area 5',
-    'Area 6',
-    'Area 7',
-    'Area 8',
-    'Area 9',
-  ];
 }

@@ -1,385 +1,498 @@
-<div class="card">
-  <div class="card-body">
-    <div class="row">
-      <div class="col-md-12 text-right mb-5">
-        <div class="add-categories ">
-          <button class="btn btn-seconadary mb-2" (click)="addCategoryModel(addCategory)"><i class="sl-icon-plus"></i>
-            Add Food Items</button>
-        </div>
-      </div>
-    </div>
-    <div class="col-12">
-      <div class="row">
-        <div class="col-md-2">
-          <img width="150px" class="mr-2" src="assets/images/food/1.jpg" alt="">
-        </div>
-        <div class="col-md-3">
-          <h3 class="mb-0"> Champ </h3>
-          <p>Category : Fast Food </p>
-          <p>Sub-Category : Soya Chap </p>
-          <p>Quantity : 10/pc</p>
-        <p>Price : <i class="fas fa-euro-sign"></i>11/inc tax </p>
-
-        </div>
-        <div class="col-md-5">
-          <label>Description</label>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos voluptatem, recusandae quibusdam.</p>
-        </div>
-        <div class="col-md-2 text-right">
-          <div class="delete-categories">
-            <span class="btn btn-primary mr-2" (click)="editBoxModal(editModel)"><i class="ti-marker-alt"></i> </span>
-            <span class="btn btn-danger" (click)="deleteBoxModal(deleteBox)"><i class="ti-trash"></i> </span>
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <form>
+                        <div class="mb-2">
+                            <input type="text" class="form-control" id="prenametext" placeholder="Search">
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-8 d-flex  justify-content-end">
+                    <!-- <a href="javascript:void()" class=" btn"><i class=" fas fa-redo"></i></a>
+      <a href="javascript:void()" class="mr-2 btn"><i class="fas fa-print"></i></a> -->
+                    <!-- <div class="mr-2"><button class="btn btn-primary">Download CSV</button></div> -->
+                    <!-- <div ngbDropdown class="d-inline-block mb-2 mr-2">
+          <button class="btn btn-primary text-white" id="dropdownBasic1" ngbDropdownToggle>
+              All
+          </button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button class="dropdown-item">Accepted</button>
+              <button class="dropdown-item">Pending</button>
           </div>
+      </div> -->
+                    <div class="mr-2"><button class="btn btn-primary" (click)="Adddetails(Adddetail)"><i class="sl-icon-plus"></i> Add</button></div>
+                    <div ngbDropdown class="d-inline-block mb-2 mr-2">
+                        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle> All </button>
+                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                            <button class="dropdown-item">All</button>
+                            <button class="dropdown-item"> Public </button>
+                            <button class="dropdown-item"> Private </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table mat-table class=" w-100" [dataSource]="dataSource" matSort>
+                        <ng-container matColumnDef="Images">
+                            <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Images </th>
+                            <td mat-cell *matCellDef="let row">
+                                <span class="img-small"><img src={{row.Images}} alt="wedding" width="60" class="rounded"></span>
+                            </td>
+                        </ng-container>
+                        <!-- ID Column -->
+                        <ng-container matColumnDef="EventName">
+                            <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Group Name </th>
+                            <td mat-cell *matCellDef="let row"> {{row.EventName}} </td>
+                        </ng-container>
+                        <!-- ID Column -->
+                        <ng-container matColumnDef="Eventtype">
+                            <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Public/Private </th>
+                            <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Eventtype}} </td>
+                        </ng-container>
+
+                        <!-- Progress Column -->
+                        <ng-container matColumnDef="Date">
+                            <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Date </th>
+                            <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Date}} </td>
+                        </ng-container>
+                        <!-- Progress Column -->
+                        <ng-container matColumnDef="email">
+                            <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Group Members </th>
+                            <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.email}}
+                                <a href="javascript:void()" (click)="carModal(car)"><i class="sl-icon-info"></i></a>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="groupdescription">
+                            <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Group Description </th>
+                            <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.groupdescription}}
+                            </td>
+                        </ng-container>
+                        <!-- Progress Column -->
+                        <ng-container matColumnDef="Duration">
+                            <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Visible to non-members </th>
+                            <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Duration}} </td>
+                        </ng-container>
+                        <!-- Address -->
+                        <!-- <ng-container matColumnDef="location">
+                            <th mat-header-cell *matHeaderCellDef> Members can invite others </th>
+                            <td mat-cell *matCellDef="let row"> {{row.location}} </td>
+                        </ng-container> -->
+                        <!-- pendingOrder -->
+                        <ng-container matColumnDef="action">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-nowrap"> Action </th>
+                            <td mat-cell *matCellDef="let row" class="text-nowrap">
+
+                                <div ngbDropdown placement="bottom-right" display="dynamic" class="dropdown-menu-right" container="body">
+                                    <button class="btn btn-outline-primary btn-sm" id="dropdownBasic1" ngbDropdownToggle>
+                Action
+              </button>
+
+                                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                        <!-- <a class="dropdown-item" (click)="eventdetails(eventdetail)"><i class="ti-eye"></i>
+                  View
+                </a> -->
+                                        <button class="dropdown-item" (click)="eventsedit(eventedit)"><i
+                      class="ti-marker-alt"></i> Edit</button>
+
+                                        <a href="javascript:void()" class="dropdown-item " (click)="userDeleteModal(userDelete)"><i class="ti-trash"></i>
+                  Delete</a>
+                                        <!-- <button class="dropdown-item">On way to delivery</button>
+                  <button class="dropdown-item"> In process of Pick-up</button>
+                  <button class="dropdown-item"> Pending and not processed for Pick-Up</button>
+                  <button class="dropdown-item"> Completed and payment confirmed.</button>
+                  <button class="dropdown-item">Food Being Prepared </button> -->
+                                    </div>
+
+                                    <!-- <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                        <button class="dropdown-item" (click)="userDeleteModal(userDelete)"><i class="ti-trash"></i>Delete</button>
+                                    </div> -->
+                                </div>
+
+                                <!-- <a *ngIf="row.action==1" class="btn btn-primary" routerLink="/pages/orderdetail"><i class="ti-eye"></i>
+              View
+            </a> -->
+                            </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                        <!-- Row shown when there is no matching data. -->
+                        <!-- <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        </tr> -->
+                    </table>
+                </div>
+                <div class="col-md-12 text-right">
+                    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+    <!-- Column -->
 </div>
-
-<!-- edit user detail -->
-<ng-template #addsubCategory let-modal>
-  <div class="modal-body">
-    <div class="card">
-      <form action="#">
-        <div class="form-body">
-          <div class="card-body">
-            <div class="row p-t-20">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label class="control-label">Name</label>
-                  <input type="text" id="firstName" class="form-control" placeholder="John doe">
-
-                </div>
-              </div>
-              <!--/span-->
-              <div class="col-md-6">
-                <div class="form-group has-success">
-                  <div class="form-group">
-                    <label class="control-label">Upload Food Image</label>
-                    <div class="custom-file"><input class="custom-file-input" id="inputGroupFile01" type="file"><label
-                        class="custom-file-label" for="inputGroupFile01">Choose file</label></div>
-                  </div>
-                </div>
-              </div>
-              <!--/span-->
-            </div>
-            <!--/row-->
-          </div>
-          <div class="form-actions">
-            <div class="card-body">
-              <button type="submit" class="btn btn-success mr-3" (click)="modal.dismiss('Cross click')">
-                <i class="fa fa-check"></i> Update</button>
-              <button type="button" class="btn btn-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
-            </div>
-          </div>
+<ng-template #userDelete let-modal>
+    <div class="modal-body">
+        <p>Are you sure want to delete?</p>
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary mr-2" aria-label="Close" (click)="modal.dismiss('Cross click')">Yes</button>
+            <button type="button" class="btn btn-seconadary" aria-label="Close" (click)="modal.dismiss('Cross click')">No</button>
         </div>
-      </form>
     </div>
-
-  </div>
 </ng-template>
-
-<!-- delete modal -->
-<ng-template #deleteBox let-modal>
-  <div class="modal-body">
-    <p>Are You Sure want to delete this user?</p>
-    <div class="btn-group">
-      <button type="button" class="btn btn-primary mr-2" aria-label="Close"
-        (click)="modal.dismiss('Cross click')">Yes</button>
-      <button type="button" class="btn btn-seconadary" aria-label="Close"
-        (click)="modal.dismiss('Cross click')">No</button>
-    </div>
-  </div>
-</ng-template>
-
-
-
-
-
-<!-- edit user detail -->
-<ng-template #addsubCategory let-modal>
-  <div class="modal-body">
-    <div class="card">
-      <form action="#">
-        <div class="form-body">
-          <div class="card-body">
-            <div class="row p-t-20">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label class="control-label">Name</label>
-                  <input type="text" id="firstName" class="form-control" placeholder="John doe">
-
-                </div>
-              </div>
-              <!--/span-->
-              <div class="col-md-6">
-                <div class="form-group has-success">
-                  <div class="form-group">
-                    <label class="control-label">Upload Food Image</label>
-                    <div class="custom-file"><input class="custom-file-input" id="inputGroupFile01" type="file"><label
-                        class="custom-file-label" for="inputGroupFile01">Choose file</label></div>
-                  </div>
-                </div>
-              </div>
-              <!--/span-->
+<ng-template #car let-modal>
+    <div class="modal-body">
+        <h3>Group Members</h3>
+        <div class="my-3 table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <th class="text-nowrap">Name</th>
+                    <th class="text-nowrap">User Id</th>
+                    <th class="text-nowrap">Phone no.</th>
+                    <th class="text-nowrap">Sign-up date</th>
+                    <th class="text-nowrap">Number of events attended</th>
+                    <th class="text-nowrap">Number of events hosted</th>
+                    <th class="text-nowrap">Number of groups he/she is in</th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Sam</td>
+                        <td>#122344</td>
+                        <td>+1-478523690</td>
+                        <td> 05/05/20 </td>
+                        <td>10</td>
+                        <td>7</td>
+                        <td>15</td>
+                        <td> <a class="btn btn-outline-primary btn-sm"> Remove </a> </td>
+                    </tr>
+                    <tr>
+                        <td>Sam</td>
+                        <td>#122344</td>
+                        <td>+1-478523690</td>
+                        <td> 05/05/20 </td>
+                        <td>10</td>
+                        <td>7</td>
+                        <td>15</td>
+                        <td> <a class="btn btn-outline-primary btn-sm"> Remove </a> </td>
+                    </tr>
+                    <tr>
+                        <td>Sam</td>
+                        <td>#122344</td>
+                        <td>+1-478523690</td>
+                        <td> 05/05/20 </td>
+                        <td>10</td>
+                        <td>7</td>
+                        <td>15</td>
+                        <td> <a class="btn btn-outline-primary btn-sm"> Remove </a> </td>
+                    </tr>
+                    <tr>
+                        <td>Sam</td>
+                        <td>#122344</td>
+                        <td>+1-478523690</td>
+                        <td> 05/05/20 </td>
+                        <td>10</td>
+                        <td>7</td>
+                        <td>15</td>
+                        <td> <a class="btn btn-outline-primary btn-sm"> Remove </a> </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="input-group-append">
+                <a class="btn mr-0 btn-danger text-white my-2" type="button" (click)="modal.close()">Close</a>
             </div>
-            <!--/row-->
-
-          </div>
-          <div class="form-actions">
-            <div class="card-body">
-              <button type="submit" class="btn btn-success mr-3" (click)="modal.dismiss('Cross click')">
-                <i class="fa fa-check"></i> Update</button>
-              <button type="button" class="btn btn-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
-            </div>
-          </div>
         </div>
-      </form>
     </div>
-
-  </div>
 </ng-template>
-
-<!-- edit user detail -->
-<ng-template #editModel let-modal>
-  <div class="modal-body">
-    <div class="card">
-      <form action="#">
-        <div class="form-body">
-          <div class="card-body">
-            <div class="row p-t-20">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label class="control-label">Category Name</label>
-                  <mat-form-field class="w-100">
-                    <mat-label>Category Name</mat-label>
-                    <mat-select>
-                      <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-
-
-                  <label class="control-label">Sub Category</label>
-                  <mat-form-field class="w-100">
-                    <mat-label>Sub Category</mat-label>
-                    <mat-select [formControl]="toppings" multiple>
-                      <mat-option *ngFor="let topping of dishType" [value]="topping">{{topping}}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-
-                </div>
-              </div>
-              <!--/span-->
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label class="control-label">Food Item name</label>
-                  <input type="text" id="firstName" class="form-control" placeholder="Food Item name">
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group has-success">
-                  <div class="form-group">
-                    <label class="control-label">Upload Food Image</label>
-                    <div class="custom-file"><input class="custom-file-input" id="inputGroupFile01" type="file"><label
-                        class="custom-file-label" for="inputGroupFile01">Choose file</label></div>
-                  </div>
-                </div>
-              </div>
-              <!--/span-->
-            </div>
-            <!--/row-->
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group has-danger">
-                  <label class="control-label">Quantity </label>
-                  <input type="text" class="form-control" aria-label="Username" placeholder="Quantity">
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group has-danger">
-                  <label class="control-label">Price</label>
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend"><span class="input-group-text"><i
-                          class="fas fa-euro-sign"></i></span></div><input aria-describedby="basic-addon1"
-                      aria-label="price" class="form-control" placeholder="Price" type="number">
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group has-danger">
-                  <label class="control-label">Tax</label>
-                  <input type="text" class="form-control" aria-label="Username" placeholder="10%">
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group has-danger">
-                  <label class="control-label">Delivery charges</label>
-                  <input type="text" class="form-control" aria-label="Username" placeholder="$5">
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group has-danger">
-                  <label class="control-label">Normal Stock</label>
-                  <input type="text" class="form-control" aria-label="Username" placeholder="35">
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group has-danger">
-                  <label class="control-label">Over Stock</label>
-                  <input type="text" class="form-control" aria-label="Username" placeholder="10">
-                </div>
-              </div>
-             
-              <!-- <div class="col-md-6">
-                            <div class="form-group has-danger">
-                                <label class="control-label">User Type</label>
-                                <input type="text" class="form-control" aria-label="Username" placeholder="type of User">
+<ng-template #Adddetail let-modal>
+    <div class="modal-body">
+        <div class="card">
+            <form action="#">
+                <div class="form-body">
+                    <div class="card-body">
+                        <div class="row p-t-20">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label"> Image  </label>
+                                    <input type="file" class="form-control">
+                                </div>
                             </div>
-                        </div> -->
-              <div class="col-md-12">
-                <div class="form-group has-danger">
-                  <label class="control-label">Description </label>
-                  <textarea name="" id="" cols="30" rows="3" class="form-control"></textarea>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="form-actions">
-            <div class="card-body">
-              <button type="submit" class="btn btn-success mr-3" (click)="modal.dismiss('Cross click')">
-                <i class="fa fa-check"></i> Add</button>
-              <button type="button" class="btn btn-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
-            </div>
-          </div>
-        </div>
-      </form>
-    </div>
-
-  </div>
-</ng-template>
-
-<!-- edit user detail -->
-<ng-template #addCategory let-modal>
-  <div class="modal-body">
-    <div class="card">
-      <form action="#">
-        <div class="form-body">
-          <div class="card-body">
-            <div class="row p-t-20">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label class="control-label">Category Name</label>
-                  <mat-form-field class="w-100">
-                    <mat-label>Category Name</mat-label>
-                    <mat-select>
-                      <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-
-
-                  <label class="control-label">Sub Category</label>
-                  <mat-form-field class="w-100">
-                    <mat-label>Sub Category</mat-label>
-                    <mat-select [formControl]="toppings" multiple>
-                      <mat-option *ngFor="let topping of dishType" [value]="topping">{{topping}}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-
-                </div>
-              </div>
-              <!--/span-->
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label class="control-label">Food Item name</label>
-                  <input type="text" id="firstName" class="form-control" placeholder="Food Item name">
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group has-success">
-                  <div class="form-group">
-                    <label class="control-label">Upload Food Image</label>
-                    <div class="custom-file"><input class="custom-file-input" id="inputGroupFile01" type="file"><label
-                        class="custom-file-label" for="inputGroupFile01">Choose file</label></div>
-                  </div>
-                </div>
-              </div>
-              <!--/span-->
-            </div>
-            <!--/row-->
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group has-danger">
-                  <label class="control-label">Quantity </label>
-                  <input type="text" class="form-control" aria-label="Username" placeholder="Quantity">
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group has-danger">
-                  <label class="control-label">Price</label>
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend"><span class="input-group-text"><i
-                          class="fas fa-euro-sign"></i></span></div><input aria-describedby="basic-addon1"
-                      aria-label="price" class="form-control" placeholder="Price" type="number">
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group has-danger">
-                  <label class="control-label">Tax</label>
-                  <input type="text" class="form-control" aria-label="Username" placeholder="10%">
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group has-danger">
-                  <label class="control-label">Delivery charges</label>
-                  <input type="text" class="form-control" aria-label="Username" placeholder="$5">
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group has-danger">
-                  <label class="control-label">Normal Stock</label>
-                  <input type="text" class="form-control" aria-label="Username" placeholder="35">
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group has-danger">
-                  <label class="control-label">Over Stock</label>
-                  <input type="text" class="form-control" aria-label="Username" placeholder="10">
-                </div>
-              </div>
-             
-              <!-- <div class="col-md-6">
-                            <div class="form-group has-danger">
-                                <label class="control-label">User Type</label>
-                                <input type="text" class="form-control" aria-label="Username" placeholder="type of User">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label"> Group Name  </label>
+                                    <input type="text" id="firstName" class="form-control" placeholder="Event Group Name">
+                                </div>
                             </div>
-                        </div> -->
-              <div class="col-md-12">
-                <div class="form-group has-danger">
-                  <label class="control-label">Description </label>
-                  <textarea name="" id="" cols="30" rows="3" class="form-control"></textarea>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label"> Public/Private </label>
+                                    <!-- <input type="text" id="firstName" class="form-control" placeholder="Eg:- Public"> -->
+                                    <select name="" id="" class="form-control">
+                                    <option> Public </option>
+                                    <option> Private </option>
+                                  </select>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label"> Date </label>
+                                    <input type="date" id="firstName" class="form-control">
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <!-- <div class="col-md-6">
+                                <div class="form-group has-danger">
+                                    <label class="control-label"> Group Members </label>
+                                    <input type="text" id="email" class="form-control form-control-danger" placeholder="20">
+                                </div>
+                            </div> -->
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group has-danger">
+                                    <label class="control-label">  Group Description </label>
+                                    <textarea class="form-control form-control-danger" placeholder="Enter description for this group"></textarea>
+                                </div>
+                            </div>
+                            <!-- /span -->
+                            <div class="align-items-center col-md-6 d-flex">
+                                <div class="form-group has-danger mb-0">
+                                    <label class="control-label mb-0"> Visible to non-members </label>
+                                    <!-- <input type="text" id="email" class="form-control form-control-danger" placeholder="Eg:- yes"> -->
+                                    <mat-slide-toggle class="ml-4">
+                                    </mat-slide-toggle>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <h4>Invite Guests/User</h4>
+                                <button class="btn btn-primary" (click)="invitemodal(invite)"> Invite </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="card-body">
+                            <button type="submit" class="btn btn-success mr-3" (click)="modal.dismiss('Cross click')"> Save</button>
+                            <button type="button" class="btn btn-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="form-actions">
-            <div class="card-body">
-              <button type="submit" class="btn btn-success mr-3" (click)="modal.dismiss('Cross click')">
-                <i class="fa fa-check"></i> Add</button>
-              <button type="button" class="btn btn-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
-            </div>
-          </div>
+            </form>
         </div>
-      </form>
     </div>
+</ng-template>
+<ng-template #eventdetail let-modal>
+    <div class="modal-body">
+        <div class="card">
+            <form action="#">
+                <div class="form-body">
+                    <div class="card-body">
+                        <div class="row p-t-20">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label"> Image  </label>
+                                    <input type="file" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label"> Group Name  </label>
+                                    <input type="text" id="firstName" class="form-control" placeholder="Group 1">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label"> Public/Private </label>
+                                    <input type="text" id="firstName" class="form-control" placeholder="Public">
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label"> Date </label>
+                                    <input type="date" id="firstName" class="form-control" placeholder="05/05/21">
 
-  </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <!-- <div class="col-md-6">
+                                <div class="form-group has-danger">
+                                    <label class="control-label"> Group Members </label>
+                                    <input type="text" id="email" class="form-control form-control-danger" placeholder="20">
+                                </div>
+                            </div> -->
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group has-danger">
+                                    <label class="control-label">  Group Description </label>
+                                    <textarea class="form-control form-control-danger" placeholder="This is Description of this group"></textarea>
+                                </div>
+                            </div>
+                            <!-- /span -->
+                            <div class="col-md-6">
+                                <div class="form-group has-danger">
+                                    <label class="control-label"> Visible to non-members </label>
+                                    <input type="text" id="email" class="form-control form-control-danger" placeholder="yes">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="card-body">
+                            <!-- <button type="submit" class="btn btn-primary mr-3" (click)="modal.dismiss('Cross click')"><i class="fa fa-check"></i> Update</button> -->
+                            <button type="button" class="btn btn-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</ng-template>
+<ng-template #eventedit let-modal>
+    <div class="modal-body">
+        <div class="card">
+            <form action="#">
+                <div class="form-body">
+                    <div class="card-body">
+                        <div class="row p-t-20">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label"> Image  </label>
+                                    <input type="file" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label"> Group Name  </label>
+                                    <input type="text" id="firstName" class="form-control" placeholder="Group 1">
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label"> Public/Private </label>
+                                    <!-- <input type="text" id="firstName" class="form-control" placeholder="Eg:- Public"> -->
+                                    <select name="" id="" class="form-control">
+                                    <option> Public </option>
+                                    <option> Private </option>
+                                  </select>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label"> Date </label>
+                                    <input type="date" id="firstName" class="form-control" placeholder="05/05/21">
+
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <!-- <div class="col-md-6">
+                                <div class="form-group has-danger">
+                                    <label class="control-label"> Group Members </label>
+                                    <input type="text" id="email" class="form-control form-control-danger" placeholder="20">
+                                </div>
+                            </div> -->
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group has-danger">
+                                    <label class="control-label">  Group Description </label>
+                                    <textarea class="form-control form-control-danger" placeholder="This is Description of this group"></textarea>
+                                </div>
+                            </div>
+                            <!-- /span -->
+                            <div class="align-items-center col-md-6 d-flex">
+                                <div class="form-group has-danger mb-0">
+                                    <label class="control-label mb-0"> Visible to non-members </label>
+                                    <!-- <input type="text" id="email" class="form-control form-control-danger" placeholder="yes"> -->
+                                    <mat-slide-toggle class="ml-4">
+                                    </mat-slide-toggle>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <h4>Invite Guests/User</h4>
+                                <button class="btn btn-primary" (click)="invitemodal(invite)"> Invite </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="card-body">
+                            <button type="submit" class="btn btn-primary mr-3" (click)="modal.dismiss('Cross click')"><i class="fa fa-check"></i> Update</button>
+                            <button type="button" class="btn btn-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</ng-template>
+<ng-template #invite let-modal>
+    <div class="modal-body">
+        <h3 class="pb-3">User List</h3>
+        <div class="col-6 px-0"><input type="text" class="form-control" id="prenametext" placeholder="Search"></div>
+        <div class="my-3 table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <th class="text-nowrap">Select</th>
+                    <th class="text-nowrap">Name</th>
+                    <th class="text-nowrap">User Id</th>
+                    <th class="text-nowrap">Phone no.</th>
+                    <th class="text-nowrap">Sign-up date</th>
+                    <th class="text-nowrap">Number of events attended</th>
+                    <th class="text-nowrap">Number of events hosted</th>
+                    <th class="text-nowrap">Number of groups he/she is in</th>
+                    <!-- <th>Action</th> -->
+                </thead>
+                <tbody>
+                    <tr>
+                        <td> <input type="checkbox"> </td>
+                        <td>Sam</td>
+                        <td>#122344</td>
+                        <td class="text-nowrap">+1-478523690</td>
+                        <td> 05/05/20 </td>
+                        <td>10</td>
+                        <td>7</td>
+                        <td>15</td>
+                        <!-- <td> <a class="btn btn-outline-success btn-sm" id="dropdownBasic1"> Invite </a> </td> -->
+                    </tr>
+                    <tr>
+                        <td> <input type="checkbox"> </td>
+                        <td>Sam</td>
+                        <td>#122344</td>
+                        <td class="text-nowrap">+1-478523690</td>
+                        <td> 05/05/20 </td>
+                        <td>10</td>
+                        <td>7</td>
+                        <td>15</td>
+                        <!-- <td> <a class="btn btn-outline-success btn-sm" id="dropdownBasic1"> Invite </a> </td> -->
+                    </tr>
+                    <tr>
+                        <td> <input type="checkbox"> </td>
+                        <td>Sam</td>
+                        <td>#122344</td>
+                        <td class="text-nowrap">+1-478523690</td>
+                        <td> 05/05/20 </td>
+                        <td>10</td>
+                        <td>7</td>
+                        <td>15</td>
+                        <!-- <td> <a class="btn btn-outline-success btn-sm" id="dropdownBasic1"> Invite </a> </td> -->
+                    </tr>
+                    <tr>
+                        <td> <input type="checkbox"> </td>
+                        <td>Sam</td>
+                        <td>#122344</td>
+                        <td class="text-nowrap">+1-478523690</td>
+                        <td> 05/05/20 </td>
+                        <td>10</td>
+                        <td>7</td>
+                        <td>15</td>
+                        <!-- <td> <a class="btn btn-outline-success btn-sm" id="dropdownBasic1"> Invite </a> </td> -->
+                    </tr>
+                </tbody>
+            </table>
+            <div class="input-group-append">
+                <a class="btn mr-0 btn-success text-white my-2 mr-2" type="button" (click)="modal.close()">Submit</a>
+                <a class="btn mr-0 btn-danger text-white my-2" type="button" (click)="modal.close()">Close</a>
+            </div>
+        </div>
+    </div>
 </ng-template>

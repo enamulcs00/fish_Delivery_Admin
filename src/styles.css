@@ -20,84 +20,49 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+
+/* .btn-outline-primary {
+    color: #FF2E42 !important;
+} */
+
+.btn-outline-primary:hover {
+    color: #FFF !important;
+}
+
 .theme_btn {
-    background: #3591FF;
-    color: #fff !important;
-    cursor: pointer;
+    border: solid 1px #FF2E42 !important;
+    color: #FF2E42 !important;
+    background: none;
+    padding: 10px 10px !important;
 }
 
-.dlt_btn {
-    background: #ef6e6e;
-    color: #fff !important;
-    padding-right: 1px;
-    width: 30px;
-    height: 30px;
-    border-radius: 3px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    cursor: pointer;
-}
-
-.dlt_btn i {
-    font-size: 17px;
-}
-
-.cstm_tabs {
-    border: 2px solid #3591FF !important;
+.cstm_tab {
+    margin-bottom: 20px !important;
     border-bottom: 0px !important;
 }
 
-.ord_tab_hd {
-    border: 0px !important;
-    color: #fff;
-    background: #3591FF;
-    border-top-left-radius: 0px !important;
-    border-top-right-radius: 0px !important;
+.cstm_tab .nav-link {
+    border: 0px solid transparent !important;
+    color: #000 !important;
+    font-weight: 500;
 }
 
-.ord_tab_hd:hover {
-    color: #fff;
+.cstm_tab .nav-link:hover {
+    border: 0px solid transparent !important;
+    color: #000 !important;
 }
 
-.ord_tab_hd.active {
-    color: #3591FF !important;
-    background: #fff !important;
-    /* border-bottom: 2px solid #fff !important; */
+.cstm_tab .nav-link.active {
+    border: 0px solid transparent !important;
+    border-bottom: 2px solid #FF2E42 !important;
+    color: #FF2E42 !important;
 }
 
-.sidebar-nav ul .sidebar-item .first-level .sidebar-item.active .sidebar-link {
-    color: #3591FF;
-    font-weight: bold;
+.slct_icn {
+    height: auto;
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+.slct_icn .mat-option-text span {
+    font-size: 30px;
+    border: solid #000 1px;
 }
-
-input[type=number] {
-    -moz-appearance: textfield;
-}
-
-.mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
-    background-color: #92c1fa !important;
-}
-
-.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
-    background-color: #3591FF !important;
-}
-
-.btn-danger {
-    font-size: 17px !important;
-    padding: 5px 10px !important;
-}
-
-
-/* .logo-text {
-  width: 120px;
-  text-align: left;
-  overflow: hidden;
-} */

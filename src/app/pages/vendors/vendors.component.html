@@ -1,10 +1,7 @@
 <div class="row">
     <!-- Column -->
-
-
     <div class="col-lg-12">
         <div class="card">
-
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-4">
@@ -15,45 +12,12 @@
                         </form>
                     </div>
                     <div class="col-md-8 d-flex  justify-content-end">
-                        <!-- <div class="mr-2"> <button class="btn btn-danger" (click)="editdetailModal(editdetail)" >Sub Account</button></div> -->
                         <button class="btn btn-primary mb-2 mr-2"><i class="sl-icon-cloud-download"></i> Export CSV</button>
-                        <!-- <div ngbDropdown class="d-inline-block mb-2 mr-2">
-              <button class="btn btn-info text-white" id="dropdownBasic1" ngbDropdownToggle>
-                Status
-              </button>
-              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                <button class="dropdown-item">All</button>
-                <button class="dropdown-item">Active</button>
-                <button class="dropdown-item">Inactive</button>
-              </div>
-            </div> -->
-                        <!-- <div ngbDropdown class="d-inline-block mb-2">
-                            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
-                Account Type
-              </button>
-                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                                <button class="dropdown-item">All</button>
-                                <button class="dropdown-item">Main</button>
-                                <button class="dropdown-item">Sub Account</button>
-                            </div>
-                        </div> -->
                         <div class="d-inline-block mb-2">
                             <a class="btn btn-outline-primary" routerLink="/pages/addvendor">
-                                <i class="sl-icon-plus"></i> Add Service Provider
+                                <i class="sl-icon-plus"></i> Add vendor
                             </a>
                         </div>
-                        <!-- <div ngbDropdown class="d-inline-block mb-2 ml-2">
-              <button class="btn btn-outline-info" id="dropdownBasic1" ngbDropdownToggle>
-                Business Type
-              </button>
-              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                <button class="dropdown-item">All</button>
-                <button class="dropdown-item">Bike</button>
-                <button class="dropdown-item">Event</button>
-              </div>
-            </div> -->
-                        <!-- <button class="btn btn-primary mb-2 mr-2"><i class="sl-icon-cloud-download"></i> Export CSV</button> -->
-                        <!-- <button class="btn btn-seconadary mb-2" (click)="addUserModal(addUser)"><i class="sl-icon-plus"></i> Add Vendor</button> -->
                     </div>
                     <div class="table-responsive">
                         <table class="table v-middle product-overview" id="zero_config">
@@ -70,7 +34,6 @@
                             </thead>
                             <tbody>
                                 <tr>
-
                                     <td><span class="text-nowrap"> Ronny </span></td>
                                     <td><span class="text-nowrap"> #Ronny33 </span></td>
                                     <td class="text-nowrap">+91-33434343</td>
@@ -81,17 +44,17 @@
                                         </mat-slide-toggle>
                                     </td>
                                     <td>
+                                        <button class="btn btn-outline-primary btn-sm"> Delete </button>
+                                    </td>
+                                    <!-- <td>
                                         <div ngbDropdown placement="bottom" class="d-inline-block " placement="bottom" container="body">
-                                            <button class="btn btn-outline-primary btn-sm" id="dropdownBasic1" ngbDropdownToggle>
-                        Pending
-                      </button>
+                                            <button class="btn btn-outline-primary btn-sm" id="dropdownBasic1" ngbDropdownToggle> Action </button>
                                             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                                                <button class="dropdown-item" (click)="vendorConfirmModal(vendorConfirm)">Accept</button>
-                                                <button class="dropdown-item" (click)="vendorUnconfirmModal(vendorUnconfirm)"> Reject </button>
-
+                                                <button class="dropdown-item" (click)="vendorConfirmModal(vendorConfirm)"> Edit </button>
+                                                <button class="dropdown-item" (click)="vendorUnconfirmModal(vendorUnconfirm)"> Remove </button>
                                             </div>
                                         </div>
-                                    </td>
+                                    </td> -->
                                 </tr>
                                 <tr>
                                     <td><span class="text-nowrap"> Ronny </span></td>
@@ -104,21 +67,17 @@
                                         </mat-slide-toggle>
                                     </td>
                                     <td>
+                                        <button class="btn btn-outline-primary btn-sm"> Delete </button>
+                                    </td>
+                                    <!-- <td>
                                         <div ngbDropdown placement="bottom" class="d-inline-block " placement="bottom" container="body">
-                                            <button class="btn btn-outline-primary btn-sm" id="dropdownBasic1" ngbDropdownToggle>
-                        Action
-                      </button>
+                                            <button class="btn btn-outline-primary btn-sm" id="dropdownBasic1" ngbDropdownToggle> Action </button>
                                             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                                                <a class="dropdown-item" routerLink="/pages/vendorHistory">
-                                                    <i class="ti-eye"></i> View</a>
-                                                <a class="dropdown-item" routerLink="/pages/editvendor"><i class="ti-marker-alt"></i> Edit
-                        </a>
-                                                <a class="dropdown-item" (click)="userDeleteModal(userDelete)"><i class="ti-trash"></i>
-                          Delete
-                        </a>
+                                                <button class="dropdown-item" (click)="vendorConfirmModal(vendorConfirm)"> Edit </button>
+                                                <button class="dropdown-item" (click)="vendorUnconfirmModal(vendorUnconfirm)"> Remove </button>
                                             </div>
                                         </div>
-                                    </td>
+                                    </td> -->
                                 </tr>
                                 <tr>
                                     <td><span class="text-nowrap"> Ronny </span></td>
@@ -131,29 +90,23 @@
                                         </mat-slide-toggle>
                                     </td>
                                     <td>
+                                        <button class="btn btn-outline-primary btn-sm"> Delete </button>
+                                    </td>
+                                    <!-- <td>
                                         <div ngbDropdown placement="bottom" class="d-inline-block " placement="bottom" container="body">
-                                            <button class="btn btn-outline-primary btn-sm" id="dropdownBasic1" ngbDropdownToggle>
-                        Action
-                      </button>
+                                            <button class="btn btn-outline-primary btn-sm" id="dropdownBasic1" ngbDropdownToggle> Action </button>
                                             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                                                <a class="dropdown-item" routerLink="/pages/vendorHistory">
-                                                    <i class="ti-eye"></i> View</a>
-                                                <a class="dropdown-item" routerLink="/pages/editvendor"><i class="ti-marker-alt"></i> Edit
-                        </a>
-                                                <a class="dropdown-item" (click)="userDeleteModal(userDelete)"><i class="ti-trash"></i>
-                          Delete
-                        </a>
+                                                <button class="dropdown-item" (click)="vendorConfirmModal(vendorConfirm)"> Edit </button>
+                                                <button class="dropdown-item" (click)="vendorUnconfirmModal(vendorUnconfirm)"> Remove </button>
                                             </div>
                                         </div>
-                                    </td>
+                                    </td> -->
                                 </tr>
-
                             </tbody>
                         </table>
                         <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
                         </mat-paginator>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -270,10 +223,10 @@
     <!-- delete modal -->
     <ng-template #userDelete let-modal>
         <div class="modal-body">
-            <p>Are you sure want to delete this service provider ?</p>
+            <p>Are You Sure want to delete?</p>
             <div class="btn-group">
-                <button type="button" class="btn btn-primary m-2" aria-label="Close" (click)="modal.dismiss('Cross click')">Yes</button>
-                <button type="button" class="btn btn-seconadary m-2" aria-label="Close" (click)="modal.dismiss('Cross click')">No</button>
+                <button type="button" class="btn btn-primary mr-2" aria-label="Close" (click)="modal.dismiss('Cross click')">Yes</button>
+                <button type="button" class="btn btn-seconadary" aria-label="Close" (click)="modal.dismiss('Cross click')">No</button>
             </div>
         </div>
     </ng-template>
@@ -288,7 +241,7 @@
                             <div class="row p-t-20">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="control-label">Edit Commission</label>
+                                        <label class="control-label">Edit Commision</label>
                                         <input type="text" id="firstName" class="form-control" value="50% " placeholder="">
                                     </div>
                                 </div>
@@ -408,8 +361,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Edit Commission</label>
-                                        <input type="text" id="Commission" name="Commission" class="form-control" placeholder="$50">
+                                        <label class="control-label">Edit Commision</label>
+                                        <input type="text" id="Commision" name="Commision" class="form-control" placeholder="$50">
                                     </div>
                                 </div>
                                 <!--/span-->
@@ -432,13 +385,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">IBAN No</label>
-                                        <input type="text" id="Commission" name="Commission" class="form-control" placeholder="IBAN No">
+                                        <input type="text" id="Commision" name="Commision" class="form-control" placeholder="IBAN No">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Bank Name</label>
-                                        <input type="text" id="Commission" name="Commission" class="form-control" placeholder="Bank Name">
+                                        <input type="text" id="Commision" name="Commision" class="form-control" placeholder="Bank Name">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -452,13 +405,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Commercial registration ID </label>
-                                        <input type="text" id="Commission" name="Commission" class="form-control" placeholder="Commercial registration ID ">
+                                        <input type="text" id="Commision" name="Commision" class="form-control" placeholder="Commercial registration ID ">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Tax ID </label>
-                                        <input type="text" id="Commission" name="Commission" class="form-control" placeholder="Tax ID ">
+                                        <input type="text" id="Commision" name="Commision" class="form-control" placeholder="Tax ID ">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -470,7 +423,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Tourism ID </label>
-                                        <input type="text" id="Commission" name="Commission" class="form-control" placeholder="Tourism ID ">
+                                        <input type="text" id="Commision" name="Commision" class="form-control" placeholder="Tourism ID ">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -482,14 +435,14 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Reset Password </label>
-                                        <input type="password" id="Commission" name="Commission" class="form-control" placeholder="Reset ">
+                                        <input type="password" id="Commision" name="Commision" class="form-control" placeholder="Reset ">
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Re-enter Password </label>
-                                        <input type="password" id="Commission" name="Commission" class="form-control" placeholder="Reset ">
+                                        <input type="password" id="Commision" name="Commision" class="form-control" placeholder="Reset ">
                                     </div>
                                 </div>
 
@@ -512,7 +465,7 @@
 
     <ng-template #vendorConfirm let-modal>
         <div class="modal-body">
-            <label>Add Commission</label>
+            <label>Add Commision</label>
             <div class="input-group mb-3"><span class="input-group-text">%</span><input aria-describedby="basic-addon1" aria-label="" class="form-control" placeholder="" type="text">
                 <div class="input-group-append"><button class="btn mr-0 btn-info" type="button">Submit</button></div>
             </div>

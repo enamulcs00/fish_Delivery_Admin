@@ -1,0 +1,50 @@
+input[type="file"] {
+    height: 35px;
+    padding: 3px 10px;
+}
+
+.cstm_icn .icon_outr {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.cstm_icn li {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    border: solid #000 1px;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.cstm_icn li.selected {
+    cursor: default;
+}
+
+.cstm_icn li.selected::after {
+    content: "X";
+    width: 15px;
+    height: 15px;
+    font-size: 10px;
+    font-weight: bold;
+    background: #000;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    cursor: pointer;
+}
+
+.cstm_icn .icn {
+    font-size: 45px;
+}

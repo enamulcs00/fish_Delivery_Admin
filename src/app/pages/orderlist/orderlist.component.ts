@@ -5,20 +5,25 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource, } from '@angular/material/table';
 export interface UserData {
-  hotelName:string,
-  name: string,
-  driver:string,
-  id: string,
-  contact:string,
-  email:string;
- // status:string,
+  Images: string,
+  EventName:string,
+  // Eventtype: string,
+  Event_type: string,
+  datetime: string,
+  Duration:string,
+  Durationtime:string,
+  Durationdate:string,
+  box:string;
   action:string,
-  address:string,
-  orderdate:string,
-  deliverydate:string,
-  Ordertype:string,
-  // foodStatus:string,
-  orderStatus:string,
+  location:string,
+  invited:string,
+  invited2:string,
+  guest:string,
+  attendees:string,
+  Waiting:string,
+  messagescount:string,
+  likes:string,
+  polls:string,
 }
 @Component({
   selector: 'app-orderlist',
@@ -27,21 +32,13 @@ export interface UserData {
 })
 export class OrderlistComponent implements OnInit {
 
-  active = 1;
   closeResult: string;
-  displayedColumns: string[] = [ 'name','contact','address','orderdate','orderStatus','totalSales','action'];
+  displayedColumns: string[] = [ 'Images', 'EventName', 'Event_type','datetime','box','Duration', 'Durationtime', 'Durationdate','location', 'polls', 'invited', 'invited2', 'guest', 'attendees', 'Waiting', 'messagescount', 'likes','action'];
   dataSource: MatTableDataSource<UserData>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-
-  displayedColumns1: string[] = [ 'name','contact','address','orderdate','orderStatus','totalSales','action'];
-  dataSource1: MatTableDataSource<UserData>;
-  @ViewChild(MatPaginator, { static: true }) paginator1: MatPaginator;
-  @ViewChild(MatSort, { static: true }) sort1: MatSort;
-
   constructor(private modalService: NgbModal) {
     this.dataSource = new MatTableDataSource(this.table);
-    this.dataSource1 = new MatTableDataSource(this.table1);
   }
   toppings = new FormControl();
   toppingList: string[] = ['Jamas Thomas', 'Rony Roy', 'Vicky Andy', 'john Vick', 'Alex Harry', 'Harry Roy'];
@@ -54,124 +51,97 @@ export class OrderlistComponent implements OnInit {
 
   table = [
     {
-      hotelName:"Wedding",
-      name: 'Sandy roy',
-      id: "#334553",
-      contact:"+91-33434343",
-      email:"Non veg",
-      address:"#454 1st Block, Rammurthy, Bangalore-560016",
-      Ordertype:"Delivery",
-      driver:"Andrew Tye",
-      orderdate:"12-05-2021/13:45",
-      deliverydate:"12-05-2021/15:45",
-      // foodStatus:"Pending and not processed for Pick-Up",
-      orderStatus:"Pending",
-      totalSales:"500",
+      Images: "assets/images/gallery/wedding.jpg",
+      EventName:"Event 1",
+      Event_type: 'Public',
+      // Eventtype: 'Drink',
+      datetime: "05/05/21, 10:20 AM",
+      box:"Description will be shown here....",
+      Duration:"2 Days",
+      Durationtime:"10:00 AM - 10:00 PM",
+      Durationdate: "10/10/20 - 12/10/20",
+      location:"London",
+      polls:"View",
+      invited: "150",
+      invited2: "10",
+      guest: "20",
+      attendees: "45",
+      Waiting: "15",
+      messagescount: "250",
+      likes: "30",
       action:"0",
     },
     {
-      hotelName:"Wedding",
-      name: 'Rohan Smith',
-      id: "#334553",
-      contact:"+91-33434343",
-      email:"Veg and Non veg",
-      address:"#454 1st Block, Rammurthy, Bangalore-560016",
-      Ordertype:"Drive thru",
-      driver:"Andrew Tye",
-      orderdate:"12-05-2021/13:45",
-      deliverydate:"12-05-2021/15:45",
-      // foodStatus:"On The Way",
-      orderStatus:"Accepted",
-      totalSales:"500",
+      Images: "assets/images/gallery/wedding.jpg",
+      EventName:"Event 2",
+      Event_type: 'Private',
+      // Eventtype: 'Drink',
+      datetime: "05/05/21, 11:20 AM",
+      box:"Description will be shown here....",
+      Duration:"3 Days",
+      Durationtime:"10:00 AM - 10:00 PM",
+      Durationdate: "10/10/20 - 12/10/20",
+      location:"London",
+      polls:"View",
+      invited: "150",
+      invited2: "15",
+      guest: "20",
+      attendees: "45",
+      Waiting: "15",
+      messagescount: "250",
+      likes: "30",
       action:"1",
     },
     {
-      hotelName:"DJ",
-      name: 'john Doe',
-      id: "#34553",
-      contact:"+91-33434343",
-      email:"Veg",
-      address:"#454 1st Block, Rammurthy, Bangalore-560016",
-      Ordertype:"Delivery",
-      driver:"Andrew Tye",
-      orderdate:"12-05-2021/13:45",
-      deliverydate:"12-05-2021/15:45",
-      // foodStatus:"On The Way",
-      orderStatus:"Accepted",
-      totalSales:"400",
+      Images: "assets/images/gallery/wedding.jpg",
+      EventName:"Event 3",
+      Event_type: 'Public',
+      // Eventtype: 'Drink',
+      datetime: "05/05/21, 12:20 AM",
+      box:"Description will be shown here....",
+      Duration:"2 Days",
+      Durationtime:"10:00 AM - 10:00 PM",
+      Durationdate: "10/10/20 - 12/10/20",
+      location:"London",
+      polls:"View",
+      invited: "150",
+      invited2: "5",
+      guest: "20",
+      attendees: "45",
+      Waiting: "15",
+      messagescount: "250",
+      likes: "30",
       action:"1",
     },
 
   ]
-
-  table1 = [
-    {
-      hotelName:"Wedding",
-      name: 'Sandy roy',
-      id: "#334553",
-      contact:"+91-33434343",
-      email:"Non veg",
-      address:"#454 1st Block, Rammurthy, Bangalore-560016",
-      Ordertype:"Delivery",
-      driver:"Andrew Tye",
-      orderdate:"12-05-2021/13:45",
-      deliverydate:"12-05-2021/15:45",
-      // foodStatus:"Pending and not processed for Pick-Up",
-      orderStatus:"Cancelled",
-      totalSales:"500",
-      action:"1",
-    },
-    {
-      hotelName:"Wedding",
-      name: 'Rohan Smith',
-      id: "#334553",
-      contact:"+91-33434343",
-      email:"Veg and Non veg",
-      address:"#454 1st Block, Rammurthy, Bangalore-560016",
-      Ordertype:"Drive thru",
-      driver:"Andrew Tye",
-      orderdate:"12-05-2021/13:45",
-      deliverydate:"12-05-2021/15:45",
-      // foodStatus:"On The Way",
-      orderStatus:"Completed",
-      totalSales:"500",
-      action:"1",
-    },
-    {
-      hotelName:"DJ",
-      name: 'john Doe',
-      id: "#34553",
-      contact:"+91-33434343",
-      email:"Veg",
-      address:"#454 1st Block, Rammurthy, Bangalore-560016",
-      Ordertype:"Delivery",
-      driver:"Andrew Tye",
-      orderdate:"12-05-2021/13:45",
-      deliverydate:"12-05-2021/15:45",
-      // foodStatus:"On The Way",
-      orderStatus:"Completed",
-      totalSales:"400",
-      action:"1",
-    },
-
-  ]
-
   userDeleteModal(userDelete) {
     this.modalService.open(userDelete, {backdropClass: 'light-blue-backdrop',centered: true,size: 'sm'});
   }
-  reviewModal(review) {
-    this.modalService.open(review, {backdropClass: 'light-blue-backdrop',centered: true,size: 'lg'});
+  Adddetails(Adddetail) {
+    this.modalService.open(Adddetail, {backdropClass: 'light-blue-backdrop',centered: true,size: 'lg'});
   }
-  orderConfirmModal(orderConfirm) {
-    this.modalService.open(orderConfirm, {backdropClass: 'light-blue-backdrop',centered: true,size: 'sm'});
+  eventsedit(eventedit) {
+  this.modalService.open(eventedit, {backdropClass: 'light-blue-backdrop',centered: true,size: 'lg'});
   }
-  changedriverModal(changedriver) {
-    this.modalService.open(changedriver, {backdropClass: 'light-blue-backdrop',centered: true,size: 'sm'});
+  eventdetails(eventdetail) {
+    this.modalService.open(eventdetail, {backdropClass: 'light-blue-backdrop',centered: true,size: 'lg'});
   }
   carModal(car) {
-    this.modalService.open(car, {backdropClass: 'light-blue-backdrop',centered: true,size: 'sm'});
+    this.modalService.open(car, {backdropClass: 'light-blue-backdrop',centered: true,size: 'lg'});
   }
-  vendorConfirmModal(vendorConfirm) {
-    this.modalService.open(vendorConfirm, {backdropClass: 'light-blue-backdrop',centered: true,size: 'sm'});
+  carModal2(car2) {
+    this.modalService.open(car2, {backdropClass: 'light-blue-backdrop',centered: true,size: 'lg'});
+  }
+  pollsmodal(polls) {
+    this.modalService.open(polls, {backdropClass: 'light-blue-backdrop',centered: true,size: 'lg'});
+  }
+  editpollmodal(editpoll) {
+    this.modalService.dismissAll();
+    this.modalService.open(editpoll, {backdropClass: 'light-blue-backdrop',centered: true,size: 'lg'});
+  }
+  invitemodal(invite) {
+    this.modalService.dismissAll();
+    this.modalService.open(invite, {backdropClass: 'light-blue-backdrop',centered: true,size: 'lg'});
   }
 }
