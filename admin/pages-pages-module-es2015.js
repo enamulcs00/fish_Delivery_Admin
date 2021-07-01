@@ -44083,6 +44083,7 @@ class UsersComponent {
         this.submitted = true;
         if (this.editUserForm.valid) {
             const body = {
+                userId: this.localID,
                 firstName: this.editUserForm.controls["firstName"].value,
                 lastName: this.editUserForm.controls["lastName"].value,
                 phoneNo: this.editUserForm.controls["phoneNo"].value,
@@ -44095,6 +44096,7 @@ class UsersComponent {
                     this.sessionTerminate();
                 }
                 if (res.statusCode == 200) {
+                    this.modalService.dismissAll();
                     sweetalert2__WEBPACK_IMPORTED_MODULE_6___default.a.fire("Updated", "User updated successfully", "success");
                     this.submitted = false;
                     this.editUserForm.reset();
@@ -44161,12 +44163,12 @@ class UsersComponent {
         };
         console.log(data);
         this.Srvc.getUser(data).subscribe((res) => {
-            var _a, _b, _c, _d;
+            var _a, _b, _c, _d, _e, _f, _g, _h;
             if (res.statusCode === 200) {
-                this.editUserForm.controls["firstName"].setValue((_a = res === null || res === void 0 ? void 0 : res.data) === null || _a === void 0 ? void 0 : _a.firstName);
-                this.editUserForm.controls["lastName"].setValue((_b = res === null || res === void 0 ? void 0 : res.data) === null || _b === void 0 ? void 0 : _b.lastName);
-                this.editUserForm.controls["dialCode"].setValue((_c = res === null || res === void 0 ? void 0 : res.data) === null || _c === void 0 ? void 0 : _c.dialCode);
-                this.editUserForm.controls["phoneNo"].setValue((_d = res === null || res === void 0 ? void 0 : res.data) === null || _d === void 0 ? void 0 : _d.phoneNo);
+                this.editUserForm.controls["firstName"].setValue((_b = (_a = res === null || res === void 0 ? void 0 : res.data) === null || _a === void 0 ? void 0 : _a.user) === null || _b === void 0 ? void 0 : _b.firstName);
+                this.editUserForm.controls["lastName"].setValue((_d = (_c = res === null || res === void 0 ? void 0 : res.data) === null || _c === void 0 ? void 0 : _c.user) === null || _d === void 0 ? void 0 : _d.lastName);
+                this.editUserForm.controls["dialCode"].setValue((_f = (_e = res === null || res === void 0 ? void 0 : res.data) === null || _e === void 0 ? void 0 : _e.user) === null || _f === void 0 ? void 0 : _f.dialCode);
+                this.editUserForm.controls["phoneNo"].setValue((_h = (_g = res === null || res === void 0 ? void 0 : res.data) === null || _g === void 0 ? void 0 : _g.user) === null || _h === void 0 ? void 0 : _h.phoneNo);
             }
             else {
                 sweetalert2__WEBPACK_IMPORTED_MODULE_6___default.a.fire("Server Error", "Failed to retrieve data from Server", "error");

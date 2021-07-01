@@ -321,6 +321,7 @@ export class UsersComponent implements OnInit {
     this.submitted = true;
     if (this.editUserForm.valid) {
       const body = {
+        userId: this.localID,
         firstName: this.editUserForm.controls["firstName"].value,
         lastName: this.editUserForm.controls["lastName"].value,
         phoneNo: this.editUserForm.controls["phoneNo"].value,
@@ -334,6 +335,7 @@ export class UsersComponent implements OnInit {
           this.sessionTerminate();
         }
         if (res.statusCode == 200) {
+          this.modalService.dismissAll();
           Swal.fire("Updated", "User updated successfully", "success");
           this.submitted = false;
           this.editUserForm.reset();
@@ -410,10 +412,10 @@ export class UsersComponent implements OnInit {
     console.log(data);
     this.Srvc.getUser(data).subscribe((res: any) => {
       if (res.statusCode === 200) {
-        this.editUserForm.controls["firstName"].setValue(res?.data?.firstName);
-        this.editUserForm.controls["lastName"].setValue(res?.data?.lastName);
-        this.editUserForm.controls["dialCode"].setValue(res?.data?.dialCode);
-        this.editUserForm.controls["phoneNo"].setValue(res?.data?.phoneNo);
+        this.editUserForm.controls["firstName"].setValue(res?.data?.user?.firstName);
+        this.editUserForm.controls["lastName"].setValue(res?.data?.user?.lastName);
+        this.editUserForm.controls["dialCode"].setValue(res?.data?.user?.dialCode);
+        this.editUserForm.controls["phoneNo"].setValue(res?.data?.user?.phoneNo);
       } else {
         Swal.fire(
           "Server Error",
