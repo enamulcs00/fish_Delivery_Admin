@@ -94,7 +94,7 @@ export class ProfileComponent {
         this.signUpform.controls["email"].setValue(res.data.email);
 
         this.imageCheck = res?.data?.image
-        this.imgURL = this.baseURL + res?.data?.image;
+        this.imgURL = res?.data?.image;
         this.name = res?.data?.fullName;
         this.email = res?.data?.email;
         this.dialCode = res?.data?.dialCode;
@@ -169,7 +169,7 @@ export class ProfileComponent {
           this.toaster.success("Image Selected", "Success", {
             timeOut: 2000,
           });
-          this.imageResPath = res.data.filePath;
+          this.imageResPath = res?.data?.image;
         } else {
           Swal.fire("Oops", "Failed to update Photo", "error");
         }

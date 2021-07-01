@@ -32,7 +32,7 @@ export class OnboardingService {
 
   // Upload Photo
   uploadFile(data) {
-    return this.http.post(`${this.baseURL}Admin/uploadFile`, data);
+    return this.http.post(`${this.baseURL}User/uploadFile`, data);
   }
 
   // Update Admin

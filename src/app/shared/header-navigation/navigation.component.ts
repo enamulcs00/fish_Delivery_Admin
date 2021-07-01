@@ -57,7 +57,7 @@ export class NavigationComponent implements AfterViewInit {
         this.name = res?.data?.fullName;
         this.email = res?.data?.email;
         this.imageData = res?.data?.image
-        this.profilePic = this.baseURL + res?.data?.image;
+        this.profilePic = res?.data?.image;
       });
     }
 

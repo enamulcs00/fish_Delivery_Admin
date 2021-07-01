@@ -31,7 +31,9 @@
         align-items: center;
         margin: 0px;
         text-align: center;
-        padding: $topbar-navbrand-padding;
+        justify-content: center;
+        // padding: $topbar-navbrand-padding;
+        padding: 0px 0px 0px 15px;
         .dark-logo {
           display: none;
         }
