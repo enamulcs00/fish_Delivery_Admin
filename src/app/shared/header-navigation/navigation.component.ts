@@ -7,6 +7,10 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 declare var $: any;
+import { Router } from "@angular/router";
+import { OnboardingService } from "src/app/services/onboarding.service";
+import Swal from "sweetalert2";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-navigation',
@@ -20,7 +24,48 @@ export class NavigationComponent implements AfterViewInit {
 
   public showSearch = false;
   public element1: any;
-  constructor(private modalService: NgbModal) {}
+  baseURL: string;
+  name: any;
+  email: any;
+  profilePic: string;
+  alterImage:string="../../../assets/images/users/admin.png";
+  imageData: any;
+
+  constructor(private modalService: NgbModal,
+    private router: Router,
+    private Srvc: OnboardingService,
+    private toaster: ToastrService
+    ) {
+      this.Srvc.$searchvalue.subscribe((res: any) => {
+        this.getProfile();
+      });
+    }
+
+    sessionTerminate() {
+      Swal.fire("Oops", "Session is Terminated", "error");
+      sessionStorage.removeItem("token");
+      this.router.navigate(["/login"]);
+    }
+
+    // get Admin Profile
+    getProfile() {
+      this.Srvc.getProfile().subscribe((res: any) => {
+        if (res.statusCode == 401) {
+          this.sessionTerminate();
+        }
+        this.baseURL = "http://15.207.74.128:9041";
+        this.name = res?.data?.fullName;
+        this.email = res?.data?.email;
+        this.imageData = res?.data?.image
+        this.profilePic = this.baseURL + res?.data?.image;
+      });
+    }
+
+    // Logout
+  logout() {
+    sessionStorage.removeItem("token");
+    this.router.navigate(["/login"]);
+  }
 
   // This is for Notifications
   notifications: Object[] = [
@@ -91,9 +136,9 @@ export class NavigationComponent implements AfterViewInit {
 
   ngAfterViewInit() {}
    openBox() {
-    let element = document.getElementById("notification");    
+    let element = document.getElementById("notification");
     element.classList.toggle("sidebar_slide");
-    
+
   }
   closeBox(){
     let element1 = document.getElementById("arrow-close").parentElement;

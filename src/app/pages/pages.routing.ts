@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AuthGuardGuard } from 'src/app/authentication/auth-guard.guard';
 
 import { HelperclassesComponent } from './helper-classes/hc.component';
 import { InvoiceComponent } from './invoice/invoice.component';
@@ -66,7 +67,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Helper Classes' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'users',
@@ -77,7 +79,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Users' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'users_detail',
@@ -88,7 +91,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Users Detail' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'usershistory',
@@ -99,7 +103,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'User History' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'vendors',
@@ -110,7 +115,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Vendors' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'vendorsdetail',
@@ -121,7 +127,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Vendors Detail' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'foodcategories',
@@ -132,7 +139,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Food Categories' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'fooditem',
@@ -143,7 +151,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Groups' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'events',
@@ -154,7 +163,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Events' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'rewards',
@@ -165,7 +175,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Discount' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'promocode',
@@ -176,7 +187,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Promo Code' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'Inventory',
@@ -187,7 +199,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Inventory' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'invoice',
@@ -198,7 +211,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Invoice Page' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'profile',
@@ -209,7 +223,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Profile Page' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'vendorHistory',
@@ -220,7 +235,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Vendor History' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'drivers',
@@ -231,7 +247,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Drivers' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'driversdetail',
@@ -242,7 +259,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Drivers Detail' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'orderlist',
@@ -253,7 +271,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Events' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'orderdetail',
@@ -264,7 +283,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Order Detail' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'banner',
@@ -275,7 +295,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Banner ' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'pricing',
@@ -286,7 +307,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Pricing Page' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
 
       // {
@@ -309,7 +331,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Tours' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'bikes',
@@ -320,7 +343,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Bikes' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'destination',
@@ -331,7 +355,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Destination' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'hotels',
@@ -342,7 +367,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Hotels' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'calculator',
@@ -353,7 +379,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Caculator' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'reviews',
@@ -364,7 +391,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Report' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'revenue',
@@ -375,7 +403,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Revenue' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'analytics',
@@ -386,7 +415,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/dashboard' },
             { title: 'Analytics' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'manage_admin',
@@ -397,7 +427,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/manage_admin' },
             { title: 'Profile' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'manage_admin_form',
@@ -409,7 +440,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/manage_admin' },
             { title: 'Profile' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'notification',
@@ -420,7 +452,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/notification' },
             { title: 'Notification' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'notificationhistory',
@@ -431,7 +464,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/notification_history' },
             { title: 'Notification History' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'support',
@@ -442,7 +476,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/support' },
             { title: 'Suppoort' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'langingpage',
@@ -453,7 +488,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/about' },
             { title: 'About' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'contact',
@@ -464,7 +500,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/contact' },
             { title: 'Contact' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'faq',
@@ -475,7 +512,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/faq' },
             { title: 'Faq' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'privacy',
@@ -486,7 +524,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/privacy' },
             { title: 'Privacy' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'terms',
@@ -497,7 +536,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/terms' },
             { title: 'terms' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
 
       {
@@ -509,7 +549,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/geofence' },
             { title: 'Geofence' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'geofencelist',
@@ -520,7 +561,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/geofencelist' },
             { title: 'Geofence List' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'geofencedit',
@@ -531,7 +573,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/geofencedit' },
             { title: 'Geofence Edit' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'productsale',
@@ -542,7 +585,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/productsale' },
             { title: 'Product Sale' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
        {
         path: 'addvendor',
@@ -553,7 +597,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/addvendor' },
             { title: 'Add Vendor' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'editvendor',
@@ -564,7 +609,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/editvendor' },
             { title: 'Edit Vendor' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'vendororder',
@@ -575,7 +621,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/editvendor' },
             { title: 'Orders' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'vendorcategory',
@@ -586,7 +633,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/editvendor' },
             { title: 'Vendor Category' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'vendorbusiness',
@@ -597,7 +645,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/editvendor' },
             { title: ' Business' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'trucks',
@@ -608,7 +657,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/truks' },
             { title: ' Truck List' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
       {
         path: 'truckscategory',
@@ -619,7 +669,8 @@ export const PagesRoutes: Routes = [
             { title: 'Dashboard', url: '/truks' },
             { title: ' Category' }
           ]
-        }
+        },
+        canActivate: [AuthGuardGuard]
       },
 
     ]

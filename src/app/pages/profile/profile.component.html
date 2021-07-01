@@ -1,83 +1,150 @@
 <div class="row">
-    <!-- Column -->
-    <div class="col-lg-4 col-xlg-3 col-md-5">
-        <div class="card">
-            <div class="card-body text-center">
-                <div class="m-t-30 text-center">
-                    <img src="assets/images/users/1.jpg" class="rounded-circle" width="150" />               
-                </div>
-                <div class="upload-btn-wrapper">
-                    <button class="btn-upload"><i class="mdi mdi-pencil"></i></button>
-                    <input type="file" name="myfile" />
-                  </div>
-            </div>
-            <div>
-                <hr> </div>
-            <div class="card-body">
-                <small class="text-muted p-t-30 db">Name</small>
-                <h6>  Steave Jobs</h6>
-                <small class="text-muted">Email address </small>
-                <h6>hannagover@gmail.com</h6>
-                <small class="text-muted p-t-30 db">Phone</small>
-                <h6>+91 654 784 547</h6>
-<!--              
+  <!-- Column -->
+  <div class="col-lg-4 col-xlg-3 col-md-5">
+    <div class="card">
+      <div class="card-body text-center">
+        <div class="m-t-30 text-center">
+          <img *ngIf="imageCheck;else alterPic" src={{imgURL}} class="rounded-circle" width="150" height="150" />
+          <ng-template #alterPic>
+            <img  src={{alterImage}} class="rounded-circle" width="150" height="150" />
+          </ng-template>
+        </div>
+        <div class="upload-btn-wrapper">
+          <button class="btn-upload"><i class="mdi mdi-pencil"></i></button>
+          <input (change)="upload($event)" accept="image/x-png,image/gif,image/jpeg" type="file" name="myfile" />
+        </div>
+      </div>
+      <div>
+        <hr>
+      </div>
+      <div class="card-body">
+        <small class="text-muted p-t-30 db">Name</small>
+        <h6>{{name}}</h6>
+        <small class="text-muted">Email address </small>
+        <h6>{{email}}</h6>
+        <small class="text-muted p-t-30 db">Phone</small>
+        <h6>{{dialCode || ""}}-{{phoneNo || ""}}</h6>
+        <!--
                 <div class="map-box">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d470029.1604841957!2d72.29955005258641!3d23.019996818380896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e848aba5bd449%3A0x4fcedd11614f6516!2sAhmedabad%2C+Gujarat!5e0!3m2!1sen!2sin!4v1493204785508"
                         width="100%" height="150" frameborder="0" style="border:0" allowfullscreen></iframe>
                 </div> -->
-            </div>
-        </div>
+      </div>
     </div>
-    <!-- Column -->
-    <!-- Column -->
-    <div class="col-lg-8 col-xlg-9 col-md-7">
-        <div class="card">
-            <ngb-tabset type="pills" class="custom-pills">           
-                <ngb-tab title="Settings">
-                    <ng-template ngbTabContent>
-                        <div class="card-body">
-                            <form class="form-horizontal form-material">
-                                <div class="form-group">
-                                    <label class="col-md-12">Full Name</label>
-                                    <div class="col-md-12">
-                                        <input type="text" placeholder="Johnathan Doe" class="form-control form-control-line">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="example-email" class="col-md-12">Email</label>
-                                    <div class="col-md-12">
-                                        <input type="email" placeholder="johnathan@admin.com" class="form-control form-control-line" name="example-email" id="example-email">
-                                    </div>
-                                </div>
-                                <!-- <div class="form-group">
+  </div>
+  <!-- Column -->
+  <!-- Column -->
+  <div class="col-lg-8 col-xlg-9 col-md-7">
+    <div class="card">
+      <ngb-tabset type="pills" class="custom-pills">
+        <ngb-tab title="Settings">
+          <ng-template ngbTabContent>
+            <div class="card-body">
+              <form class="form-horizontal form-material" [formGroup]="signUpform">
+                <div class="form-group">
+                  <label class="col-md-12">First Name</label>
+                  <div class="col-md-12">
+                    <input #ref (keydown.space)="avoidBlankSpace($event ,ref.value)" formControlName="firstName"
+                      (keypress)="alphabate($event)" type="text" placeholder="Johnathan"
+                      class="form-control form-control-line">
+                    <mat-error
+                      *ngIf=" signUpform.controls['firstName'].touched && signUpform.controls['firstName'].invalid"
+                      class="text-danger d-inline-block pt-1">
+                      *First Name is invalid
+                    </mat-error>
+                    <p class="text-danger" *ngIf="submitted && errorHandling('firstName', 'required')">
+                      *First Name is required!
+                    </p>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-md-12">Last Name</label>
+                  <div class="col-md-12">
+                    <input (keypress)="textOnly($event)" formControlName="lastName" (keypress)="alphabate($event)"
+                      type="text" placeholder="Doe" class="form-control form-control-line">
+                    <mat-error
+                      *ngIf=" signUpform.controls['lastName'].touched && signUpform.controls['lastName'].invalid"
+                      class="text-danger d-inline-block pt-1">
+                      *Last Name is invalid
+                    </mat-error>
+                    <p class="text-danger" *ngIf="submitted && errorHandling('lastName', 'required')">
+                      *Last Name is required!
+                    </p>
+                  </div>
+                </div>
+
+
+                <div class="form-group">
+                  <label for="example-email" class="col-md-12">Email</label>
+                  <div class="col-md-12">
+                    <input #email (keydown.space)="avoidBlankSpace($event ,email.value)" type="email"
+                      formControlName="email" placeholder="johnathan@admin.com" class="form-control form-control-line"
+                      name="example-email" id="example-email">
+                    <mat-error *ngIf=" signUpform.controls['email'].touched && signUpform.controls['email'].invalid"
+                      class="text-danger d-inline-block pt-1">
+                      *Please enter a valid email
+                    </mat-error>
+                    <p class="text-danger" *ngIf="submitted && errorHandling('email', 'required')">
+                      *Email is required!
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Dial Code -->
+                <div class="form-group">
+                  <label class="col-md-12">Dial Code</label>
+                  <div class="col-md-12">
+                    <select type="text" formControlName="dialCode" id="dialCode" class="form-control" placeholder="+91">
+                      <option *ngFor="let dialCode of dialCodeList" value="{{'+'+dialCode.callingCodes}}">
+                        +{{dialCode.callingCodes}} - {{dialCode.name}}</option>
+                    </select>
+                    <mat-error *ngIf="signUpform.controls['dialCode'].invalid" class="text-danger d-inline-block pt-1">
+                      *DialCode is invalid
+                    </mat-error>
+                    <p class="text-danger" *ngIf="submitted && errorHandling('dialCode', 'required')">
+                      *Dial Code is required!
+                    </p>
+                  </div>
+                </div>
+
+                <!-- <div class="form-group">
                                     <label class="col-md-12">Password</label>
                                     <div class="col-md-12">
                                         <input type="password" value="password" class="form-control form-control-line">
                                     </div>
                                 </div> -->
-                                <div class="form-group">
-                                    <label class="col-md-12">Phone No</label>
-                                    <div class="col-md-12">
-                                        <input type="text" placeholder="123 456 7890" class="form-control form-control-line">
-                                    </div>
-                                </div>
-                                <!-- <div class="form-group">
+                <!-- Phone Number -->
+                <div class="form-group">
+                  <label class="col-md-12">Phone No</label>
+                  <div class="col-md-12">
+                    <input formControlName="phoneNo" type="text" (keypress)="phoneNoInput($event)"
+                      placeholder="123 456 7890" class="form-control form-control-line">
+                    <mat-error *ngIf="signUpform.controls['phoneNo'].invalid" class="text-danger d-inline-block pt-1">
+                      *Phone No. is invalid
+                    </mat-error>
+                    <p class="text-danger" *ngIf="submitted && errorHandling('phoneNo', 'required')">
+                      *Phone Number is required!
+                    </p>
+                  </div>
+                </div>
+                <!-- <div class="form-group">
                                     <label class="col-md-12">Message</label>
                                     <div class="col-md-12">
                                         <textarea rows="5" class="form-control form-control-line"></textarea>
                                     </div>
                                 </div>                                 -->
-                                <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <button class="btn btn-success">Update Profile</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </ng-template>
-                </ngb-tab>
-            </ngb-tabset>
-        </div>
+                <div class="form-group">
+                  <div class="col-sm-12">
+                    <button (click)="updateProfile()" class="btn btn-success">Update Profile</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
     </div>
-    <!-- Column -->
+  </div>
+  <!-- Column -->
 </div>
