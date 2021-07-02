@@ -1320,7 +1320,7 @@ class Login2Component {
                     localStorage.removeItem("remember");
                 }
                 this.route.navigate(["/dashboard"]);
-                this.toastr.success("Login Successful", "Welcome Back", {
+                this.toastr.success("", "Login Successful", {
                     timeOut: 2000,
                 });
             }

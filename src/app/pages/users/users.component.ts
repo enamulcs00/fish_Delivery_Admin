@@ -40,6 +40,7 @@ export class UsersComponent implements OnInit {
 
   //table: any
   displayedColumns: string[] = [
+    "serial_no",
     "name",
     "id",
     "contact",
@@ -55,7 +56,7 @@ export class UsersComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   page: any = 10;
-  pageindec: any;
+  pageindec: any=1;
   searchitem: any;
   totalUsers: any;
   deleteID: any;

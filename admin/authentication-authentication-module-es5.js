@@ -2475,7 +2475,7 @@
 
                 _this6.route.navigate(["/dashboard"]);
 
-                _this6.toastr.success("Login Successful", "Welcome Back", {
+                _this6.toastr.success("", "Login Successful", {
                   timeOut: 2000
                 });
               } else {
