@@ -59,8 +59,8 @@ export class ProfileComponent {
         "",
         [
           Validators.required,
-          Validators.minLength(8),
-          Validators.maxLength(13),
+          Validators.minLength(7),
+          Validators.maxLength(15),
         ],
       ],
       dialCode: [

@@ -312,7 +312,7 @@ export class UsersComponent implements OnInit {
     dialCode: ["", [Validators.required]],
     phoneNo: [
       "",
-      [Validators.required, Validators.minLength(8), Validators.maxLength(13)],
+      [Validators.required, Validators.minLength(7), Validators.maxLength(15)],
     ],
   });
 

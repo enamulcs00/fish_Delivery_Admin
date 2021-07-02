@@ -37,7 +37,7 @@
   <div class="col-lg-8 col-xlg-9 col-md-7">
     <div class="card">
       <ngb-tabset type="pills" class="custom-pills">
-        <ngb-tab title="Settings">
+        <ngb-tab title="Profile">
           <ng-template ngbTabContent>
             <div class="card-body">
               <form class="form-horizontal form-material" [formGroup]="signUpform">
@@ -45,7 +45,7 @@
                   <label class="col-md-12">First Name</label>
                   <div class="col-md-12">
                     <input #ref (keydown.space)="avoidBlankSpace($event ,ref.value)" formControlName="firstName"
-                      (keypress)="alphabate($event)" type="text" placeholder="Johnathan"
+                      (keypress)="alphabate($event)" type="text" placeholder="Ex. Johnathan"
                       class="form-control form-control-line">
                     <mat-error
                       *ngIf=" signUpform.controls['firstName'].touched && signUpform.controls['firstName'].invalid"
@@ -62,7 +62,7 @@
                   <label class="col-md-12">Last Name</label>
                   <div class="col-md-12">
                     <input (keypress)="textOnly($event)" formControlName="lastName" (keypress)="alphabate($event)"
-                      type="text" placeholder="Doe" class="form-control form-control-line">
+                      type="text" placeholder="Ex. Doe" class="form-control form-control-line">
                     <mat-error
                       *ngIf=" signUpform.controls['lastName'].touched && signUpform.controls['lastName'].invalid"
                       class="text-danger d-inline-block pt-1">
