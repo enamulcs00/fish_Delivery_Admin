@@ -295,7 +295,7 @@
                   <div class="form-group">
                     <label class="control-label">First Name</label>
                     <input #ref (keydown.space)="avoidBlankSpace($event ,ref.value)" formControlName="firstName"
-                      (keypress)="alphabate($event)" type="text" placeholder="Johnathan"
+                      (keypress)="alphabate($event)" type="text" placeholder=""
                       class="form-control form-control-line">
                     <mat-error
                       *ngIf=" editUserForm.controls['firstName'].touched && editUserForm.controls['firstName'].invalid"
@@ -310,7 +310,7 @@
                   <div class="form-group">
                     <label class="control-label">Last Name</label>
                     <input (keypress)="textOnly($event)" formControlName="lastName" (keypress)="alphabate($event)"
-                      type="text" placeholder="Doe" class="form-control form-control-line">
+                      type="text" placeholder="" class="form-control form-control-line">
                     <mat-error
                       *ngIf=" editUserForm.controls['lastName'].touched && editUserForm.controls['lastName'].invalid"
                       class="text-danger d-inline-block pt-1">
@@ -353,7 +353,7 @@
                     <input formControlName="phoneNo" type="text" (keypress)="phoneNoInput($event)"
                       placeholder="123 456 7890" class="form-control form-control-line">
                     <mat-error *ngIf="editUserForm.controls['phoneNo'].invalid" class="text-danger d-inline-block pt-1">
-                      *Phone No. is invalid
+                      *Phone No. should be between 8 - 15 digits
                     </mat-error>
                     <p class="text-danger" *ngIf="submitted && errorHandling('phoneNo', 'required')">
                       *Phone Number is required!
