@@ -1,630 +1,658 @@
 <!-- Column -->
 <!-- delete modal -->
 <div class="d-flex align-items-center justify-content-between">
-    <ul class="nav nav-tabs cstm_tab" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link active" href="#Past" role="tab" data-toggle="tab">Past Events</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#ongoing" role="tab" data-toggle="tab">Ongoing Events</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#upcoming" role="tab" data-toggle="tab">Upcoming Events</a>
-        </li>
-    </ul>
-    <div class="text-right mr-3"><button class="btn btn-primary" (click)="Adddetails(Adddetail)"><i class="sl-icon-plus"></i> Add</button></div>
+  <ul class="nav nav-tabs cstm_tab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" href="#Past" role="tab" (click)="changeFilterType(0)" data-toggle="tab">Past Events</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#ongoing" role="tab" (click)="changeFilterType(1)" data-toggle="tab">Ongoing Events</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#upcoming" role="tab" (click)="changeFilterType(2)" data-toggle="tab">Upcoming
+        Events</a>
+    </li>
+  </ul>
+  <div class="text-right mr-3"><button class="btn btn-primary" (click)="Adddetails(Adddetail)"><i
+        class="sl-icon-plus"></i> Add</button></div>
 </div>
 <!-- Tab panes -->
 <div class="tab-content">
-    <div role="tabpanel" class="tab-pane show active" id="Past">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <form>
-                                <div class="mb-2">
-                                    <input type="text" class="form-control" id="prenametext" placeholder="Search">
-                                </div>
-                            </form>
-                        </div>
-                        <div class="col-md-8 d-flex  justify-content-end">
-                            <!-- <div class="mr-2"><button class="btn btn-primary" (click)="Adddetails(Adddetail)"><i class="sl-icon-plus"></i> Add</button></div> -->
-                            <div ngbDropdown class="d-inline-block mb-2 mr-2">
-                                <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle> All </button>
-                                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                                    <button class="dropdown-item">All</button>
-                                    <button class="dropdown-item"> Public </button>
-                                    <button class="dropdown-item"> Private </button>
-                                </div>
-                            </div>
-                            <button class="btn btn-primary mb-2 mr-2"><i class="sl-icon-cloud-download"></i> Export CSV</button>
-                        </div>
-                        <div class="table-responsive">
-                            <table mat-table class=" w-100" [dataSource]="dataSource" matSort>
-                                <ng-container matColumnDef="Images">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Type </th>
-                                    <td mat-cell *matCellDef="let row">
-                                        <!-- <span class="img-small"><img src={{row.Images}} alt="wedding" width="60" class="rounded"></span> -->
-                                        <div class="cstm_icn">
-                                            <ul class="icon_outr">
-                                                <li>
-                                                    <span class="mdi mdi-food-variant icn"></span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </ng-container>
-                                <!-- ID Column -->
-                                <ng-container matColumnDef="EventName">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Name </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.EventName}} </td>
-                                </ng-container>
-                                <!-- ID Column -->
-                                <ng-container matColumnDef="Event_type">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Public/Private </th>
-                                    <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Event_type}} </td>
-                                </ng-container>
-                                <!-- <ng-container matColumnDef="Eventtype">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Type </th>
-                                    <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Eventtype}}
-                                        <br> <i class="fa fa-glass"></i>
-                                    </td>
-                                </ng-container> -->
-                                <!-- Progress Column -->
-                                <ng-container matColumnDef="datetime">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Created On </th>
-                                    <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.datetime}} </td>
-                                </ng-container>
-                                <!-- Progress Column -->
-                                <ng-container matColumnDef="Duration">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Duration </th>
-                                    <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Duration}} </td>
-                                </ng-container>
-                                <ng-container matColumnDef="Durationdate">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Date </th>
-                                    <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Durationdate}} </td>
-                                </ng-container>
-                                <ng-container matColumnDef="Durationtime">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Time </th>
-                                    <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Durationtime}} </td>
-                                </ng-container>
-                                <!-- Progress Column -->
-                                <ng-container matColumnDef="box">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Description </th>
-                                    <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.box}} </td>
-                                </ng-container>
-                                <ng-container matColumnDef="invited">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> People invited </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.invited}} </td>
-                                </ng-container>
-                                <ng-container matColumnDef="invited2">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> People directly invited </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.invited2}} </td>
-                                </ng-container>
-                                <ng-container matColumnDef="guest">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Guest list </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.guest}}
-                                        <a href="javascript:void()" (click)="carModal(car)"><i class="sl-icon-info"></i></a>
-                                    </td>
-                                </ng-container>
-                                <ng-container matColumnDef="attendees">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Max attendees </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.attendees}} </td>
-                                </ng-container>
-                                <ng-container matColumnDef="Waiting">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Waiting list </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.Waiting}}
-                                        <a href="javascript:void()" (click)="carModal2(car2)"><i class="sl-icon-info"></i></a>
-                                    </td>
-                                </ng-container>
-                                <ng-container matColumnDef="messagescount">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Number of messages in chat </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.messagescount}} </td>
-                                </ng-container>
-                                <ng-container matColumnDef="likes">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Number of likes </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.likes}} </td>
-                                </ng-container>
-                                <!-- Address -->
-                                <ng-container matColumnDef="polls">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Polls </th>
-                                    <td mat-cell *matCellDef="let row"> <button class="btn btn-primary" (click)="pollsmodal(polls)">{{row.polls}}</button></td>
-                                </ng-container>
-                                <ng-container matColumnDef="location">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap">Location </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.location}} </td>
-                                </ng-container>
-                                <ng-container matColumnDef="action">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-nowrap"> Action </th>
-                                    <td mat-cell *matCellDef="let row" class="text-nowrap">
-                                        <div ngbDropdown placement="bottom-right" display="dynamic" class="dropdown-menu-right" container="body">
-                                            <button class="btn btn-outline-primary btn-sm" id="dropdownBasic1" ngbDropdownToggle> Action </button>
-                                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                                                <!-- <a class="dropdown-item" (click)="eventdetails(eventdetail)"><i class="ti-eye"></i> View </a> -->
-                                                <!-- <button class="dropdown-item" (click)="eventsedit(eventedit)"><i class="ti-marker-alt"></i> Edit</button> -->
-                                                <a href="javascript:void()" class="dropdown-item " (click)="userDeleteModal(userDelete)"> <i class="ti-trash"></i> Delete</a>
-                                            </div>
-                                            <!-- <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                                            </div> -->
-                                        </div>
-                                    </td>
-                                </ng-container>
-                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                            </table>
-                        </div>
-                        <div class="col-md-12 text-right">
-                            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-                        </div>
-                    </div>
+  <div role="tabpanel" class="tab-pane show active" id="Past">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <form>
+                <div class="mb-2">
+                  <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="searchitem" (keyup)="search($event)"
+                    type="text" class="form-control" id="prenametext" placeholder="Search">
                 </div>
+              </form>
             </div>
-            <!-- Column -->
-        </div>
-    </div>
-    <div role="tabpanel" class="tab-pane fade" id="ongoing">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <form>
-                                <div class="mb-2">
-                                    <input type="text" class="form-control" id="prenametext" placeholder="Search">
-                                </div>
-                            </form>
-                        </div>
-                        <div class="col-md-8 d-flex  justify-content-end">
-                            <!-- <div class="mr-2"><button class="btn btn-primary" (click)="Adddetails(Adddetail)"><i class="sl-icon-plus"></i> Add</button></div> -->
-                            <div ngbDropdown class="d-inline-block mb-2 mr-2">
-                                <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle> All </button>
-                                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                                    <button class="dropdown-item">All</button>
-                                    <button class="dropdown-item"> Public </button>
-                                    <button class="dropdown-item"> Private </button>
-                                </div>
-                            </div>
-                            <button class="btn btn-primary mb-2 mr-2"><i class="sl-icon-cloud-download"></i> Export CSV</button>
-                        </div>
-                        <div class="table-responsive">
-                            <table mat-table class=" w-100" [dataSource]="dataSource" matSort>
-                                <ng-container matColumnDef="Images">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Type </th>
-                                    <td mat-cell *matCellDef="let row">
-                                        <!-- <span class="img-small"><img src={{row.Images}} alt="Event" width="60" class="rounded"></span> -->
-                                        <div class="cstm_icn">
-                                            <ul class="icon_outr">
-                                                <li>
-                                                    <span class="mdi mdi-food-variant icn"></span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </ng-container>
-                                <!-- ID Column -->
-                                <ng-container matColumnDef="EventName">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Name </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.EventName}} </td>
-                                </ng-container>
-                                <!-- ID Column -->
-                                <ng-container matColumnDef="Event_type">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Public/Private </th>
-                                    <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Event_type}} </td>
-                                </ng-container>
-                                <!-- <ng-container matColumnDef="Eventtype">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Type </th>
-                                    <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Eventtype}}
-                                        <br> <i class="fa fa-glass"></i>
-                                    </td>
-                                </ng-container> -->
-                                <!-- Progress Column -->
-                                <ng-container matColumnDef="datetime">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Created On </th>
-                                    <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.datetime}} </td>
-                                </ng-container>
-                                <!-- Progress Column -->
-                                <ng-container matColumnDef="Duration">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Duration </th>
-                                    <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Duration}} </td>
-                                </ng-container>
-                                <ng-container matColumnDef="Durationdate">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Date </th>
-                                    <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Durationdate}} </td>
-                                </ng-container>
-                                <ng-container matColumnDef="Durationtime">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Time </th>
-                                    <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Durationtime}} </td>
-                                </ng-container>
-                                <!-- Progress Column -->
-                                <ng-container matColumnDef="box">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Description </th>
-                                    <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.box}} </td>
-                                </ng-container>
-                                <ng-container matColumnDef="invited">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> People invited </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.invited}} </td>
-                                </ng-container>
-                                <ng-container matColumnDef="invited2">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> People directly invited </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.invited2}} </td>
-                                </ng-container>
-                                <ng-container matColumnDef="guest">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Guest list </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.guest}}
-                                        <a href="javascript:void()" (click)="carModal(car)"><i class="sl-icon-info"></i></a>
-                                    </td>
-                                </ng-container>
-                                <ng-container matColumnDef="attendees">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Max attendees </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.attendees}} </td>
-                                </ng-container>
-                                <ng-container matColumnDef="Waiting">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Waiting list </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.Waiting}}
-                                        <a href="javascript:void()" (click)="carModal2(car2)"><i class="sl-icon-info"></i></a>
-                                    </td>
-                                </ng-container>
-                                <ng-container matColumnDef="messagescount">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Number of messages in chat </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.messagescount}} </td>
-                                </ng-container>
-                                <ng-container matColumnDef="likes">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Number of likes </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.likes}} </td>
-                                </ng-container>
-                                <!-- Address -->
-                                <ng-container matColumnDef="location">
-                                    <th mat-header-cell *matHeaderCellDef>Location </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.location}} </td>
-                                </ng-container>
-                                <ng-container matColumnDef="polls">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Polls </th>
-                                    <td mat-cell *matCellDef="let row"> <button class="btn btn-primary" (click)="pollsmodal(polls)">{{row.polls}}</button></td>
-                                </ng-container>
-                                <ng-container matColumnDef="action">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-nowrap"> Action </th>
-                                    <td mat-cell *matCellDef="let row" class="text-nowrap">
-                                        <div ngbDropdown placement="bottom-right" display="dynamic" class="dropdown-menu-right" container="body">
-                                            <button class="btn btn-outline-primary btn-sm" id="dropdownBasic1" ngbDropdownToggle> Action </button>
-                                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                                                <!-- <a class="dropdown-item" (click)="eventdetails(eventdetail)"><i class="ti-eye"></i> View </a> -->
-                                                <button class="dropdown-item" (click)="eventsedit(eventedit)"><i class="ti-marker-alt"></i> Edit</button>
-                                                <a href="javascript:void()" class="dropdown-item " (click)="userDeleteModal(userDelete)"><i class="ti-trash"></i>Delete</a>
-                                            </div>
-                                            <!-- <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                                            </div> -->
-                                        </div>
-                                    </td>
-                                </ng-container>
-                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                            </table>
-                        </div>
-                        <div class="col-md-12 text-right">
-                            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-                        </div>
-                    </div>
+            <div class="col-md-8 d-flex  justify-content-end">
+              <!-- <div class="mr-2"><button class="btn btn-primary" (click)="Adddetails(Adddetail)"><i class="sl-icon-plus"></i> Add</button></div> -->
+              <div ngbDropdown class="d-inline-block mb-2 mr-2">
+                <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle> All </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                  <button style="cursor: pointer;" class="dropdown-item" (click)="filterStatus(0)">All</button>
+                  <button style="cursor: pointer;" class="dropdown-item" (click)="filterStatus(1)"> Public </button>
+                  <button style="cursor: pointer;" class="dropdown-item" (click)="filterStatus(2)"> Private </button>
                 </div>
+              </div>
+              <button class="btn btn-primary mb-2 mr-2"><i class="sl-icon-cloud-download"></i> Export CSV</button>
             </div>
-            <!-- Column -->
-        </div>
-    </div>
-    <div role="tabpanel" class="tab-pane fade" id="upcoming">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <form>
-                                <div class="mb-2">
-                                    <input type="text" class="form-control" id="prenametext" placeholder="Search">
-                                </div>
-                            </form>
-                        </div>
-                        <div class="col-md-8 d-flex  justify-content-end">
-                            <!-- <div class="mr-2"><button class="btn btn-primary" (click)="Adddetails(Adddetail)"><i class="sl-icon-plus"></i> Add</button></div> -->
-                            <div ngbDropdown class="d-inline-block mb-2 mr-2">
-                                <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle> All </button>
-                                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                                    <button class="dropdown-item">All</button>
-                                    <button class="dropdown-item"> Public </button>
-                                    <button class="dropdown-item"> Private </button>
-                                </div>
-                            </div>
-                            <button class="btn btn-primary mb-2 mr-2"><i class="sl-icon-cloud-download"></i> Export CSV</button>
-                        </div>
-                        <div class="table-responsive">
-                            <table mat-table class=" w-100" [dataSource]="dataSource" matSort>
-                                <ng-container matColumnDef="Images">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Type </th>
-                                    <td mat-cell *matCellDef="let row">
-                                        <!-- <span class="img-small"><img src={{row.Images}} alt="Event" width="60" class="rounded"></span> -->
-                                        <div class="cstm_icn">
-                                            <ul class="icon_outr">
-                                                <li>
-                                                    <span class="mdi mdi-food-variant icn"></span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </ng-container>
-                                <!-- ID Column -->
-                                <ng-container matColumnDef="EventName">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Name </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.EventName}} </td>
-                                </ng-container>
-                                <!-- ID Column -->
-                                <ng-container matColumnDef="Event_type">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Public/Private </th>
-                                    <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Event_type}} </td>
-                                </ng-container>
-                                <!-- <ng-container matColumnDef="Eventtype">
+            <div class="table-responsive">
+              <table mat-table class=" w-100" [dataSource]="dataSource" matSort>
+                <ng-container matColumnDef="Images">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Type </th>
+                  <td mat-cell *matCellDef="let row">
+                    <!-- <span class="img-small"><img src={{row.Images}} alt="wedding" width="60" class="rounded"></span> -->
+                    <div class="cstm_icn">
+                      <ul class="icon_outr">
+                        <li>
+                          <span class="mdi mdi-food-variant icn"></span>
+                        </li>
+                      </ul>
+                    </div>
+                  </td>
+                </ng-container>
+                <!-- ID Column -->
+                <ng-container matColumnDef="EventName">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Name </th>
+                  <td mat-cell *matCellDef="let row"> {{row.EventName}} </td>
+                </ng-container>
+                <!-- ID Column -->
+                <ng-container matColumnDef="Event_type">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Public/Private </th>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Event_type}} </td>
+                </ng-container>
+                <!-- <ng-container matColumnDef="Eventtype">
                                     <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Type </th>
                                     <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Eventtype}}
                                         <br> <i class="fa fa-glass"></i>
                                     </td>
                                 </ng-container> -->
-                                <!-- Progress Column -->
-                                <ng-container matColumnDef="datetime">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Created On </th>
-                                    <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.datetime}} </td>
-                                </ng-container>
-                                <!-- Progress Column -->
-                                <ng-container matColumnDef="Duration">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Duration </th>
-                                    <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Duration}} </td>
-                                </ng-container>
-                                <ng-container matColumnDef="Durationdate">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Date </th>
-                                    <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Durationdate}} </td>
-                                </ng-container>
-                                <ng-container matColumnDef="Durationtime">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Time </th>
-                                    <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Durationtime}} </td>
-                                </ng-container>
-                                <!-- Progress Column -->
-                                <ng-container matColumnDef="box">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Description </th>
-                                    <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.box}} </td>
-                                </ng-container>
-                                <ng-container matColumnDef="invited">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> People invited </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.invited}} </td>
-                                </ng-container>
-                                <ng-container matColumnDef="invited2">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> People directly invited </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.invited2}} </td>
-                                </ng-container>
-                                <ng-container matColumnDef="guest">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Guest list </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.guest}}
-                                        <a href="javascript:void()" (click)="carModal(car)"><i class="sl-icon-info"></i></a>
+                <!-- Progress Column -->
+                <ng-container matColumnDef="datetime">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Created On </th>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.datetime}} </td>
+                </ng-container>
+                <!-- Progress Column -->
+                <ng-container matColumnDef="Duration">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Duration </th>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Duration}} </td>
+                </ng-container>
+                <ng-container matColumnDef="Durationdate">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Date </th>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Durationdate}} </td>
+                </ng-container>
+                <ng-container matColumnDef="Durationtime">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Time </th>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Durationtime}} </td>
+                </ng-container>
+                <!-- Progress Column -->
+                <ng-container matColumnDef="box">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Description </th>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.box}} </td>
+                </ng-container>
+                <ng-container matColumnDef="invited">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> People invited </th>
+                  <td mat-cell *matCellDef="let row"> {{row.invited}} </td>
+                </ng-container>
+                <ng-container matColumnDef="invited2">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> People directly invited </th>
+                  <td mat-cell *matCellDef="let row"> {{row.invited2}} </td>
+                </ng-container>
+                <ng-container matColumnDef="guest">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Guest list </th>
+                  <td mat-cell *matCellDef="let row"> {{row.guest}}
+                    <a href="javascript:void()" (click)="carModal(car)"><i class="sl-icon-info"></i></a>
+                  </td>
+                </ng-container>
+                <ng-container matColumnDef="attendees">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Max attendees </th>
+                  <td mat-cell *matCellDef="let row"> {{row.attendees}} </td>
+                </ng-container>
+                <ng-container matColumnDef="Waiting">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Waiting list </th>
+                  <td mat-cell *matCellDef="let row"> {{row.Waiting}}
+                    <a href="javascript:void()" (click)="carModal2(car2)"><i class="sl-icon-info"></i></a>
+                  </td>
+                </ng-container>
+                <ng-container matColumnDef="messagescount">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Number of messages in chat </th>
+                  <td mat-cell *matCellDef="let row"> {{row.messagescount}} </td>
+                </ng-container>
+                <ng-container matColumnDef="likes">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Number of likes </th>
+                  <td mat-cell *matCellDef="let row"> {{row.likes}} </td>
+                </ng-container>
+                <!-- Address -->
+                <ng-container matColumnDef="polls">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Polls </th>
+                  <td mat-cell *matCellDef="let row"> <button class="btn btn-primary"
+                      (click)="pollsmodal(polls)">{{row.polls}}</button></td>
+                </ng-container>
+                <ng-container matColumnDef="location">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap">Location </th>
+                  <td mat-cell *matCellDef="let row"> {{row.location}} </td>
+                </ng-container>
+                <ng-container matColumnDef="action">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-nowrap"> Action </th>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap">
+                    <div ngbDropdown placement="bottom-right" display="dynamic" class="dropdown-menu-right"
+                      container="body">
+                      <button class="btn btn-outline-primary btn-sm" id="dropdownBasic1" ngbDropdownToggle> Action
+                      </button>
+                      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <!-- <a class="dropdown-item" (click)="eventdetails(eventdetail)"><i class="ti-eye"></i> View </a> -->
+                        <!-- <button class="dropdown-item" (click)="eventsedit(eventedit)"><i class="ti-marker-alt"></i> Edit</button> -->
+                        <a href="javascript:void()" class="dropdown-item " (click)="userDeleteModal(userDelete)"> <i
+                            class="ti-trash"></i> Delete</a>
+                      </div>
+                      <!-- <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                            </div> -->
+                    </div>
+                  </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+            </div>
+            <div class="col-md-12 text-right">
+              <mat-paginator [length]="totalEvents" [pageSize]="page" [pageSizeOptions]="[5, 10, 25, 100]"
+                (page)="onPaginateChange($event)"></mat-paginator>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Column -->
+    </div>
+  </div>
+  <div role="tabpanel" class="tab-pane fade" id="ongoing">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <form>
+                <div class="mb-2">
+                  <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="searchitem" (keyup)="search($event)"
+                    type="text" class="form-control" id="prenametext" placeholder="Search">
+                </div>
+              </form>
+            </div>
+            <div class="col-md-8 d-flex  justify-content-end">
+              <!-- <div class="mr-2"><button class="btn btn-primary" (click)="Adddetails(Adddetail)"><i class="sl-icon-plus"></i> Add</button></div> -->
+              <div ngbDropdown class="d-inline-block mb-2 mr-2">
+                <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle> All </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                  <button style="cursor: pointer;" class="dropdown-item" (click)="filterStatus(0)">All</button>
+                  <button style="cursor: pointer;" class="dropdown-item" (click)="filterStatus(1)"> Public </button>
+                  <button style="cursor: pointer;" class="dropdown-item" (click)="filterStatus(2)"> Private </button>
+                </div>
+              </div>
+              <button class="btn btn-primary mb-2 mr-2"><i class="sl-icon-cloud-download"></i> Export CSV</button>
+            </div>
+            <div class="table-responsive">
+              <table mat-table class=" w-100" [dataSource]="dataSource" matSort>
+                <ng-container matColumnDef="Images">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Type </th>
+                  <td mat-cell *matCellDef="let row">
+                    <!-- <span class="img-small"><img src={{row.Images}} alt="Event" width="60" class="rounded"></span> -->
+                    <div class="cstm_icn">
+                      <ul class="icon_outr">
+                        <li>
+                          <span class="mdi mdi-food-variant icn"></span>
+                        </li>
+                      </ul>
+                    </div>
+                  </td>
+                </ng-container>
+                <!-- ID Column -->
+                <ng-container matColumnDef="EventName">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Name </th>
+                  <td mat-cell *matCellDef="let row"> {{row.EventName}} </td>
+                </ng-container>
+                <!-- ID Column -->
+                <ng-container matColumnDef="Event_type">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Public/Private </th>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Event_type}} </td>
+                </ng-container>
+                <!-- <ng-container matColumnDef="Eventtype">
+                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Type </th>
+                                    <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Eventtype}}
+                                        <br> <i class="fa fa-glass"></i>
                                     </td>
-                                </ng-container>
-                                <ng-container matColumnDef="attendees">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Max attendees </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.attendees}} </td>
-                                </ng-container>
-                                <ng-container matColumnDef="Waiting">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Waiting list </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.Waiting}}
-                                        <a href="javascript:void()" (click)="carModal2(car2)"><i class="sl-icon-info"></i></a>
+                                </ng-container> -->
+                <!-- Progress Column -->
+                <ng-container matColumnDef="datetime">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Created On </th>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.datetime}} </td>
+                </ng-container>
+                <!-- Progress Column -->
+                <ng-container matColumnDef="Duration">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Duration </th>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Duration}} </td>
+                </ng-container>
+                <ng-container matColumnDef="Durationdate">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Date </th>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Durationdate}} </td>
+                </ng-container>
+                <ng-container matColumnDef="Durationtime">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Time </th>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Durationtime}} </td>
+                </ng-container>
+                <!-- Progress Column -->
+                <ng-container matColumnDef="box">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Description </th>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.box}} </td>
+                </ng-container>
+                <ng-container matColumnDef="invited">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> People invited </th>
+                  <td mat-cell *matCellDef="let row"> {{row.invited}} </td>
+                </ng-container>
+                <ng-container matColumnDef="invited2">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> People directly invited </th>
+                  <td mat-cell *matCellDef="let row"> {{row.invited2}} </td>
+                </ng-container>
+                <ng-container matColumnDef="guest">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Guest list </th>
+                  <td mat-cell *matCellDef="let row"> {{row.guest}}
+                    <a href="javascript:void()" (click)="carModal(car)"><i class="sl-icon-info"></i></a>
+                  </td>
+                </ng-container>
+                <ng-container matColumnDef="attendees">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Max attendees </th>
+                  <td mat-cell *matCellDef="let row"> {{row.attendees}} </td>
+                </ng-container>
+                <ng-container matColumnDef="Waiting">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Waiting list </th>
+                  <td mat-cell *matCellDef="let row"> {{row.Waiting}}
+                    <a href="javascript:void()" (click)="carModal2(car2)"><i class="sl-icon-info"></i></a>
+                  </td>
+                </ng-container>
+                <ng-container matColumnDef="messagescount">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Number of messages in chat </th>
+                  <td mat-cell *matCellDef="let row"> {{row.messagescount}} </td>
+                </ng-container>
+                <ng-container matColumnDef="likes">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Number of likes </th>
+                  <td mat-cell *matCellDef="let row"> {{row.likes}} </td>
+                </ng-container>
+                <!-- Address -->
+                <ng-container matColumnDef="location">
+                  <th mat-header-cell *matHeaderCellDef>Location </th>
+                  <td mat-cell *matCellDef="let row"> {{row.location}} </td>
+                </ng-container>
+                <ng-container matColumnDef="polls">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Polls </th>
+                  <td mat-cell *matCellDef="let row"> <button class="btn btn-primary"
+                      (click)="pollsmodal(polls)">{{row.polls}}</button></td>
+                </ng-container>
+                <ng-container matColumnDef="action">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-nowrap"> Action </th>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap">
+                    <div ngbDropdown placement="bottom-right" display="dynamic" class="dropdown-menu-right"
+                      container="body">
+                      <button class="btn btn-outline-primary btn-sm" id="dropdownBasic1" ngbDropdownToggle> Action
+                      </button>
+                      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <!-- <a class="dropdown-item" (click)="eventdetails(eventdetail)"><i class="ti-eye"></i> View </a> -->
+                        <button class="dropdown-item" (click)="eventsedit(eventedit)"><i class="ti-marker-alt"></i>
+                          Edit</button>
+                        <a href="javascript:void()" class="dropdown-item " (click)="userDeleteModal(userDelete)"><i
+                            class="ti-trash"></i>Delete</a>
+                      </div>
+                      <!-- <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                            </div> -->
+                    </div>
+                  </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+            </div>
+            <div class="col-md-12 text-right">
+              <mat-paginator [length]="totalEvents" [pageSize]="page" [pageSizeOptions]="[5, 10, 25, 100]"
+                (page)="onPaginateChange($event)"></mat-paginator>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Column -->
+    </div>
+  </div>
+  <div role="tabpanel" class="tab-pane fade" id="upcoming">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <form>
+                <div class="mb-2">
+                  <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="searchitem" (keyup)="search($event)"
+                    type="text" class="form-control" id="prenametext" placeholder="Search">
+                </div>
+              </form>
+            </div>
+            <div class="col-md-8 d-flex  justify-content-end">
+              <!-- <div class="mr-2"><button class="btn btn-primary" (click)="Adddetails(Adddetail)"><i class="sl-icon-plus"></i> Add</button></div> -->
+              <div ngbDropdown class="d-inline-block mb-2 mr-2">
+                <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle> All </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                  <button style="cursor: pointer;" class="dropdown-item" (click)="filterStatus(0)">All</button>
+                  <button style="cursor: pointer;" class="dropdown-item" (click)="filterStatus(1)"> Public </button>
+                  <button style="cursor: pointer;" class="dropdown-item" (click)="filterStatus(2)"> Private </button>
+                </div>
+              </div>
+              <button class="btn btn-primary mb-2 mr-2"><i class="sl-icon-cloud-download"></i> Export CSV</button>
+            </div>
+            <div class="table-responsive">
+              <table mat-table class=" w-100" [dataSource]="dataSource" matSort>
+                <ng-container matColumnDef="Images">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Type </th>
+                  <td mat-cell *matCellDef="let row">
+                    <!-- <span class="img-small"><img src={{row.Images}} alt="Event" width="60" class="rounded"></span> -->
+                    <div class="cstm_icn">
+                      <ul class="icon_outr">
+                        <li>
+                          <span class="mdi mdi-food-variant icn"></span>
+                        </li>
+                      </ul>
+                    </div>
+                  </td>
+                </ng-container>
+                <!-- ID Column -->
+                <ng-container matColumnDef="EventName">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Name </th>
+                  <td mat-cell *matCellDef="let row"> {{row.EventName}} </td>
+                </ng-container>
+                <!-- ID Column -->
+                <ng-container matColumnDef="Event_type">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Public/Private </th>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Event_type}} </td>
+                </ng-container>
+                <!-- <ng-container matColumnDef="Eventtype">
+                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Type </th>
+                                    <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Eventtype}}
+                                        <br> <i class="fa fa-glass"></i>
                                     </td>
-                                </ng-container>
-                                <ng-container matColumnDef="messagescount">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Number of messages in chat </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.messagescount}} </td>
-                                </ng-container>
-                                <ng-container matColumnDef="likes">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Number of likes </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.likes}} </td>
-                                </ng-container>
-                                <!-- Address -->
-                                <ng-container matColumnDef="location">
-                                    <th mat-header-cell *matHeaderCellDef>Location </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.location}} </td>
-                                </ng-container>
-                                <ng-container matColumnDef="polls">
-                                    <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Polls </th>
-                                    <td mat-cell *matCellDef="let row"> <button class="btn btn-primary" (click)="pollsmodal(polls)">{{row.polls}}</button></td>
-                                </ng-container>
-                                <ng-container matColumnDef="action">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-nowrap"> Action </th>
-                                    <td mat-cell *matCellDef="let row" class="text-nowrap">
-                                        <div ngbDropdown placement="bottom-right" display="dynamic" class="dropdown-menu-right" container="body">
-                                            <button class="btn btn-outline-primary btn-sm" id="dropdownBasic1" ngbDropdownToggle> Action </button>
-                                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                                                <!-- <a class="dropdown-item" (click)="eventdetails(eventdetail)"><i class="ti-eye"></i> View </a> -->
-                                                <button class="dropdown-item" (click)="eventsedit(eventedit)"><i class="ti-marker-alt"></i> Edit</button>
-                                                <a href="javascript:void()" class="dropdown-item " (click)="userDeleteModal(userDelete)"><i class="ti-trash"></i>Delete</a>
-                                            </div>
-                                            <!-- <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                </ng-container> -->
+                <!-- Progress Column -->
+                <ng-container matColumnDef="datetime">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Created On </th>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.datetime}} </td>
+                </ng-container>
+                <!-- Progress Column -->
+                <ng-container matColumnDef="Duration">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Duration </th>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Duration}} </td>
+                </ng-container>
+                <ng-container matColumnDef="Durationdate">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Date </th>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Durationdate}} </td>
+                </ng-container>
+                <ng-container matColumnDef="Durationtime">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Time </th>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Durationtime}} </td>
+                </ng-container>
+                <!-- Progress Column -->
+                <ng-container matColumnDef="box">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Description </th>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.box}} </td>
+                </ng-container>
+                <ng-container matColumnDef="invited">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> People invited </th>
+                  <td mat-cell *matCellDef="let row"> {{row.invited}} </td>
+                </ng-container>
+                <ng-container matColumnDef="invited2">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> People directly invited </th>
+                  <td mat-cell *matCellDef="let row"> {{row.invited2}} </td>
+                </ng-container>
+                <ng-container matColumnDef="guest">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Guest list </th>
+                  <td mat-cell *matCellDef="let row"> {{row.guest}}
+                    <a href="javascript:void()" (click)="carModal(car)"><i class="sl-icon-info"></i></a>
+                  </td>
+                </ng-container>
+                <ng-container matColumnDef="attendees">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Max attendees </th>
+                  <td mat-cell *matCellDef="let row"> {{row.attendees}} </td>
+                </ng-container>
+                <ng-container matColumnDef="Waiting">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Waiting list </th>
+                  <td mat-cell *matCellDef="let row"> {{row.Waiting}}
+                    <a href="javascript:void()" (click)="carModal2(car2)"><i class="sl-icon-info"></i></a>
+                  </td>
+                </ng-container>
+                <ng-container matColumnDef="messagescount">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Number of messages in chat </th>
+                  <td mat-cell *matCellDef="let row"> {{row.messagescount}} </td>
+                </ng-container>
+                <ng-container matColumnDef="likes">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Number of likes </th>
+                  <td mat-cell *matCellDef="let row"> {{row.likes}} </td>
+                </ng-container>
+                <!-- Address -->
+                <ng-container matColumnDef="location">
+                  <th mat-header-cell *matHeaderCellDef>Location </th>
+                  <td mat-cell *matCellDef="let row"> {{row.location}} </td>
+                </ng-container>
+                <ng-container matColumnDef="polls">
+                  <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Polls </th>
+                  <td mat-cell *matCellDef="let row"> <button class="btn btn-primary"
+                      (click)="pollsmodal(polls)">{{row.polls}}</button></td>
+                </ng-container>
+                <ng-container matColumnDef="action">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-nowrap"> Action </th>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap">
+                    <div ngbDropdown placement="bottom-right" display="dynamic" class="dropdown-menu-right"
+                      container="body">
+                      <button class="btn btn-outline-primary btn-sm" id="dropdownBasic1" ngbDropdownToggle> Action
+                      </button>
+                      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <!-- <a class="dropdown-item" (click)="eventdetails(eventdetail)"><i class="ti-eye"></i> View </a> -->
+                        <button class="dropdown-item" (click)="eventsedit(eventedit)"><i class="ti-marker-alt"></i>
+                          Edit</button>
+                        <a href="javascript:void()" class="dropdown-item " (click)="userDeleteModal(userDelete)"><i
+                            class="ti-trash"></i>Delete</a>
+                      </div>
+                      <!-- <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                                           </div> -->
-                                        </div>
-                                    </td>
-                                </ng-container>
-                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                            </table>
-                        </div>
-                        <div class="col-md-12 text-right">
-                            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-                        </div>
                     </div>
-                </div>
+                  </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
             </div>
-            <!-- Column -->
+            <div class="col-md-12 text-right">
+              <mat-paginator [length]="totalEvents" [pageSize]="page" [pageSizeOptions]="[5, 10, 25, 100]"
+                (page)="onPaginateChange($event)"></mat-paginator>
+            </div>
+          </div>
         </div>
+      </div>
+      <!-- Column -->
     </div>
+  </div>
 </div>
 <ng-template #userDelete let-modal>
-    <div class="modal-body">
-        <p>Are you sure want to delete?</p>
-        <div class="btn-group">
-            <button type="button" class="btn btn-primary mr-2" aria-label="Close" (click)="modal.dismiss('Cross click')">Yes</button>
-            <button type="button" class="btn btn-seconadary" aria-label="Close" (click)="modal.dismiss('Cross click')">No</button>
-        </div>
+  <div class="modal-body">
+    <p>Are you sure want to delete?</p>
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary mr-2" aria-label="Close"
+        (click)="modal.dismiss('Cross click')">Yes</button>
+      <button type="button" class="btn btn-seconadary" aria-label="Close"
+        (click)="modal.dismiss('Cross click')">No</button>
     </div>
+  </div>
 </ng-template>
 <ng-template #car let-modal>
-    <div class="modal-body">
-        <h3>Guest List</h3>
-        <div class="my-3 table-responsive">
-            <table class="table table-bordered">
-                <thead>
-                    <th class="text-nowrap">Name</th>
-                    <th class="text-nowrap">User Id</th>
-                    <th class="text-nowrap">Phone no.</th>
-                    <th class="text-nowrap">Sign-up date</th>
-                    <th class="text-nowrap">Number of events attended</th>
-                    <th class="text-nowrap">Number of events hosted</th>
-                    <th class="text-nowrap">Number of groups he/she is in</th>
-                    <th>Action</th>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Sam</td>
-                        <td>#122344</td>
-                        <td class="text-nowrap">+1-478523690</td>
-                        <td> 05/05/20 </td>
-                        <td>10</td>
-                        <td>7</td>
-                        <td>15</td>
-                        <td> <a class="btn btn-outline-primary btn-sm" id="dropdownBasic1"> Remove </a> </td>
-                    </tr>
-                    <tr>
-                        <td>Sam</td>
-                        <td>#122344</td>
-                        <td class="text-nowrap">+1-478523690</td>
-                        <td> 05/05/20 </td>
-                        <td>10</td>
-                        <td>7</td>
-                        <td>15</td>
-                        <td> <a class="btn btn-outline-primary btn-sm" id="dropdownBasic1"> Remove </a> </td>
-                    </tr>
-                    <tr>
-                        <td>Sam</td>
-                        <td>#122344</td>
-                        <td class="text-nowrap">+1-478523690</td>
-                        <td> 05/05/20 </td>
-                        <td>10</td>
-                        <td>7</td>
-                        <td>15</td>
-                        <td> <a class="btn btn-outline-primary btn-sm" id="dropdownBasic1"> Remove </a> </td>
-                    </tr>
-                    <tr>
-                        <td>Sam</td>
-                        <td>#122344</td>
-                        <td class="text-nowrap">+1-478523690</td>
-                        <td> 05/05/20 </td>
-                        <td>10</td>
-                        <td>7</td>
-                        <td>15</td>
-                        <td> <a class="btn btn-outline-primary btn-sm" id="dropdownBasic1"> Remove </a> </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="input-group-append">
-                <a class="btn mr-0 btn-danger text-white my-2" type="button" (click)="modal.close()">Close</a>
-            </div>
-        </div>
+  <div class="modal-body">
+    <h3>Guest List</h3>
+    <div class="my-3 table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <th class="text-nowrap">Name</th>
+          <th class="text-nowrap">User Id</th>
+          <th class="text-nowrap">Phone no.</th>
+          <th class="text-nowrap">Sign-up date</th>
+          <th class="text-nowrap">Number of events attended</th>
+          <th class="text-nowrap">Number of events hosted</th>
+          <th class="text-nowrap">Number of groups he/she is in</th>
+          <th>Action</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Sam</td>
+            <td>#122344</td>
+            <td class="text-nowrap">+1-478523690</td>
+            <td> 05/05/20 </td>
+            <td>10</td>
+            <td>7</td>
+            <td>15</td>
+            <td> <a class="btn btn-outline-primary btn-sm" id="dropdownBasic1"> Remove </a> </td>
+          </tr>
+          <tr>
+            <td>Sam</td>
+            <td>#122344</td>
+            <td class="text-nowrap">+1-478523690</td>
+            <td> 05/05/20 </td>
+            <td>10</td>
+            <td>7</td>
+            <td>15</td>
+            <td> <a class="btn btn-outline-primary btn-sm" id="dropdownBasic1"> Remove </a> </td>
+          </tr>
+          <tr>
+            <td>Sam</td>
+            <td>#122344</td>
+            <td class="text-nowrap">+1-478523690</td>
+            <td> 05/05/20 </td>
+            <td>10</td>
+            <td>7</td>
+            <td>15</td>
+            <td> <a class="btn btn-outline-primary btn-sm" id="dropdownBasic1"> Remove </a> </td>
+          </tr>
+          <tr>
+            <td>Sam</td>
+            <td>#122344</td>
+            <td class="text-nowrap">+1-478523690</td>
+            <td> 05/05/20 </td>
+            <td>10</td>
+            <td>7</td>
+            <td>15</td>
+            <td> <a class="btn btn-outline-primary btn-sm" id="dropdownBasic1"> Remove </a> </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="input-group-append">
+        <a class="btn mr-0 btn-danger text-white my-2" type="button" (click)="modal.close()">Close</a>
+      </div>
     </div>
+  </div>
 </ng-template>
 <ng-template #car2 let-modal>
-    <div class="modal-body">
-        <h3>Waiting List</h3>
-        <div class="my-3 table-responsive">
-            <table class="table table-bordered">
-                <thead>
-                    <th class="text-nowrap">Name</th>
-                    <th class="text-nowrap">User Id</th>
-                    <th class="text-nowrap">Phone no.</th>
-                    <th class="text-nowrap">Sign-up date</th>
-                    <th class="text-nowrap">Number of events attended</th>
-                    <th class="text-nowrap">Number of events hosted</th>
-                    <th class="text-nowrap">Number of groups he/she is in</th>
-                    <th>Action</th>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Sam</td>
-                        <td>#122344</td>
-                        <td class="text-nowrap">+1-478523690</td>
-                        <td> 05/05/20 </td>
-                        <td>10</td>
-                        <td>7</td>
-                        <td>15</td>
-                        <td> <a class="btn btn-outline-success btn-sm" id="dropdownBasic1"> Accept </a> <a class="btn btn-outline-primary btn-sm mt-2" id="dropdownBasic1"> Reject </a> </td>
-                    </tr>
-                    <tr>
-                        <td>Sam</td>
-                        <td>#122344</td>
-                        <td class="text-nowrap">+1-478523690</td>
-                        <td> 05/05/20 </td>
-                        <td>10</td>
-                        <td>7</td>
-                        <td>15</td>
-                        <td> <a class="btn btn-outline-success btn-sm" id="dropdownBasic1"> Accept </a> <a class="btn btn-outline-primary btn-sm mt-2" id="dropdownBasic1"> Reject </a> </td>
-                    </tr>
-                    <tr>
-                        <td>Sam</td>
-                        <td>#122344</td>
-                        <td class="text-nowrap">+1-478523690</td>
-                        <td> 05/05/20 </td>
-                        <td>10</td>
-                        <td>7</td>
-                        <td>15</td>
-                        <td> <a class="btn btn-outline-success btn-sm" id="dropdownBasic1"> Accept </a> <a class="btn btn-outline-primary btn-sm mt-2" id="dropdownBasic1"> Reject </a> </td>
-                    </tr>
-                    <tr>
-                        <td>Sam</td>
-                        <td>#122344</td>
-                        <td class="text-nowrap">+1-478523690</td>
-                        <td> 05/05/20 </td>
-                        <td>10</td>
-                        <td>7</td>
-                        <td>15</td>
-                        <td> <a class="btn btn-outline-success btn-sm" id="dropdownBasic1"> Accept </a> <a class="btn btn-outline-primary btn-sm mt-2" id="dropdownBasic1"> Reject </a> </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="input-group-append">
-                <a class="btn mr-0 btn-danger text-white my-2" type="button" (click)="modal.close()">Close</a>
-            </div>
-        </div>
+  <div class="modal-body">
+    <h3>Waiting List</h3>
+    <div class="my-3 table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <th class="text-nowrap">Name</th>
+          <th class="text-nowrap">User Id</th>
+          <th class="text-nowrap">Phone no.</th>
+          <th class="text-nowrap">Sign-up date</th>
+          <th class="text-nowrap">Number of events attended</th>
+          <th class="text-nowrap">Number of events hosted</th>
+          <th class="text-nowrap">Number of groups he/she is in</th>
+          <th>Action</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Sam</td>
+            <td>#122344</td>
+            <td class="text-nowrap">+1-478523690</td>
+            <td> 05/05/20 </td>
+            <td>10</td>
+            <td>7</td>
+            <td>15</td>
+            <td> <a class="btn btn-outline-success btn-sm" id="dropdownBasic1"> Accept </a> <a
+                class="btn btn-outline-primary btn-sm mt-2" id="dropdownBasic1"> Reject </a> </td>
+          </tr>
+          <tr>
+            <td>Sam</td>
+            <td>#122344</td>
+            <td class="text-nowrap">+1-478523690</td>
+            <td> 05/05/20 </td>
+            <td>10</td>
+            <td>7</td>
+            <td>15</td>
+            <td> <a class="btn btn-outline-success btn-sm" id="dropdownBasic1"> Accept </a> <a
+                class="btn btn-outline-primary btn-sm mt-2" id="dropdownBasic1"> Reject </a> </td>
+          </tr>
+          <tr>
+            <td>Sam</td>
+            <td>#122344</td>
+            <td class="text-nowrap">+1-478523690</td>
+            <td> 05/05/20 </td>
+            <td>10</td>
+            <td>7</td>
+            <td>15</td>
+            <td> <a class="btn btn-outline-success btn-sm" id="dropdownBasic1"> Accept </a> <a
+                class="btn btn-outline-primary btn-sm mt-2" id="dropdownBasic1"> Reject </a> </td>
+          </tr>
+          <tr>
+            <td>Sam</td>
+            <td>#122344</td>
+            <td class="text-nowrap">+1-478523690</td>
+            <td> 05/05/20 </td>
+            <td>10</td>
+            <td>7</td>
+            <td>15</td>
+            <td> <a class="btn btn-outline-success btn-sm" id="dropdownBasic1"> Accept </a> <a
+                class="btn btn-outline-primary btn-sm mt-2" id="dropdownBasic1"> Reject </a> </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="input-group-append">
+        <a class="btn mr-0 btn-danger text-white my-2" type="button" (click)="modal.close()">Close</a>
+      </div>
     </div>
+  </div>
 </ng-template>
 <ng-template #Adddetail let-modal>
-    <div class="modal-body">
-        <div class="card">
-            <form action="#">
-                <div class="form-body">
-                    <div class="card-body">
-                        <div class="row p-t-20">
-                            <div class="col-12 cstm_icn">
-                                <h4 class="mb-4"> Select Icon </h4>
-                                <ul class="icon_outr">
-                                    <li class="selected">
-                                        <span class="mdi mdi-food-variant icn"></span>
-                                    </li>
-                                    <li>
-                                        <span class="mdi mdi-food-apple icn"></span>
-                                    </li>
-                                    <li>
-                                        <span class="mdi mdi-food icn"></span>
-                                    </li>
-                                </ul>
-                                <!-- <div class="form-group">
+  <div class="modal-body">
+    <div class="card">
+      <form action="#">
+        <div class="form-body">
+          <div class="card-body">
+            <div class="row p-t-20">
+              <div class="col-12 cstm_icn">
+                <h4 class="mb-4"> Select Icon </h4>
+                <ul class="icon_outr">
+                  <li class="selected">
+                    <span class="mdi mdi-food-variant icn"></span>
+                  </li>
+                  <li>
+                    <span class="mdi mdi-food-apple icn"></span>
+                  </li>
+                  <li>
+                    <span class="mdi mdi-food icn"></span>
+                  </li>
+                </ul>
+                <!-- <div class="form-group">
                                     <label class="control-label"> Image  </label>
                                     <input type="file" class="form-control">
                                 </div> -->
-                                <!-- <mat-select>
+                <!-- <mat-select>
                                     <mat-option>
 
                                     </mat-option>
                                 </mat-select> -->
-                                <!-- <mat-form-field appearance="fill" class="w-100">
+                <!-- <mat-form-field appearance="fill" class="w-100">
                                     <mat-label>Select Icon</mat-label>
                                     <mat-select [(ngModel)]="selectedValue" name="food">
                                         <mat-option class="slct_icn"> <span class="mdi mdi-food-variant"></span> </mat-option>
@@ -632,313 +660,320 @@
                                         <mat-option class="slct_icn"> <span class="mdi mdi-food icn"></span> </mat-option>
                                     </mat-select>
                                 </mat-form-field> -->
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label"> Event Name  </label>
-                                    <input type="text" id="firstName" class="form-control" placeholder="Enter Event Name">
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label"> Event Name </label>
+                  <input type="text" id="firstName" class="form-control" placeholder="Enter Event Name">
 
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label"> Public/Private </label>
-                                    <!-- <input type="text" id="firstName" class="form-control" placeholder="Eg:- Public"> -->
-                                    <select name="" id="" class="form-control">
-                                      <option> Public </option>
-                                      <option> Private </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <!--/span-->
-                            <div class="col-md-6">
-                                <div class="form-group has-danger">
-                                    <label class="control-label"> Max Attendees </label>
-                                    <input type="number" id="email" class="form-control form-control-danger" placeholder="Enter duration of event">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group has-danger">
-                                    <label class="control-label"> Duration </label>
-                                    <input type="text" id="email" class="form-control form-control-danger" placeholder="Enter duration of event">
-                                </div>
-                            </div>
-                            <!--/span-->
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label"> Start Date </label>
-                                    <input type="date" id="firstName" class="form-control" placeholder="Enter Date">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label"> End Date </label>
-                                    <input type="date" id="firstName" class="form-control" placeholder="Enter Date">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label"> Start Time </label>
-                                    <input type="time" id="firstName" class="form-control" placeholder="Enter Date">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label"> End Time </label>
-                                    <input type="time" id="firstName" class="form-control" placeholder="Enter Date">
-                                </div>
-                            </div>
-                            <!-- /span -->
-                            <div class="col-md-6">
-                                <div class="form-group has-danger">
-                                    <label class="control-label"> Location </label>
-                                    <input type="text" id="email" class="form-control form-control-danger" placeholder="Enter location of event">
-                                </div>
-                            </div>
-                            <!--/span-->
-                            <div class="col-md-6">
-                                <div class="form-group has-danger">
-                                    <label class="control-label">  Event Description </label>
-                                    <textarea class="form-control form-control-danger" placeholder="Type here description for this Event"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-6 mb-3">
-                                <h4>Invite Guests/User</h4>
-                                <button class="btn btn-primary" (click)="invitemodal(invite)"> Invite </button>
-                            </div>
-                            <div class="col-12">
-                                <h4>Polls</h4>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group has-danger">
-                                    <label class="control-label"> Name </label>
-                                    <input type="text" id="text" class="form-control form-control-danger" placeholder="Enter Poll name">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group has-danger">
-                                    <label class="control-label"> option </label>
-                                    <input type="text" id="text" class="form-control form-control-danger" placeholder="Enter Poll option">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group has-danger">
-                                    <label class="control-label"> option </label>
-                                    <input type="text" id="text" class="form-control form-control-danger" placeholder="Enter Poll option">
-                                </div>
-                            </div>
-                            <div class="col-md-6 d-flex align-items-center">
-                                <button class="btn btn-primary">Add Option</button>
-                            </div>
-                            <div class="col-12">
-                                <button class="btn btn-primary">Add New Poll</button>
-                            </div>
-                        </div>
-                        <!--/row-->
-                    </div>
-                    <div class="form-actions">
-                        <div class="card-body">
-                            <button type="submit" class="btn btn-success mr-3" (click)="modal.dismiss('Cross click')"> Save</button>
-                            <button type="button" class="btn btn-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
-                        </div>
-                    </div>
                 </div>
-            </form>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label"> Public/Private </label>
+                  <!-- <input type="text" id="firstName" class="form-control" placeholder="Eg:- Public"> -->
+                  <select name="" id="" class="form-control">
+                    <option> Public </option>
+                    <option> Private </option>
+                  </select>
+                </div>
+              </div>
+              <!--/span-->
+              <div class="col-md-6">
+                <div class="form-group has-danger">
+                  <label class="control-label"> Max Attendees </label>
+                  <input type="number" id="email" class="form-control form-control-danger"
+                    placeholder="Enter duration of event">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group has-danger">
+                  <label class="control-label"> Duration </label>
+                  <input type="text" id="email" class="form-control form-control-danger"
+                    placeholder="Enter duration of event">
+                </div>
+              </div>
+              <!--/span-->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label"> Start Date </label>
+                  <input type="date" id="firstName" class="form-control" placeholder="Enter Date">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label"> End Date </label>
+                  <input type="date" id="firstName" class="form-control" placeholder="Enter Date">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label"> Start Time </label>
+                  <input type="time" id="firstName" class="form-control" placeholder="Enter Date">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label"> End Time </label>
+                  <input type="time" id="firstName" class="form-control" placeholder="Enter Date">
+                </div>
+              </div>
+              <!-- /span -->
+              <div class="col-md-6">
+                <div class="form-group has-danger">
+                  <label class="control-label"> Location </label>
+                  <input type="text" id="email" class="form-control form-control-danger"
+                    placeholder="Enter location of event">
+                </div>
+              </div>
+              <!--/span-->
+              <div class="col-md-6">
+                <div class="form-group has-danger">
+                  <label class="control-label"> Event Description </label>
+                  <textarea class="form-control form-control-danger"
+                    placeholder="Type here description for this Event"></textarea>
+                </div>
+              </div>
+              <div class="col-6 mb-3">
+                <h4>Invite Guests/User</h4>
+                <button class="btn btn-primary" (click)="invitemodal(invite)"> Invite </button>
+              </div>
+              <div class="col-12">
+                <h4>Polls</h4>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group has-danger">
+                  <label class="control-label"> Name </label>
+                  <input type="text" id="text" class="form-control form-control-danger" placeholder="Enter Poll name">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group has-danger">
+                  <label class="control-label"> option </label>
+                  <input type="text" id="text" class="form-control form-control-danger" placeholder="Enter Poll option">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group has-danger">
+                  <label class="control-label"> option </label>
+                  <input type="text" id="text" class="form-control form-control-danger" placeholder="Enter Poll option">
+                </div>
+              </div>
+              <div class="col-md-6 d-flex align-items-center">
+                <button class="btn btn-primary">Add Option</button>
+              </div>
+              <div class="col-12">
+                <button class="btn btn-primary">Add New Poll</button>
+              </div>
+            </div>
+            <!--/row-->
+          </div>
+          <div class="form-actions">
+            <div class="card-body">
+              <button type="submit" class="btn btn-success mr-3" (click)="modal.dismiss('Cross click')"> Save</button>
+              <button type="button" class="btn btn-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
+            </div>
+          </div>
         </div>
-
+      </form>
     </div>
+
+  </div>
 </ng-template>
 <ng-template #eventdetail let-modal>
-    <div class="modal-body">
-        <div class="card">
-            <form action="#">
-                <div class="form-body">
-                    <div class="card-body">
-                        <div class="row p-t-20">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label"> Image  </label>
-                                    <input type="file" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label"> Event Name  </label>
-                                    <input type="text" id="firstName" class="form-control" placeholder="Event 1">
-
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label"> Public/Private </label>
-                                    <input type="text" id="firstName" class="form-control" placeholder="Public">
-
-                                </div>
-                            </div>
-                            <!--/span-->
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label"> Date </label>
-                                    <input type="Date" id="firstName" class="form-control" placeholder="05/05/21">
-                                </div>
-                            </div>
-                            <!--/span-->
-                            <div class="col-md-6">
-                                <div class="form-group has-danger">
-                                    <label class="control-label"> Duration </label>
-                                    <input type="text" id="email" class="form-control form-control-danger" placeholder="2 Days">
-                                </div>
-                            </div>
-                            <!-- /span -->
-                            <div class="col-md-6">
-                                <div class="form-group has-danger">
-                                    <label class="control-label"> Location </label>
-                                    <input type="text" id="email" class="form-control form-control-danger" placeholder="London">
-                                </div>
-                            </div>
-                            <!--/span-->
-                            <div class="col-md-6">
-                                <div class="form-group has-danger">
-                                    <label class="control-label">  Event Description </label>
-                                    <textarea class="form-control form-control-danger" placeholder="This is Description of this Event"></textarea>
-                                </div>
-                            </div>
-                            <!--/span-->
-                        </div>
-                        <!--/row-->
-                    </div>
-
-                    <div class="form-actions">
-                        <div class="card-body">
-                            <!-- <button type="submit" class="btn btn-primary mr-3" (click)="modal.dismiss('Cross click')"><i class="fa fa-check"></i> Update</button> -->
-                            <button type="button" class="btn btn-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
-                        </div>
-                    </div>
+  <div class="modal-body">
+    <div class="card">
+      <form action="#">
+        <div class="form-body">
+          <div class="card-body">
+            <div class="row p-t-20">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label"> Image </label>
+                  <input type="file" class="form-control">
                 </div>
-            </form>
-        </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label"> Event Name </label>
+                  <input type="text" id="firstName" class="form-control" placeholder="Event 1">
 
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label"> Public/Private </label>
+                  <input type="text" id="firstName" class="form-control" placeholder="Public">
+
+                </div>
+              </div>
+              <!--/span-->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label"> Date </label>
+                  <input type="Date" id="firstName" class="form-control" placeholder="05/05/21">
+                </div>
+              </div>
+              <!--/span-->
+              <div class="col-md-6">
+                <div class="form-group has-danger">
+                  <label class="control-label"> Duration </label>
+                  <input type="text" id="email" class="form-control form-control-danger" placeholder="2 Days">
+                </div>
+              </div>
+              <!-- /span -->
+              <div class="col-md-6">
+                <div class="form-group has-danger">
+                  <label class="control-label"> Location </label>
+                  <input type="text" id="email" class="form-control form-control-danger" placeholder="London">
+                </div>
+              </div>
+              <!--/span-->
+              <div class="col-md-6">
+                <div class="form-group has-danger">
+                  <label class="control-label"> Event Description </label>
+                  <textarea class="form-control form-control-danger"
+                    placeholder="This is Description of this Event"></textarea>
+                </div>
+              </div>
+              <!--/span-->
+            </div>
+            <!--/row-->
+          </div>
+
+          <div class="form-actions">
+            <div class="card-body">
+              <!-- <button type="submit" class="btn btn-primary mr-3" (click)="modal.dismiss('Cross click')"><i class="fa fa-check"></i> Update</button> -->
+              <button type="button" class="btn btn-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
+
+  </div>
 </ng-template>
 <ng-template #eventedit let-modal>
-    <div class="modal-body">
-        <div class="card">
-            <form action="#">
-                <div class="form-body">
-                    <div class="card-body">
-                        <div class="row p-t-20">
-                            <!-- <div class="col-md-6">
+  <div class="modal-body">
+    <div class="card">
+      <form action="#">
+        <div class="form-body">
+          <div class="card-body">
+            <div class="row p-t-20">
+              <!-- <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label"> Image  </label>
                                     <input type="file" class="form-control">
                                 </div>
                             </div> -->
-                            <div class="col-12 cstm_icn">
-                                <h4 class="mb-4"> Select Icon </h4>
-                                <ul class="icon_outr">
-                                    <li class="selected">
-                                        <span class="mdi mdi-food-variant icn"></span>
-                                    </li>
-                                    <li>
-                                        <span class="mdi mdi-food-apple icn"></span>
-                                    </li>
-                                    <li>
-                                        <span class="mdi mdi-food icn"></span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label"> Event Name  </label>
-                                    <input type="text" id="firstName" class="form-control" placeholder="Event 1">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label"> Public/Private </label>
-                                    <!-- <input type="text" id="firstName" class="form-control" placeholder="Public"> -->
-                                    <select name="" id="" class="form-control">
-                                      <option> Public </option>
-                                      <option> Private </option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group has-danger">
-                                    <label class="control-label"> Max Attendees </label>
-                                    <input type="number" id="email" class="form-control form-control-danger" placeholder="Enter duration of event">
-                                </div>
-                            </div>
-                            <!--/span-->
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label"> Date </label>
-                                    <input type="date" id="firstName" class="form-control" placeholder="example@gmail.com">
+              <div class="col-12 cstm_icn">
+                <h4 class="mb-4"> Select Icon </h4>
+                <ul class="icon_outr">
+                  <li class="selected">
+                    <span class="mdi mdi-food-variant icn"></span>
+                  </li>
+                  <li>
+                    <span class="mdi mdi-food-apple icn"></span>
+                  </li>
+                  <li>
+                    <span class="mdi mdi-food icn"></span>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label"> Event Name </label>
+                  <input type="text" id="firstName" class="form-control" placeholder="Event 1">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label"> Public/Private </label>
+                  <!-- <input type="text" id="firstName" class="form-control" placeholder="Public"> -->
+                  <select name="" id="" class="form-control">
+                    <option> Public </option>
+                    <option> Private </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group has-danger">
+                  <label class="control-label"> Max Attendees </label>
+                  <input type="number" id="email" class="form-control form-control-danger"
+                    placeholder="Enter duration of event">
+                </div>
+              </div>
+              <!--/span-->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label"> Date </label>
+                  <input type="date" id="firstName" class="form-control" placeholder="example@gmail.com">
 
-                                </div>
-                            </div>
-                            <!--/span-->
-                            <div class="col-md-6">
-                                <div class="form-group has-danger">
-                                    <label class="control-label"> Duration </label>
-                                    <input type="text" id="email" class="form-control form-control-danger" placeholder="2 days">
-                                </div>
-                            </div>
-                            <!-- /span -->
-                            <div class="col-md-6">
-                                <div class="form-group has-danger">
-                                    <label class="control-label"> Location </label>
-                                    <input type="text" id="email" class="form-control form-control-danger" placeholder="London">
-                                </div>
-                            </div>
-                            <!--/span-->
-                            <div class="col-md-6">
-                                <div class="form-group has-danger">
-                                    <label class="control-label">  Event Description </label>
-                                    <textarea class="form-control form-control-danger" placeholder="This is Description of this Event"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-6 mb-3">
-                                <h4>Invite Guests/User</h4>
-                                <button class="btn btn-primary" (click)="invitemodal(invite)"> Invite </button>
-                            </div>
-                            <!--/span-->
-                            <!-- <div class="col-md-6">
+                </div>
+              </div>
+              <!--/span-->
+              <div class="col-md-6">
+                <div class="form-group has-danger">
+                  <label class="control-label"> Duration </label>
+                  <input type="text" id="email" class="form-control form-control-danger" placeholder="2 days">
+                </div>
+              </div>
+              <!-- /span -->
+              <div class="col-md-6">
+                <div class="form-group has-danger">
+                  <label class="control-label"> Location </label>
+                  <input type="text" id="email" class="form-control form-control-danger" placeholder="London">
+                </div>
+              </div>
+              <!--/span-->
+              <div class="col-md-6">
+                <div class="form-group has-danger">
+                  <label class="control-label"> Event Description </label>
+                  <textarea class="form-control form-control-danger"
+                    placeholder="This is Description of this Event"></textarea>
+                </div>
+              </div>
+              <div class="col-6 mb-3">
+                <h4>Invite Guests/User</h4>
+                <button class="btn btn-primary" (click)="invitemodal(invite)"> Invite </button>
+              </div>
+              <!--/span-->
+              <!-- <div class="col-md-6">
                                 <div class="form-group has-danger">
                                     <label class="control-label">Cancelled  Orders</label>
                                     <input type="text" id="email" class="form-control form-control-danger" placeholder="00">
                                 </div>
                             </div> -->
-                            <!--/span-->
-                            <!-- <div class="col-md-6">
+              <!--/span-->
+              <!-- <div class="col-md-6">
                                 <div class="form-group has-danger">
                                     <label class="control-label">Completed Orders</label>
                                     <input type="text" id="email" class="form-control form-control-danger" placeholder="40">
                                 </div>
                             </div> -->
-                            <!--/span-->
-                            <!-- <div class="col-md-6">
+              <!--/span-->
+              <!-- <div class="col-md-6">
                                 <div class="form-group has-danger">
                                     <label class="control-label">City</label>
                                     <input type="text" id="city" class="form-control form-control-danger" placeholder="Berlin">
                                 </div>
                             </div> -->
-                            <!--/span-->
-                            <!-- <div class="col-md-6">
+              <!--/span-->
+              <!-- <div class="col-md-6">
                                 <div class="form-group has-danger">
                                     <label class="control-label">Pincode</label>
                                     <input type="text" id="email" class="form-control form-control-danger" placeholder="Pincode">
                                 </div>
                             </div> -->
-                            <!--/span-->
-                            <!-- <div class="col-md-12">
+              <!--/span-->
+              <!-- <div class="col-md-12">
                                 <div class="form-group has-danger">
                                     <label class="control-label">Address</label>
                                     <textarea name="" id="" cols="30" rows="5" class="form-control" placeholder="#433 New garden Complex"></textarea>
                                 </div>
                             </div> -->
-                            <!--/span-->
-                            <!-- <div class="col-12">
+              <!--/span-->
+              <!-- <div class="col-12">
                                 <h4>Polls</h4>
                             </div>
                             <div class="col-md-6">
@@ -962,282 +997,288 @@
                             <div class="col-md-6 d-flex align-items-center">
                                 <button class="btn btn-primary">Add Option</button>
                             </div> -->
-                        </div>
-                        <!--/row-->
-                    </div>
+            </div>
+            <!--/row-->
+          </div>
 
-                    <div class="form-actions">
-                        <div class="card-body">
-                            <button type="submit" class="btn btn-primary mr-3" (click)="modal.dismiss('Cross click')"><i class="fa fa-check"></i> Update</button>
-                            <button type="button" class="btn btn-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
+          <div class="form-actions">
+            <div class="card-body">
+              <button type="submit" class="btn btn-primary mr-3" (click)="modal.dismiss('Cross click')"><i
+                  class="fa fa-check"></i> Update</button>
+              <button type="button" class="btn btn-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
+            </div>
+          </div>
         </div>
-
+      </form>
     </div>
+
+  </div>
 </ng-template>
 <ng-template #polls let-modal>
-    <div class="modal-body">
-        <h3>Polls List</h3>
-        <div class="my-3 table-responsive">
-            <table class="table table-bordered">
+  <div class="modal-body">
+    <h3>Polls List</h3>
+    <div class="my-3 table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <th class="text-nowrap">Name</th>
+          <th class="text-nowrap">Options</th>
+          <th>Action</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Polls 1</td>
+            <td>
+              <table class="table table-bordered">
                 <thead>
-                    <th class="text-nowrap">Name</th>
-                    <th class="text-nowrap">Options</th>
-                    <th>Action</th>
+                  <th class="text-nowrap">Options</th>
+                  <th class="text-nowrap">Votes</th>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Polls 1</td>
-                        <td>
-                            <table class="table table-bordered">
-                                <thead>
-                                    <th class="text-nowrap">Options</th>
-                                    <th class="text-nowrap">Votes</th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Option 1</td>
-                                        <td> 200 </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Option 2</td>
-                                        <td> 200 </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Option 3</td>
-                                        <td> 200 </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Option 4</td>
-                                        <td> 200 </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Option 5</td>
-                                        <td> 200 </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                        <td>
-                            <a class="btn btn-danger btn-sm" (click)="editpollmodal(editpoll)"> <i class="fa fa-pencil-square-o text-white"></i> </a>
-                            <a class="btn btn-danger btn-sm ml-2"> <i class="fa fa-trash text-white"></i> </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Polls 2</td>
-                        <td>
-                            <table class="table table-bordered">
-                                <thead>
-                                    <th class="text-nowrap">Options</th>
-                                    <th class="text-nowrap">Votes</th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Option 1</td>
-                                        <td> 200 </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Option 2</td>
-                                        <td> 200 </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                        <td>
-                            <a class="btn btn-danger btn-sm" (click)="editpollmodal(editpoll)"> <i class="fa fa-pencil-square-o text-white"></i> </a>
-                            <a class="btn btn-danger btn-sm ml-2"> <i class="fa fa-trash text-white"></i> </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Polls 3</td>
-                        <td>
-                            <table class="table table-bordered">
-                                <thead>
-                                    <th class="text-nowrap">Options</th>
-                                    <th class="text-nowrap">Votes</th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Option 1</td>
-                                        <td> 200 </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Option 2</td>
-                                        <td> 200 </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Option 3</td>
-                                        <td> 200 </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Option 4</td>
-                                        <td> 200 </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                        <td>
-                            <a class="btn btn-danger btn-sm" (click)="editpollmodal(editpoll)"> <i class="fa fa-pencil-square-o text-white"></i> </a>
-                            <a class="btn btn-danger btn-sm ml-2"> <i class="fa fa-trash text-white"></i> </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Polls 4</td>
-                        <td>
-                            <table class="table table-bordered">
-                                <thead>
-                                    <th class="text-nowrap">Options</th>
-                                    <th class="text-nowrap">Votes</th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Option 1</td>
-                                        <td> 200 </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Option 2</td>
-                                        <td> 200 </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Option 3</td>
-                                        <td> 200 </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                        <td>
-                            <a class="btn btn-danger btn-sm" (click)="editpollmodal(editpoll)"> <i class="fa fa-pencil-square-o text-white"></i> </a>
-                            <a class="btn btn-danger btn-sm ml-2"> <i class="fa fa-trash text-white"></i> </a>
-                        </td>
-                    </tr>
+                  <tr>
+                    <td>Option 1</td>
+                    <td> 200 </td>
+                  </tr>
+                  <tr>
+                    <td>Option 2</td>
+                    <td> 200 </td>
+                  </tr>
+                  <tr>
+                    <td>Option 3</td>
+                    <td> 200 </td>
+                  </tr>
+                  <tr>
+                    <td>Option 4</td>
+                    <td> 200 </td>
+                  </tr>
+                  <tr>
+                    <td>Option 5</td>
+                    <td> 200 </td>
+                  </tr>
                 </tbody>
-            </table>
-            <div class="input-group-append">
-                <a class="btn mr-0 btn-danger text-white my-2" type="button" (click)="modal.close()">Close</a>
-            </div>
-        </div>
+              </table>
+            </td>
+            <td>
+              <a class="btn btn-danger btn-sm" (click)="editpollmodal(editpoll)"> <i
+                  class="fa fa-pencil-square-o text-white"></i> </a>
+              <a class="btn btn-danger btn-sm ml-2"> <i class="fa fa-trash text-white"></i> </a>
+            </td>
+          </tr>
+          <tr>
+            <td>Polls 2</td>
+            <td>
+              <table class="table table-bordered">
+                <thead>
+                  <th class="text-nowrap">Options</th>
+                  <th class="text-nowrap">Votes</th>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Option 1</td>
+                    <td> 200 </td>
+                  </tr>
+                  <tr>
+                    <td>Option 2</td>
+                    <td> 200 </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+            <td>
+              <a class="btn btn-danger btn-sm" (click)="editpollmodal(editpoll)"> <i
+                  class="fa fa-pencil-square-o text-white"></i> </a>
+              <a class="btn btn-danger btn-sm ml-2"> <i class="fa fa-trash text-white"></i> </a>
+            </td>
+          </tr>
+          <tr>
+            <td>Polls 3</td>
+            <td>
+              <table class="table table-bordered">
+                <thead>
+                  <th class="text-nowrap">Options</th>
+                  <th class="text-nowrap">Votes</th>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Option 1</td>
+                    <td> 200 </td>
+                  </tr>
+                  <tr>
+                    <td>Option 2</td>
+                    <td> 200 </td>
+                  </tr>
+                  <tr>
+                    <td>Option 3</td>
+                    <td> 200 </td>
+                  </tr>
+                  <tr>
+                    <td>Option 4</td>
+                    <td> 200 </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+            <td>
+              <a class="btn btn-danger btn-sm" (click)="editpollmodal(editpoll)"> <i
+                  class="fa fa-pencil-square-o text-white"></i> </a>
+              <a class="btn btn-danger btn-sm ml-2"> <i class="fa fa-trash text-white"></i> </a>
+            </td>
+          </tr>
+          <tr>
+            <td>Polls 4</td>
+            <td>
+              <table class="table table-bordered">
+                <thead>
+                  <th class="text-nowrap">Options</th>
+                  <th class="text-nowrap">Votes</th>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Option 1</td>
+                    <td> 200 </td>
+                  </tr>
+                  <tr>
+                    <td>Option 2</td>
+                    <td> 200 </td>
+                  </tr>
+                  <tr>
+                    <td>Option 3</td>
+                    <td> 200 </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+            <td>
+              <a class="btn btn-danger btn-sm" (click)="editpollmodal(editpoll)"> <i
+                  class="fa fa-pencil-square-o text-white"></i> </a>
+              <a class="btn btn-danger btn-sm ml-2"> <i class="fa fa-trash text-white"></i> </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="input-group-append">
+        <a class="btn mr-0 btn-danger text-white my-2" type="button" (click)="modal.close()">Close</a>
+      </div>
     </div>
+  </div>
 </ng-template>
 <ng-template #editpoll let-modal>
-    <div class="modal-body">
-        <div class="card">
-            <form action="#">
-                <div class="form-body">
-                    <div class="card-body">
-                        <div class="row p-t-20">
-                            <div class="col-12">
-                                <h4>Polls</h4>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group has-danger">
-                                    <label class="control-label"> Name </label>
-                                    <input type="text" id="text" class="form-control form-control-danger" placeholder="Enter Poll name">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group has-danger">
-                                    <label class="control-label"> option </label>
-                                    <input type="text" id="text" class="form-control form-control-danger" placeholder="Enter Poll option">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group has-danger">
-                                    <label class="control-label"> option </label>
-                                    <input type="text" id="text" class="form-control form-control-danger" placeholder="Enter Poll option">
-                                </div>
-                            </div>
-                            <div class="col-md-6 d-flex align-items-center">
-                                <button class="btn btn-primary">Add Option</button>
-                            </div>
-                            <div class="col-12">
-                                <button class="btn btn-primary">Add New Poll</button>
-                            </div>
-                        </div>
-                        <!--/row-->
-                    </div>
-                    <div class="form-actions">
-                        <div class="card-body">
-                            <button type="submit" class="btn btn-primary mr-3" (click)="modal.dismiss('Cross click')"><i class="fa fa-check"></i> Update</button>
-                            <button type="button" class="btn btn-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
-                        </div>
-                    </div>
+  <div class="modal-body">
+    <div class="card">
+      <form action="#">
+        <div class="form-body">
+          <div class="card-body">
+            <div class="row p-t-20">
+              <div class="col-12">
+                <h4>Polls</h4>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group has-danger">
+                  <label class="control-label"> Name </label>
+                  <input type="text" id="text" class="form-control form-control-danger" placeholder="Enter Poll name">
                 </div>
-            </form>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group has-danger">
+                  <label class="control-label"> option </label>
+                  <input type="text" id="text" class="form-control form-control-danger" placeholder="Enter Poll option">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group has-danger">
+                  <label class="control-label"> option </label>
+                  <input type="text" id="text" class="form-control form-control-danger" placeholder="Enter Poll option">
+                </div>
+              </div>
+              <div class="col-md-6 d-flex align-items-center">
+                <button class="btn btn-primary">Add Option</button>
+              </div>
+              <div class="col-12">
+                <button class="btn btn-primary">Add New Poll</button>
+              </div>
+            </div>
+            <!--/row-->
+          </div>
+          <div class="form-actions">
+            <div class="card-body">
+              <button type="submit" class="btn btn-primary mr-3" (click)="modal.dismiss('Cross click')"><i
+                  class="fa fa-check"></i> Update</button>
+              <button type="button" class="btn btn-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
+            </div>
+          </div>
         </div>
-
+      </form>
     </div>
+
+  </div>
 </ng-template>
 <ng-template #invite let-modal>
-    <div class="modal-body">
-        <h3 class="pb-3">User List</h3>
-        <div class="col-6 px-0"><input type="text" class="form-control" id="prenametext" placeholder="Search"></div>
-        <div class="my-3 table-responsive">
-            <table class="table table-bordered">
-                <thead>
-                    <th class="text-nowrap">Select</th>
-                    <th class="text-nowrap">Name</th>
-                    <th class="text-nowrap">User Id</th>
-                    <th class="text-nowrap">Phone no.</th>
-                    <th class="text-nowrap">Sign-up date</th>
-                    <th class="text-nowrap">Number of events attended</th>
-                    <th class="text-nowrap">Number of events hosted</th>
-                    <th class="text-nowrap">Number of groups he/she is in</th>
-                    <!-- <th>Action</th> -->
-                </thead>
-                <tbody>
-                    <tr>
-                        <td> <input type="checkbox"> </td>
-                        <td>Sam</td>
-                        <td>#122344</td>
-                        <td class="text-nowrap">+1-478523690</td>
-                        <td> 05/05/20 </td>
-                        <td>10</td>
-                        <td>7</td>
-                        <td>15</td>
-                        <!-- <td> <a class="btn btn-outline-success btn-sm" id="dropdownBasic1"> Invite </a> </td> -->
-                    </tr>
-                    <tr>
-                        <td> <input type="checkbox"> </td>
-                        <td>Sam</td>
-                        <td>#122344</td>
-                        <td class="text-nowrap">+1-478523690</td>
-                        <td> 05/05/20 </td>
-                        <td>10</td>
-                        <td>7</td>
-                        <td>15</td>
-                        <!-- <td> <a class="btn btn-outline-success btn-sm" id="dropdownBasic1"> Invite </a> </td> -->
-                    </tr>
-                    <tr>
-                        <td> <input type="checkbox"> </td>
-                        <td>Sam</td>
-                        <td>#122344</td>
-                        <td class="text-nowrap">+1-478523690</td>
-                        <td> 05/05/20 </td>
-                        <td>10</td>
-                        <td>7</td>
-                        <td>15</td>
-                        <!-- <td> <a class="btn btn-outline-success btn-sm" id="dropdownBasic1"> Invite </a> </td> -->
-                    </tr>
-                    <tr>
-                        <td> <input type="checkbox"> </td>
-                        <td>Sam</td>
-                        <td>#122344</td>
-                        <td class="text-nowrap">+1-478523690</td>
-                        <td> 05/05/20 </td>
-                        <td>10</td>
-                        <td>7</td>
-                        <td>15</td>
-                        <!-- <td> <a class="btn btn-outline-success btn-sm" id="dropdownBasic1"> Invite </a> </td> -->
-                    </tr>
-                </tbody>
-            </table>
-            <div class="input-group-append">
-                <a class="btn mr-0 btn-success text-white my-2 mr-2" type="button" (click)="modal.close()">Submit</a>
-                <a class="btn mr-0 btn-danger text-white my-2" type="button" (click)="modal.close()">Close</a>
-            </div>
-        </div>
+  <div class="modal-body">
+    <h3 class="pb-3">User List</h3>
+    <div class="col-6 px-0"><input type="text" class="form-control" id="prenametext" placeholder="Search"></div>
+    <div class="my-3 table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <th class="text-nowrap">Select</th>
+          <th class="text-nowrap">Name</th>
+          <th class="text-nowrap">User Id</th>
+          <th class="text-nowrap">Phone no.</th>
+          <th class="text-nowrap">Sign-up date</th>
+          <th class="text-nowrap">Number of events attended</th>
+          <th class="text-nowrap">Number of events hosted</th>
+          <th class="text-nowrap">Number of groups he/she is in</th>
+          <!-- <th>Action</th> -->
+        </thead>
+        <tbody>
+          <tr>
+            <td> <input type="checkbox"> </td>
+            <td>Sam</td>
+            <td>#122344</td>
+            <td class="text-nowrap">+1-478523690</td>
+            <td> 05/05/20 </td>
+            <td>10</td>
+            <td>7</td>
+            <td>15</td>
+            <!-- <td> <a class="btn btn-outline-success btn-sm" id="dropdownBasic1"> Invite </a> </td> -->
+          </tr>
+          <tr>
+            <td> <input type="checkbox"> </td>
+            <td>Sam</td>
+            <td>#122344</td>
+            <td class="text-nowrap">+1-478523690</td>
+            <td> 05/05/20 </td>
+            <td>10</td>
+            <td>7</td>
+            <td>15</td>
+            <!-- <td> <a class="btn btn-outline-success btn-sm" id="dropdownBasic1"> Invite </a> </td> -->
+          </tr>
+          <tr>
+            <td> <input type="checkbox"> </td>
+            <td>Sam</td>
+            <td>#122344</td>
+            <td class="text-nowrap">+1-478523690</td>
+            <td> 05/05/20 </td>
+            <td>10</td>
+            <td>7</td>
+            <td>15</td>
+            <!-- <td> <a class="btn btn-outline-success btn-sm" id="dropdownBasic1"> Invite </a> </td> -->
+          </tr>
+          <tr>
+            <td> <input type="checkbox"> </td>
+            <td>Sam</td>
+            <td>#122344</td>
+            <td class="text-nowrap">+1-478523690</td>
+            <td> 05/05/20 </td>
+            <td>10</td>
+            <td>7</td>
+            <td>15</td>
+            <!-- <td> <a class="btn btn-outline-success btn-sm" id="dropdownBasic1"> Invite </a> </td> -->
+          </tr>
+        </tbody>
+      </table>
+      <div class="input-group-append">
+        <a class="btn mr-0 btn-success text-white my-2 mr-2" type="button" (click)="modal.close()">Submit</a>
+        <a class="btn mr-0 btn-danger text-white my-2" type="button" (click)="modal.close()">Close</a>
+      </div>
     </div>
+  </div>
 </ng-template>
