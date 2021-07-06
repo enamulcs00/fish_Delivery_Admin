@@ -99,7 +99,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: []
     },
     {
-      path: '/pages/fooditem',
+      path: '/pages/groups',
       title: 'Groups',
       icon: ' far fa-list-alt',
       class: '',
@@ -140,7 +140,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: []
     },
     {
-        path: '/pages/calculator',
+        path: '/pages/eventType',
         title: 'Event Types',
         icon: 'mdi mdi-package-variant',
         class: '',

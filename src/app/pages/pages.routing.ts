@@ -143,7 +143,7 @@ export const PagesRoutes: Routes = [
         canActivate: [AuthGuardGuard]
       },
       {
-        path: 'fooditem',
+        path: 'groups',
         component: FoodItemsComponent,
         data: {
           title: 'Groups',
@@ -371,13 +371,13 @@ export const PagesRoutes: Routes = [
         canActivate: [AuthGuardGuard]
       },
       {
-        path: 'calculator',
+        path: 'eventType',
         component: CalculatorComponent,
         data: {
           title: 'Event Type',
           urls: [
             { title: 'Dashboard', url: '/dashboard' },
-            { title: 'Caculator' }
+            { title: 'Event Type' }
           ]
         },
         canActivate: [AuthGuardGuard]
