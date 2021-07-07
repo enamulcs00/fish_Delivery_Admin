@@ -36719,6 +36719,7 @@ class OrderlistComponent {
                     this.ArrayImage = [];
                     this.modalService.dismissAll();
                     sweetalert2__WEBPACK_IMPORTED_MODULE_5___default.a.fire("Success", res.message, "success");
+                    this.getAllEvents();
                 }
                 else {
                     sweetalert2__WEBPACK_IMPORTED_MODULE_5___default.a.fire("Oops", res.message, "error");

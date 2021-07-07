@@ -520,6 +520,7 @@ export class OrderlistComponent implements OnInit {
             this.ArrayImage = [];
             this.modalService.dismissAll();
             Swal.fire("Success", res.message, "success");
+            this.getAllEvents();
           } else {
             Swal.fire("Oops", res.message, "error");
           }

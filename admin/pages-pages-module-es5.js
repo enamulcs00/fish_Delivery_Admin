@@ -69033,6 +69033,8 @@
                   _this136.modalService.dismissAll();
 
                   sweetalert2__WEBPACK_IMPORTED_MODULE_5___default.a.fire("Success", res.message, "success");
+
+                  _this136.getAllEvents();
                 } else {
                   sweetalert2__WEBPACK_IMPORTED_MODULE_5___default.a.fire("Oops", res.message, "error");
                 }
