@@ -48,25 +48,31 @@
                 <ng-container matColumnDef="Images">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Type </th>
                   <td mat-cell *matCellDef="let row">
-                    <!-- <span class="img-small"><img src={{row.Images}} alt="wedding" width="60" class="rounded"></span> -->
-                    <div class="cstm_icn">
+                    <span class="img-small"><img src={{row?.eventType?.eventImage}} alt="wedding" width="60" class="rounded"></span>
+                    <!-- <div class="cstm_icn">
                       <ul class="icon_outr">
                         <li>
                           <span class="mdi mdi-food-variant icn"></span>
                         </li>
                       </ul>
-                    </div>
+                    </div> -->
                   </td>
                 </ng-container>
                 <!-- ID Column -->
                 <ng-container matColumnDef="EventName">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Name </th>
-                  <td mat-cell *matCellDef="let row"> {{row.EventName}} </td>
+                  <td mat-cell *matCellDef="let row"> {{row?.eventName || "-"}} </td>
                 </ng-container>
                 <!-- ID Column -->
                 <ng-container matColumnDef="Event_type">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Public/Private </th>
-                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Event_type}} </td>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap">
+                    <span *ngIf="row?.eventFor==1;else alterOption">Public</span>
+                    <ng-template #alterOption>
+                      <span>Private</span>
+                    </ng-template>
+
+                    </td>
                 </ng-container>
                 <!-- <ng-container matColumnDef="Eventtype">
                                     <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Type </th>
@@ -77,29 +83,29 @@
                 <!-- Progress Column -->
                 <ng-container matColumnDef="datetime">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Created On </th>
-                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.datetime}} </td>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.createdAt | date:'medium'}} </td>
                 </ng-container>
                 <!-- Progress Column -->
                 <ng-container matColumnDef="Duration">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Duration </th>
-                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Duration}} </td>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap">{{ getdiffDates(row)}}</td>
                 </ng-container>
                 <ng-container matColumnDef="Durationdate">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Date </th>
-                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Durationdate}} </td>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap">{{moment(row?.startDate).format('DD-MM-YYYY')}} - {{moment(row?.endDate).format('DD-MM-YYYY')}}</td>
                 </ng-container>
                 <ng-container matColumnDef="Durationtime">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Time </th>
-                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Durationtime}} </td>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap">{{row?.startTime}} - {{row?.endTime}}</td>
                 </ng-container>
                 <!-- Progress Column -->
                 <ng-container matColumnDef="box">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Description </th>
-                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.box}} </td>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.description || "-"}} </td>
                 </ng-container>
                 <ng-container matColumnDef="invited">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> People invited </th>
-                  <td mat-cell *matCellDef="let row"> {{row.invited}} </td>
+                  <td mat-cell *matCellDef="let row"> {{row?.invitedList.length}} </td>
                 </ng-container>
                 <ng-container matColumnDef="invited2">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> People directly invited </th>
@@ -113,31 +119,31 @@
                 </ng-container>
                 <ng-container matColumnDef="attendees">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Max attendees </th>
-                  <td mat-cell *matCellDef="let row"> {{row.attendees}} </td>
+                  <td mat-cell *matCellDef="let row"> {{row?.maxLength || "0"}} </td>
                 </ng-container>
                 <ng-container matColumnDef="Waiting">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Waiting list </th>
-                  <td mat-cell *matCellDef="let row"> {{row.Waiting}}
-                    <a href="javascript:void()" (click)="carModal2(car2)"><i class="sl-icon-info"></i></a>
+                  <td mat-cell *matCellDef="let row"> {{row?.waitingList.length}}
+                    <a href="javascript:void()" (click)="carModal2(car2, row?._id)"><i class="sl-icon-info"></i></a>
                   </td>
                 </ng-container>
                 <ng-container matColumnDef="messagescount">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Number of messages in chat </th>
-                  <td mat-cell *matCellDef="let row"> {{row.messagescount}} </td>
+                  <td mat-cell *matCellDef="let row"> {{row?.messagescount || "-"}} </td>
                 </ng-container>
                 <ng-container matColumnDef="likes">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Number of likes </th>
-                  <td mat-cell *matCellDef="let row"> {{row.likes}} </td>
+                  <td mat-cell *matCellDef="let row"> {{row?.likeCount}} </td>
                 </ng-container>
                 <!-- Address -->
                 <ng-container matColumnDef="polls">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Polls </th>
                   <td mat-cell *matCellDef="let row"> <button class="btn btn-primary"
-                      (click)="pollsmodal(polls)">{{row.polls}}</button></td>
+                      (click)="pollsmodal(polls, row?._id)">View</button></td>
                 </ng-container>
                 <ng-container matColumnDef="location">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap">Location </th>
-                  <td mat-cell *matCellDef="let row"> {{row.location}} </td>
+                  <td mat-cell *matCellDef="let row"> {{row?.address || "-"}} </td>
                 </ng-container>
                 <ng-container matColumnDef="action">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-nowrap"> Action </th>
@@ -201,25 +207,30 @@
                 <ng-container matColumnDef="Images">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Type </th>
                   <td mat-cell *matCellDef="let row">
-                    <!-- <span class="img-small"><img src={{row.Images}} alt="Event" width="60" class="rounded"></span> -->
-                    <div class="cstm_icn">
+                    <span class="img-small"><img src={{row?.eventType?.eventImage}} alt="Event" width="60" class="rounded"></span>
+                    <!-- <div class="cstm_icn">
                       <ul class="icon_outr">
                         <li>
                           <span class="mdi mdi-food-variant icn"></span>
                         </li>
                       </ul>
-                    </div>
+                    </div> -->
                   </td>
                 </ng-container>
                 <!-- ID Column -->
                 <ng-container matColumnDef="EventName">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Name </th>
-                  <td mat-cell *matCellDef="let row"> {{row.EventName}} </td>
+                  <td mat-cell *matCellDef="let row"> {{row?.eventName || "-"}} </td>
                 </ng-container>
                 <!-- ID Column -->
                 <ng-container matColumnDef="Event_type">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Public/Private </th>
-                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Event_type}} </td>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap">
+                    <span *ngIf="row?.eventFor==1;else alterOption">Public</span>
+                    <ng-template #alterOption>
+                      <span>Private</span>
+                    </ng-template>
+                     </td>
                 </ng-container>
                 <!-- <ng-container matColumnDef="Eventtype">
                                     <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Type </th>
@@ -230,29 +241,29 @@
                 <!-- Progress Column -->
                 <ng-container matColumnDef="datetime">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Created On </th>
-                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.datetime}} </td>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.createdAt | date:'medium'}} </td>
                 </ng-container>
                 <!-- Progress Column -->
                 <ng-container matColumnDef="Duration">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Duration </th>
-                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Duration}} </td>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap">{{ getdiffDates(row)}}</td>
                 </ng-container>
                 <ng-container matColumnDef="Durationdate">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Date </th>
-                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Durationdate}} </td>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{moment(row?.startDate).format('DD-MM-YYYY')}} - {{moment(row?.endDate).format('DD-MM-YYYY')}} </td>
                 </ng-container>
                 <ng-container matColumnDef="Durationtime">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Time </th>
-                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Durationtime}} </td>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row?.startTime}} - {{row?.endTime}} </td>
                 </ng-container>
                 <!-- Progress Column -->
                 <ng-container matColumnDef="box">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Description </th>
-                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.box}} </td>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.description || "-"}} </td>
                 </ng-container>
                 <ng-container matColumnDef="invited">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> People invited </th>
-                  <td mat-cell *matCellDef="let row"> {{row.invited}} </td>
+                  <td mat-cell *matCellDef="let row"> {{row?.invitedList.length}} </td>
                 </ng-container>
                 <ng-container matColumnDef="invited2">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> People directly invited </th>
@@ -266,12 +277,12 @@
                 </ng-container>
                 <ng-container matColumnDef="attendees">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Max attendees </th>
-                  <td mat-cell *matCellDef="let row"> {{row.attendees}} </td>
+                  <td mat-cell *matCellDef="let row"> {{row?.maxLength || "0"}} </td>
                 </ng-container>
                 <ng-container matColumnDef="Waiting">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Waiting list </th>
-                  <td mat-cell *matCellDef="let row"> {{row.Waiting}}
-                    <a href="javascript:void()" (click)="carModal2(car2)"><i class="sl-icon-info"></i></a>
+                  <td mat-cell *matCellDef="let row"> {{row?.waitingList.length}}
+                    <a href="javascript:void()" (click)="carModal2(car2, row?._id)"><i class="sl-icon-info"></i></a>
                   </td>
                 </ng-container>
                 <ng-container matColumnDef="messagescount">
@@ -280,17 +291,17 @@
                 </ng-container>
                 <ng-container matColumnDef="likes">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Number of likes </th>
-                  <td mat-cell *matCellDef="let row"> {{row.likes}} </td>
+                  <td mat-cell *matCellDef="let row"> {{row?.likeCount}} </td>
                 </ng-container>
                 <!-- Address -->
                 <ng-container matColumnDef="location">
                   <th mat-header-cell *matHeaderCellDef>Location </th>
-                  <td mat-cell *matCellDef="let row"> {{row.location}} </td>
+                  <td mat-cell *matCellDef="let row"> {{row?.address || "-"}} </td>
                 </ng-container>
                 <ng-container matColumnDef="polls">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Polls </th>
                   <td mat-cell *matCellDef="let row"> <button class="btn btn-primary"
-                      (click)="pollsmodal(polls)">{{row.polls}}</button></td>
+                      (click)="pollsmodal(polls, row?._id)">View</button></td>
                 </ng-container>
                 <ng-container matColumnDef="action">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-nowrap"> Action </th>
@@ -355,25 +366,30 @@
                 <ng-container matColumnDef="Images">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Type </th>
                   <td mat-cell *matCellDef="let row">
-                    <!-- <span class="img-small"><img src={{row.Images}} alt="Event" width="60" class="rounded"></span> -->
-                    <div class="cstm_icn">
+                    <span class="img-small"><img src={{row?.eventType?.eventImage}} alt="Event" width="60" class="rounded"></span>
+                    <!-- <div class="cstm_icn">
                       <ul class="icon_outr">
                         <li>
                           <span class="mdi mdi-food-variant icn"></span>
                         </li>
                       </ul>
-                    </div>
+                    </div> -->
                   </td>
                 </ng-container>
                 <!-- ID Column -->
                 <ng-container matColumnDef="EventName">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Name </th>
-                  <td mat-cell *matCellDef="let row"> {{row.EventName}} </td>
+                  <td mat-cell *matCellDef="let row"> {{row?.eventName || "-"}} </td>
                 </ng-container>
                 <!-- ID Column -->
                 <ng-container matColumnDef="Event_type">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Public/Private </th>
-                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Event_type}} </td>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap">
+                    <span *ngIf="row?.eventFor==1;else alterOption">Public</span>
+                    <ng-template #alterOption>
+                      <span>Private</span>
+                    </ng-template>
+                  </td>
                 </ng-container>
                 <!-- <ng-container matColumnDef="Eventtype">
                                     <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Type </th>
@@ -384,29 +400,29 @@
                 <!-- Progress Column -->
                 <ng-container matColumnDef="datetime">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Created On </th>
-                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.datetime}} </td>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.createdAt | date:'medium'}} </td>
                 </ng-container>
                 <!-- Progress Column -->
                 <ng-container matColumnDef="Duration">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Duration </th>
-                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Duration}} </td>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap">{{ getdiffDates(row)}}</td>
                 </ng-container>
                 <ng-container matColumnDef="Durationdate">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Date </th>
-                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Durationdate}} </td>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{moment(row?.startDate).format('DD-MM-YYYY')}} - {{moment(row?.endDate).format('DD-MM-YYYY')}} </td>
                 </ng-container>
                 <ng-container matColumnDef="Durationtime">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Time </th>
-                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.Durationtime}} </td>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row?.startTime}} - {{row?.endTime}} </td>
                 </ng-container>
                 <!-- Progress Column -->
                 <ng-container matColumnDef="box">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Description </th>
-                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.box}} </td>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap">  {{row.description || "-"}} </td>
                 </ng-container>
                 <ng-container matColumnDef="invited">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> People invited </th>
-                  <td mat-cell *matCellDef="let row"> {{row.invited}} </td>
+                  <td mat-cell *matCellDef="let row"> {{row?.invitedList.length}} </td>
                 </ng-container>
                 <ng-container matColumnDef="invited2">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> People directly invited </th>
@@ -420,12 +436,12 @@
                 </ng-container>
                 <ng-container matColumnDef="attendees">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Max attendees </th>
-                  <td mat-cell *matCellDef="let row"> {{row.attendees}} </td>
+                  <td mat-cell *matCellDef="let row">{{row?.maxLength || "0"}} </td>
                 </ng-container>
                 <ng-container matColumnDef="Waiting">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Waiting list </th>
-                  <td mat-cell *matCellDef="let row"> {{row.Waiting}}
-                    <a href="javascript:void()" (click)="carModal2(car2)"><i class="sl-icon-info"></i></a>
+                  <td mat-cell *matCellDef="let row"> {{row?.waitingList.length}}
+                    <a href="javascript:void()" (click)="carModal2(car2, row?._id)"><i class="sl-icon-info"></i></a>
                   </td>
                 </ng-container>
                 <ng-container matColumnDef="messagescount">
@@ -434,17 +450,17 @@
                 </ng-container>
                 <ng-container matColumnDef="likes">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Number of likes </th>
-                  <td mat-cell *matCellDef="let row"> {{row.likes}} </td>
+                  <td mat-cell *matCellDef="let row"> {{row?.likeCount}} </td>
                 </ng-container>
                 <!-- Address -->
                 <ng-container matColumnDef="location">
                   <th mat-header-cell *matHeaderCellDef>Location </th>
-                  <td mat-cell *matCellDef="let row"> {{row.location}} </td>
+                  <td mat-cell *matCellDef="let row"> {{row?.address || "-"}} </td>
                 </ng-container>
                 <ng-container matColumnDef="polls">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Polls </th>
                   <td mat-cell *matCellDef="let row"> <button class="btn btn-primary"
-                      (click)="pollsmodal(polls)">{{row.polls}}</button></td>
+                      (click)="pollsmodal(polls, row?._id)">View</button></td>
                 </ng-container>
                 <ng-container matColumnDef="action">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header class="text-nowrap"> Action </th>
@@ -559,7 +575,7 @@
   <div class="modal-body">
     <h3>Waiting List</h3>
     <div class="my-3 table-responsive">
-      <table class="table table-bordered">
+      <table *ngIf="waitingList.length;else noWaitingData" class="table table-bordered">
         <thead>
           <th class="text-nowrap">Name</th>
           <th class="text-nowrap">User Id</th>
@@ -571,52 +587,24 @@
           <th>Action</th>
         </thead>
         <tbody>
-          <tr>
-            <td>Sam</td>
-            <td>#122344</td>
-            <td class="text-nowrap">+1-478523690</td>
-            <td> 05/05/20 </td>
-            <td>10</td>
-            <td>7</td>
-            <td>15</td>
+          <tr *ngFor="let item of waitingList">
+            <td>{{item?.userName}}</td>
+            <td>{{item?.userName}}</td>
+            <td class="text-nowrap">{{item?.dialCode}}-{{item?.phoneNo}}</td>
+            <td> {{item?.createdAt | date: 'medium'}} </td>
+            <td>{{item?.attendedEventCount}}</td>
+            <td>{{item?.hostedEventCount}}</td>
+            <td>{{item?.attendedGroupCount}}</td>
             <td> <a class="btn btn-outline-success btn-sm" id="dropdownBasic1"> Accept </a> <a
                 class="btn btn-outline-primary btn-sm mt-2" id="dropdownBasic1"> Reject </a> </td>
           </tr>
-          <tr>
-            <td>Sam</td>
-            <td>#122344</td>
-            <td class="text-nowrap">+1-478523690</td>
-            <td> 05/05/20 </td>
-            <td>10</td>
-            <td>7</td>
-            <td>15</td>
-            <td> <a class="btn btn-outline-success btn-sm" id="dropdownBasic1"> Accept </a> <a
-                class="btn btn-outline-primary btn-sm mt-2" id="dropdownBasic1"> Reject </a> </td>
-          </tr>
-          <tr>
-            <td>Sam</td>
-            <td>#122344</td>
-            <td class="text-nowrap">+1-478523690</td>
-            <td> 05/05/20 </td>
-            <td>10</td>
-            <td>7</td>
-            <td>15</td>
-            <td> <a class="btn btn-outline-success btn-sm" id="dropdownBasic1"> Accept </a> <a
-                class="btn btn-outline-primary btn-sm mt-2" id="dropdownBasic1"> Reject </a> </td>
-          </tr>
-          <tr>
-            <td>Sam</td>
-            <td>#122344</td>
-            <td class="text-nowrap">+1-478523690</td>
-            <td> 05/05/20 </td>
-            <td>10</td>
-            <td>7</td>
-            <td>15</td>
-            <td> <a class="btn btn-outline-success btn-sm" id="dropdownBasic1"> Accept </a> <a
-                class="btn btn-outline-primary btn-sm mt-2" id="dropdownBasic1"> Reject </a> </td>
-          </tr>
+
         </tbody>
       </table>
+      <ng-template #noWaitingData>
+        <p >No Data</p>
+      </ng-template>
+
       <div class="input-group-append">
         <a class="btn mr-0 btn-danger text-white my-2" type="button" (click)="modal.close()">Close</a>
       </div>
@@ -626,22 +614,17 @@
 <ng-template #Adddetail let-modal>
   <div class="modal-body">
     <div class="card">
-      <form action="#">
+      <form [formGroup]="addEventForm">
         <div class="form-body">
           <div class="card-body">
             <div class="row p-t-20">
               <div class="col-12 cstm_icn">
                 <h4 class="mb-4"> Select Icon </h4>
                 <ul class="icon_outr">
-                  <li class="selected">
-                    <span class="mdi mdi-food-variant icn"></span>
+                  <li  *ngFor="let item of ArrayImage;let i = index;">
+                    <img [class.selected]="item?.isSelected" (click)="selectIcon(item.id)" [src]="item.image?item.image:'assets/images/dashed.png'" height="80" width="90" alt="123" />
                   </li>
-                  <li>
-                    <span class="mdi mdi-food-apple icn"></span>
-                  </li>
-                  <li>
-                    <span class="mdi mdi-food icn"></span>
-                  </li>
+
                 </ul>
                 <!-- <div class="form-group">
                                     <label class="control-label"> Image  </label>
@@ -664,74 +647,140 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="control-label"> Event Name </label>
-                  <input type="text" id="firstName" class="form-control" placeholder="Enter Event Name">
-
+                  <input (keypress)="alphabate($event)" #eventName (keydown.space)="doSomething($event ,eventName.value)" formControlName="eventName" type="text" id="firstName" class="form-control" placeholder="Enter Event Name">
+                  <!-- <small
+                *ngIf=" addEventForm.controls['eventName'].touched && addEventForm.controls['eventName'].invalid"
+                class="text-danger d-inline-block pt-1">
+                *Event Name is invalid
+                </small> -->
+              <small class="text-danger" *ngIf="submitted && errorHandling('eventName', 'required')">
+                *Event Name is required!
+              </small>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="control-label"> Public/Private </label>
                   <!-- <input type="text" id="firstName" class="form-control" placeholder="Eg:- Public"> -->
-                  <select name="" id="" class="form-control">
-                    <option> Public </option>
-                    <option> Private </option>
+                  <select formControlName="eventFor" name="" id="" class="form-control">
+                    <option [value]="1"> Public </option>
+                    <option [value]="2"> Private </option>
                   </select>
+              <small class="text-danger" *ngIf="submitted && errorHandling('eventFor', 'required')">
+                *Type of event is required!
+              </small>
                 </div>
               </div>
               <!--/span-->
               <div class="col-md-6">
                 <div class="form-group has-danger">
                   <label class="control-label"> Max Attendees </label>
-                  <input type="number" id="email" class="form-control form-control-danger"
+                  <input formControlName="maxLength" min="0" max="9999" minlength="1" maxlength="4" type="number" id="email" class="form-control form-control-danger"
                     placeholder="Enter duration of event">
+                    <small
+                *ngIf=" addEventForm.controls['maxLength'].touched && addEventForm.controls['maxLength'].invalid"
+                class="text-danger d-inline-block pt-1">
+                *Max Attendees limit is 0-9999 !
+                </small>
+              <small class="text-danger" *ngIf="submitted && errorHandling('maxLength', 'required')">
+                *Max Attendees is required!
+              </small>
                 </div>
               </div>
-              <div class="col-md-6">
+              <!-- <div class="col-md-6">
                 <div class="form-group has-danger">
                   <label class="control-label"> Duration </label>
                   <input type="text" id="email" class="form-control form-control-danger"
                     placeholder="Enter duration of event">
                 </div>
-              </div>
+              </div> -->
               <!--/span-->
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="control-label"> Start Date </label>
-                  <input type="date" id="firstName" class="form-control" placeholder="Enter Date">
+                  <input formControlName="startDate" type="date" id="firstName" class="form-control" placeholder="Enter Date">
+                  <small
+                *ngIf=" addEventForm.controls['startDate'].touched && addEventForm.controls['startDate'].invalid"
+                class="text-danger d-inline-block pt-1">
+                *Please choose start date !
+                </small>
+              <small class="text-danger" *ngIf="submitted && errorHandling('startDate', 'required')">
+                *Start date is required!
+              </small>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="control-label"> End Date </label>
-                  <input type="date" id="firstName" class="form-control" placeholder="Enter Date">
+                  <input formControlName="endDate" type="date" id="firstName" class="form-control" placeholder="Enter Date">
+                  <small
+                *ngIf=" addEventForm.controls['endDate'].touched && addEventForm.controls['endDate'].invalid"
+                class="text-danger d-inline-block pt-1">
+                *Please choose end date !
+                </small>
+              <small class="text-danger" *ngIf="submitted && errorHandling('endDate', 'required')">
+                *End date is required!
+              </small>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="control-label"> Start Time </label>
-                  <input type="time" id="firstName" class="form-control" placeholder="Enter Date">
+                  <input formControlName="startTime" type="time" id="firstName" class="form-control" placeholder="Enter Date">
+                  <small
+                *ngIf=" addEventForm.controls['startTime'].touched && addEventForm.controls['startTime'].invalid"
+                class="text-danger d-inline-block pt-1">
+                *Please choose start time !
+                </small>
+              <small class="text-danger" *ngIf="submitted && errorHandling('startTime', 'required')">
+                *Start time is required!
+              </small>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="control-label"> End Time </label>
-                  <input type="time" id="firstName" class="form-control" placeholder="Enter Date">
+                  <input formControlName="endTime" type="time" id="firstName" class="form-control" placeholder="Enter Date">
+                  <small
+                *ngIf=" addEventForm.controls['endTime'].touched && addEventForm.controls['endTime'].invalid"
+                class="text-danger d-inline-block pt-1">
+                *Please choose end time !
+                </small>
+              <small class="text-danger" *ngIf="submitted && errorHandling('endTime', 'required')">
+                *End time is required!
+              </small>
                 </div>
               </div>
               <!-- /span -->
               <div class="col-md-6">
                 <div class="form-group has-danger">
                   <label class="control-label"> Location </label>
-                  <input type="text" id="email" class="form-control form-control-danger"
+                  <input #location (keydown.space)="doSomething($event ,location.value)" formControlName="address" type="text" id="email" class="form-control form-control-danger"
                     placeholder="Enter location of event">
+                    <small
+                *ngIf=" addEventForm.controls['address'].touched && addEventForm.controls['address'].invalid"
+                class="text-danger d-inline-block pt-1">
+                *Please choose location!
+                </small>
+              <small class="text-danger" *ngIf="submitted && errorHandling('address', 'required')">
+                *Location is required!
+              </small>
                 </div>
               </div>
               <!--/span-->
               <div class="col-md-6">
                 <div class="form-group has-danger">
                   <label class="control-label"> Event Description </label>
-                  <textarea class="form-control form-control-danger"
+                  <textarea #des (keydown.space)="doSomething($event ,des.value)" formControlName="description" class="form-control form-control-danger"
                     placeholder="Type here description for this Event"></textarea>
+                    <small
+                    *ngIf=" addEventForm.controls['description'].touched && addEventForm.controls['description'].invalid"
+                    class="text-danger d-inline-block pt-1">
+                    *Please enter description!
+                    </small>
+                  <small class="text-danger" *ngIf="submitted && errorHandling('description', 'required')">
+                    *Description is required!
+                  </small>
                 </div>
               </div>
               <div class="col-6 mb-3">
@@ -744,34 +793,34 @@
               <div class="col-md-6">
                 <div class="form-group has-danger">
                   <label class="control-label"> Name </label>
-                  <input type="text" id="text" class="form-control form-control-danger" placeholder="Enter Poll name">
+                  <input disabled type="text" id="text" class="form-control form-control-danger" placeholder="Enter Poll name">
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group has-danger">
                   <label class="control-label"> option </label>
-                  <input type="text" id="text" class="form-control form-control-danger" placeholder="Enter Poll option">
+                  <input disabled type="text" id="text" class="form-control form-control-danger" placeholder="Enter Poll option">
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group has-danger">
                   <label class="control-label"> option </label>
-                  <input type="text" id="text" class="form-control form-control-danger" placeholder="Enter Poll option">
+                  <input disabled type="text" id="text" class="form-control form-control-danger" placeholder="Enter Poll option">
                 </div>
               </div>
               <div class="col-md-6 d-flex align-items-center">
-                <button class="btn btn-primary">Add Option</button>
+                <button disabled class="btn btn-primary">Add Option</button>
               </div>
               <div class="col-12">
-                <button class="btn btn-primary">Add New Poll</button>
+                <button disabled class="btn btn-primary">Add New Poll</button>
               </div>
             </div>
             <!--/row-->
           </div>
           <div class="form-actions">
             <div class="card-body">
-              <button type="submit" class="btn btn-success mr-3" (click)="modal.dismiss('Cross click')"> Save</button>
-              <button type="button" class="btn btn-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
+              <button type="submit" class="btn btn-success mr-3" (click)="submitEvent()"> Save</button>
+              <button type="button" class="btn btn-dark" (click)="cancelForm()">Cancel</button>
             </div>
           </div>
         </div>
@@ -1018,15 +1067,15 @@
   <div class="modal-body">
     <h3>Polls List</h3>
     <div class="my-3 table-responsive">
-      <table class="table table-bordered">
+      <table *ngIf="pollsData.length;else noPollsData" class="table table-bordered">
         <thead>
           <th class="text-nowrap">Name</th>
           <th class="text-nowrap">Options</th>
           <th>Action</th>
         </thead>
         <tbody>
-          <tr>
-            <td>Polls 1</td>
+          <tr *ngFor="let polls of pollsData">
+            <td>{{polls?.pollName}}</td>
             <td>
               <table class="table table-bordered">
                 <thead>
@@ -1034,25 +1083,9 @@
                   <th class="text-nowrap">Votes</th>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Option 1</td>
-                    <td> 200 </td>
-                  </tr>
-                  <tr>
-                    <td>Option 2</td>
-                    <td> 200 </td>
-                  </tr>
-                  <tr>
-                    <td>Option 3</td>
-                    <td> 200 </td>
-                  </tr>
-                  <tr>
-                    <td>Option 4</td>
-                    <td> 200 </td>
-                  </tr>
-                  <tr>
-                    <td>Option 5</td>
-                    <td> 200 </td>
+                  <tr *ngFor="let item of polls?.options">
+                    <td>{{item?.option}}</td>
+                    <td> {{item?.count}} </td>
                   </tr>
                 </tbody>
               </table>
@@ -1063,98 +1096,14 @@
               <a class="btn btn-danger btn-sm ml-2"> <i class="fa fa-trash text-white"></i> </a>
             </td>
           </tr>
-          <tr>
-            <td>Polls 2</td>
-            <td>
-              <table class="table table-bordered">
-                <thead>
-                  <th class="text-nowrap">Options</th>
-                  <th class="text-nowrap">Votes</th>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Option 1</td>
-                    <td> 200 </td>
-                  </tr>
-                  <tr>
-                    <td>Option 2</td>
-                    <td> 200 </td>
-                  </tr>
-                </tbody>
-              </table>
-            </td>
-            <td>
-              <a class="btn btn-danger btn-sm" (click)="editpollmodal(editpoll)"> <i
-                  class="fa fa-pencil-square-o text-white"></i> </a>
-              <a class="btn btn-danger btn-sm ml-2"> <i class="fa fa-trash text-white"></i> </a>
-            </td>
-          </tr>
-          <tr>
-            <td>Polls 3</td>
-            <td>
-              <table class="table table-bordered">
-                <thead>
-                  <th class="text-nowrap">Options</th>
-                  <th class="text-nowrap">Votes</th>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Option 1</td>
-                    <td> 200 </td>
-                  </tr>
-                  <tr>
-                    <td>Option 2</td>
-                    <td> 200 </td>
-                  </tr>
-                  <tr>
-                    <td>Option 3</td>
-                    <td> 200 </td>
-                  </tr>
-                  <tr>
-                    <td>Option 4</td>
-                    <td> 200 </td>
-                  </tr>
-                </tbody>
-              </table>
-            </td>
-            <td>
-              <a class="btn btn-danger btn-sm" (click)="editpollmodal(editpoll)"> <i
-                  class="fa fa-pencil-square-o text-white"></i> </a>
-              <a class="btn btn-danger btn-sm ml-2"> <i class="fa fa-trash text-white"></i> </a>
-            </td>
-          </tr>
-          <tr>
-            <td>Polls 4</td>
-            <td>
-              <table class="table table-bordered">
-                <thead>
-                  <th class="text-nowrap">Options</th>
-                  <th class="text-nowrap">Votes</th>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Option 1</td>
-                    <td> 200 </td>
-                  </tr>
-                  <tr>
-                    <td>Option 2</td>
-                    <td> 200 </td>
-                  </tr>
-                  <tr>
-                    <td>Option 3</td>
-                    <td> 200 </td>
-                  </tr>
-                </tbody>
-              </table>
-            </td>
-            <td>
-              <a class="btn btn-danger btn-sm" (click)="editpollmodal(editpoll)"> <i
-                  class="fa fa-pencil-square-o text-white"></i> </a>
-              <a class="btn btn-danger btn-sm ml-2"> <i class="fa fa-trash text-white"></i> </a>
-            </td>
-          </tr>
+
+
+
         </tbody>
       </table>
+      <ng-template #noPollsData>
+        <p>No Poll added</p>
+      </ng-template>
       <div class="input-group-append">
         <a class="btn mr-0 btn-danger text-white my-2" type="button" (click)="modal.close()">Close</a>
       </div>
@@ -1214,7 +1163,7 @@
 <ng-template #invite let-modal>
   <div class="modal-body">
     <h3 class="pb-3">User List</h3>
-    <div class="col-6 px-0"><input type="text" class="form-control" id="prenametext" placeholder="Search"></div>
+    <div class="col-6 px-0"><input [ngModelOptions]="{ standalone: true }" [(ngModel)]="searchitemUser" (keyup)="usersSearch($event)" type="text" class="form-control" id="prenametext" placeholder="Search"></div>
     <div class="my-3 table-responsive">
       <table class="table table-bordered">
         <thead>
@@ -1229,54 +1178,26 @@
           <!-- <th>Action</th> -->
         </thead>
         <tbody>
-          <tr>
-            <td> <input type="checkbox"> </td>
-            <td>Sam</td>
-            <td>#122344</td>
-            <td class="text-nowrap">+1-478523690</td>
-            <td> 05/05/20 </td>
-            <td>10</td>
-            <td>7</td>
-            <td>15</td>
+          <tr *ngFor="let user of usersData">
+            <td> <input (change)="inviteUsers($event,user?._id)" type="checkbox" [checked]="usersArray.includes(user?._id)"> </td>
+            <td>{{user?.firstName}} {{user?.lastName}}</td>
+            <td>{{user?.userName|| "-"}}</td>
+            <td class="text-nowrap">{{user?.dialCode}}-{{user?.phoneNo}}</td>
+            <td> {{user.createdAt | date:'medium'}} </td>
+            <td>{{user?.attendedEventCount || "-"}}</td>
+            <td>{{user?.hostedEventCount || "-"}}</td>
+            <td>{{user?.attendedGroupCount || "-"}}</td>
             <!-- <td> <a class="btn btn-outline-success btn-sm" id="dropdownBasic1"> Invite </a> </td> -->
           </tr>
-          <tr>
-            <td> <input type="checkbox"> </td>
-            <td>Sam</td>
-            <td>#122344</td>
-            <td class="text-nowrap">+1-478523690</td>
-            <td> 05/05/20 </td>
-            <td>10</td>
-            <td>7</td>
-            <td>15</td>
-            <!-- <td> <a class="btn btn-outline-success btn-sm" id="dropdownBasic1"> Invite </a> </td> -->
-          </tr>
-          <tr>
-            <td> <input type="checkbox"> </td>
-            <td>Sam</td>
-            <td>#122344</td>
-            <td class="text-nowrap">+1-478523690</td>
-            <td> 05/05/20 </td>
-            <td>10</td>
-            <td>7</td>
-            <td>15</td>
-            <!-- <td> <a class="btn btn-outline-success btn-sm" id="dropdownBasic1"> Invite </a> </td> -->
-          </tr>
-          <tr>
-            <td> <input type="checkbox"> </td>
-            <td>Sam</td>
-            <td>#122344</td>
-            <td class="text-nowrap">+1-478523690</td>
-            <td> 05/05/20 </td>
-            <td>10</td>
-            <td>7</td>
-            <td>15</td>
-            <!-- <td> <a class="btn btn-outline-success btn-sm" id="dropdownBasic1"> Invite </a> </td> -->
-          </tr>
+
         </tbody>
       </table>
+      <div class="col-md-12 text-right">
+        <mat-paginator [length]="totalUsers" [pageSize]="pageUser" [pageSizeOptions]="[5, 10, 25, 100]"
+          (page)="onPaginateChangeUser($event)"></mat-paginator>
+      </div>
       <div class="input-group-append">
-        <a class="btn mr-0 btn-success text-white my-2 mr-2" type="button" (click)="modal.close()">Submit</a>
+        <a class="btn mr-0 btn-success text-white my-2 mr-2" type="button" (click)="modal.close('invite')">Submit</a>
         <a class="btn mr-0 btn-danger text-white my-2" type="button" (click)="modal.close()">Close</a>
       </div>
     </div>
