@@ -25,9 +25,28 @@ export class EventsService {
     return this.http.put(this.baseURL+"Admin/updateEvent",body);
   }
 
-  // Add
+  // Add Event
   addEvent(body) {
     return this.http.post<any>(`${this.baseURL}Admin/createEvent`, body);
+  }
+
+
+
+  //////////////////////////Polls/////////////////////////
+
+  // Add Poll
+  addPoll(body) {
+    return this.http.post<any>(`${this.baseURL}Admin/addPoll`, body);
+  }
+
+  // Update Poll
+  updatePoll(body){
+    return this.http.put<any>(`${this.baseURL}Admin/updatePoll`, body);
+  }
+
+  // Delete Poll
+  deletePoll(body){
+    return this.http.post<any>(`${this.baseURL}Admin/deletePoll`, body);
   }
 
 }

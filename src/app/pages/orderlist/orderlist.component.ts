@@ -16,6 +16,7 @@ import { EventTypeService } from "src/app/services/event-type.service";
 import { NgForm, FormGroup, FormControl } from "@angular/forms";
 import { FormBuilder, Validators } from "@angular/forms";
 import { UsersService } from "src/app/services/users.service";
+import { trackByHourSegment } from "angular-calendar/modules/common/util";
 
 export interface UserData {
   Images: string;
@@ -37,7 +38,10 @@ export interface UserData {
   messagescount: string;
   likes: string;
   polls: string;
+
+
 }
+declare var $: any;
 @Component({
   selector: "app-orderlist",
   templateUrl: "./orderlist.component.html",
@@ -77,11 +81,13 @@ export class OrderlistComponent implements OnInit {
   filterType: any = 0;
   totalEvents: any;
   addEventForm: FormGroup;
+  addPollForm: FormGroup;
   searchValue: any;
   pollsData: any;
   eventData: any;
   waitingList: any;
   selectedIcon: any = false;
+
   ArrayImage: any = [];
   usersData: any;
   searchValueUser: any;
@@ -91,6 +97,11 @@ export class OrderlistComponent implements OnInit {
   usersArray: any = [];
   iconID: any;
   submitted: boolean=false;
+  isAdd : boolean = false;
+  isEdit: boolean = false;
+  editId: any;
+  eventID: any;
+  isModalEnable: boolean = false;
   constructor(
     private modalService: NgbModal,
     private Srvc: EventsService,
@@ -111,6 +122,7 @@ export class OrderlistComponent implements OnInit {
         ],
       ],
       eventFor: ["", [Validators.required]],
+      icon: ["",[Validators.required]],
 
       maxLength: [
         "",
@@ -145,6 +157,17 @@ export class OrderlistComponent implements OnInit {
         ],
       ],
     });
+
+    this.addPollForm = formBuilder.group({
+      pollName: [
+        "",
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(35),
+        ],
+      ],
+    });
   }
   toppings = new FormControl();
   toppingList: string[] = [
@@ -157,6 +180,7 @@ export class OrderlistComponent implements OnInit {
   ];
   ngOnInit(): void {
     this.getAllEvents();
+    this.getEventType();
   }
 
   cancelForm() {
@@ -164,7 +188,7 @@ export class OrderlistComponent implements OnInit {
     this.usersArray = [];
     this.iconID = null;
     this.addEventForm.reset();
-    this.ArrayImage = [];
+    // this.ArrayImage = [];
     this.submitted=false;
   }
 
@@ -227,17 +251,21 @@ export class OrderlistComponent implements OnInit {
 
   // Get Event Type Image
   getEventType() {
+    const array=[];
     this.eventTypeService.getEventType().subscribe((res: any) => {
       if (res.statusCode == 200) {
+        const array=[]
         for (var x of res.data) {
-          this.ArrayImage.push({ id: x._id, image: x.eventImage });
+         array.push({ id: x._id, image: x.eventImage });
         }
+        this.ArrayImage=array;
       }
     });
   }
 
   // Choose Event type icon
   selectIcon(id) {
+    console.log("Select Icon Called",this.ArrayImage);
     this.selectedIcon = true;
     let index = this.ArrayImage.findIndex((x) => x.id == id);
     if (index != -1) {
@@ -246,6 +274,7 @@ export class OrderlistComponent implements OnInit {
         return x;
       });
       this.ArrayImage[index]["isSelected"] = true;
+      // console.log();
     }
     this.iconID = id;
   }
@@ -363,7 +392,9 @@ export class OrderlistComponent implements OnInit {
     });
   }
   Adddetails(Adddetail) {
-    this.getEventType();
+    // this.isAdd = true;
+    // this.isEdit = false;
+    // this.getEventType();
     this.modalService.open(Adddetail, {
       backdropClass: "light-blue-backdrop",
       centered: true,
@@ -372,11 +403,41 @@ export class OrderlistComponent implements OnInit {
       keyboard: false,
     });
   }
-  eventsedit(eventedit) {
-    this.modalService.open(eventedit, {
+  eventsedit(Adddetail,row) {
+    // this.isAdd = false;
+    // this.isEdit = true;
+    this.addEventForm.reset();
+    this.usersArray = [];
+    this.iconID = null;
+    // this.ArrayImage = [];
+    this.submitted=false;
+    // this.getEventType();
+    this.addEventForm.controls["eventName"].setValue(row?.eventName);
+    this.addEventForm.controls["eventFor"].setValue(row?.eventFor);
+    this.addEventForm.controls["maxLength"].setValue(row?.maxLength);
+    this.addEventForm.controls["startDate"].setValue(moment(row?.startDate).format('YYYY-MM-DD'));
+    this.addEventForm.controls["endDate"].setValue(moment(row?.endDate).format('YYYY-MM-DD'));
+    this.addEventForm.controls["startTime"].setValue(row?.startTime);
+    this.addEventForm.controls["endTime"].setValue(row?.endTime);
+    this.addEventForm.controls["address"].setValue(row?.address);
+    this.addEventForm.controls["description"].setValue(row?.description);
+
+    // Push the User ID in User Array
+    for (var user of row.invitedList){
+      this.usersArray.push(user._id)
+    };
+
+    this.selectIcon(row?.eventType?._id);
+    console.log(row?.eventType?._id);
+
+
+
+    this.modalService.open(Adddetail, {
       backdropClass: "light-blue-backdrop",
       centered: true,
       size: "lg",
+      backdrop: "static",
+      keyboard: false,
     });
   }
   eventdetails(eventdetail) {
@@ -409,20 +470,27 @@ export class OrderlistComponent implements OnInit {
       (element: any) => element._id === id
     );
     this.pollsData = filteredData.pollId;
+    this.eventID = id;
 
     this.modalService.open(polls, {
       backdropClass: "light-blue-backdrop",
       centered: true,
       size: "lg",
+      backdrop: "static",
+      keyboard: false,
     });
   }
   editpollmodal(editpoll) {
-    this.modalService.dismissAll();
+    // this.modalService.dismissAll();
     this.modalService.open(editpoll, {
       backdropClass: "light-blue-backdrop",
       centered: true,
       size: "lg",
+      backdrop: "static",
+      keyboard: false,
+
     });
+
   }
   invitemodal(invite) {
     this.getUsers();
@@ -517,7 +585,7 @@ export class OrderlistComponent implements OnInit {
             this.addEventForm.reset();
             this.usersArray = [];
             this.iconID = null;
-            this.ArrayImage = [];
+            // this.ArrayImage = [];
             this.modalService.dismissAll();
             Swal.fire("Success", res.message, "success");
             this.getAllEvents();
@@ -566,5 +634,41 @@ export class OrderlistComponent implements OnInit {
       return true;
     }
     return false;
+  }
+
+  // Add Poll
+  submitPoll() {
+    this.submitted = true;
+    if (this.addPollForm.valid) {
+      let obj = {
+        eventId : this.eventID ,
+        pollName: this.addPollForm.value.pollName,
+
+      };
+
+      console.log(obj);
+      return;
+      this.Srvc.addPoll(obj).subscribe(
+        (res: any) => {
+          if (res.statusCode == 401) {
+            this.sessionTerminate();
+          }
+          if (res.statusCode == 200) {
+            this.submitted = false;
+            this.addPollForm.reset();
+            Swal.fire("Success", res.message, "success");
+            document.getElementById('close-modal').click();
+            this.getAllEvents();
+          } else {
+            Swal.fire("Oops", res.message, "error");
+          }
+        },
+        (error) => {
+          Swal.fire("Oops", "Something went wrong", "error");
+        }
+      );
+    } else {
+      this.toaster.error("Please fill all the required fields");
+    }
   }
 }

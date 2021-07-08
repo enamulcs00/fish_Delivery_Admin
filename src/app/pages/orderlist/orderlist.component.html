@@ -312,7 +312,7 @@
                       </button>
                       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                         <!-- <a class="dropdown-item" (click)="eventdetails(eventdetail)"><i class="ti-eye"></i> View </a> -->
-                        <button class="dropdown-item" (click)="eventsedit(eventedit)"><i class="ti-marker-alt"></i>
+                        <button class="dropdown-item" (click)="eventsedit(Adddetail, row)"><i class="ti-marker-alt"></i>
                           Edit</button>
                         <a href="javascript:void()" class="dropdown-item " (click)="userDeleteModal(userDelete)"><i
                             class="ti-trash"></i>Delete</a>
@@ -471,7 +471,7 @@
                       </button>
                       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                         <!-- <a class="dropdown-item" (click)="eventdetails(eventdetail)"><i class="ti-eye"></i> View </a> -->
-                        <button class="dropdown-item" (click)="eventsedit(eventedit)"><i class="ti-marker-alt"></i>
+                        <button class="dropdown-item" (click)="eventsedit(Adddetail, row)"><i class="ti-marker-alt"></i>
                           Edit</button>
                         <a href="javascript:void()" class="dropdown-item " (click)="userDeleteModal(userDelete)"><i
                             class="ti-trash"></i>Delete</a>
@@ -621,11 +621,19 @@
               <div class="col-12 cstm_icn">
                 <h4 class="mb-4"> Select Icon </h4>
                 <ul class="icon_outr">
-                  <li  *ngFor="let item of ArrayImage;let i = index;">
+                  <!-- " -->
+                  <li  *ngFor="let item of ArrayImage;let i = index;" >
                     <img [class.selected]="item?.isSelected" (click)="selectIcon(item.id)" [src]="item.image?item.image:'assets/images/dashed.png'" height="80" width="90" alt="123" />
+
                   </li>
 
                 </ul>
+
+                <!-- <small
+                *ngIf="addEventForm.controls['icon'].invalid"
+                class="text-danger d-inline-block pt-1">
+                *Event icon is required!
+                </small> -->
                 <!-- <div class="form-group">
                                     <label class="control-label"> Image  </label>
                                     <input type="file" class="form-control">
@@ -680,7 +688,7 @@
                     <small
                 *ngIf=" addEventForm.controls['maxLength'].touched && addEventForm.controls['maxLength'].invalid"
                 class="text-danger d-inline-block pt-1">
-                *Max Attendees limit is 0-9999 !
+                *Please enter Max Attendees, limit is 0-9999 !
                 </small>
               <small class="text-danger" *ngIf="submitted && errorHandling('maxLength', 'required')">
                 *Max Attendees is required!
@@ -787,33 +795,34 @@
                 <h4>Invite Guests/User</h4>
                 <button class="btn btn-primary" (click)="invitemodal(invite)"> Invite </button>
               </div>
-              <div class="col-12">
-                <h4>Polls</h4>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group has-danger">
-                  <label class="control-label"> Name </label>
-                  <input disabled type="text" id="text" class="form-control form-control-danger" placeholder="Enter Poll name">
+              <!-- <div *ngIf="isEdit">
+
+                <div class="col-12">
+                  <h4>Polls</h4>
                 </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group has-danger">
-                  <label class="control-label"> option </label>
-                  <input disabled type="text" id="text" class="form-control form-control-danger" placeholder="Enter Poll option">
+                <div class="col-md-6">
+                  <div class="form-group has-danger">
+                    <label class="control-label"> Name </label>
+                    <input disabled type="text" id="text" class="form-control form-control-danger" placeholder="Enter Poll name">
+                  </div>
                 </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group has-danger">
-                  <label class="control-label"> option </label>
-                  <input disabled type="text" id="text" class="form-control form-control-danger" placeholder="Enter Poll option">
+
+                <div class="col-md-6">
+                  <div class="form-group has-danger">
+                    <label class="control-label"> option </label>
+                    <input disabled type="text" id="text" class="form-control form-control-danger" placeholder="Enter Poll option">
+                  </div>
                 </div>
-              </div>
-              <div class="col-md-6 d-flex align-items-center">
-                <button disabled class="btn btn-primary">Add Option</button>
-              </div>
-              <div class="col-12">
-                <button disabled class="btn btn-primary">Add New Poll</button>
-              </div>
+
+                <div class="col-md-6 d-flex align-items-center">
+                  <button disabled class="btn btn-primary">Add Option</button>
+                </div>
+                <div class="col-12">
+                  <button disabled class="btn btn-primary">Add New Poll</button>
+                </div>
+              </div> -->
+
+
             </div>
             <!--/row-->
           </div>
@@ -1096,34 +1105,32 @@
               <a class="btn btn-danger btn-sm ml-2"> <i class="fa fa-trash text-white"></i> </a>
             </td>
           </tr>
-
-
-
         </tbody>
       </table>
       <ng-template #noPollsData>
         <p>No Poll added</p>
       </ng-template>
-      <div class="input-group-append">
-        <a class="btn mr-0 btn-danger text-white my-2" type="button" (click)="modal.close()">Close</a>
-      </div>
+          <button class="btn btn-primary d-block mx-1" (click)="isModalEnable = true; editpollmodal(editpoll)">+</button>
+        <a class="btn btn-danger text-white my-2 mx-1" type="button" (click)="modal.close()">Close</a>
     </div>
   </div>
 </ng-template>
+
+
 <ng-template #editpoll let-modal>
   <div class="modal-body">
     <div class="card">
-      <form action="#">
+      <form [formGroup]="addPollForm" >
         <div class="form-body">
           <div class="card-body">
             <div class="row p-t-20">
               <div class="col-12">
-                <h4>Polls</h4>
+                <h4>Add Poll</h4>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-12">
                 <div class="form-group has-danger">
                   <label class="control-label"> Name </label>
-                  <input type="text" id="text" class="form-control form-control-danger" placeholder="Enter Poll name">
+                  <input formControlName="pollName" type="text" id="text" class="form-control form-control-danger" placeholder="Enter Poll name">
                 </div>
               </div>
               <div class="col-md-6">
@@ -1132,26 +1139,18 @@
                   <input type="text" id="text" class="form-control form-control-danger" placeholder="Enter Poll option">
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="form-group has-danger">
-                  <label class="control-label"> option </label>
-                  <input type="text" id="text" class="form-control form-control-danger" placeholder="Enter Poll option">
-                </div>
-              </div>
+
               <div class="col-md-6 d-flex align-items-center">
                 <button class="btn btn-primary">Add Option</button>
-              </div>
-              <div class="col-12">
-                <button class="btn btn-primary">Add New Poll</button>
               </div>
             </div>
             <!--/row-->
           </div>
           <div class="form-actions">
             <div class="card-body">
-              <button type="submit" class="btn btn-primary mr-3" (click)="modal.dismiss('Cross click')"><i
-                  class="fa fa-check"></i> Update</button>
-              <button type="button" class="btn btn-dark" (click)="modal.dismiss('Cross click')">Cancel</button>
+              <button type="submit" (click)="submitPoll()"  class="btn btn-primary mr-3" ><i
+                  class="fa fa-check"></i> Add</button>
+              <button type="button" id="close-modal" class="btn btn-dark" (click)="modal.close('editpoll')">Cancel</button>
             </div>
           </div>
         </div>
@@ -1160,6 +1159,7 @@
 
   </div>
 </ng-template>
+
 <ng-template #invite let-modal>
   <div class="modal-body">
     <h3 class="pb-3">User List</h3>

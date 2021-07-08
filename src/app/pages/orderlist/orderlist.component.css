@@ -28,7 +28,17 @@ input[type="file"] {
     justify-content: center;
     margin-right: 20px;
     margin-bottom: 15px;
-    cursor: pointer;
+}
+
+.cstm_icn li input {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  /* opacity: 0; */
+  font-size: 0px;
+  cursor: pointer;
 }
 
 .cstm_icn li img {
