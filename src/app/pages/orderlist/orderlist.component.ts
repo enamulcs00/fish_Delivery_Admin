@@ -16,7 +16,7 @@ import { EventTypeService } from "src/app/services/event-type.service";
 import { NgForm, FormGroup, FormControl } from "@angular/forms";
 import { FormBuilder, Validators } from "@angular/forms";
 import { UsersService } from "src/app/services/users.service";
-import { trackByHourSegment } from "angular-calendar/modules/common/util";
+
 
 export interface UserData {
   Images: string;
@@ -102,6 +102,7 @@ export class OrderlistComponent implements OnInit {
   editId: any;
   eventID: any;
   isModalEnable: boolean = false;
+  editEventID: any;
   constructor(
     private modalService: NgbModal,
     private Srvc: EventsService,
@@ -122,7 +123,7 @@ export class OrderlistComponent implements OnInit {
         ],
       ],
       eventFor: ["", [Validators.required]],
-      icon: ["",[Validators.required]],
+      icon: [""],
 
       maxLength: [
         "",
@@ -265,7 +266,7 @@ export class OrderlistComponent implements OnInit {
 
   // Choose Event type icon
   selectIcon(id) {
-    console.log("Select Icon Called",this.ArrayImage);
+    // console.log("Select Icon Called",this.ArrayImage);
     this.selectedIcon = true;
     let index = this.ArrayImage.findIndex((x) => x.id == id);
     if (index != -1) {
@@ -285,7 +286,7 @@ export class OrderlistComponent implements OnInit {
     this.getAllEvents();
   }
 
-  // Filter by Status(Active/Inactive)
+  // Filter by Status(Public/Private)
   filterStatus(value) {
     this.btnStatus = value;
     this.getAllEvents();
@@ -392,8 +393,8 @@ export class OrderlistComponent implements OnInit {
     });
   }
   Adddetails(Adddetail) {
-    // this.isAdd = true;
-    // this.isEdit = false;
+    this.isAdd = true;
+    this.isEdit = false;
     // this.getEventType();
     this.modalService.open(Adddetail, {
       backdropClass: "light-blue-backdrop",
@@ -404,8 +405,8 @@ export class OrderlistComponent implements OnInit {
     });
   }
   eventsedit(Adddetail,row) {
-    // this.isAdd = false;
-    // this.isEdit = true;
+    this.isAdd = false;
+    this.isEdit = true;
     this.addEventForm.reset();
     this.usersArray = [];
     this.iconID = null;
@@ -427,8 +428,10 @@ export class OrderlistComponent implements OnInit {
       this.usersArray.push(user._id)
     };
 
+    this.editEventID = row?._id;
+
     this.selectIcon(row?.eventType?._id);
-    console.log(row?.eventType?._id);
+    // console.log(row?.eventType?._id);
 
 
 
@@ -481,7 +484,6 @@ export class OrderlistComponent implements OnInit {
     });
   }
   editpollmodal(editpoll) {
-    // this.modalService.dismissAll();
     this.modalService.open(editpoll, {
       backdropClass: "light-blue-backdrop",
       centered: true,
@@ -547,13 +549,14 @@ export class OrderlistComponent implements OnInit {
     this.getUsers();
   }
 
+  // Push the selected Users ID in a Array
   inviteUsers(event, id) {
     if (event.target.checked) {
       this.usersArray.push(id);
     } else {
       this.usersArray.splice(this.usersArray.indexOf(id), 1);
     }
-    console.log(this.usersArray);
+    // console.log(this.usersArray);
   }
 
   submitEvent() {
@@ -573,9 +576,56 @@ export class OrderlistComponent implements OnInit {
         description: this.addEventForm.value.description,
       };
 
-      console.log(obj);
+      // console.log(obj);
       // return;
       this.Srvc.addEvent(obj).subscribe(
+        (res: any) => {
+          if (res.statusCode == 401) {
+            this.sessionTerminate();
+          }
+          if (res.statusCode == 200) {
+            this.submitted = false;
+            this.addEventForm.reset();
+            this.usersArray = [];
+            this.iconID = null;
+            // this.ArrayImage = [];
+            this.modalService.dismissAll();
+            Swal.fire("Success", res.message, "success");
+            this.getAllEvents();
+          } else {
+            Swal.fire("Oops", res.message, "error");
+          }
+        },
+        (error) => {
+          Swal.fire("Oops", "Something went wrong", "error");
+        }
+      );
+    } else {
+      this.toaster.error("Please fill all the required fields");
+    }
+  }
+
+  submitEventEdit() {
+    this.submitted = true;
+    if (this.addEventForm.valid) {
+      let obj = {
+        eventId:this.editEventID,
+        eventType: this.iconID,
+        invitedList: this.usersArray,
+        eventName: this.addEventForm.value.eventName,
+        eventFor: this.addEventForm.value.eventFor,
+        maxLength: this.addEventForm.value.maxLength,
+        startDate: this.addEventForm.value.startDate,
+        endDate: this.addEventForm.value.endDate,
+        startTime: this.addEventForm.value.startTime,
+        endTime: this.addEventForm.value.endTime,
+        address: this.addEventForm.value.address,
+        description: this.addEventForm.value.description,
+      };
+
+      // console.log(obj);
+      // return;
+      this.Srvc.updateEvent(obj).subscribe(
         (res: any) => {
           if (res.statusCode == 401) {
             this.sessionTerminate();

@@ -27,7 +27,7 @@
               <form>
                 <div class="mb-2">
                   <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="searchitem" (keyup)="search($event)"
-                    type="text" class="form-control" id="prenametext" placeholder="Search">
+                    type="text" class="form-control" id="pastSearch" placeholder="Search">
                 </div>
               </form>
             </div>
@@ -186,7 +186,7 @@
               <form>
                 <div class="mb-2">
                   <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="searchitem" (keyup)="search($event)"
-                    type="text" class="form-control" id="prenametext" placeholder="Search">
+                    type="text" class="form-control" id="ongoingSearch" placeholder="Search">
                 </div>
               </form>
             </div>
@@ -312,9 +312,9 @@
                       </button>
                       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                         <!-- <a class="dropdown-item" (click)="eventdetails(eventdetail)"><i class="ti-eye"></i> View </a> -->
-                        <button class="dropdown-item" (click)="eventsedit(Adddetail, row)"><i class="ti-marker-alt"></i>
+                        <button style="cursor: pointer;" class="dropdown-item" (click)="eventsedit(Adddetail, row)"><i class="ti-marker-alt"></i>
                           Edit</button>
-                        <a href="javascript:void()" class="dropdown-item " (click)="userDeleteModal(userDelete)"><i
+                        <a style="cursor: pointer;" href="javascript:void()" class="dropdown-item " (click)="userDeleteModal(userDelete)"><i
                             class="ti-trash"></i>Delete</a>
                       </div>
                       <!-- <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
@@ -345,7 +345,7 @@
               <form>
                 <div class="mb-2">
                   <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="searchitem" (keyup)="search($event)"
-                    type="text" class="form-control" id="prenametext" placeholder="Search">
+                    type="text" class="form-control" id="upcomingSearch" placeholder="Search">
                 </div>
               </form>
             </div>
@@ -471,9 +471,9 @@
                       </button>
                       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                         <!-- <a class="dropdown-item" (click)="eventdetails(eventdetail)"><i class="ti-eye"></i> View </a> -->
-                        <button class="dropdown-item" (click)="eventsedit(Adddetail, row)"><i class="ti-marker-alt"></i>
+                        <button style="cursor: pointer;" class="dropdown-item" (click)="eventsedit(Adddetail, row)"><i class="ti-marker-alt"></i>
                           Edit</button>
-                        <a href="javascript:void()" class="dropdown-item " (click)="userDeleteModal(userDelete)"><i
+                        <a style="cursor: pointer;" href="javascript:void()" class="dropdown-item " (click)="userDeleteModal(userDelete)"><i
                             class="ti-trash"></i>Delete</a>
                       </div>
                       <!-- <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
@@ -655,7 +655,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="control-label"> Event Name </label>
-                  <input (keypress)="alphabate($event)" #eventName (keydown.space)="doSomething($event ,eventName.value)" formControlName="eventName" type="text" id="firstName" class="form-control" placeholder="Enter Event Name">
+                  <input (keypress)="alphabate($event)" #eventName (keydown.space)="doSomething($event ,eventName.value)" formControlName="eventName" type="text" id="eventName" class="form-control" placeholder="Enter Event Name">
                   <!-- <small
                 *ngIf=" addEventForm.controls['eventName'].touched && addEventForm.controls['eventName'].invalid"
                 class="text-danger d-inline-block pt-1">
@@ -683,7 +683,7 @@
               <div class="col-md-6">
                 <div class="form-group has-danger">
                   <label class="control-label"> Max Attendees </label>
-                  <input formControlName="maxLength" min="0" max="9999" minlength="1" maxlength="4" type="number" id="email" class="form-control form-control-danger"
+                  <input formControlName="maxLength" min="0" max="9999" minlength="1" maxlength="4" type="number" id="maxAttendees" class="form-control form-control-danger"
                     placeholder="Enter duration of event">
                     <small
                 *ngIf=" addEventForm.controls['maxLength'].touched && addEventForm.controls['maxLength'].invalid"
@@ -706,7 +706,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="control-label"> Start Date </label>
-                  <input formControlName="startDate" type="date" id="firstName" class="form-control" placeholder="Enter Date">
+                  <input formControlName="startDate" type="date" id="startDate" class="form-control" placeholder="Enter Date">
                   <small
                 *ngIf=" addEventForm.controls['startDate'].touched && addEventForm.controls['startDate'].invalid"
                 class="text-danger d-inline-block pt-1">
@@ -720,7 +720,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="control-label"> End Date </label>
-                  <input formControlName="endDate" type="date" id="firstName" class="form-control" placeholder="Enter Date">
+                  <input formControlName="endDate" type="date" id="endDate" class="form-control" placeholder="Enter Date">
                   <small
                 *ngIf=" addEventForm.controls['endDate'].touched && addEventForm.controls['endDate'].invalid"
                 class="text-danger d-inline-block pt-1">
@@ -734,7 +734,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="control-label"> Start Time </label>
-                  <input formControlName="startTime" type="time" id="firstName" class="form-control" placeholder="Enter Date">
+                  <input formControlName="startTime" type="time" id="startTime" class="form-control" placeholder="Enter Date">
                   <small
                 *ngIf=" addEventForm.controls['startTime'].touched && addEventForm.controls['startTime'].invalid"
                 class="text-danger d-inline-block pt-1">
@@ -748,7 +748,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="control-label"> End Time </label>
-                  <input formControlName="endTime" type="time" id="firstName" class="form-control" placeholder="Enter Date">
+                  <input formControlName="endTime" type="time" id="endTime" class="form-control" placeholder="Enter Date">
                   <small
                 *ngIf=" addEventForm.controls['endTime'].touched && addEventForm.controls['endTime'].invalid"
                 class="text-danger d-inline-block pt-1">
@@ -763,7 +763,7 @@
               <div class="col-md-6">
                 <div class="form-group has-danger">
                   <label class="control-label"> Location </label>
-                  <input #location (keydown.space)="doSomething($event ,location.value)" formControlName="address" type="text" id="email" class="form-control form-control-danger"
+                  <input #location (keydown.space)="doSomething($event ,location.value)" formControlName="address" type="text" id="location" class="form-control form-control-danger"
                     placeholder="Enter location of event">
                     <small
                 *ngIf=" addEventForm.controls['address'].touched && addEventForm.controls['address'].invalid"
@@ -828,7 +828,8 @@
           </div>
           <div class="form-actions">
             <div class="card-body">
-              <button type="submit" class="btn btn-success mr-3" (click)="submitEvent()"> Save</button>
+              <button *ngIf="isAdd" type="submit" class="btn btn-success mr-3" (click)="submitEvent()"> Save</button>
+              <button *ngIf="isEdit" type="submit" class="btn btn-success mr-3" (click)="submitEventEdit()"> Update</button>
               <button type="button" class="btn btn-dark" (click)="cancelForm()">Cancel</button>
             </div>
           </div>
@@ -876,14 +877,14 @@
               <div class="col-md-6">
                 <div class="form-group has-danger">
                   <label class="control-label"> Duration </label>
-                  <input type="text" id="email" class="form-control form-control-danger" placeholder="2 Days">
+                  <input type="text" id="duration" class="form-control form-control-danger" placeholder="2 Days">
                 </div>
               </div>
               <!-- /span -->
               <div class="col-md-6">
                 <div class="form-group has-danger">
                   <label class="control-label"> Location </label>
-                  <input type="text" id="email" class="form-control form-control-danger" placeholder="London">
+                  <input type="text" id="location" class="form-control form-control-danger" placeholder="London">
                 </div>
               </div>
               <!--/span-->
@@ -1163,7 +1164,7 @@
 <ng-template #invite let-modal>
   <div class="modal-body">
     <h3 class="pb-3">User List</h3>
-    <div class="col-6 px-0"><input [ngModelOptions]="{ standalone: true }" [(ngModel)]="searchitemUser" (keyup)="usersSearch($event)" type="text" class="form-control" id="prenametext" placeholder="Search"></div>
+    <div class="col-6 px-0"><input [ngModelOptions]="{ standalone: true }" [(ngModel)]="searchitemUser" (keyup)="usersSearch($event)" type="text" class="form-control" id="search" placeholder="Search"></div>
     <div class="my-3 table-responsive">
       <table class="table table-bordered">
         <thead>
