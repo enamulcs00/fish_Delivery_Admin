@@ -33,6 +33,7 @@ export interface UserData {
   Ordertype: string;
   // foodStatus:string,
   orderStatus: string;
+
 }
 @Component({
   selector: "app-food-items",
@@ -54,32 +55,41 @@ export class FoodItemsComponent implements OnInit {
   dataSource: MatTableDataSource<UserData>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  page: any=10;
+  page: any = 10;
   pageindec: any;
   searchitem: any;
-  btnStatus: any=0;
+  btnStatus: any = 0;
+  isEdit: boolean = false;
   groupData: any;
   totalGroups: any;
   searchValue: any;
   pageindecUser: any;
+  fileName: any = "Choose File";
   searchitemUser: any;
-  pageUser: any=5;
-  usersData: any;
+  pageUser: any = 5;
+  usersData: any=[];
   totalUsers: any;
+  usersInvited:any;
   searchValueUser: any;
-  visibleToNonMembers:boolean=false;
+  visibleToNonMembers: boolean = false;
   addGroupForm: FormGroup;
-  usersArray: any=[];
-  submitted: boolean=false;
+  usersArray: any = [];
+  submitted: boolean = false;
   imageResPath: any;
   file: any;
-  constructor(private modalService: NgbModal,
+  isVisiblityChecked: any;
+  groupID: any;
+  isImageAttached: boolean = false;
+  deleteID: any;
+  constructor(
+    private modalService: NgbModal,
     private Srvc: GroupsService,
     private router: Router,
     private route: ActivatedRoute,
     private toaster: ToastrService,
     private formBuilder: FormBuilder,
-    private usersService: UsersService) {
+    private usersService: UsersService
+  ) {
     // this.dataSource = new MatTableDataSource(this.table);
     this.addGroupForm = formBuilder.group({
       groupName: [
@@ -91,7 +101,7 @@ export class FoodItemsComponent implements OnInit {
         ],
       ],
       groupFor: ["", [Validators.required]],
-      date: ["", [Validators.required]],
+      // date: ["", [Validators.required]],
       description: [
         "",
         [
@@ -117,6 +127,7 @@ export class FoodItemsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllGroups();
+    this.getUsers();
   }
 
   ngAfterViewInit() {
@@ -130,7 +141,7 @@ export class FoodItemsComponent implements OnInit {
       limit: this.page,
       page: this.pageindec == null ? 1 : this.pageindec,
       search: this.searchitem == null ? "" : this.searchitem,
-      type: this.btnStatus
+      type: this.btnStatus,
     };
 
     this.Srvc.getAll(data).subscribe((res: any) => {
@@ -139,8 +150,8 @@ export class FoodItemsComponent implements OnInit {
       }
       if (res.statusCode == 200) {
         if (res?.data?.count) {
-          this.groupData = res?.data?.eventData;
-          this.dataSource = new MatTableDataSource(res?.data?.eventData);
+          this.groupData = res?.data?.groupData;
+          this.dataSource = new MatTableDataSource(res?.data?.groupData);
         } else {
           this.dataSource = null;
           this.toaster.error("No data found", "Oops", {
@@ -291,7 +302,8 @@ export class FoodItemsComponent implements OnInit {
     },
   ];
 
-  userDeleteModal(userDelete) {
+  userDeleteModal(userDelete, id) {
+    this.deleteID = id;
     this.modalService.open(userDelete, {
       backdropClass: "light-blue-backdrop",
       centered: true,
@@ -307,13 +319,7 @@ export class FoodItemsComponent implements OnInit {
       keyboard: false,
     });
   }
-  eventsedit(eventedit) {
-    this.modalService.open(eventedit, {
-      backdropClass: "light-blue-backdrop",
-      centered: true,
-      size: "lg",
-    });
-  }
+
   eventdetails(eventdetail) {
     this.modalService.open(eventdetail, {
       backdropClass: "light-blue-backdrop",
@@ -329,12 +335,11 @@ export class FoodItemsComponent implements OnInit {
     });
   }
   invitemodal(invite) {
-    this.getUsers();
-    this.modalService.dismissAll();
+
     this.modalService.open(invite, {
       backdropClass: "light-blue-backdrop",
       centered: true,
-      size: "lg"
+      size: "lg",
     });
   }
 
@@ -357,30 +362,57 @@ export class FoodItemsComponent implements OnInit {
     this.modalService.dismissAll();
     this.usersArray = [];
     this.addGroupForm.reset();
-    this.submitted=false;
-    this.imageResPath=null;
+    this.submitted = false;
+    this.imageResPath = null;
+    this.isEdit = false;
+    this.fileName = "Choose File";
+    this.isImageAttached = false;
+  }
+
+  eventsedit(Adddetail, row) {
+    this.groupID = row?._id;
+    this.isEdit = true;
+    this.submitted = false;
+    this.addGroupForm.controls["groupName"].setValue(row?.name);
+    this.addGroupForm.controls["groupFor"].setValue(row?.groupType);
+    this.addGroupForm.controls["description"].setValue(row?.description);
+    this.addGroupForm.controls["description"].setValue(row?.description);
+
+    this.isVisiblityChecked = row?.visibileTo;
+    if (row?.image) {
+      this.fileName = "Image.jpg";
+    }
+    // Push the User ID in User Array
+    for (var user of row?.invite) {
+      this.usersArray.push(user._id);
+    }
+
+    this.modalService.open(Adddetail, {
+      backdropClass: "light-blue-backdrop",
+      centered: true,
+      size: "lg",
+    });
   }
 
   // Add Group on Submit
   submitGroup() {
     this.submitted = true;
     if (this.addGroupForm.valid) {
+      if (this.isImageAttached){
+
+
       let obj = {
         invite: this.usersArray,
         name: this.addGroupForm.value.groupName,
         groupType: this.addGroupForm.value.groupFor,
-        date: this.addGroupForm.value.date,
+        // date: this.addGroupForm.value.date,
         description: this.addGroupForm.value.description,
-        visibileTo:this.visibleToNonMembers,
-        image:this.imageResPath
+        visibileTo: this.visibleToNonMembers,
+        image: this.imageResPath,
       };
 
-      if (!this.imageResPath){
-        delete obj.image
-      }
-
       console.log(obj);
-      return;
+      // return;
       this.Srvc.addGroup(obj).subscribe(
         (res: any) => {
           if (res.statusCode == 401) {
@@ -390,7 +422,9 @@ export class FoodItemsComponent implements OnInit {
             this.submitted = false;
             this.addGroupForm.reset();
             this.usersArray = [];
-            this.imageResPath=null;
+            this.fileName = "Choose File";
+            this.imageResPath = null;
+            this.isImageAttached = false;
             this.modalService.dismissAll();
             Swal.fire("Success", res.message, "success");
             this.getAllGroups();
@@ -402,14 +436,17 @@ export class FoodItemsComponent implements OnInit {
           Swal.fire("Oops", "Something went wrong", "error");
         }
       );
+
+      } else {
+        this.toaster.error("Please choose a Group image");
+      }
     } else {
       this.toaster.error("Please fill all the required fields");
     }
   }
 
-  changeVisibility(event){
+  changeVisibility(event) {
     this.visibleToNonMembers = event.checked;
-    console.log(this.visibleToNonMembers);
   }
 
   // Image Upload
@@ -422,14 +459,89 @@ export class FoodItemsComponent implements OnInit {
       formData.append("file", this.file);
       this.Srvc.uploadFile(formData).subscribe((res: any) => {
         if (res.statusCode === 200) {
+          this.fileName = evt.target.files[0].name;
           this.toaster.success("Image Selected", "Success", {
             timeOut: 2000,
           });
           this.imageResPath = res?.data?.image;
+          this.isImageAttached = true;
         } else {
           Swal.fire("Oops", "Failed to upload Photo", "error");
         }
       });
     }
+  }
+
+  // Edit Group on Submit
+  editGroup() {
+    this.submitted = true;
+    if (this.addGroupForm.valid) {
+      let obj = {
+        groupId: this.groupID,
+        invite: this.usersArray,
+        name: this.addGroupForm.value.groupName,
+        groupType: this.addGroupForm.value.groupFor,
+        // date: this.addGroupForm.value.date,
+        description: this.addGroupForm.value.description,
+        visibileTo: this.visibleToNonMembers,
+        image: this.imageResPath,
+      };
+      if (!this.isImageAttached) {
+        delete obj.image;
+      }
+
+      console.log(obj);
+      // return;
+      this.Srvc.updateGroup(obj).subscribe(
+        (res: any) => {
+          if (res.statusCode == 401) {
+            this.sessionTerminate();
+          }
+          if (res.statusCode == 200) {
+            this.submitted = false;
+            this.addGroupForm.reset();
+            this.usersArray = [];
+            this.isEdit = false;
+            this.imageResPath = null;
+            this.isImageAttached = false;
+            this.modalService.dismissAll();
+            this.fileName = "Choose File";
+            Swal.fire("Success", res.message, "success");
+            this.getAllGroups();
+          } else {
+            Swal.fire("Oops", res.message, "error");
+          }
+        },
+        (error) => {
+          Swal.fire("Oops", "Something went wrong", "error");
+        }
+      );
+    }
+    // else {
+    //   this.toaster.error("Please choose group image");
+    // }
+    else {
+      this.toaster.error("Please fill all the required fields");
+    }
+  }
+
+  deleteGroup() {
+    const data = {
+      groupId: this.deleteID,
+      isDeleted: true,
+    };
+
+    this.Srvc.updateGroup(data).subscribe((res: any) => {
+      if (res.statusCode == 401) {
+        this.sessionTerminate();
+      }
+      if (res.statusCode == 200) {
+        Swal.fire("Deleted", "Group deleted successfully", "success");
+        this.modalService.dismissAll();
+        this.getAllGroups();
+      } else {
+        Swal.fire("Oops", "Failed to delete Group", "error");
+      }
+    });
   }
 }

@@ -794,7 +794,7 @@
                 </div>
               </div>
               <div class="col-6 mb-3">
-                <h4>Invite Guests/User</h4>
+                <h4>Invite Guests/User <span *ngIf="usersArray.length">({{usersArray.length}} users Invited)</span></h4>
                 <button class="btn btn-primary" (click)="invitemodal(invite)"> Invite </button>
               </div>
               <!-- <div *ngIf="isEdit">

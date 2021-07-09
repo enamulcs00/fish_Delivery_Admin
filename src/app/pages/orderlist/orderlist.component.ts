@@ -222,7 +222,7 @@ export class OrderlistComponent implements OnInit {
     var Days = Time / (1000 * 3600 * 24); //Diference in Days
     let hours = (Days - Math.floor(Days)) * 24;
     if (hours == 0) {
-      if (Days == 1 || Days==0) {
+      if (Days == 1 || Days==0 || Days==-1) {
         return Math.abs(Math.floor(Days)) + " Day ";
       } else {
         return Math.abs(Math.floor(Days)) + " Days ";
@@ -842,7 +842,9 @@ export class OrderlistComponent implements OnInit {
 
   deleteEvent(){
     const data = {
-      eventId: this.deleteID
+      eventId: this.deleteID,
+      isDeleted:true
+
     };
 
     this.Srvc.updateEvent(data).subscribe((res: any) => {
@@ -862,7 +864,8 @@ export class OrderlistComponent implements OnInit {
   deletePoll(){
     const data = {
       eventId: this.eventID,
-      pollId: this.deletePollID
+      pollId: this.deletePollID,
+      isDeleted:true
     };
 
     this.Srvc.updatePoll(data).subscribe((res: any) => {
