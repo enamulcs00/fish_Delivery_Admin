@@ -81,6 +81,7 @@ export class FoodItemsComponent implements OnInit {
   groupID: any;
   isImageAttached: boolean = false;
   deleteID: any;
+  memberList: any;
   constructor(
     private modalService: NgbModal,
     private Srvc: GroupsService,
@@ -327,7 +328,11 @@ export class FoodItemsComponent implements OnInit {
       size: "lg",
     });
   }
-  carModal(car) {
+  carModal(car,id) {
+    const filteredData = this.groupData.find(
+      (element: any) => element._id === id
+    );
+    this.memberList = filteredData.join;
     this.modalService.open(car, {
       backdropClass: "light-blue-backdrop",
       centered: true,
