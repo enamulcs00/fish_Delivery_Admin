@@ -218,12 +218,12 @@ export class OrderlistComponent implements OnInit {
   getdiffDates(row) {
     var date1 = new Date(row.startDate);
     var date2 = new Date(row.endDate);
-    var Time = date2.getTime()%4 - date1.getTime()%4;
+    var Time = date2.getTime() - date1.getTime();
 
     var Days = Time / (1000 * 3600 * 24); //Diference in Days
     let hours = (Days - Math.floor(Days)) * 24;
     if (hours == 0) {
-      if (Days == 1 || Days==0 || Days==-1) {
+      if (Days == 1 || Days==0) {
         return Math.abs(Math.floor(Days)) + " Day ";
       } else {
         return Math.abs(Math.floor(Days)) + " Days ";
