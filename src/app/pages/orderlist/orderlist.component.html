@@ -48,7 +48,8 @@
                 <ng-container matColumnDef="Images">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Type </th>
                   <td mat-cell *matCellDef="let row">
-                    <span class="img-small"><img src={{row?.eventType?.eventImage}} alt="wedding" width="60" class="rounded"></span>
+                    <span class="img-small"><img src={{row?.eventType?.eventImage}} alt="wedding" width="60"
+                        class="rounded"></span>
                     <!-- <div class="cstm_icn">
                       <ul class="icon_outr">
                         <li>
@@ -72,7 +73,7 @@
                       <span>Private</span>
                     </ng-template>
 
-                    </td>
+                  </td>
                 </ng-container>
                 <!-- <ng-container matColumnDef="Eventtype">
                                     <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Type </th>
@@ -92,7 +93,8 @@
                 </ng-container>
                 <ng-container matColumnDef="Durationdate">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Date </th>
-                  <td mat-cell *matCellDef="let row" class="text-nowrap">{{moment(row?.startDate).format('DD-MM-YYYY')}} - {{moment(row?.endDate).format('DD-MM-YYYY')}}</td>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap">{{moment(row?.startDate).format('DD-MM-YYYY')}}
+                    - {{moment(row?.endDate).format('DD-MM-YYYY')}}</td>
                 </ng-container>
                 <ng-container matColumnDef="Durationtime">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Time </th>
@@ -105,16 +107,16 @@
                 </ng-container>
                 <ng-container matColumnDef="invited">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> People invited </th>
-                  <td mat-cell *matCellDef="let row"> {{row?.invitedList.length}} </td>
+                  <td mat-cell *matCellDef="let row"> {{row?.personalInvite}} </td>
                 </ng-container>
                 <ng-container matColumnDef="invited2">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> People directly invited </th>
-                  <td mat-cell *matCellDef="let row"> {{row.invited2}} </td>
+                  <td mat-cell *matCellDef="let row"> {{row?.personallyInvited.length}} </td>
                 </ng-container>
                 <ng-container matColumnDef="guest">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Guest list </th>
-                  <td mat-cell *matCellDef="let row"> {{row.guest}}
-                    <a href="javascript:void()" (click)="carModal(car)"><i class="sl-icon-info"></i></a>
+                  <td mat-cell *matCellDef="let row"> {{row?.acceptedList.length}}
+                    <a href="javascript:void()" (click)="carModal(car,row._id)"><i class="sl-icon-info"></i></a>
                   </td>
                 </ng-container>
                 <ng-container matColumnDef="attendees">
@@ -155,7 +157,7 @@
                       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                         <!-- <a class="dropdown-item" (click)="eventdetails(eventdetail)"><i class="ti-eye"></i> View </a> -->
                         <!-- <button class="dropdown-item" (click)="eventsedit(eventedit)"><i class="ti-marker-alt"></i> Edit</button> -->
-                        <a href="javascript:void()" class="dropdown-item " (click)="userDeleteModal(userDelete)"> <i
+                        <a href="javascript:void()" class="dropdown-item " (click)="userDeleteModal(userDelete,row?._id)"> <i
                             class="ti-trash"></i> Delete</a>
                       </div>
                       <!-- <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
@@ -207,7 +209,8 @@
                 <ng-container matColumnDef="Images">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Type </th>
                   <td mat-cell *matCellDef="let row">
-                    <span class="img-small"><img src={{row?.eventType?.eventImage}} alt="Event" width="60" class="rounded"></span>
+                    <span class="img-small"><img src={{row?.eventType?.eventImage}} alt="Event" width="60"
+                        class="rounded"></span>
                     <!-- <div class="cstm_icn">
                       <ul class="icon_outr">
                         <li>
@@ -230,7 +233,7 @@
                     <ng-template #alterOption>
                       <span>Private</span>
                     </ng-template>
-                     </td>
+                  </td>
                 </ng-container>
                 <!-- <ng-container matColumnDef="Eventtype">
                                     <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Type </th>
@@ -250,7 +253,9 @@
                 </ng-container>
                 <ng-container matColumnDef="Durationdate">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Date </th>
-                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{moment(row?.startDate).format('DD-MM-YYYY')}} - {{moment(row?.endDate).format('DD-MM-YYYY')}} </td>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap">
+                    {{moment(row?.startDate).format('DD-MM-YYYY')}} - {{moment(row?.endDate).format('DD-MM-YYYY')}}
+                  </td>
                 </ng-container>
                 <ng-container matColumnDef="Durationtime">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Time </th>
@@ -263,16 +268,16 @@
                 </ng-container>
                 <ng-container matColumnDef="invited">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> People invited </th>
-                  <td mat-cell *matCellDef="let row"> {{row?.invitedList.length}} </td>
+                  <td mat-cell *matCellDef="let row"> {{row?.personalInvite}} </td>
                 </ng-container>
                 <ng-container matColumnDef="invited2">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> People directly invited </th>
-                  <td mat-cell *matCellDef="let row"> {{row.invited2}} </td>
+                  <td mat-cell *matCellDef="let row"> {{row?.personallyInvited.length}} </td>
                 </ng-container>
                 <ng-container matColumnDef="guest">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Guest list </th>
-                  <td mat-cell *matCellDef="let row"> {{row.guest}}
-                    <a href="javascript:void()" (click)="carModal(car)"><i class="sl-icon-info"></i></a>
+                  <td mat-cell *matCellDef="let row"> {{row?.acceptedList.length}}
+                    <a href="javascript:void()" (click)="carModal(car,row._id)"><i class="sl-icon-info"></i></a>
                   </td>
                 </ng-container>
                 <ng-container matColumnDef="attendees">
@@ -312,10 +317,11 @@
                       </button>
                       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                         <!-- <a class="dropdown-item" (click)="eventdetails(eventdetail)"><i class="ti-eye"></i> View </a> -->
-                        <button style="cursor: pointer;" class="dropdown-item" (click)="eventsedit(Adddetail, row)"><i class="ti-marker-alt"></i>
+                        <button style="cursor: pointer;" class="dropdown-item" (click)="eventsedit(Adddetail, row)"><i
+                            class="ti-marker-alt"></i>
                           Edit</button>
-                        <a style="cursor: pointer;" href="javascript:void()" class="dropdown-item " (click)="userDeleteModal(userDelete)"><i
-                            class="ti-trash"></i>Delete</a>
+                        <a style="cursor: pointer;" href="javascript:void()" class="dropdown-item "
+                          (click)="userDeleteModal(userDelete,row?._id)"><i class="ti-trash"></i>Delete</a>
                       </div>
                       <!-- <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                                             </div> -->
@@ -366,7 +372,8 @@
                 <ng-container matColumnDef="Images">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Type </th>
                   <td mat-cell *matCellDef="let row">
-                    <span class="img-small"><img src={{row?.eventType?.eventImage}} alt="Event" width="60" class="rounded"></span>
+                    <span class="img-small"><img src={{row?.eventType?.eventImage}} alt="Event" width="60"
+                        class="rounded"></span>
                     <!-- <div class="cstm_icn">
                       <ul class="icon_outr">
                         <li>
@@ -409,7 +416,9 @@
                 </ng-container>
                 <ng-container matColumnDef="Durationdate">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Date </th>
-                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{moment(row?.startDate).format('DD-MM-YYYY')}} - {{moment(row?.endDate).format('DD-MM-YYYY')}} </td>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap">
+                    {{moment(row?.startDate).format('DD-MM-YYYY')}} - {{moment(row?.endDate).format('DD-MM-YYYY')}}
+                  </td>
                 </ng-container>
                 <ng-container matColumnDef="Durationtime">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Time </th>
@@ -418,20 +427,20 @@
                 <!-- Progress Column -->
                 <ng-container matColumnDef="box">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Description </th>
-                  <td mat-cell *matCellDef="let row" class="text-nowrap">  {{row.description || "-"}} </td>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.description || "-"}} </td>
                 </ng-container>
                 <ng-container matColumnDef="invited">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> People invited </th>
-                  <td mat-cell *matCellDef="let row"> {{row?.invitedList.length}} </td>
+                  <td mat-cell *matCellDef="let row"> {{row?.personalInvite}} </td>
                 </ng-container>
                 <ng-container matColumnDef="invited2">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> People directly invited </th>
-                  <td mat-cell *matCellDef="let row"> {{row.invited2}} </td>
+                  <td mat-cell *matCellDef="let row"> {{row?.personallyInvited.length}}  </td>
                 </ng-container>
                 <ng-container matColumnDef="guest">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Guest list </th>
-                  <td mat-cell *matCellDef="let row"> {{row.guest}}
-                    <a href="javascript:void()" (click)="carModal(car)"><i class="sl-icon-info"></i></a>
+                  <td mat-cell *matCellDef="let row"> {{row?.acceptedList.length}}
+                    <a href="javascript:void()" (click)="carModal(car,row._id)"><i class="sl-icon-info"></i></a>
                   </td>
                 </ng-container>
                 <ng-container matColumnDef="attendees">
@@ -471,10 +480,11 @@
                       </button>
                       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                         <!-- <a class="dropdown-item" (click)="eventdetails(eventdetail)"><i class="ti-eye"></i> View </a> -->
-                        <button style="cursor: pointer;" class="dropdown-item" (click)="eventsedit(Adddetail, row)"><i class="ti-marker-alt"></i>
+                        <button style="cursor: pointer;" class="dropdown-item" (click)="eventsedit(Adddetail, row)"><i
+                            class="ti-marker-alt"></i>
                           Edit</button>
-                        <a style="cursor: pointer;" href="javascript:void()" class="dropdown-item " (click)="userDeleteModal(userDelete)"><i
-                            class="ti-trash"></i>Delete</a>
+                        <a style="cursor: pointer;" href="javascript:void()" class="dropdown-item "
+                          (click)="userDeleteModal(userDelete,row?._id)"><i class="ti-trash"></i>Delete</a>
                       </div>
                       <!-- <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                                           </div> -->
@@ -498,23 +508,36 @@
 </div>
 <ng-template #userDelete let-modal>
   <div class="modal-body">
-    <p>Are you sure want to delete?</p>
+    <p>Are you sure want to delete this event?</p>
     <div class="btn-group">
       <button type="button" class="btn btn-primary mr-2" aria-label="Close"
-        (click)="modal.dismiss('Cross click')">Yes</button>
+        (click)="deleteEvent()">Yes</button>
       <button type="button" class="btn btn-seconadary" aria-label="Close"
         (click)="modal.dismiss('Cross click')">No</button>
     </div>
   </div>
 </ng-template>
+
+<ng-template #pollDelete let-modal>
+  <div class="modal-body">
+    <p>Are you sure want to delete this poll?</p>
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary mr-2" aria-label="Close"
+        (click)="deletePoll()">Yes</button>
+      <button type="button" class="btn btn-seconadary" aria-label="Close"
+        (click)="modal.dismiss('Cross click')">No</button>
+    </div>
+  </div>
+</ng-template>
+
 <ng-template #car let-modal>
   <div class="modal-body">
     <h3>Guest List</h3>
     <div class="my-3 table-responsive">
-      <table class="table table-bordered">
+      <table class="table table-bordered" *ngIf="guestList.length;else noGuestData">
         <thead>
           <th class="text-nowrap">Name</th>
-          <th class="text-nowrap">User Id</th>
+          <!-- <th class="text-nowrap">User Id</th> -->
           <th class="text-nowrap">Phone no.</th>
           <th class="text-nowrap">Sign-up date</th>
           <th class="text-nowrap">Number of events attended</th>
@@ -523,48 +546,21 @@
           <th>Action</th>
         </thead>
         <tbody>
-          <tr>
-            <td>Sam</td>
-            <td>#122344</td>
-            <td class="text-nowrap">+1-478523690</td>
-            <td> 05/05/20 </td>
-            <td>10</td>
-            <td>7</td>
-            <td>15</td>
-            <td> <a class="btn btn-outline-primary btn-sm" id="dropdownBasic1"> Remove </a> </td>
-          </tr>
-          <tr>
-            <td>Sam</td>
-            <td>#122344</td>
-            <td class="text-nowrap">+1-478523690</td>
-            <td> 05/05/20 </td>
-            <td>10</td>
-            <td>7</td>
-            <td>15</td>
-            <td> <a class="btn btn-outline-primary btn-sm" id="dropdownBasic1"> Remove </a> </td>
-          </tr>
-          <tr>
-            <td>Sam</td>
-            <td>#122344</td>
-            <td class="text-nowrap">+1-478523690</td>
-            <td> 05/05/20 </td>
-            <td>10</td>
-            <td>7</td>
-            <td>15</td>
-            <td> <a class="btn btn-outline-primary btn-sm" id="dropdownBasic1"> Remove </a> </td>
-          </tr>
-          <tr>
-            <td>Sam</td>
-            <td>#122344</td>
-            <td class="text-nowrap">+1-478523690</td>
-            <td> 05/05/20 </td>
-            <td>10</td>
-            <td>7</td>
-            <td>15</td>
+          <tr *ngFor="let item of guestList">
+            <td>{{item?.userName}}</td>
+            <!-- <td>{{item?.userName}}</td> -->
+            <td class="text-nowrap">{{item?.dialCode}}-{{item?.phoneNo}}</td>
+            <td> {{item?.createdAt | date: 'medium'}} </td>
+            <td>{{item?.attendedEventCount}}</td>
+            <td>{{item?.hostedEventCount}}</td>
+            <td>{{item?.attendedGroupCount}}</td>
             <td> <a class="btn btn-outline-primary btn-sm" id="dropdownBasic1"> Remove </a> </td>
           </tr>
         </tbody>
       </table>
+      <ng-template #noGuestData>
+        <p>No Data</p>
+      </ng-template>
       <div class="input-group-append">
         <a class="btn mr-0 btn-danger text-white my-2" type="button" (click)="modal.close()">Close</a>
       </div>
@@ -578,7 +574,7 @@
       <table *ngIf="waitingList.length;else noWaitingData" class="table table-bordered">
         <thead>
           <th class="text-nowrap">Name</th>
-          <th class="text-nowrap">User Id</th>
+          <!-- <th class="text-nowrap">User Id</th> -->
           <th class="text-nowrap">Phone no.</th>
           <th class="text-nowrap">Sign-up date</th>
           <th class="text-nowrap">Number of events attended</th>
@@ -589,7 +585,7 @@
         <tbody>
           <tr *ngFor="let item of waitingList">
             <td>{{item?.userName}}</td>
-            <td>{{item?.userName}}</td>
+            <!-- <td>{{item?.userName}}</td> -->
             <td class="text-nowrap">{{item?.dialCode}}-{{item?.phoneNo}}</td>
             <td> {{item?.createdAt | date: 'medium'}} </td>
             <td>{{item?.attendedEventCount}}</td>
@@ -602,7 +598,7 @@
         </tbody>
       </table>
       <ng-template #noWaitingData>
-        <p >No Data</p>
+        <p>No Data</p>
       </ng-template>
 
       <div class="input-group-append">
@@ -622,8 +618,9 @@
                 <h4 class="mb-4"> Select Icon </h4>
                 <ul class="icon_outr">
                   <!-- " -->
-                  <li  *ngFor="let item of ArrayImage;let i = index;" >
-                    <img [class.selected]="item?.isSelected" (click)="selectIcon(item.id)" [src]="item.image?item.image:'assets/images/dashed.png'" height="80" width="90" alt="123" />
+                  <li *ngFor="let item of ArrayImage;let i = index;">
+                    <img [class.selected]="item?.isSelected" (click)="selectIcon(item.id)"
+                      [src]="item.image?item.image:'assets/images/dashed.png'" height="80" width="90" alt="123" />
 
                   </li>
 
@@ -655,15 +652,17 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="control-label"> Event Name </label>
-                  <input (keypress)="alphabate($event)" #eventName (keydown.space)="doSomething($event ,eventName.value)" formControlName="eventName" type="text" id="eventName" class="form-control" placeholder="Enter Event Name">
+                  <input (keypress)="alphabate($event)" #eventName
+                    (keydown.space)="doSomething($event ,eventName.value)" formControlName="eventName" type="text"
+                    id="eventName" class="form-control" placeholder="Enter Event Name">
                   <!-- <small
                 *ngIf=" addEventForm.controls['eventName'].touched && addEventForm.controls['eventName'].invalid"
                 class="text-danger d-inline-block pt-1">
                 *Event Name is invalid
                 </small> -->
-              <small class="text-danger" *ngIf="submitted && errorHandling('eventName', 'required')">
-                *Event Name is required!
-              </small>
+                  <small class="text-danger" *ngIf="submitted && errorHandling('eventName', 'required')">
+                    *Event Name is required!
+                  </small>
                 </div>
               </div>
               <div class="col-md-6">
@@ -674,25 +673,25 @@
                     <option [value]="1"> Public </option>
                     <option [value]="2"> Private </option>
                   </select>
-              <small class="text-danger" *ngIf="submitted && errorHandling('eventFor', 'required')">
-                *Type of event is required!
-              </small>
+                  <small class="text-danger" *ngIf="submitted && errorHandling('eventFor', 'required')">
+                    *Type of event is required!
+                  </small>
                 </div>
               </div>
               <!--/span-->
               <div class="col-md-6">
                 <div class="form-group has-danger">
                   <label class="control-label"> Max Attendees </label>
-                  <input formControlName="maxLength" min="0" max="9999" minlength="1" maxlength="4" type="number" id="maxAttendees" class="form-control form-control-danger"
-                    placeholder="Enter duration of event">
-                    <small
-                *ngIf=" addEventForm.controls['maxLength'].touched && addEventForm.controls['maxLength'].invalid"
-                class="text-danger d-inline-block pt-1">
-                *Please enter Max Attendees, limit is 0-9999 !
-                </small>
-              <small class="text-danger" *ngIf="submitted && errorHandling('maxLength', 'required')">
-                *Max Attendees is required!
-              </small>
+                  <input formControlName="maxLength" min="0" max="9999" minlength="1" maxlength="4" type="number"
+                    id="maxAttendees" class="form-control form-control-danger" placeholder="Enter duration of event">
+                  <small
+                    *ngIf=" addEventForm.controls['maxLength'].touched && addEventForm.controls['maxLength'].invalid"
+                    class="text-danger d-inline-block pt-1">
+                    *Please enter Max Attendees, limit is 0-9999 !
+                  </small>
+                  <small class="text-danger" *ngIf="submitted && errorHandling('maxLength', 'required')">
+                    *Max Attendees is required!
+                  </small>
                 </div>
               </div>
               <!-- <div class="col-md-6">
@@ -706,86 +705,89 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="control-label"> Start Date </label>
-                  <input formControlName="startDate" type="date" id="startDate" class="form-control" placeholder="Enter Date">
+                  <input [min]="getToday()" formControlName="startDate" type="date" id="startDate" class="form-control"
+                    placeholder="Enter Date">
                   <small
-                *ngIf=" addEventForm.controls['startDate'].touched && addEventForm.controls['startDate'].invalid"
-                class="text-danger d-inline-block pt-1">
-                *Please choose start date !
-                </small>
-              <small class="text-danger" *ngIf="submitted && errorHandling('startDate', 'required')">
-                *Start date is required!
-              </small>
+                    *ngIf=" addEventForm.controls['startDate'].touched && addEventForm.controls['startDate'].invalid"
+                    class="text-danger d-inline-block pt-1">
+                    *Please choose start date !
+                  </small>
+                  <small class="text-danger" *ngIf="submitted && errorHandling('startDate', 'required')">
+                    *Start date is required!
+                  </small>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="control-label"> End Date </label>
-                  <input formControlName="endDate" type="date" id="endDate" class="form-control" placeholder="Enter Date">
-                  <small
-                *ngIf=" addEventForm.controls['endDate'].touched && addEventForm.controls['endDate'].invalid"
-                class="text-danger d-inline-block pt-1">
-                *Please choose end date !
-                </small>
-              <small class="text-danger" *ngIf="submitted && errorHandling('endDate', 'required')">
-                *End date is required!
-              </small>
+                  <input [min]="getToday()" formControlName="endDate" type="date" id="endDate" class="form-control"
+                    placeholder="Enter Date">
+                  <small *ngIf=" addEventForm.controls['endDate'].touched && addEventForm.controls['endDate'].invalid"
+                    class="text-danger d-inline-block pt-1">
+                    *Please choose end date !
+                  </small>
+                  <small class="text-danger" *ngIf="submitted && errorHandling('endDate', 'required')">
+                    *End date is required!
+                  </small>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="control-label"> Start Time </label>
-                  <input formControlName="startTime" type="time" id="startTime" class="form-control" placeholder="Enter Date">
+                  <input formControlName="startTime" type="time" id="startTime" class="form-control"
+                    placeholder="Enter Date">
                   <small
-                *ngIf=" addEventForm.controls['startTime'].touched && addEventForm.controls['startTime'].invalid"
-                class="text-danger d-inline-block pt-1">
-                *Please choose start time !
-                </small>
-              <small class="text-danger" *ngIf="submitted && errorHandling('startTime', 'required')">
-                *Start time is required!
-              </small>
+                    *ngIf=" addEventForm.controls['startTime'].touched && addEventForm.controls['startTime'].invalid"
+                    class="text-danger d-inline-block pt-1">
+                    *Please choose start time !
+                  </small>
+                  <small class="text-danger" *ngIf="submitted && errorHandling('startTime', 'required')">
+                    *Start time is required!
+                  </small>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="control-label"> End Time </label>
-                  <input formControlName="endTime" type="time" id="endTime" class="form-control" placeholder="Enter Date">
-                  <small
-                *ngIf=" addEventForm.controls['endTime'].touched && addEventForm.controls['endTime'].invalid"
-                class="text-danger d-inline-block pt-1">
-                *Please choose end time !
-                </small>
-              <small class="text-danger" *ngIf="submitted && errorHandling('endTime', 'required')">
-                *End time is required!
-              </small>
+                  <input formControlName="endTime" type="time" id="endTime" class="form-control"
+                    placeholder="Enter Date">
+                  <small *ngIf=" addEventForm.controls['endTime'].touched && addEventForm.controls['endTime'].invalid"
+                    class="text-danger d-inline-block pt-1">
+                    *Please choose end time !
+                  </small>
+                  <small class="text-danger" *ngIf="submitted && errorHandling('endTime', 'required')">
+                    *End time is required!
+                  </small>
                 </div>
               </div>
               <!-- /span -->
               <div class="col-md-6">
                 <div class="form-group has-danger">
                   <label class="control-label"> Location </label>
-                  <input #location (keydown.space)="doSomething($event ,location.value)" formControlName="address" type="text" id="location" class="form-control form-control-danger"
+                  <input #location (keydown.space)="doSomething($event ,location.value)" formControlName="address"
+                    type="text" id="location" class="form-control form-control-danger"
                     placeholder="Enter location of event">
-                    <small
-                *ngIf=" addEventForm.controls['address'].touched && addEventForm.controls['address'].invalid"
-                class="text-danger d-inline-block pt-1">
-                *Please choose location!
-                </small>
-              <small class="text-danger" *ngIf="submitted && errorHandling('address', 'required')">
-                *Location is required!
-              </small>
+                  <small *ngIf=" addEventForm.controls['address'].touched && addEventForm.controls['address'].invalid"
+                    class="text-danger d-inline-block pt-1">
+                    *Please choose location!
+                  </small>
+                  <small class="text-danger" *ngIf="submitted && errorHandling('address', 'required')">
+                    *Location is required!
+                  </small>
                 </div>
               </div>
               <!--/span-->
               <div class="col-md-6">
                 <div class="form-group has-danger">
                   <label class="control-label"> Event Description </label>
-                  <textarea #des (keydown.space)="doSomething($event ,des.value)" formControlName="description" class="form-control form-control-danger"
+                  <textarea #des (keydown.space)="doSomething($event ,des.value)" formControlName="description"
+                    class="form-control form-control-danger"
                     placeholder="Type here description for this Event"></textarea>
-                    <small
+                  <small
                     *ngIf=" addEventForm.controls['description'].touched && addEventForm.controls['description'].invalid"
                     class="text-danger d-inline-block pt-1">
                     *Please enter description!
-                    </small>
+                  </small>
                   <small class="text-danger" *ngIf="submitted && errorHandling('description', 'required')">
                     *Description is required!
                   </small>
@@ -829,7 +831,8 @@
           <div class="form-actions">
             <div class="card-body">
               <button *ngIf="isAdd" type="submit" class="btn btn-success mr-3" (click)="submitEvent()"> Save</button>
-              <button *ngIf="isEdit" type="submit" class="btn btn-success mr-3" (click)="submitEventEdit()"> Update</button>
+              <button *ngIf="isEdit" type="submit" class="btn btn-success mr-3" (click)="submitEventEdit()">
+                Update</button>
               <button type="button" class="btn btn-dark" (click)="cancelForm()">Cancel</button>
             </div>
           </div>
@@ -1101,9 +1104,9 @@
               </table>
             </td>
             <td>
-              <a class="btn btn-danger btn-sm" (click)="editpollmodal(editpoll)"> <i
+              <a class="btn btn-danger btn-sm" (click)="editpollmodal(editpoll,polls)"> <i
                   class="fa fa-pencil-square-o text-white"></i> </a>
-              <a class="btn btn-danger btn-sm ml-2"> <i class="fa fa-trash text-white"></i> </a>
+              <a (click)="pollDeleteModal(pollDelete,polls?._id)" class="btn btn-danger btn-sm ml-2"> <i class="fa fa-trash text-white"></i> </a>
             </td>
           </tr>
         </tbody>
@@ -1111,8 +1114,8 @@
       <ng-template #noPollsData>
         <p>No Poll added</p>
       </ng-template>
-          <button class="btn btn-primary d-block mx-1" (click)="isModalEnable = true; editpollmodal(editpoll)">+</button>
-        <a class="btn btn-danger text-white my-2 mx-1" type="button" (click)="modal.close()">Close</a>
+      <button class="btn btn-primary d-block mx-1" (click)="isModalEnable = true; addpollmodal(editpoll)">Add Poll</button>
+      <a class="btn btn-danger text-white my-2 mx-1" type="button" (click)="modal.close()">Close</a>
     </div>
   </div>
 </ng-template>
@@ -1121,7 +1124,7 @@
 <ng-template #editpoll let-modal>
   <div class="modal-body">
     <div class="card">
-      <form [formGroup]="addPollForm" >
+      <form [formGroup]="addPollForm">
         <div class="form-body">
           <div class="card-body">
             <div class="row p-t-20">
@@ -1131,27 +1134,36 @@
               <div class="col-md-12">
                 <div class="form-group has-danger">
                   <label class="control-label"> Name </label>
-                  <input formControlName="pollName" type="text" id="text" class="form-control form-control-danger" placeholder="Enter Poll name">
+                  <input formControlName="pollName" type="text" id="text" class="form-control form-control-danger"
+                    placeholder="Enter Poll name">
+                    <small *ngIf="addPollForm.controls['pollName'].touched && addPollForm.controls['pollName'].invalid" class="text-danger">
+                      *Poll name is required.</small>
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="form-group has-danger">
-                  <label class="control-label"> option </label>
-                  <input type="text" id="text" class="form-control form-control-danger" placeholder="Enter Poll option">
+              <div class="col-md-12 form-group" formArrayName="options"
+                *ngFor="let option of addPollForm.get('options')['controls']; let i = index;">
+                <div class="input-group " [formGroupName]="i">
+                  <input class="form-control" placeholder="Enter option" formControlName="option">
+                  <button class="btn btn-danger" (click)="removeOption(i)"><i class="fa fa-trash"></i></button>
                 </div>
+                <small *ngIf="submitted && option.get('option').hasError('required')" class="text-danger">
+                  *Option is required.</small>
               </div>
 
               <div class="col-md-6 d-flex align-items-center">
-                <button class="btn btn-primary">Add Option</button>
+                <button class="btn btn-primary" (click)="pushFormArray()">Add Option</button>
               </div>
             </div>
             <!--/row-->
           </div>
           <div class="form-actions">
             <div class="card-body">
-              <button type="submit" (click)="submitPoll()"  class="btn btn-primary mr-3" ><i
-                  class="fa fa-check"></i> Add</button>
-              <button type="button" id="close-modal" class="btn btn-dark" (click)="modal.close('editpoll')">Cancel</button>
+              <button *ngIf="!isEditPoll" type="submit" (click)="submitPoll()" class="btn btn-primary mr-3"><i class="fa fa-check"></i>
+                Add</button>
+                <button *ngIf="isEditPoll" type="submit" (click)="editPoll()" class="btn btn-primary mr-3"><i class="fa fa-check"></i>
+                  Edit</button>
+              <button type="button" id="close-modal" class="btn btn-dark"
+                (click)="cancelPoll();modal.close('editpoll')">Cancel</button>
             </div>
           </div>
         </div>
@@ -1164,7 +1176,8 @@
 <ng-template #invite let-modal>
   <div class="modal-body">
     <h3 class="pb-3">User List</h3>
-    <div class="col-6 px-0"><input [ngModelOptions]="{ standalone: true }" [(ngModel)]="searchitemUser" (keyup)="usersSearch($event)" type="text" class="form-control" id="search" placeholder="Search"></div>
+    <div class="col-6 px-0"><input [ngModelOptions]="{ standalone: true }" [(ngModel)]="searchitemUser"
+        (keyup)="usersSearch($event)" type="text" class="form-control" id="search" placeholder="Search"></div>
     <div class="my-3 table-responsive">
       <table class="table table-bordered">
         <thead>
@@ -1180,7 +1193,8 @@
         </thead>
         <tbody>
           <tr *ngFor="let user of usersData">
-            <td> <input (change)="inviteUsers($event,user?._id)" type="checkbox" [checked]="usersArray.includes(user?._id)"> </td>
+            <td> <input (change)="inviteUsers($event,user?._id)" type="checkbox"
+                [checked]="usersArray.includes(user?._id)"> </td>
             <td>{{user?.firstName}} {{user?.lastName}}</td>
             <td>{{user?.userName|| "-"}}</td>
             <td class="text-nowrap">{{user?.dialCode}}-{{user?.phoneNo}}</td>

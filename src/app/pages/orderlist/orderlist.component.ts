@@ -13,10 +13,9 @@ import { ActivatedRoute, Router, Routes } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import * as moment from "moment";
 import { EventTypeService } from "src/app/services/event-type.service";
-import { NgForm, FormGroup, FormControl } from "@angular/forms";
+import { NgForm, FormGroup, FormControl, FormArray } from "@angular/forms";
 import { FormBuilder, Validators } from "@angular/forms";
 import { UsersService } from "src/app/services/users.service";
-
 
 export interface UserData {
   Images: string;
@@ -38,8 +37,6 @@ export interface UserData {
   messagescount: string;
   likes: string;
   polls: string;
-
-
 }
 declare var $: any;
 @Component({
@@ -83,6 +80,7 @@ export class OrderlistComponent implements OnInit {
   addEventForm: FormGroup;
   addPollForm: FormGroup;
   searchValue: any;
+  isEditPoll:boolean=false;
   pollsData: any;
   eventData: any;
   waitingList: any;
@@ -96,13 +94,19 @@ export class OrderlistComponent implements OnInit {
   totalUsers: any;
   usersArray: any = [];
   iconID: any;
-  submitted: boolean=false;
-  isAdd : boolean = false;
+  submitted: boolean = false;
+  isAdd: boolean = false;
   isEdit: boolean = false;
+  options: FormArray;
   editId: any;
   eventID: any;
   isModalEnable: boolean = false;
   editEventID: any;
+  deleteID: any;
+  pollsArray: any = [];
+  pollID: any;
+  deletePollID: any;
+  guestList: any;
   constructor(
     private modalService: NgbModal,
     private Srvc: EventsService,
@@ -168,6 +172,7 @@ export class OrderlistComponent implements OnInit {
           Validators.maxLength(35),
         ],
       ],
+      options: new FormArray([]),
     });
   }
   toppings = new FormControl();
@@ -184,13 +189,29 @@ export class OrderlistComponent implements OnInit {
     this.getEventType();
   }
 
+  pushFormArray() {
+    this.options = this.addPollForm.get("options") as FormArray;
+    this.options.push(this.AddOption());
+  }
+
+  AddOption(): FormGroup {
+    return this.formBuilder.group({
+      option: new FormControl("", [Validators.required]),
+    });
+  }
+
+  removeOption(index) {
+    const remove = this.addPollForm.get("options") as FormArray;
+    remove.removeAt(index);
+  }
+
   cancelForm() {
     this.modalService.dismissAll();
     this.usersArray = [];
     this.iconID = null;
     this.addEventForm.reset();
     // this.ArrayImage = [];
-    this.submitted=false;
+    this.submitted = false;
   }
 
   // Calculate Duration(Difference b/w Start date & End date)
@@ -201,13 +222,13 @@ export class OrderlistComponent implements OnInit {
     var Days = Time / (1000 * 3600 * 24); //Diference in Days
     let hours = (Days - Math.floor(Days)) * 24;
     if (hours == 0) {
-      if (Days <= 1) {
-        return Math.floor(Days) + " Day ";
+      if (Days == 1 || Days==0) {
+        return Math.abs(Math.floor(Days)) + " Day ";
       } else {
-        return Math.floor(Days) + " Days ";
+        return Math.abs(Math.floor(Days)) + " Days ";
       }
     } else {
-      return Math.floor(Days) + " days " + hours + " hours";
+      return Math.abs(Math.floor(Days)) + " days " + hours + " hours";
     }
   }
 
@@ -252,16 +273,21 @@ export class OrderlistComponent implements OnInit {
 
   // Get Event Type Image
   getEventType() {
-    const array=[];
+    const array = [];
     this.eventTypeService.getEventType().subscribe((res: any) => {
       if (res.statusCode == 200) {
-        const array=[]
+        const array = [];
         for (var x of res.data) {
-         array.push({ id: x._id, image: x.eventImage });
+          array.push({ id: x._id, image: x.eventImage });
         }
-        this.ArrayImage=array;
+        this.ArrayImage = array;
       }
     });
+  }
+
+  // Get Today's Date
+  getToday(): string {
+    return new Date().toISOString().split("T")[0];
   }
 
   // Choose Event type icon
@@ -385,8 +411,18 @@ export class OrderlistComponent implements OnInit {
       action: "1",
     },
   ];
-  userDeleteModal(userDelete) {
+  userDeleteModal(userDelete, id) {
+    this.deleteID = id;
     this.modalService.open(userDelete, {
+      backdropClass: "light-blue-backdrop",
+      centered: true,
+      size: "sm",
+    });
+  }
+
+  pollDeleteModal(pollDelete, id) {
+    this.deletePollID = id;
+    this.modalService.open(pollDelete, {
       backdropClass: "light-blue-backdrop",
       centered: true,
       size: "sm",
@@ -404,36 +440,38 @@ export class OrderlistComponent implements OnInit {
       keyboard: false,
     });
   }
-  eventsedit(Adddetail,row) {
+  eventsedit(Adddetail, row) {
     this.isAdd = false;
     this.isEdit = true;
     this.addEventForm.reset();
     this.usersArray = [];
     this.iconID = null;
     // this.ArrayImage = [];
-    this.submitted=false;
+    this.submitted = false;
     // this.getEventType();
     this.addEventForm.controls["eventName"].setValue(row?.eventName);
     this.addEventForm.controls["eventFor"].setValue(row?.eventFor);
     this.addEventForm.controls["maxLength"].setValue(row?.maxLength);
-    this.addEventForm.controls["startDate"].setValue(moment(row?.startDate).format('YYYY-MM-DD'));
-    this.addEventForm.controls["endDate"].setValue(moment(row?.endDate).format('YYYY-MM-DD'));
+    this.addEventForm.controls["startDate"].setValue(
+      moment(row?.startDate).format("YYYY-MM-DD")
+    );
+    this.addEventForm.controls["endDate"].setValue(
+      moment(row?.endDate).format("YYYY-MM-DD")
+    );
     this.addEventForm.controls["startTime"].setValue(row?.startTime);
     this.addEventForm.controls["endTime"].setValue(row?.endTime);
     this.addEventForm.controls["address"].setValue(row?.address);
     this.addEventForm.controls["description"].setValue(row?.description);
 
     // Push the User ID in User Array
-    for (var user of row.invitedList){
-      this.usersArray.push(user._id)
-    };
+    for (var user of row.invitedList) {
+      this.usersArray.push(user._id);
+    }
 
     this.editEventID = row?._id;
 
     this.selectIcon(row?.eventType?._id);
     // console.log(row?.eventType?._id);
-
-
 
     this.modalService.open(Adddetail, {
       backdropClass: "light-blue-backdrop",
@@ -450,7 +488,11 @@ export class OrderlistComponent implements OnInit {
       size: "lg",
     });
   }
-  carModal(car) {
+  carModal(car,id) {
+    const filteredData = this.eventData.find(
+      (element: any) => element._id === id
+    );
+    this.guestList = filteredData.acceptedList;
     this.modalService.open(car, {
       backdropClass: "light-blue-backdrop",
       centered: true,
@@ -483,16 +525,47 @@ export class OrderlistComponent implements OnInit {
       keyboard: false,
     });
   }
-  editpollmodal(editpoll) {
+
+  // Cancel Poll
+  cancelPoll() {
+    this.addPollForm.reset();
+    this.pollsArray = [];
+  }
+
+  // Edit Poll
+  editpollmodal(editpoll, poll) {
+    this.isEditPoll = true;
+    this.pollID = poll?._id;
+    const remove = this.addPollForm.get("options") as FormArray;
+    remove.clear();
+    this.addPollForm.controls["pollName"].setValue(poll?.pollName);
+    this.pollsArray = <FormArray>this.addPollForm.controls.options;
+
+    for (let x of poll?.options) {
+      this.pollsArray.push(
+        this.formBuilder.group({
+          option: x.option,
+        })
+      );
+    }
+
     this.modalService.open(editpoll, {
       backdropClass: "light-blue-backdrop",
       centered: true,
       size: "lg",
       backdrop: "static",
       keyboard: false,
-
     });
+  }
 
+  addpollmodal(editpoll) {
+    this.modalService.open(editpoll, {
+      backdropClass: "light-blue-backdrop",
+      centered: true,
+      size: "lg",
+      backdrop: "static",
+      keyboard: false,
+    });
   }
   invitemodal(invite) {
     this.getUsers();
@@ -525,8 +598,6 @@ export class OrderlistComponent implements OnInit {
       }
     });
   }
-
-
 
   // Search
   timer1: any;
@@ -609,7 +680,7 @@ export class OrderlistComponent implements OnInit {
     this.submitted = true;
     if (this.addEventForm.valid) {
       let obj = {
-        eventId:this.editEventID,
+        eventId: this.editEventID,
         eventType: this.iconID,
         invitedList: this.usersArray,
         eventName: this.addEventForm.value.eventName,
@@ -691,34 +762,120 @@ export class OrderlistComponent implements OnInit {
     this.submitted = true;
     if (this.addPollForm.valid) {
       let obj = {
-        eventId : this.eventID ,
+        eventId: this.eventID,
         pollName: this.addPollForm.value.pollName,
-
+        options: this.addPollForm.controls["options"].value,
       };
-
-      console.log(obj);
-      return;
-      this.Srvc.addPoll(obj).subscribe(
-        (res: any) => {
-          if (res.statusCode == 401) {
-            this.sessionTerminate();
+      if (obj.options.length) {
+        // console.log(obj);
+        // return;
+        this.Srvc.addPoll(obj).subscribe(
+          (res: any) => {
+            if (res.statusCode == 401) {
+              this.sessionTerminate();
+            }
+            if (res.statusCode == 200) {
+              this.isEditPoll = false;
+              this.submitted = false;
+              this.addPollForm.reset();
+              Swal.fire("Success", res.message, "success");
+              document.getElementById("close-modal").click();
+              this.modalService.dismissAll();
+              this.getAllEvents();
+            } else {
+              Swal.fire("Oops", res.message, "error");
+            }
+          },
+          (error) => {
+            Swal.fire("Oops", "Something went wrong", "error");
           }
-          if (res.statusCode == 200) {
-            this.submitted = false;
-            this.addPollForm.reset();
-            Swal.fire("Success", res.message, "success");
-            document.getElementById('close-modal').click();
-            this.getAllEvents();
-          } else {
-            Swal.fire("Oops", res.message, "error");
-          }
-        },
-        (error) => {
-          Swal.fire("Oops", "Something went wrong", "error");
-        }
-      );
+        );
+      } else {
+        this.toaster.error("Atleast 1 option is required");
+      }
     } else {
       this.toaster.error("Please fill all the required fields");
     }
+  }
+
+  // Edit Poll
+  editPoll() {
+    this.submitted = true;
+    if (this.addPollForm.valid) {
+      let obj = {
+        eventId: this.eventID,
+        pollId: this.pollID,
+        pollName: this.addPollForm.value.pollName,
+        options: this.addPollForm.controls["options"].value,
+      };
+      if (obj.options.length) {
+        // console.log(obj);
+        // return;
+        this.Srvc.updatePoll(obj).subscribe(
+          (res: any) => {
+            if (res.statusCode == 401) {
+              this.sessionTerminate();
+            }
+            if (res.statusCode == 200) {
+              this.isEditPoll = false;
+              this.submitted = false;
+              this.addPollForm.reset();
+              Swal.fire("Success", res.message, "success");
+              document.getElementById("close-modal").click();
+              this.modalService.dismissAll();
+              this.getAllEvents();
+            } else {
+              Swal.fire("Oops", res.message, "error");
+            }
+          },
+          (error) => {
+            Swal.fire("Oops", "Something went wrong", "error");
+          }
+        );
+      } else {
+        this.toaster.error("Atleast 1 option is required");
+      }
+    } else {
+      this.toaster.error("Please fill all the required fields");
+    }
+  }
+
+  deleteEvent(){
+    const data = {
+      eventId: this.deleteID
+    };
+
+    this.Srvc.updateEvent(data).subscribe((res: any) => {
+      if (res.statusCode == 401) {
+        this.sessionTerminate();
+      }
+      if (res.statusCode == 200) {
+        Swal.fire("Deleted", "Event deleted successfully", "success");
+        this.modalService.dismissAll();
+        this.getAllEvents();
+      } else {
+        Swal.fire("Oops", "Failed to delete Event", "error");
+      }
+    });
+  }
+
+  deletePoll(){
+    const data = {
+      eventId: this.eventID,
+      pollId: this.deletePollID
+    };
+
+    this.Srvc.updatePoll(data).subscribe((res: any) => {
+      if (res.statusCode == 401) {
+        this.sessionTerminate();
+      }
+      if (res.statusCode == 200) {
+        Swal.fire("Deleted", "Poll deleted successfully", "success");
+        this.modalService.dismissAll();
+        this.getAllEvents();
+      } else {
+        Swal.fire("Oops", "Failed to delete Poll", "error");
+      }
+    });
   }
 }
