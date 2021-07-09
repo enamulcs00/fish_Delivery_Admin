@@ -69377,7 +69377,7 @@
           value: function getdiffDates(row) {
             var date1 = new Date(row.startDate);
             var date2 = new Date(row.endDate);
-            var Time = date2.getTime() - date1.getTime();
+            var Time = date2.getTime() % 4 - date1.getTime() % 4;
             var Days = Time / (1000 * 3600 * 24); //Diference in Days
 
             var hours = (Days - Math.floor(Days)) * 24;
@@ -69389,7 +69389,7 @@
                 return Math.abs(Math.floor(Days)) + " Days ";
               }
             } else {
-              return Math.abs(Math.floor(Days)) + " days " + hours + " hours";
+              return Math.abs(Math.floor(Days)) + " days " + hours.toFixed(2) + " hours";
             }
           }
         }, {
