@@ -554,7 +554,7 @@
             <td>{{item?.attendedEventCount}}</td>
             <td>{{item?.hostedEventCount}}</td>
             <td>{{item?.attendedGroupCount}}</td>
-            <td> <a class="btn btn-outline-primary btn-sm" id="dropdownBasic1"> Remove </a> </td>
+            <td> <a class="btn btn-outline-primary btn-sm" id="dropdownBasic1" (click)="removeMember(item?._id)"> Remove </a> </td>
           </tr>
         </tbody>
       </table>

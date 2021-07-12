@@ -1082,12 +1082,12 @@ export class OrderlistComponent implements OnInit {
         this.modalService.dismissAll();
         this.getAllEvents();
       } else {
-        Swal.fire("Oops", "Failed to remove member", "error");
+        Swal.fire("Oops", res.message, "error");
       }
     });
   }
 
-  // Remove a Member
+  // Accept a Member
   acceptMember(id){
     const data = {
       groupId: this.memberActionId,
@@ -1105,7 +1105,7 @@ export class OrderlistComponent implements OnInit {
         this.getAllEvents();
 
       } else {
-        Swal.fire("Oops", "Failed to accept member", "error");
+        Swal.fire("Oops", res.message, "error");
       }
     });
   }
