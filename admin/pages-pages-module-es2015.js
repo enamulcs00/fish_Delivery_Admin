@@ -38440,38 +38440,37 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _contact_contact_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./contact/contact.component */ "./src/app/pages/contact/contact.component.ts");
 /* harmony import */ var _notification_notification_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./notification/notification.component */ "./src/app/pages/notification/notification.component.ts");
 /* harmony import */ var _vendors_vendors_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./vendors/vendors.component */ "./src/app/pages/vendors/vendors.component.ts");
-/* harmony import */ var _events_events_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./events/events.component */ "./src/app/pages/events/events.component.ts");
-/* harmony import */ var _rewards_rewards_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./rewards/rewards.component */ "./src/app/pages/rewards/rewards.component.ts");
-/* harmony import */ var _vendordetail_vendordetail_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./vendordetail/vendordetail.component */ "./src/app/pages/vendordetail/vendordetail.component.ts");
-/* harmony import */ var _userhistory_userhistory_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./userhistory/userhistory.component */ "./src/app/pages/userhistory/userhistory.component.ts");
-/* harmony import */ var _promocode_promocode_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./promocode/promocode.component */ "./src/app/pages/promocode/promocode.component.ts");
-/* harmony import */ var _vendorhistory_vendorhistory_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./vendorhistory/vendorhistory.component */ "./src/app/pages/vendorhistory/vendorhistory.component.ts");
-/* harmony import */ var _users_detail_users_detail_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./users-detail/users-detail.component */ "./src/app/pages/users-detail/users-detail.component.ts");
-/* harmony import */ var _food_categories_food_categories_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./food-categories/food-categories.component */ "./src/app/pages/food-categories/food-categories.component.ts");
-/* harmony import */ var _inventory_inventory_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./inventory/inventory.component */ "./src/app/pages/inventory/inventory.component.ts");
-/* harmony import */ var _orderlist_orderlist_component__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./orderlist/orderlist.component */ "./src/app/pages/orderlist/orderlist.component.ts");
-/* harmony import */ var _banner_banner_component__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./banner/banner.component */ "./src/app/pages/banner/banner.component.ts");
-/* harmony import */ var _privacy_policy_privacy_component__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./privacy-policy/privacy.component */ "./src/app/pages/privacy-policy/privacy.component.ts");
-/* harmony import */ var _admin_admin_component__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./admin/admin.component */ "./src/app/pages/admin/admin.component.ts");
-/* harmony import */ var _food_items_food_items_component__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./food-items/food-items.component */ "./src/app/pages/food-items/food-items.component.ts");
-/* harmony import */ var _driver_driver_component__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./driver/driver.component */ "./src/app/pages/driver/driver.component.ts");
-/* harmony import */ var _driverdetail_driverdetail_component__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./driverdetail/driverdetail.component */ "./src/app/pages/driverdetail/driverdetail.component.ts");
-/* harmony import */ var _orderdetail_orderdetail_component__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./orderdetail/orderdetail.component */ "./src/app/pages/orderdetail/orderdetail.component.ts");
-/* harmony import */ var _adminform_adminform_component__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./adminform/adminform.component */ "./src/app/pages/adminform/adminform.component.ts");
-/* harmony import */ var _notificationhistory_notificationhistory_component__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./notificationhistory/notificationhistory.component */ "./src/app/pages/notificationhistory/notificationhistory.component.ts");
-/* harmony import */ var _support_support_component__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./support/support.component */ "./src/app/pages/support/support.component.ts");
-/* harmony import */ var _geofence_geofence_component__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./geofence/geofence.component */ "./src/app/pages/geofence/geofence.component.ts");
-/* harmony import */ var _geofencelist_geofencelist_component__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./geofencelist/geofencelist.component */ "./src/app/pages/geofencelist/geofencelist.component.ts");
-/* harmony import */ var _geofencedit_geofencedit_component__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./geofencedit/geofencedit.component */ "./src/app/pages/geofencedit/geofencedit.component.ts");
-/* harmony import */ var _product_sale_product_sale_component__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./product-sale/product-sale.component */ "./src/app/pages/product-sale/product-sale.component.ts");
-/* harmony import */ var _addvendor_addvendor_component__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./addvendor/addvendor.component */ "./src/app/pages/addvendor/addvendor.component.ts");
-/* harmony import */ var _editvendor_editvendor_component__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./editvendor/editvendor.component */ "./src/app/pages/editvendor/editvendor.component.ts");
-/* harmony import */ var _vendororderlist_vendororderlist_component__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./vendororderlist/vendororderlist.component */ "./src/app/pages/vendororderlist/vendororderlist.component.ts");
-/* harmony import */ var _vendorcategory_vendorcategory_component__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./vendorcategory/vendorcategory.component */ "./src/app/pages/vendorcategory/vendorcategory.component.ts");
-/* harmony import */ var _vendorbusiness_vendorbusiness_component__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./vendorbusiness/vendorbusiness.component */ "./src/app/pages/vendorbusiness/vendorbusiness.component.ts");
-/* harmony import */ var _trucklist_trucklist_component__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./trucklist/trucklist.component */ "./src/app/pages/trucklist/trucklist.component.ts");
-/* harmony import */ var _truckcategory_truckcategory_component__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./truckcategory/truckcategory.component */ "./src/app/pages/truckcategory/truckcategory.component.ts");
-/* harmony import */ var _terms_terms_component__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./terms/terms.component */ "./src/app/pages/terms/terms.component.ts");
+/* harmony import */ var _rewards_rewards_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./rewards/rewards.component */ "./src/app/pages/rewards/rewards.component.ts");
+/* harmony import */ var _vendordetail_vendordetail_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./vendordetail/vendordetail.component */ "./src/app/pages/vendordetail/vendordetail.component.ts");
+/* harmony import */ var _userhistory_userhistory_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./userhistory/userhistory.component */ "./src/app/pages/userhistory/userhistory.component.ts");
+/* harmony import */ var _promocode_promocode_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./promocode/promocode.component */ "./src/app/pages/promocode/promocode.component.ts");
+/* harmony import */ var _vendorhistory_vendorhistory_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./vendorhistory/vendorhistory.component */ "./src/app/pages/vendorhistory/vendorhistory.component.ts");
+/* harmony import */ var _users_detail_users_detail_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./users-detail/users-detail.component */ "./src/app/pages/users-detail/users-detail.component.ts");
+/* harmony import */ var _food_categories_food_categories_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./food-categories/food-categories.component */ "./src/app/pages/food-categories/food-categories.component.ts");
+/* harmony import */ var _inventory_inventory_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./inventory/inventory.component */ "./src/app/pages/inventory/inventory.component.ts");
+/* harmony import */ var _orderlist_orderlist_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./orderlist/orderlist.component */ "./src/app/pages/orderlist/orderlist.component.ts");
+/* harmony import */ var _banner_banner_component__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./banner/banner.component */ "./src/app/pages/banner/banner.component.ts");
+/* harmony import */ var _privacy_policy_privacy_component__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./privacy-policy/privacy.component */ "./src/app/pages/privacy-policy/privacy.component.ts");
+/* harmony import */ var _admin_admin_component__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./admin/admin.component */ "./src/app/pages/admin/admin.component.ts");
+/* harmony import */ var _food_items_food_items_component__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./food-items/food-items.component */ "./src/app/pages/food-items/food-items.component.ts");
+/* harmony import */ var _driver_driver_component__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./driver/driver.component */ "./src/app/pages/driver/driver.component.ts");
+/* harmony import */ var _driverdetail_driverdetail_component__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./driverdetail/driverdetail.component */ "./src/app/pages/driverdetail/driverdetail.component.ts");
+/* harmony import */ var _orderdetail_orderdetail_component__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./orderdetail/orderdetail.component */ "./src/app/pages/orderdetail/orderdetail.component.ts");
+/* harmony import */ var _adminform_adminform_component__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./adminform/adminform.component */ "./src/app/pages/adminform/adminform.component.ts");
+/* harmony import */ var _notificationhistory_notificationhistory_component__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./notificationhistory/notificationhistory.component */ "./src/app/pages/notificationhistory/notificationhistory.component.ts");
+/* harmony import */ var _support_support_component__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./support/support.component */ "./src/app/pages/support/support.component.ts");
+/* harmony import */ var _geofence_geofence_component__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./geofence/geofence.component */ "./src/app/pages/geofence/geofence.component.ts");
+/* harmony import */ var _geofencelist_geofencelist_component__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./geofencelist/geofencelist.component */ "./src/app/pages/geofencelist/geofencelist.component.ts");
+/* harmony import */ var _geofencedit_geofencedit_component__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./geofencedit/geofencedit.component */ "./src/app/pages/geofencedit/geofencedit.component.ts");
+/* harmony import */ var _product_sale_product_sale_component__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./product-sale/product-sale.component */ "./src/app/pages/product-sale/product-sale.component.ts");
+/* harmony import */ var _addvendor_addvendor_component__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./addvendor/addvendor.component */ "./src/app/pages/addvendor/addvendor.component.ts");
+/* harmony import */ var _editvendor_editvendor_component__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./editvendor/editvendor.component */ "./src/app/pages/editvendor/editvendor.component.ts");
+/* harmony import */ var _vendororderlist_vendororderlist_component__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./vendororderlist/vendororderlist.component */ "./src/app/pages/vendororderlist/vendororderlist.component.ts");
+/* harmony import */ var _vendorcategory_vendorcategory_component__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./vendorcategory/vendorcategory.component */ "./src/app/pages/vendorcategory/vendorcategory.component.ts");
+/* harmony import */ var _vendorbusiness_vendorbusiness_component__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./vendorbusiness/vendorbusiness.component */ "./src/app/pages/vendorbusiness/vendorbusiness.component.ts");
+/* harmony import */ var _trucklist_trucklist_component__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./trucklist/trucklist.component */ "./src/app/pages/trucklist/trucklist.component.ts");
+/* harmony import */ var _truckcategory_truckcategory_component__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./truckcategory/truckcategory.component */ "./src/app/pages/truckcategory/truckcategory.component.ts");
+/* harmony import */ var _terms_terms_component__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./terms/terms.component */ "./src/app/pages/terms/terms.component.ts");
 
 
 
@@ -38491,7 +38490,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
+// import { EventsComponent } from './events/events.component';
 
 
 
@@ -38554,7 +38553,7 @@ const PagesRoutes = [
             },
             {
                 path: 'users_detail',
-                component: _users_detail_users_detail_component__WEBPACK_IMPORTED_MODULE_25__["UsersDetailComponent"],
+                component: _users_detail_users_detail_component__WEBPACK_IMPORTED_MODULE_24__["UsersDetailComponent"],
                 data: {
                     title: 'Users Detail',
                     urls: [
@@ -38566,7 +38565,7 @@ const PagesRoutes = [
             },
             {
                 path: 'usershistory',
-                component: _userhistory_userhistory_component__WEBPACK_IMPORTED_MODULE_22__["UserhistoryComponent"],
+                component: _userhistory_userhistory_component__WEBPACK_IMPORTED_MODULE_21__["UserhistoryComponent"],
                 data: {
                     title: 'User History',
                     urls: [
@@ -38590,7 +38589,7 @@ const PagesRoutes = [
             },
             {
                 path: 'vendorsdetail',
-                component: _vendordetail_vendordetail_component__WEBPACK_IMPORTED_MODULE_21__["VendordetailComponent"],
+                component: _vendordetail_vendordetail_component__WEBPACK_IMPORTED_MODULE_20__["VendordetailComponent"],
                 data: {
                     title: 'Vendors Detail',
                     urls: [
@@ -38602,7 +38601,7 @@ const PagesRoutes = [
             },
             {
                 path: 'foodcategories',
-                component: _food_categories_food_categories_component__WEBPACK_IMPORTED_MODULE_26__["FoodCategoriesComponent"],
+                component: _food_categories_food_categories_component__WEBPACK_IMPORTED_MODULE_25__["FoodCategoriesComponent"],
                 data: {
                     title: 'Food Categories',
                     urls: [
@@ -38614,7 +38613,7 @@ const PagesRoutes = [
             },
             {
                 path: 'groups',
-                component: _food_items_food_items_component__WEBPACK_IMPORTED_MODULE_32__["FoodItemsComponent"],
+                component: _food_items_food_items_component__WEBPACK_IMPORTED_MODULE_31__["FoodItemsComponent"],
                 data: {
                     title: 'Groups',
                     urls: [
@@ -38624,21 +38623,21 @@ const PagesRoutes = [
                 },
                 canActivate: [src_app_authentication_auth_guard_guard__WEBPACK_IMPORTED_MODULE_0__["AuthGuardGuard"]]
             },
-            {
-                path: 'events',
-                component: _events_events_component__WEBPACK_IMPORTED_MODULE_19__["EventsComponent"],
-                data: {
-                    title: 'Events',
-                    urls: [
-                        { title: 'Dashboard', url: '/dashboard' },
-                        { title: 'Events' }
-                    ]
-                },
-                canActivate: [src_app_authentication_auth_guard_guard__WEBPACK_IMPORTED_MODULE_0__["AuthGuardGuard"]]
-            },
+            // {
+            //   path: 'orderlist',
+            //   component: EventsComponent,
+            //   data: {
+            //     title: 'Events',
+            //     urls: [
+            //       { title: 'Dashboard', url: '/dashboard' },
+            //       { title: 'Events' }
+            //     ]
+            //   },
+            //   canActivate: [AuthGuardGuard]
+            // },
             {
                 path: 'rewards',
-                component: _rewards_rewards_component__WEBPACK_IMPORTED_MODULE_20__["RewardsComponent"],
+                component: _rewards_rewards_component__WEBPACK_IMPORTED_MODULE_19__["RewardsComponent"],
                 data: {
                     title: 'Discount',
                     urls: [
@@ -38650,7 +38649,7 @@ const PagesRoutes = [
             },
             {
                 path: 'promocode',
-                component: _promocode_promocode_component__WEBPACK_IMPORTED_MODULE_23__["PromocodeComponent"],
+                component: _promocode_promocode_component__WEBPACK_IMPORTED_MODULE_22__["PromocodeComponent"],
                 data: {
                     title: 'Promo Code',
                     urls: [
@@ -38662,7 +38661,7 @@ const PagesRoutes = [
             },
             {
                 path: 'Inventory',
-                component: _inventory_inventory_component__WEBPACK_IMPORTED_MODULE_27__["InventoryComponent"],
+                component: _inventory_inventory_component__WEBPACK_IMPORTED_MODULE_26__["InventoryComponent"],
                 data: {
                     title: 'Inventory',
                     urls: [
@@ -38698,7 +38697,7 @@ const PagesRoutes = [
             },
             {
                 path: 'vendorHistory',
-                component: _vendorhistory_vendorhistory_component__WEBPACK_IMPORTED_MODULE_24__["VendorhistoryComponent"],
+                component: _vendorhistory_vendorhistory_component__WEBPACK_IMPORTED_MODULE_23__["VendorhistoryComponent"],
                 data: {
                     title: 'Vendor History',
                     urls: [
@@ -38710,7 +38709,7 @@ const PagesRoutes = [
             },
             {
                 path: 'drivers',
-                component: _driver_driver_component__WEBPACK_IMPORTED_MODULE_33__["DriverComponent"],
+                component: _driver_driver_component__WEBPACK_IMPORTED_MODULE_32__["DriverComponent"],
                 data: {
                     title: 'Drivers',
                     urls: [
@@ -38722,7 +38721,7 @@ const PagesRoutes = [
             },
             {
                 path: 'driversdetail',
-                component: _driverdetail_driverdetail_component__WEBPACK_IMPORTED_MODULE_34__["DriverdetailComponent"],
+                component: _driverdetail_driverdetail_component__WEBPACK_IMPORTED_MODULE_33__["DriverdetailComponent"],
                 data: {
                     title: 'Drivers Detail',
                     urls: [
@@ -38733,8 +38732,8 @@ const PagesRoutes = [
                 canActivate: [src_app_authentication_auth_guard_guard__WEBPACK_IMPORTED_MODULE_0__["AuthGuardGuard"]]
             },
             {
-                path: 'orderlist',
-                component: _orderlist_orderlist_component__WEBPACK_IMPORTED_MODULE_28__["OrderlistComponent"],
+                path: 'events',
+                component: _orderlist_orderlist_component__WEBPACK_IMPORTED_MODULE_27__["OrderlistComponent"],
                 data: {
                     title: 'Events',
                     urls: [
@@ -38746,7 +38745,7 @@ const PagesRoutes = [
             },
             {
                 path: 'orderdetail',
-                component: _orderdetail_orderdetail_component__WEBPACK_IMPORTED_MODULE_35__["OrderdetailComponent"],
+                component: _orderdetail_orderdetail_component__WEBPACK_IMPORTED_MODULE_34__["OrderdetailComponent"],
                 data: {
                     title: 'Order Detail',
                     urls: [
@@ -38758,7 +38757,7 @@ const PagesRoutes = [
             },
             {
                 path: 'banner',
-                component: _banner_banner_component__WEBPACK_IMPORTED_MODULE_29__["BannerComponent"],
+                component: _banner_banner_component__WEBPACK_IMPORTED_MODULE_28__["BannerComponent"],
                 data: {
                     title: 'Banner',
                     urls: [
@@ -38889,7 +38888,7 @@ const PagesRoutes = [
             },
             {
                 path: 'manage_admin',
-                component: _admin_admin_component__WEBPACK_IMPORTED_MODULE_31__["AdminComponent"],
+                component: _admin_admin_component__WEBPACK_IMPORTED_MODULE_30__["AdminComponent"],
                 data: {
                     title: 'Admin',
                     urls: [
@@ -38902,7 +38901,7 @@ const PagesRoutes = [
             {
                 path: 'manage_admin_form',
                 //canActivate: [AuthGaurdGuard],
-                component: _adminform_adminform_component__WEBPACK_IMPORTED_MODULE_36__["AdminformComponent"],
+                component: _adminform_adminform_component__WEBPACK_IMPORTED_MODULE_35__["AdminformComponent"],
                 data: {
                     title: 'Admin Detail',
                     urls: [
@@ -38926,7 +38925,7 @@ const PagesRoutes = [
             },
             {
                 path: 'notificationhistory',
-                component: _notificationhistory_notificationhistory_component__WEBPACK_IMPORTED_MODULE_37__["NotificationhistoryComponent"],
+                component: _notificationhistory_notificationhistory_component__WEBPACK_IMPORTED_MODULE_36__["NotificationhistoryComponent"],
                 data: {
                     title: 'Notification History',
                     urls: [
@@ -38938,7 +38937,7 @@ const PagesRoutes = [
             },
             {
                 path: 'support',
-                component: _support_support_component__WEBPACK_IMPORTED_MODULE_38__["SupportComponent"],
+                component: _support_support_component__WEBPACK_IMPORTED_MODULE_37__["SupportComponent"],
                 data: {
                     title: 'Support',
                     urls: [
@@ -38986,7 +38985,7 @@ const PagesRoutes = [
             },
             {
                 path: 'privacy',
-                component: _privacy_policy_privacy_component__WEBPACK_IMPORTED_MODULE_30__["PrivacyComponent"],
+                component: _privacy_policy_privacy_component__WEBPACK_IMPORTED_MODULE_29__["PrivacyComponent"],
                 data: {
                     title: 'Privacy',
                     urls: [
@@ -38998,7 +38997,7 @@ const PagesRoutes = [
             },
             {
                 path: 'terms',
-                component: _terms_terms_component__WEBPACK_IMPORTED_MODULE_50__["TermsComponent"],
+                component: _terms_terms_component__WEBPACK_IMPORTED_MODULE_49__["TermsComponent"],
                 data: {
                     title: 'Terms',
                     urls: [
@@ -39010,7 +39009,7 @@ const PagesRoutes = [
             },
             {
                 path: 'geofence',
-                component: _geofence_geofence_component__WEBPACK_IMPORTED_MODULE_39__["GeofenceComponent"],
+                component: _geofence_geofence_component__WEBPACK_IMPORTED_MODULE_38__["GeofenceComponent"],
                 data: {
                     title: 'Geofence',
                     urls: [
@@ -39022,7 +39021,7 @@ const PagesRoutes = [
             },
             {
                 path: 'geofencelist',
-                component: _geofencelist_geofencelist_component__WEBPACK_IMPORTED_MODULE_40__["GeofencelistComponent"],
+                component: _geofencelist_geofencelist_component__WEBPACK_IMPORTED_MODULE_39__["GeofencelistComponent"],
                 data: {
                     title: 'Geofence List',
                     urls: [
@@ -39034,7 +39033,7 @@ const PagesRoutes = [
             },
             {
                 path: 'geofencedit',
-                component: _geofencedit_geofencedit_component__WEBPACK_IMPORTED_MODULE_41__["GeofenceditComponent"],
+                component: _geofencedit_geofencedit_component__WEBPACK_IMPORTED_MODULE_40__["GeofenceditComponent"],
                 data: {
                     title: 'Geofence Edit',
                     urls: [
@@ -39046,7 +39045,7 @@ const PagesRoutes = [
             },
             {
                 path: 'productsale',
-                component: _product_sale_product_sale_component__WEBPACK_IMPORTED_MODULE_42__["ProductSaleComponent"],
+                component: _product_sale_product_sale_component__WEBPACK_IMPORTED_MODULE_41__["ProductSaleComponent"],
                 data: {
                     title: 'Product Sale',
                     urls: [
@@ -39058,7 +39057,7 @@ const PagesRoutes = [
             },
             {
                 path: 'addvendor',
-                component: _addvendor_addvendor_component__WEBPACK_IMPORTED_MODULE_43__["AddvendorComponent"],
+                component: _addvendor_addvendor_component__WEBPACK_IMPORTED_MODULE_42__["AddvendorComponent"],
                 data: {
                     title: 'Add Vendor',
                     urls: [
@@ -39070,7 +39069,7 @@ const PagesRoutes = [
             },
             {
                 path: 'editvendor',
-                component: _editvendor_editvendor_component__WEBPACK_IMPORTED_MODULE_44__["EditvendorComponent"],
+                component: _editvendor_editvendor_component__WEBPACK_IMPORTED_MODULE_43__["EditvendorComponent"],
                 data: {
                     title: 'Edit Vendor',
                     urls: [
@@ -39082,7 +39081,7 @@ const PagesRoutes = [
             },
             {
                 path: 'vendororder',
-                component: _vendororderlist_vendororderlist_component__WEBPACK_IMPORTED_MODULE_45__["VendororderlistComponent"],
+                component: _vendororderlist_vendororderlist_component__WEBPACK_IMPORTED_MODULE_44__["VendororderlistComponent"],
                 data: {
                     title: 'Orders',
                     urls: [
@@ -39094,7 +39093,7 @@ const PagesRoutes = [
             },
             {
                 path: 'vendorcategory',
-                component: _vendorcategory_vendorcategory_component__WEBPACK_IMPORTED_MODULE_46__["VendorcategoryComponent"],
+                component: _vendorcategory_vendorcategory_component__WEBPACK_IMPORTED_MODULE_45__["VendorcategoryComponent"],
                 data: {
                     title: 'Vendor Category',
                     urls: [
@@ -39106,7 +39105,7 @@ const PagesRoutes = [
             },
             {
                 path: 'vendorbusiness',
-                component: _vendorbusiness_vendorbusiness_component__WEBPACK_IMPORTED_MODULE_47__["VendorbusinessComponent"],
+                component: _vendorbusiness_vendorbusiness_component__WEBPACK_IMPORTED_MODULE_46__["VendorbusinessComponent"],
                 data: {
                     title: 'Business',
                     urls: [
@@ -39118,7 +39117,7 @@ const PagesRoutes = [
             },
             {
                 path: 'trucks',
-                component: _trucklist_trucklist_component__WEBPACK_IMPORTED_MODULE_48__["TrucklistComponent"],
+                component: _trucklist_trucklist_component__WEBPACK_IMPORTED_MODULE_47__["TrucklistComponent"],
                 data: {
                     title: 'Truck List',
                     urls: [
@@ -39130,7 +39129,7 @@ const PagesRoutes = [
             },
             {
                 path: 'truckscategory',
-                component: _truckcategory_truckcategory_component__WEBPACK_IMPORTED_MODULE_49__["TruckcategoryComponent"],
+                component: _truckcategory_truckcategory_component__WEBPACK_IMPORTED_MODULE_48__["TruckcategoryComponent"],
                 data: {
                     title: 'Category',
                     urls: [

@@ -91,8 +91,8 @@ export const ROUTES: RouteInfo[] = [
     //     submenu: []
     // },
      {
-        path: '/pages/orderlist',
-        title: 'Events',
+        path: '/pages/events',
+        title: 'events',
         icon: ' far fa-list-alt',
         class: '',
         extralink: false,

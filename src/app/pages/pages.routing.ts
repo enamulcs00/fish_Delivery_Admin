@@ -19,7 +19,7 @@ import { FaqComponent } from './faq/faq.component';
 import { ContactComponent } from './contact/contact.component';
 import { NotificationComponent } from './notification/notification.component';
 import { VendorsComponent } from './vendors/vendors.component';
-import { EventsComponent } from './events/events.component';
+// import { EventsComponent } from './events/events.component';
 import { RewardsComponent } from './rewards/rewards.component';
 import { VendordetailComponent } from './vendordetail/vendordetail.component';
 import { UserhistoryComponent } from './userhistory/userhistory.component';
@@ -154,18 +154,18 @@ export const PagesRoutes: Routes = [
         },
         canActivate: [AuthGuardGuard]
       },
-      {
-        path: 'events',
-        component: EventsComponent,
-        data: {
-          title: 'Events',
-          urls: [
-            { title: 'Dashboard', url: '/dashboard' },
-            { title: 'Events' }
-          ]
-        },
-        canActivate: [AuthGuardGuard]
-      },
+      // {
+      //   path: 'orderlist',
+      //   component: EventsComponent,
+      //   data: {
+      //     title: 'Events',
+      //     urls: [
+      //       { title: 'Dashboard', url: '/dashboard' },
+      //       { title: 'Events' }
+      //     ]
+      //   },
+      //   canActivate: [AuthGuardGuard]
+      // },
       {
         path: 'rewards',
         component: RewardsComponent,
@@ -263,7 +263,7 @@ export const PagesRoutes: Routes = [
         canActivate: [AuthGuardGuard]
       },
       {
-        path: 'orderlist',
+        path: 'events',
         component: OrderlistComponent,
         data: {
           title: 'Events',
