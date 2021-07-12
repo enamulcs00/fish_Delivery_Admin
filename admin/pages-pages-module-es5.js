@@ -91749,7 +91749,7 @@
         }, {
           key: "memberAction",
           value: function memberAction(body) {
-            return this.http.post("".concat(this.baseURL, "joinEventByEventId"), body);
+            return this.http.post("".concat(this.baseURL, "Admin/joinEventByEventId"), body);
           } //////////////////////////Polls/////////////////////////
           // Add Poll
 

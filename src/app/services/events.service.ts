@@ -32,7 +32,7 @@ export class EventsService {
 
   // Accept/Reject a member
   memberAction(body) {
-    return this.http.post<any>(`${this.baseURL}joinEventByEventId`, body);
+    return this.http.post<any>(`${this.baseURL}Admin/joinEventByEventId`, body);
   }
 
 

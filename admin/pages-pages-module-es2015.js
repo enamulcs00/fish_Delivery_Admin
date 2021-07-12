@@ -48499,7 +48499,7 @@ class EventsService {
     }
     // Accept/Reject a member
     memberAction(body) {
-        return this.http.post(`${this.baseURL}joinEventByEventId`, body);
+        return this.http.post(`${this.baseURL}Admin/joinEventByEventId`, body);
     }
     //////////////////////////Polls/////////////////////////
     // Add Poll
