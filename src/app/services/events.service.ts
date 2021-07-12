@@ -30,6 +30,11 @@ export class EventsService {
     return this.http.post<any>(`${this.baseURL}Admin/createEvent`, body);
   }
 
+  // Accept/Reject a member
+  memberAction(body) {
+    return this.http.post<any>(`${this.baseURL}joinEventByEventId`, body);
+  }
+
 
 
   //////////////////////////Polls/////////////////////////

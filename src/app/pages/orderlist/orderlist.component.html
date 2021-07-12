@@ -591,8 +591,8 @@
             <td>{{item?.attendedEventCount}}</td>
             <td>{{item?.hostedEventCount}}</td>
             <td>{{item?.attendedGroupCount}}</td>
-            <td> <a class="btn btn-outline-success btn-sm" id="dropdownBasic1"> Accept </a> <a
-                class="btn btn-outline-primary btn-sm mt-2" id="dropdownBasic1"> Reject </a> </td>
+            <td> <a class="btn btn-outline-success btn-sm" id="dropdownBasic1" (click)="acceptMember(item?._id)"> Accept </a> <a
+                class="btn btn-outline-primary btn-sm mt-2" id="dropdownBasic1" (click)="removeMember(item?._id)"> Reject </a> </td>
           </tr>
 
         </tbody>
@@ -669,7 +669,7 @@
                 <div class="form-group">
                   <label class="control-label"> Public/Private </label>
                   <!-- <input type="text" id="firstName" class="form-control" placeholder="Eg:- Public"> -->
-                  <select formControlName="eventFor" name="" id="" class="form-control">
+                  <select (change)="showInvites($event)" formControlName="eventFor" name="" id="" class="form-control">
                     <option [value]="1"> Public </option>
                     <option [value]="2"> Private </option>
                   </select>
@@ -793,9 +793,21 @@
                   </small>
                 </div>
               </div>
+
+
+
               <div class="col-6 mb-3">
                 <h4>Invite Guests/User <span *ngIf="usersArray.length">({{usersArray.length}} users Invited)</span></h4>
                 <button class="btn btn-primary" (click)="invitemodal(invite)"> Invite </button>
+              </div>
+
+              <div class="col-md-6" *ngIf="showToggle">
+                <div class="form-group">
+                  <label class="control-label"> Guests can invite others </label>
+                  <mat-slide-toggle class="ml-4" [checked]="isGuestInvited" (change)="changeGuestInvites($event)">
+                  </mat-slide-toggle>
+
+                </div>
               </div>
               <!-- <div *ngIf="isEdit">
 

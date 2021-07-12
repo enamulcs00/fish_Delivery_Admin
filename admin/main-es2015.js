@@ -1379,7 +1379,7 @@ const ROUTES = [
     // },
     {
         path: '/pages/events',
-        title: 'events',
+        title: 'Events',
         icon: ' far fa-list-alt',
         class: '',
         extralink: false,

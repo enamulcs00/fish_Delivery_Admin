@@ -121,6 +121,10 @@ export class OrderlistComponent implements OnInit {
   endTimeCheckValue: any;
   startTimeConvert: any;
   endTimeConvert: any;
+  isGuestInvited: boolean=false;
+  showToggle: boolean=false;
+  memberActionId: any;
+
   constructor(
     private modalService: NgbModal,
     private Srvc: EventsService,
@@ -521,6 +525,7 @@ export class OrderlistComponent implements OnInit {
     // this.ArrayImage = [];
     this.submitted = false;
     // this.getEventType();
+    this.isGuestInvited = row?.isGuestInvites
     this.addEventForm.controls["eventName"].setValue(row?.eventName);
     this.addEventForm.controls["eventFor"].setValue(row?.eventFor);
     this.addEventForm.controls["maxLength"].setValue(row?.maxLength);
@@ -534,6 +539,12 @@ export class OrderlistComponent implements OnInit {
     this.addEventForm.controls["endTime"].setValue(this.convertTime12to24(row?.endTime));
     this.addEventForm.controls["address"].setValue(row?.address);
     this.addEventForm.controls["description"].setValue(row?.description);
+    if (row?.eventFor==1){
+      this.showToggle = false;
+    }
+    if (row?.eventFor==2){
+      this.showToggle = true;
+    }
 
     // Push the User ID in User Array
     for (var user of row.invitedList) {
@@ -576,6 +587,7 @@ export class OrderlistComponent implements OnInit {
       (element: any) => element._id === id
     );
     this.waitingList = filteredData.waitingList;
+    this.memberActionId = id;
     this.modalService.open(car2, {
       backdropClass: "light-blue-backdrop",
       centered: true,
@@ -704,6 +716,20 @@ export class OrderlistComponent implements OnInit {
     // console.log(this.usersArray);
   }
 
+  changeGuestInvites(event) {
+    this.isGuestInvited = event.checked;
+  }
+
+  showInvites(e){
+    if (e.target.value=="2"){
+      this.showToggle = true;
+    }
+    else {
+      this.showToggle = false;
+    }
+
+  }
+
   submitEvent() {
     this.submitted = true;
     if (this.addEventForm.valid) {
@@ -721,10 +747,14 @@ export class OrderlistComponent implements OnInit {
         endTime: this.endTimeConvert,
         address: this.addEventForm.value.address,
         description: this.addEventForm.value.description,
+        isGuestInvites : this.isGuestInvited
       };
-
-      // console.log(obj);
-      // return;
+      if (obj.eventFor==1){
+        obj.isGuestInvites=true;
+      }
+      if (!this.iconID){
+        delete obj.eventType
+      }
       this.Srvc.addEvent(obj).subscribe(
         (res: any) => {
           if (res.statusCode == 401) {
@@ -744,6 +774,7 @@ export class OrderlistComponent implements OnInit {
             this.endTimeConvert="";
             this.startDateCheckValue="";
             this.endDateCheckValue="";
+            this.showToggle=false;
             this.getAllEvents();
           } else {
             Swal.fire("Oops", res.message, "error");
@@ -794,6 +825,7 @@ export class OrderlistComponent implements OnInit {
             this.startDateCheckValue="";
             this.endDateCheckValue="";
             this.modalService.dismissAll();
+            this.showToggle=false;
             Swal.fire("Success", res.message, "success");
             this.getAllEvents();
           } else {
@@ -1031,5 +1063,50 @@ export class OrderlistComponent implements OnInit {
         }
       }
     }
+  }
+
+  // Remove a Member
+  removeMember(id){
+    const data = {
+      groupId: this.memberActionId,
+      userId: id,
+      isJoin:false
+    };
+
+    this.Srvc.memberAction(data).subscribe((res: any) => {
+      if (res.statusCode == 401) {
+        this.sessionTerminate();
+      }
+      if (res.statusCode == 200) {
+        Swal.fire("Removed", "Event member successfully removed", "success");
+        this.modalService.dismissAll();
+        this.getAllEvents();
+      } else {
+        Swal.fire("Oops", "Failed to remove member", "error");
+      }
+    });
+  }
+
+  // Remove a Member
+  acceptMember(id){
+    const data = {
+      groupId: this.memberActionId,
+      userId: id,
+      isJoin:true
+    };
+
+    this.Srvc.memberAction(data).subscribe((res: any) => {
+      if (res.statusCode == 401) {
+        this.sessionTerminate();
+      }
+      if (res.statusCode == 200) {
+        Swal.fire("Success", "Event member successfully accepted", "success");
+        this.modalService.dismissAll();
+        this.getAllEvents();
+
+      } else {
+        Swal.fire("Oops", "Failed to accept member", "error");
+      }
+    });
   }
 }
