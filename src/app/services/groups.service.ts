@@ -34,4 +34,9 @@ export class GroupsService {
   uploadFile(data) {
     return this.http.post(`${this.baseURL}User/uploadFile`, data);
   }
+
+  // Remove Member
+  removeMember(body){
+    return this.http.post(this.baseURL+"Admin/removeFromGroup",body);
+  }
 }

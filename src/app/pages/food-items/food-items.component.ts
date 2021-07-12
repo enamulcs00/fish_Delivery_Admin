@@ -82,6 +82,7 @@ export class FoodItemsComponent implements OnInit {
   isImageAttached: boolean = false;
   deleteID: any;
   memberList: any;
+  groupRemoveID: any;
   constructor(
     private modalService: NgbModal,
     private Srvc: GroupsService,
@@ -333,6 +334,7 @@ export class FoodItemsComponent implements OnInit {
     const filteredData = this.groupData.find(
       (element: any) => element._id === id
     );
+    this.groupRemoveID = id;
     this.memberList = filteredData.join;
     this.modalService.open(car, {
       backdropClass: "light-blue-backdrop",
@@ -547,6 +549,31 @@ export class FoodItemsComponent implements OnInit {
         this.getAllGroups();
       } else {
         Swal.fire("Oops", "Failed to delete Group", "error");
+      }
+    });
+  }
+
+  // Remove a Member
+  removeMember(id){
+    const data = {
+      groupId: this.groupRemoveID,
+      userId: id,
+    };
+
+    this.Srvc.removeMember(data).subscribe((res: any) => {
+      if (res.statusCode == 401) {
+        this.sessionTerminate();
+      }
+      if (res.statusCode == 200) {
+        Swal.fire("Removed", "Group member successfully removed", "success");
+        this.modalService.dismissAll();
+        this.getAllGroups();
+        // const filteredData = this.groupData.find(
+        //   (element: any) => element._id === this.groupRemoveID
+        // );
+        // this.memberList = filteredData.join;
+      } else {
+        Swal.fire("Oops", "Failed to remove member", "error");
       }
     });
   }

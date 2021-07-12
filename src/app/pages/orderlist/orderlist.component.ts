@@ -119,6 +119,8 @@ export class OrderlistComponent implements OnInit {
   startDateCheckValue: any;
   endDateCheckValue: any;
   endTimeCheckValue: any;
+  startTimeConvert: any;
+  endTimeConvert: any;
   constructor(
     private modalService: NgbModal,
     private Srvc: EventsService,
@@ -330,6 +332,36 @@ export class OrderlistComponent implements OnInit {
     }
   }
 
+  // Convert time from 24 hr to 12 hr
+  tConvert(time) {
+    // Check correct time format and split into components
+    time = time.toString ().match (/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+    if (time.length > 1) { // If time format correct
+      time = time.slice (1);  // Remove full string match value
+      time[5] = +time[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
+      time[0] = +time[0] % 12 || 12; // Adjust hours
+    }
+    return time.join (''); // return adjusted time or original string
+  }
+
+  // convert Time from 12 hr to 24 hr
+  convertTime12to24 = (time12h) => {
+    const [time, modifier] = time12h.split(' ');
+
+    let [hours, minutes] = time.split(':');
+
+    if (hours === '12') {
+      hours = '00';
+    }
+
+    if (modifier === 'PM') {
+      hours = parseInt(hours, 10) + 12;
+    }
+
+    return `${hours}:${minutes}`;
+  }
+
 
   // Choose Event type icon
   selectIcon(id) {
@@ -498,8 +530,8 @@ export class OrderlistComponent implements OnInit {
     this.addEventForm.controls["endDate"].setValue(
       moment(row?.endDate).format("YYYY-MM-DD")
     );
-    this.addEventForm.controls["startTime"].setValue(row?.startTime);
-    this.addEventForm.controls["endTime"].setValue(row?.endTime);
+    this.addEventForm.controls["startTime"].setValue(this.convertTime12to24(row?.startTime));
+    this.addEventForm.controls["endTime"].setValue(this.convertTime12to24(row?.endTime));
     this.addEventForm.controls["address"].setValue(row?.address);
     this.addEventForm.controls["description"].setValue(row?.description);
 
@@ -675,6 +707,8 @@ export class OrderlistComponent implements OnInit {
   submitEvent() {
     this.submitted = true;
     if (this.addEventForm.valid) {
+      this.startTimeConvert = this.tConvert(this.addEventForm.value.startTime)
+      this.endTimeConvert = this.tConvert(this.addEventForm.value.endTime)
       let obj = {
         eventType: this.iconID,
         invitedList: this.usersArray,
@@ -683,8 +717,8 @@ export class OrderlistComponent implements OnInit {
         maxLength: this.addEventForm.value.maxLength,
         startDate: this.addEventForm.value.startDate,
         endDate: this.addEventForm.value.endDate,
-        startTime: this.addEventForm.value.startTime,
-        endTime: this.addEventForm.value.endTime,
+        startTime: this.startTimeConvert,
+        endTime: this.endTimeConvert,
         address: this.addEventForm.value.address,
         description: this.addEventForm.value.description,
       };
@@ -706,6 +740,8 @@ export class OrderlistComponent implements OnInit {
             Swal.fire("Success", res.message, "success");
             this.startTimeCheckValue="";
             this.endTimeCheckValue="";
+            this.startTimeConvert="";
+            this.endTimeConvert="";
             this.startDateCheckValue="";
             this.endDateCheckValue="";
             this.getAllEvents();
