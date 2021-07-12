@@ -48,7 +48,7 @@
                 <ng-container matColumnDef="Images">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Type </th>
                   <td mat-cell *matCellDef="let row">
-                    <span class="img-small"><img src={{row?.eventType?.eventImage}} alt="wedding" width="60"
+                    <span class="img-small imageListing"><img src={{row?.eventType?.eventImage}} alt="wedding" width="60"
                         class="rounded"></span>
                     <!-- <div class="cstm_icn">
                       <ul class="icon_outr">
@@ -140,7 +140,7 @@
                 <!-- Address -->
                 <ng-container matColumnDef="polls">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Polls </th>
-                  <td mat-cell *matCellDef="let row"> <button class="btn btn-primary"
+                  <td mat-cell *matCellDef="let row"> <button id="{{row._id}}" class="btn btn-primary"
                       (click)="pollsmodal(polls, row?._id)">View</button></td>
                 </ng-container>
                 <ng-container matColumnDef="location">
@@ -705,7 +705,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="control-label"> Start Date </label>
-                  <input [min]="getToday()" formControlName="startDate" type="date" id="startDate" class="form-control"
+                  <input [min]="getToday()" (change)="startDateCheck($event)" formControlName="startDate" type="date" id="startDate" class="form-control"
                     placeholder="Enter Date">
                   <small
                     *ngIf=" addEventForm.controls['startDate'].touched && addEventForm.controls['startDate'].invalid"
@@ -720,7 +720,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="control-label"> End Date </label>
-                  <input [min]="getToday()" formControlName="endDate" type="date" id="endDate" class="form-control"
+                  <input [min]="getMaxEndDate()"  (change)="endDateCheck($event)"  formControlName="endDate" type="date" id="endDate" class="form-control"
                     placeholder="Enter Date">
                   <small *ngIf=" addEventForm.controls['endDate'].touched && addEventForm.controls['endDate'].invalid"
                     class="text-danger d-inline-block pt-1">
@@ -734,7 +734,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="control-label"> Start Time </label>
-                  <input formControlName="startTime" type="time" id="startTime" class="form-control"
+                  <input (change)="startTimeCheck($event)" formControlName="startTime" type="time" id="startTime" class="form-control"
                     placeholder="Enter Date">
                   <small
                     *ngIf=" addEventForm.controls['startTime'].touched && addEventForm.controls['startTime'].invalid"
@@ -749,7 +749,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="control-label"> End Time </label>
-                  <input formControlName="endTime" type="time" id="endTime" class="form-control"
+                  <input (change)="endTimeCheck($event)" formControlName="endTime" type="time" id="endTime" class="form-control"
                     placeholder="Enter Date">
                   <small *ngIf=" addEventForm.controls['endTime'].touched && addEventForm.controls['endTime'].invalid"
                     class="text-danger d-inline-block pt-1">

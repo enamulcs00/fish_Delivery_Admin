@@ -39,10 +39,12 @@ input[type="file"] {
   /* opacity: 0; */
   font-size: 0px;
   cursor: pointer;
+
 }
 
 .cstm_icn li img {
   border: solid #000 1px;
+  background-color: #d8d8d8;
 }
 
 .cstm_icn li img.selected {
@@ -52,4 +54,10 @@ input[type="file"] {
 
 .cstm_icn .icn {
     font-size: 45px;
+}
+
+.imageListing{
+  background-color: #d8d8d8;
+    display: inline-block;
+    border-radius: 5px;
 }
