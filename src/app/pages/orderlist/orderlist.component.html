@@ -1235,8 +1235,8 @@
           (page)="onPaginateChangeUser($event)"></mat-paginator>
       </div>
       <div class="input-group-append">
-        <a class="btn mr-0 btn-success text-white my-2 mr-2" type="button" (click)="modal.close('invite')">Submit</a>
-        <a class="btn mr-0 btn-danger text-white my-2" type="button" (click)="modal.close()">Close</a>
+        <a class="btn mr-0 btn-success text-white my-2 mr-2" type="button" (click)="saveArray();modal.close('invite')">Submit</a>
+        <a class="btn mr-0 btn-danger text-white my-2" type="button" (click)="removeArray();modal.close()">Close</a>
       </div>
     </div>
   </div>

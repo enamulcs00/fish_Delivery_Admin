@@ -26418,6 +26418,10 @@ class FoodItemsComponent {
         });
     }
     Adddetails(Adddetail) {
+        this.tempArray = [];
+        for (var user of this.usersArray) {
+            this.tempArray.push(user);
+        }
         this.modalService.open(Adddetail, {
             backdropClass: "light-blue-backdrop",
             centered: true,
@@ -26444,6 +26448,8 @@ class FoodItemsComponent {
         });
     }
     invitemodal(invite) {
+        this.pageindecUser = 1;
+        this.getUsers();
         this.modalService.open(invite, {
             backdropClass: "light-blue-backdrop",
             centered: true,
@@ -26454,9 +26460,6 @@ class FoodItemsComponent {
     }
     // Push the selected Users ID in a Array
     inviteUsers(event, id) {
-        this.tempArray = [];
-        this.tempArray = this.usersArray;
-        this.saveStateArray = this.usersArray;
         if (event.target.checked) {
             this.tempArray.push(id);
         }
@@ -26466,16 +26469,12 @@ class FoodItemsComponent {
     }
     saveArray() {
         this.usersArray = this.tempArray;
-        this.saveStateArray = this.tempArray;
-        this.tempArray = [];
-        console.log("Save Clicked : Users Array", this.usersArray);
-        console.log("Save Clicked : Temp Array", this.tempArray);
+        this.saveStateArray = this.usersArray;
+        this.tempArray = [].concat(this.saveStateArray);
     }
     removeArray() {
-        this.tempArray = [];
         this.usersArray = this.saveStateArray;
-        console.log("Removed called : Users Array", this.usersArray);
-        console.log("Removed called : Temp Array", this.tempArray);
+        this.tempArray = [].concat(this.usersArray);
     }
     // Cancel form & reset values
     cancelForm() {
@@ -26502,6 +26501,13 @@ class FoodItemsComponent {
         // Push the User ID in User Array
         for (var user of row === null || row === void 0 ? void 0 : row.invite) {
             this.usersArray.push(user._id);
+        }
+        for (var user of row === null || row === void 0 ? void 0 : row.invite) {
+            this.saveStateArray.push(user._id);
+        }
+        this.tempArray = [];
+        for (var user of this.usersArray) {
+            this.tempArray.push(user);
         }
         if ((row === null || row === void 0 ? void 0 : row.groupType) == 1) {
             this.showToggle = false;
@@ -37197,11 +37203,11 @@ function OrderlistComponent_ng_template_73_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](28, "div", 104);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](29, "a", 192);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function OrderlistComponent_ng_template_73_Template_a_click_29_listener() { const modal_r387 = ctx.$implicit; return modal_r387.close("invite"); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function OrderlistComponent_ng_template_73_Template_a_click_29_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r393); const modal_r387 = ctx.$implicit; const ctx_r396 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); ctx_r396.saveArray(); return modal_r387.close("invite"); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](30, "Submit");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](31, "a", 105);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function OrderlistComponent_ng_template_73_Template_a_click_31_listener() { const modal_r387 = ctx.$implicit; return modal_r387.close(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function OrderlistComponent_ng_template_73_Template_a_click_31_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r393); const modal_r387 = ctx.$implicit; const ctx_r397 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); ctx_r397.removeArray(); return modal_r387.close(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](32, "Close");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -37258,6 +37264,7 @@ class OrderlistComponent {
         this.pageUser = 5;
         this.usersArray = [];
         this.submitted = false;
+        this.tempArray = [];
         this.isAdd = false;
         this.isEdit = false;
         this.isModalEnable = false;
@@ -37265,6 +37272,7 @@ class OrderlistComponent {
         this.isGuestInvited = false;
         this.showToggle = false;
         this.noDataToggle = false;
+        this.saveStateArray = [];
         this.toppings = new _angular_forms__WEBPACK_IMPORTED_MODULE_10__["FormControl"]();
         this.toppingList = [
             "Jamas Thomas",
@@ -37545,6 +37553,10 @@ class OrderlistComponent {
         });
     }
     Adddetails(Adddetail) {
+        this.tempArray = [];
+        for (var user of this.usersArray) {
+            this.tempArray.push(user);
+        }
         this.isAdd = true;
         this.isEdit = false;
         // this.getEventType();
@@ -37589,6 +37601,10 @@ class OrderlistComponent {
             this.usersArray.push(user._id);
         }
         this.editEventID = row === null || row === void 0 ? void 0 : row._id;
+        this.tempArray = [];
+        for (var user of this.usersArray) {
+            this.tempArray.push(user);
+        }
         this.selectIcon((_a = row === null || row === void 0 ? void 0 : row.eventType) === null || _a === void 0 ? void 0 : _a._id);
         // console.log(row?.eventType?._id);
         this.modalService.open(Adddetail, {
@@ -37676,8 +37692,8 @@ class OrderlistComponent {
         });
     }
     invitemodal(invite) {
+        this.pageindecUser = 1;
         this.getUsers();
-        // this.modalService.dismissAll();
         this.modalService.open(invite, {
             backdropClass: "light-blue-backdrop",
             centered: true,
@@ -37728,12 +37744,20 @@ class OrderlistComponent {
     // Push the selected Users ID in a Array
     inviteUsers(event, id) {
         if (event.target.checked) {
-            this.usersArray.push(id);
+            this.tempArray.push(id);
         }
         else {
-            this.usersArray.splice(this.usersArray.indexOf(id), 1);
+            this.tempArray.splice(this.tempArray.indexOf(id), 1);
         }
-        // console.log(this.usersArray);
+    }
+    saveArray() {
+        this.usersArray = this.tempArray;
+        this.saveStateArray = this.usersArray;
+        this.tempArray = [].concat(this.saveStateArray);
+    }
+    removeArray() {
+        this.usersArray = this.saveStateArray;
+        this.tempArray = [].concat(this.usersArray);
     }
     changeGuestInvites(event) {
         this.isGuestInvited = event.checked;

@@ -105,6 +105,7 @@ export class OrderlistComponent implements OnInit {
   usersArray: any = [];
   iconID: any;
   submitted: boolean = false;
+  tempArray: any=[];
   isAdd: boolean = false;
   isEdit: boolean = false;
   options: FormArray;
@@ -127,6 +128,7 @@ export class OrderlistComponent implements OnInit {
   memberActionId: any;
   defaultSelection: any;
   noDataToggle: boolean=false;
+  saveStateArray: any=[];
 
   constructor(
     private modalService: NgbModal,
@@ -447,6 +449,10 @@ export class OrderlistComponent implements OnInit {
     });
   }
   Adddetails(Adddetail) {
+    this.tempArray = [];
+    for (var user of this.usersArray) {
+      this.tempArray.push(user);
+    }
     this.isAdd = true;
     this.isEdit = false;
     // this.getEventType();
@@ -496,6 +502,11 @@ export class OrderlistComponent implements OnInit {
     }
 
     this.editEventID = row?._id;
+
+    this.tempArray = [];
+    for (var user of this.usersArray) {
+      this.tempArray.push(user);
+    }
 
     this.selectIcon(row?.eventType?._id);
     // console.log(row?.eventType?._id);
@@ -598,8 +609,8 @@ export class OrderlistComponent implements OnInit {
     });
   }
   invitemodal(invite) {
+    this.pageindecUser=1;
     this.getUsers();
-    // this.modalService.dismissAll();
     this.modalService.open(invite, {
       backdropClass: "light-blue-backdrop",
       centered: true,
@@ -655,11 +666,21 @@ export class OrderlistComponent implements OnInit {
   // Push the selected Users ID in a Array
   inviteUsers(event, id) {
     if (event.target.checked) {
-      this.usersArray.push(id);
+      this.tempArray.push(id);
     } else {
-      this.usersArray.splice(this.usersArray.indexOf(id), 1);
+      this.tempArray.splice(this.tempArray.indexOf(id), 1);
     }
-    // console.log(this.usersArray);
+  }
+
+  saveArray(){
+    this.usersArray = this.tempArray;
+    this.saveStateArray = this.usersArray;
+    this.tempArray = [].concat(this.saveStateArray);
+  }
+
+  removeArray(){
+    this.usersArray = this.saveStateArray;
+    this.tempArray=[].concat(this.usersArray);
   }
 
   changeGuestInvites(event) {

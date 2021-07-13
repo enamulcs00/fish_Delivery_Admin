@@ -48318,6 +48318,22 @@
         }, {
           key: "Adddetails",
           value: function Adddetails(Adddetail) {
+            this.tempArray = [];
+
+            var _iterator16 = _createForOfIteratorHelper(this.usersArray),
+                _step16;
+
+            try {
+              for (_iterator16.s(); !(_step16 = _iterator16.n()).done;) {
+                var user = _step16.value;
+                this.tempArray.push(user);
+              }
+            } catch (err) {
+              _iterator16.e(err);
+            } finally {
+              _iterator16.f();
+            }
+
             this.modalService.open(Adddetail, {
               backdropClass: "light-blue-backdrop",
               centered: true,
@@ -48352,6 +48368,8 @@
         }, {
           key: "invitemodal",
           value: function invitemodal(invite) {
+            this.pageindecUser = 1;
+            this.getUsers();
             this.modalService.open(invite, {
               backdropClass: "light-blue-backdrop",
               centered: true,
@@ -48364,10 +48382,6 @@
         }, {
           key: "inviteUsers",
           value: function inviteUsers(event, id) {
-            this.tempArray = [];
-            this.tempArray = this.usersArray;
-            this.saveStateArray = this.usersArray;
-
             if (event.target.checked) {
               this.tempArray.push(id);
             } else {
@@ -48378,18 +48392,14 @@
           key: "saveArray",
           value: function saveArray() {
             this.usersArray = this.tempArray;
-            this.saveStateArray = this.tempArray;
-            this.tempArray = [];
-            console.log("Save Clicked : Users Array", this.usersArray);
-            console.log("Save Clicked : Temp Array", this.tempArray);
+            this.saveStateArray = this.usersArray;
+            this.tempArray = [].concat(this.saveStateArray);
           }
         }, {
           key: "removeArray",
           value: function removeArray() {
-            this.tempArray = [];
             this.usersArray = this.saveStateArray;
-            console.log("Removed called : Users Array", this.usersArray);
-            console.log("Removed called : Temp Array", this.tempArray);
+            this.tempArray = [].concat(this.usersArray);
           } // Cancel form & reset values
 
         }, {
@@ -48420,18 +48430,48 @@
             } // Push the User ID in User Array
 
 
-            var _iterator16 = _createForOfIteratorHelper(row === null || row === void 0 ? void 0 : row.invite),
-                _step16;
+            var _iterator17 = _createForOfIteratorHelper(row === null || row === void 0 ? void 0 : row.invite),
+                _step17;
 
             try {
-              for (_iterator16.s(); !(_step16 = _iterator16.n()).done;) {
-                var user = _step16.value;
+              for (_iterator17.s(); !(_step17 = _iterator17.n()).done;) {
+                var user = _step17.value;
                 this.usersArray.push(user._id);
               }
             } catch (err) {
-              _iterator16.e(err);
+              _iterator17.e(err);
             } finally {
-              _iterator16.f();
+              _iterator17.f();
+            }
+
+            var _iterator18 = _createForOfIteratorHelper(row === null || row === void 0 ? void 0 : row.invite),
+                _step18;
+
+            try {
+              for (_iterator18.s(); !(_step18 = _iterator18.n()).done;) {
+                var user = _step18.value;
+                this.saveStateArray.push(user._id);
+              }
+            } catch (err) {
+              _iterator18.e(err);
+            } finally {
+              _iterator18.f();
+            }
+
+            this.tempArray = [];
+
+            var _iterator19 = _createForOfIteratorHelper(this.usersArray),
+                _step19;
+
+            try {
+              for (_iterator19.s(); !(_step19 = _iterator19.n()).done;) {
+                var user = _step19.value;
+                this.tempArray.push(user);
+              }
+            } catch (err) {
+              _iterator19.e(err);
+            } finally {
+              _iterator19.f();
             }
 
             if ((row === null || row === void 0 ? void 0 : row.groupType) == 1) {
@@ -70438,7 +70478,13 @@
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](29, "a", 192);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function OrderlistComponent_ng_template_73_Template_a_click_29_listener() {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r393);
+
             var modal_r387 = ctx.$implicit;
+
+            var ctx_r396 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+
+            ctx_r396.saveArray();
             return modal_r387.close("invite");
           });
 
@@ -70449,7 +70495,13 @@
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](31, "a", 105);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function OrderlistComponent_ng_template_73_Template_a_click_31_listener() {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r393);
+
             var modal_r387 = ctx.$implicit;
+
+            var ctx_r397 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+
+            ctx_r397.removeArray();
             return modal_r387.close();
           });
 
@@ -70508,6 +70560,7 @@
           this.pageUser = 5;
           this.usersArray = [];
           this.submitted = false;
+          this.tempArray = [];
           this.isAdd = false;
           this.isEdit = false;
           this.isModalEnable = false;
@@ -70515,6 +70568,7 @@
           this.isGuestInvited = false;
           this.showToggle = false;
           this.noDataToggle = false;
+          this.saveStateArray = [];
           this.toppings = new _angular_forms__WEBPACK_IMPORTED_MODULE_10__["FormControl"]();
           this.toppingList = ["Jamas Thomas", "Rony Roy", "Vicky Andy", "john Vick", "Alex Harry", "Harry Roy"]; // convert Time from 12 hr to 24 hr
 
@@ -70694,12 +70748,12 @@
                 _this142.defaultSelection = (_a = res === null || res === void 0 ? void 0 : res.data[0]) === null || _a === void 0 ? void 0 : _a.adminId;
                 var _array = [];
 
-                var _iterator17 = _createForOfIteratorHelper(res.data),
-                    _step17;
+                var _iterator20 = _createForOfIteratorHelper(res.data),
+                    _step20;
 
                 try {
-                  for (_iterator17.s(); !(_step17 = _iterator17.n()).done;) {
-                    var x = _step17.value;
+                  for (_iterator20.s(); !(_step20 = _iterator20.n()).done;) {
+                    var x = _step20.value;
 
                     _array.push({
                       id: x._id,
@@ -70707,9 +70761,9 @@
                     });
                   }
                 } catch (err) {
-                  _iterator17.e(err);
+                  _iterator20.e(err);
                 } finally {
-                  _iterator17.f();
+                  _iterator20.f();
                 }
 
                 _this142.ArrayImage = _array;
@@ -70840,6 +70894,22 @@
         }, {
           key: "Adddetails",
           value: function Adddetails(Adddetail) {
+            this.tempArray = [];
+
+            var _iterator21 = _createForOfIteratorHelper(this.usersArray),
+                _step21;
+
+            try {
+              for (_iterator21.s(); !(_step21 = _iterator21.n()).done;) {
+                var user = _step21.value;
+                this.tempArray.push(user);
+              }
+            } catch (err) {
+              _iterator21.e(err);
+            } finally {
+              _iterator21.f();
+            }
+
             this.isAdd = true;
             this.isEdit = false; // this.getEventType();
 
@@ -70886,21 +70956,37 @@
             } // Push the User ID in User Array
 
 
-            var _iterator18 = _createForOfIteratorHelper(row.invitedList),
-                _step18;
+            var _iterator22 = _createForOfIteratorHelper(row.invitedList),
+                _step22;
 
             try {
-              for (_iterator18.s(); !(_step18 = _iterator18.n()).done;) {
-                var user = _step18.value;
+              for (_iterator22.s(); !(_step22 = _iterator22.n()).done;) {
+                var user = _step22.value;
                 this.usersArray.push(user._id);
               }
             } catch (err) {
-              _iterator18.e(err);
+              _iterator22.e(err);
             } finally {
-              _iterator18.f();
+              _iterator22.f();
             }
 
             this.editEventID = row === null || row === void 0 ? void 0 : row._id;
+            this.tempArray = [];
+
+            var _iterator23 = _createForOfIteratorHelper(this.usersArray),
+                _step23;
+
+            try {
+              for (_iterator23.s(); !(_step23 = _iterator23.n()).done;) {
+                var user = _step23.value;
+                this.tempArray.push(user);
+              }
+            } catch (err) {
+              _iterator23.e(err);
+            } finally {
+              _iterator23.f();
+            }
+
             this.selectIcon((_a = row === null || row === void 0 ? void 0 : row.eventType) === null || _a === void 0 ? void 0 : _a._id); // console.log(row?.eventType?._id);
 
             this.modalService.open(Adddetail, {
@@ -70982,20 +71068,20 @@
             this.addPollForm.controls["pollName"].setValue(poll === null || poll === void 0 ? void 0 : poll.pollName);
             this.pollsArray = this.addPollForm.controls.options;
 
-            var _iterator19 = _createForOfIteratorHelper(poll === null || poll === void 0 ? void 0 : poll.options),
-                _step19;
+            var _iterator24 = _createForOfIteratorHelper(poll === null || poll === void 0 ? void 0 : poll.options),
+                _step24;
 
             try {
-              for (_iterator19.s(); !(_step19 = _iterator19.n()).done;) {
-                var x = _step19.value;
+              for (_iterator24.s(); !(_step24 = _iterator24.n()).done;) {
+                var x = _step24.value;
                 this.pollsArray.push(this.formBuilder.group({
                   option: x.option
                 }));
               }
             } catch (err) {
-              _iterator19.e(err);
+              _iterator24.e(err);
             } finally {
-              _iterator19.f();
+              _iterator24.f();
             }
 
             this.modalService.open(editpoll, {
@@ -71022,8 +71108,8 @@
         }, {
           key: "invitemodal",
           value: function invitemodal(invite) {
-            this.getUsers(); // this.modalService.dismissAll();
-
+            this.pageindecUser = 1;
+            this.getUsers();
             this.modalService.open(invite, {
               backdropClass: "light-blue-backdrop",
               centered: true,
@@ -71089,11 +71175,23 @@
           key: "inviteUsers",
           value: function inviteUsers(event, id) {
             if (event.target.checked) {
-              this.usersArray.push(id);
+              this.tempArray.push(id);
             } else {
-              this.usersArray.splice(this.usersArray.indexOf(id), 1);
-            } // console.log(this.usersArray);
-
+              this.tempArray.splice(this.tempArray.indexOf(id), 1);
+            }
+          }
+        }, {
+          key: "saveArray",
+          value: function saveArray() {
+            this.usersArray = this.tempArray;
+            this.saveStateArray = this.usersArray;
+            this.tempArray = [].concat(this.saveStateArray);
+          }
+        }, {
+          key: "removeArray",
+          value: function removeArray() {
+            this.usersArray = this.saveStateArray;
+            this.tempArray = [].concat(this.usersArray);
           }
         }, {
           key: "changeGuestInvites",

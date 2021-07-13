@@ -280,6 +280,10 @@ export class FoodItemsComponent implements OnInit {
     });
   }
   Adddetails(Adddetail) {
+    this.tempArray = [];
+    for (var user of this.usersArray) {
+      this.tempArray.push(user);
+    }
     this.modalService.open(Adddetail, {
       backdropClass: "light-blue-backdrop",
       centered: true,
@@ -309,7 +313,8 @@ export class FoodItemsComponent implements OnInit {
     });
   }
   invitemodal(invite) {
-
+    this.pageindecUser=1;
+    this.getUsers();
     this.modalService.open(invite, {
       backdropClass: "light-blue-backdrop",
       centered: true,
@@ -321,9 +326,6 @@ export class FoodItemsComponent implements OnInit {
 
   // Push the selected Users ID in a Array
   inviteUsers(event, id) {
-    this.tempArray = [];
-    this.tempArray = this.usersArray;
-    this.saveStateArray = this.usersArray;
     if (event.target.checked) {
       this.tempArray.push(id);
     } else {
@@ -333,17 +335,13 @@ export class FoodItemsComponent implements OnInit {
 
   saveArray(){
     this.usersArray = this.tempArray;
-    this.saveStateArray = this.tempArray;
-    this.tempArray = [];
-    console.log("Save Clicked : Users Array",this.usersArray);
-    console.log("Save Clicked : Temp Array",this.tempArray);
+    this.saveStateArray = this.usersArray;
+    this.tempArray = [].concat(this.saveStateArray);
   }
 
   removeArray(){
-    this.tempArray=[];
     this.usersArray = this.saveStateArray;
-    console.log("Removed called : Users Array",this.usersArray);
-    console.log("Removed called : Temp Array",this.tempArray);
+    this.tempArray=[].concat(this.usersArray);
   }
 
   // Error Handling
@@ -379,6 +377,16 @@ export class FoodItemsComponent implements OnInit {
     for (var user of row?.invite) {
       this.usersArray.push(user._id);
     }
+
+
+    for (var user of row?.invite) {
+      this.saveStateArray.push(user._id);
+    }
+    this.tempArray = [];
+    for (var user of this.usersArray) {
+      this.tempArray.push(user);
+    }
+
 
     if (row?.groupType==1){
       this.showToggle = false;
