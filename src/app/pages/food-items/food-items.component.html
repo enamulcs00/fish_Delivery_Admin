@@ -239,7 +239,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="control-label"> Public/Private </label>
-                  <select formControlName="groupFor" name="" id="" class="form-control">
+                  <select (change)="showInvites($event)" formControlName="groupFor" name="" id="" class="form-control">
                     <option [value]="1"> Public </option>
                     <option [value]="2"> Private </option>
                   </select>
@@ -250,7 +250,7 @@
               </div>
 
               <!-- Visibility -->
-              <div class="align-items-center col-md-6 d-flex">
+              <div *ngIf="showToggle" class="align-items-center col-md-6 d-flex">
                 <div class="form-group has-danger mb-0">
                   <label class="control-label mb-0"> Visible to non-members </label>
                   <!-- <input type="text" id="email" class="form-control form-control-danger" placeholder="Eg:- yes"> -->
@@ -503,8 +503,8 @@
           (page)="onPaginateChangeUser($event)"></mat-paginator>
       </div>
       <div class="input-group-append">
-        <a class="btn mr-0 btn-success text-white my-2 mr-2" type="button" (click)="modal.close('invite')">Submit</a>
-        <a class="btn mr-0 btn-danger text-white my-2" type="button" (click)="modal.close()">Close</a>
+        <a class="btn mr-0 btn-success text-white my-2 mr-2" type="button" (click)="saveArray();modal.close('invite')">Submit</a>
+        <a class="btn mr-0 btn-danger text-white my-2" type="button" (click)="removeArray();modal.close()">Close</a>
       </div>
     </div>
   </div>

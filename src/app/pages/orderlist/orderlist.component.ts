@@ -300,9 +300,9 @@ export class OrderlistComponent implements OnInit {
         } else {
           this.dataSource = null;
           this.noDataToggle = true;
-          this.toaster.error("No data found", "Oops", {
-            timeOut: 2000,
-          });
+          // this.toaster.error("No data found", "Oops", {
+          //   timeOut: 2000,
+          // });
         }
         this.totalEvents = res?.data?.count;
       } else {

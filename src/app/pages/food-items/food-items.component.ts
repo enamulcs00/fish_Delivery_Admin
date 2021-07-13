@@ -60,6 +60,7 @@ export class FoodItemsComponent implements OnInit {
   searchitem: any;
   btnStatus: any = 0;
   isEdit: boolean = false;
+  showToggle: boolean=false;
   filterName:string='All';
   groupData: any;
   totalGroups: any;
@@ -84,6 +85,8 @@ export class FoodItemsComponent implements OnInit {
   deleteID: any;
   memberList: any;
   groupRemoveID: any;
+  tempArray: any=[];
+  saveStateArray: any=[];
   constructor(
     private modalService: NgbModal,
     private Srvc: GroupsService,
@@ -172,6 +175,16 @@ export class FoodItemsComponent implements OnInit {
     });
   }
 
+  showInvites(e){
+    if (e.target.value=="2"){
+      this.showToggle = true;
+    }
+    else {
+      this.showToggle = false;
+    }
+
+  }
+
   // Get Users listing
   getUsers() {
     const data = {
@@ -257,62 +270,6 @@ export class FoodItemsComponent implements OnInit {
     }
   }
 
-  table = [
-    {
-      Images: "assets/images/gallery/wedding.jpg",
-      EventName: "Group 1",
-      Eventtype: "Public",
-      Date: "05/05/21",
-      Duration: "yes",
-      email: "20",
-      groupdescription: "This is Description of this group",
-      // location:"yes",
-      Ordertype: "Delivery",
-      driver: "Andrew Tye",
-      orderdate: "12-05-2021/13:45",
-      deliverydate: "12-05-2021/15:45",
-      // foodStatus:"Pending and not processed for Pick-Up",
-      orderStatus: "Pending",
-      totalSales: "500",
-      action: "0",
-    },
-    {
-      Images: "assets/images/gallery/wedding.jpg",
-      EventName: "Group 2",
-      Eventtype: "Private",
-      Date: "05/05/21",
-      Duration: "Yes",
-      email: "25",
-      groupdescription: "This is Description of this group",
-      // location:"Yes",
-      Ordertype: "Drive thru",
-      driver: "Andrew Tye",
-      orderdate: "12-05-2021/13:45",
-      deliverydate: "12-05-2021/15:45",
-      // foodStatus:"On The Way",
-      orderStatus: "Accepted",
-      totalSales: "500",
-      action: "1",
-    },
-    {
-      Images: "assets/images/gallery/wedding.jpg",
-      EventName: "Group 3",
-      Eventtype: "Public",
-      Date: "05/05/21",
-      Duration: "No",
-      email: "10",
-      groupdescription: "This is Description of this group",
-      // location:"Yes",
-      Ordertype: "Delivery",
-      driver: "Andrew Tye",
-      orderdate: "12-05-2021/13:45",
-      deliverydate: "12-05-2021/15:45",
-      // foodStatus:"On The Way",
-      orderStatus: "Accepted",
-      totalSales: "400",
-      action: "1",
-    },
-  ];
 
   userDeleteModal(userDelete, id) {
     this.deleteID = id;
@@ -357,16 +314,36 @@ export class FoodItemsComponent implements OnInit {
       backdropClass: "light-blue-backdrop",
       centered: true,
       size: "lg",
+      backdrop: "static",
+      keyboard: false,
     });
   }
 
   // Push the selected Users ID in a Array
   inviteUsers(event, id) {
+    this.tempArray = [];
+    this.tempArray = this.usersArray;
+    this.saveStateArray = this.usersArray;
     if (event.target.checked) {
-      this.usersArray.push(id);
+      this.tempArray.push(id);
     } else {
-      this.usersArray.splice(this.usersArray.indexOf(id), 1);
+      this.tempArray.splice(this.tempArray.indexOf(id), 1);
     }
+  }
+
+  saveArray(){
+    this.usersArray = this.tempArray;
+    this.saveStateArray = this.tempArray;
+    this.tempArray = [];
+    console.log("Save Clicked : Users Array",this.usersArray);
+    console.log("Save Clicked : Temp Array",this.tempArray);
+  }
+
+  removeArray(){
+    this.tempArray=[];
+    this.usersArray = this.saveStateArray;
+    console.log("Removed called : Users Array",this.usersArray);
+    console.log("Removed called : Temp Array",this.tempArray);
   }
 
   // Error Handling
@@ -393,7 +370,6 @@ export class FoodItemsComponent implements OnInit {
     this.addGroupForm.controls["groupName"].setValue(row?.name);
     this.addGroupForm.controls["groupFor"].setValue(row?.groupType);
     this.addGroupForm.controls["description"].setValue(row?.description);
-    this.addGroupForm.controls["description"].setValue(row?.description);
 
     this.isVisiblityChecked = row?.visibileTo;
     if (row?.image) {
@@ -402,6 +378,13 @@ export class FoodItemsComponent implements OnInit {
     // Push the User ID in User Array
     for (var user of row?.invite) {
       this.usersArray.push(user._id);
+    }
+
+    if (row?.groupType==1){
+      this.showToggle = false;
+    }
+    if (row?.groupType==2){
+      this.showToggle = true;
     }
 
     this.modalService.open(Adddetail, {
@@ -427,7 +410,9 @@ export class FoodItemsComponent implements OnInit {
         visibileTo: this.visibleToNonMembers,
         image: this.imageResPath,
       };
-
+      if (obj.groupType==1){
+        obj.visibileTo=true;
+      }
       console.log(obj);
       // return;
       this.Srvc.addGroup(obj).subscribe(
@@ -442,6 +427,7 @@ export class FoodItemsComponent implements OnInit {
             this.fileName = "Choose File";
             this.imageResPath = null;
             this.isImageAttached = false;
+            this.showToggle=false;
             this.modalService.dismissAll();
             Swal.fire("Success", res.message, "success");
             this.getAllGroups();
@@ -519,6 +505,7 @@ export class FoodItemsComponent implements OnInit {
             this.addGroupForm.reset();
             this.usersArray = [];
             this.isEdit = false;
+            this.showToggle=false;
             this.imageResPath = null;
             this.isImageAttached = false;
             this.modalService.dismissAll();
