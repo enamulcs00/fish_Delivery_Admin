@@ -37389,6 +37389,7 @@ class OrderlistComponent {
         this.endTimeCheckValue = "";
         this.startDateCheckValue = "";
         this.endDateCheckValue = "";
+        this.selectIcon(this.defaultSelection);
     }
     // Calculate Duration(Difference b/w Start date & End date)
     getdiffDates(row) {
@@ -37431,7 +37432,6 @@ class OrderlistComponent {
                 if ((_a = res === null || res === void 0 ? void 0 : res.data) === null || _a === void 0 ? void 0 : _a.count) {
                     this.eventData = (_b = res === null || res === void 0 ? void 0 : res.data) === null || _b === void 0 ? void 0 : _b.eventData;
                     this.noDataToggle = false;
-                    // console.log(this.pollsmodal.event)
                     this.dataSource = new _angular_material_table__WEBPACK_IMPORTED_MODULE_3__["MatTableDataSource"]((_c = res === null || res === void 0 ? void 0 : res.data) === null || _c === void 0 ? void 0 : _c.eventData);
                 }
                 else {
@@ -37491,6 +37491,7 @@ class OrderlistComponent {
     // Choose Event type icon
     selectIcon(id) {
         this.selectedIcon = true;
+        console.log("Icon selection Called", id);
         let index = this.ArrayImage.findIndex((x) => x.id == id);
         if (index != -1) {
             this.ArrayImage = this.ArrayImage.map((x) => {
@@ -37557,11 +37558,11 @@ class OrderlistComponent {
         for (var user of this.usersArray) {
             this.tempArray.push(user);
         }
+        this.getEventType();
         this.isAdd = true;
         this.isEdit = false;
         // this.getEventType();
         this.selectIcon(this.defaultSelection);
-        console.log(this.defaultSelection);
         this.modalService.open(Adddetail, {
             backdropClass: "light-blue-backdrop",
             centered: true,
@@ -37698,6 +37699,8 @@ class OrderlistComponent {
             backdropClass: "light-blue-backdrop",
             centered: true,
             size: "lg",
+            backdrop: "static",
+            keyboard: false,
         });
     }
     // Get Users listing
@@ -37815,6 +37818,7 @@ class OrderlistComponent {
                     this.endDateCheckValue = "";
                     this.showToggle = false;
                     this.getAllEvents();
+                    this.selectIcon(this.defaultSelection);
                 }
                 else {
                     sweetalert2__WEBPACK_IMPORTED_MODULE_5___default.a.fire("Oops", res.message, "error");
@@ -37864,6 +37868,7 @@ class OrderlistComponent {
                     this.showToggle = false;
                     sweetalert2__WEBPACK_IMPORTED_MODULE_5___default.a.fire("Success", res.message, "success");
                     this.getAllEvents();
+                    this.selectIcon(this.defaultSelection);
                 }
                 else {
                     sweetalert2__WEBPACK_IMPORTED_MODULE_5___default.a.fire("Oops", res.message, "error");

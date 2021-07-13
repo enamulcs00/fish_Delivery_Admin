@@ -251,6 +251,7 @@ export class OrderlistComponent implements OnInit {
     this.endTimeCheckValue="";
     this.startDateCheckValue="";
     this.endDateCheckValue="";
+    this.selectIcon(this.defaultSelection);
   }
 
   // Calculate Duration(Difference b/w Start date & End date)
@@ -297,7 +298,7 @@ export class OrderlistComponent implements OnInit {
         if (res?.data?.count) {
           this.eventData = res?.data?.eventData;
           this.noDataToggle = false;
-          // console.log(this.pollsmodal.event)
+
           this.dataSource = new MatTableDataSource(res?.data?.eventData);
         } else {
           this.dataSource = null;
@@ -320,7 +321,7 @@ export class OrderlistComponent implements OnInit {
     const array = [];
     this.eventTypeService.getEventType().subscribe((res: any) => {
       if (res.statusCode == 200) {
-        this.defaultSelection = res?.data[0]?.adminId
+        this.defaultSelection = res?.data[0]?.adminId;
         const array = [];
         for (var x of res.data) {
           array.push({ id: x._id, image: x.eventImage });
@@ -378,6 +379,7 @@ export class OrderlistComponent implements OnInit {
   // Choose Event type icon
   selectIcon(id) {
     this.selectedIcon = true;
+    console.log("Icon selection Called",id);
     let index = this.ArrayImage.findIndex((x) => x.id == id);
     if (index != -1) {
       this.ArrayImage = this.ArrayImage.map((x) => {
@@ -453,11 +455,11 @@ export class OrderlistComponent implements OnInit {
     for (var user of this.usersArray) {
       this.tempArray.push(user);
     }
+    this.getEventType();
     this.isAdd = true;
     this.isEdit = false;
     // this.getEventType();
     this.selectIcon(this.defaultSelection);
-    console.log(this.defaultSelection);
     this.modalService.open(Adddetail, {
       backdropClass: "light-blue-backdrop",
       centered: true,
@@ -615,8 +617,8 @@ export class OrderlistComponent implements OnInit {
       backdropClass: "light-blue-backdrop",
       centered: true,
       size: "lg",
-      // backdrop: "static",
-      // keyboard: false,
+      backdrop: "static",
+      keyboard: false,
     });
   }
 
@@ -743,6 +745,7 @@ export class OrderlistComponent implements OnInit {
             this.endDateCheckValue="";
             this.showToggle=false;
             this.getAllEvents();
+            this.selectIcon(this.defaultSelection);
           } else {
             Swal.fire("Oops", res.message, "error");
           }
@@ -795,6 +798,7 @@ export class OrderlistComponent implements OnInit {
             this.showToggle=false;
             Swal.fire("Success", res.message, "success");
             this.getAllEvents();
+            this.selectIcon(this.defaultSelection);
           } else {
             Swal.fire("Oops", res.message, "error");
           }

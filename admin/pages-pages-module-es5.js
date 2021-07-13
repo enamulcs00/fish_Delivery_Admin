@@ -70666,6 +70666,7 @@
             this.endTimeCheckValue = "";
             this.startDateCheckValue = "";
             this.endDateCheckValue = "";
+            this.selectIcon(this.defaultSelection);
           } // Calculate Duration(Difference b/w Start date & End date)
 
         }, {
@@ -70716,8 +70717,7 @@
               if (res.statusCode == 200) {
                 if ((_a = res === null || res === void 0 ? void 0 : res.data) === null || _a === void 0 ? void 0 : _a.count) {
                   _this141.eventData = (_b = res === null || res === void 0 ? void 0 : res.data) === null || _b === void 0 ? void 0 : _b.eventData;
-                  _this141.noDataToggle = false; // console.log(this.pollsmodal.event)
-
+                  _this141.noDataToggle = false;
                   _this141.dataSource = new _angular_material_table__WEBPACK_IMPORTED_MODULE_3__["MatTableDataSource"]((_c = res === null || res === void 0 ? void 0 : res.data) === null || _c === void 0 ? void 0 : _c.eventData);
                 } else {
                   _this141.dataSource = null;
@@ -70808,6 +70808,7 @@
           key: "selectIcon",
           value: function selectIcon(id) {
             this.selectedIcon = true;
+            console.log("Icon selection Called", id);
             var index = this.ArrayImage.findIndex(function (x) {
               return x.id == id;
             });
@@ -70910,11 +70911,11 @@
               _iterator21.f();
             }
 
+            this.getEventType();
             this.isAdd = true;
             this.isEdit = false; // this.getEventType();
 
             this.selectIcon(this.defaultSelection);
-            console.log(this.defaultSelection);
             this.modalService.open(Adddetail, {
               backdropClass: "light-blue-backdrop",
               centered: true,
@@ -71113,7 +71114,9 @@
             this.modalService.open(invite, {
               backdropClass: "light-blue-backdrop",
               centered: true,
-              size: "lg"
+              size: "lg",
+              backdrop: "static",
+              keyboard: false
             });
           } // Get Users listing
 
@@ -71265,6 +71268,8 @@
                   _this146.showToggle = false;
 
                   _this146.getAllEvents();
+
+                  _this146.selectIcon(_this146.defaultSelection);
                 } else {
                   sweetalert2__WEBPACK_IMPORTED_MODULE_5___default.a.fire("Oops", res.message, "error");
                 }
@@ -71323,6 +71328,8 @@
                   sweetalert2__WEBPACK_IMPORTED_MODULE_5___default.a.fire("Success", res.message, "success");
 
                   _this147.getAllEvents();
+
+                  _this147.selectIcon(_this147.defaultSelection);
                 } else {
                   sweetalert2__WEBPACK_IMPORTED_MODULE_5___default.a.fire("Oops", res.message, "error");
                 }
