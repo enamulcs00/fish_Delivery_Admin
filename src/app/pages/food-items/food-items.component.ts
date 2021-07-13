@@ -60,6 +60,7 @@ export class FoodItemsComponent implements OnInit {
   searchitem: any;
   btnStatus: any = 0;
   isEdit: boolean = false;
+  filterName:string='All';
   groupData: any;
   totalGroups: any;
   searchValue: any;
@@ -215,7 +216,8 @@ export class FoodItemsComponent implements OnInit {
   }
 
   // Filter by Status(Public/Private)
-  filterStatus(value) {
+  filterStatus(value,name) {
+    this.filterName=name;
     this.btnStatus = value;
     this.getAllGroups();
   }
@@ -246,6 +248,13 @@ export class FoodItemsComponent implements OnInit {
     Swal.fire("Oops", "Session is Terminated", "error");
     sessionStorage.removeItem("token");
     this.router.navigate(["/login"]);
+  }
+
+  // Avoid Space on Empty input
+  doSomething(e, ref) {
+    if (!ref.length) {
+      e.preventDefault();
+    }
   }
 
   table = [
@@ -566,12 +575,11 @@ export class FoodItemsComponent implements OnInit {
       }
       if (res.statusCode == 200) {
         Swal.fire("Removed", "Group member successfully removed", "success");
-        this.modalService.dismissAll();
         this.getAllGroups();
-        // const filteredData = this.groupData.find(
-        //   (element: any) => element._id === this.groupRemoveID
-        // );
-        // this.memberList = filteredData.join;
+        this.modalService.dismissAll();
+        setTimeout(() => {
+          document.getElementById(this.groupRemoveID).click();
+        },100)
       } else {
         Swal.fire("Oops", "Failed to remove member", "error");
       }

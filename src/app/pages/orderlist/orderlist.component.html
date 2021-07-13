@@ -25,25 +25,25 @@
           <div class="row">
             <div class="col-md-4">
               <form>
-                <div class="mb-2">
+                <div  *ngIf="!noDataToggle" class="mb-2">
                   <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="searchitem" (keyup)="search($event)"
                     type="text" class="form-control" id="pastSearch" placeholder="Search">
                 </div>
               </form>
             </div>
-            <div class="col-md-8 d-flex  justify-content-end">
+            <div *ngIf="!noDataToggle" class="col-md-8 d-flex  justify-content-end">
               <!-- <div class="mr-2"><button class="btn btn-primary" (click)="Adddetails(Adddetail)"><i class="sl-icon-plus"></i> Add</button></div> -->
               <div ngbDropdown class="d-inline-block mb-2 mr-2">
-                <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle> All </button>
+                <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle> {{filterName}} </button>
                 <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                  <button style="cursor: pointer;" class="dropdown-item" (click)="filterStatus(0)">All</button>
-                  <button style="cursor: pointer;" class="dropdown-item" (click)="filterStatus(1)"> Public </button>
-                  <button style="cursor: pointer;" class="dropdown-item" (click)="filterStatus(2)"> Private </button>
+                  <button style="cursor: pointer;" class="dropdown-item" (click)="filterStatus(0,'All')">All</button>
+                  <button style="cursor: pointer;" class="dropdown-item" (click)="filterStatus(1,'Public')"> Public </button>
+                  <button style="cursor: pointer;" class="dropdown-item" (click)="filterStatus(2,'Private')"> Private </button>
                 </div>
               </div>
               <button class="btn btn-primary mb-2 mr-2"><i class="sl-icon-cloud-download"></i> Export CSV</button>
             </div>
-            <div class="table-responsive">
+            <div class="table-responsive" *ngIf="!noDataToggle;else noDataHolder">
               <table mat-table class=" w-100" [dataSource]="dataSource" matSort>
                 <ng-container matColumnDef="Images">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Type </th>
@@ -169,7 +169,10 @@
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
               </table>
             </div>
-            <div class="col-md-12 text-right">
+            <ng-template #noDataHolder>
+              <h3 class="m-5 d-flex align-items-center justify-content-center w-100">No data found</h3>
+            </ng-template>
+            <div *ngIf="!noDataToggle" class="col-md-12 text-right">
               <mat-paginator [length]="totalEvents" [pageSize]="page" [pageSizeOptions]="[5, 10, 25, 100]"
                 (page)="onPaginateChange($event)"></mat-paginator>
             </div>
@@ -186,25 +189,25 @@
           <div class="row">
             <div class="col-md-4">
               <form>
-                <div class="mb-2">
+                <div class="mb-2" *ngIf="!noDataToggle">
                   <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="searchitem" (keyup)="search($event)"
                     type="text" class="form-control" id="ongoingSearch" placeholder="Search">
                 </div>
               </form>
             </div>
-            <div class="col-md-8 d-flex  justify-content-end">
+            <div *ngIf="!noDataToggle" class="col-md-8 d-flex  justify-content-end">
               <!-- <div class="mr-2"><button class="btn btn-primary" (click)="Adddetails(Adddetail)"><i class="sl-icon-plus"></i> Add</button></div> -->
               <div ngbDropdown class="d-inline-block mb-2 mr-2">
-                <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle> All </button>
+                <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle> {{filterName}} </button>
                 <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                  <button style="cursor: pointer;" class="dropdown-item" (click)="filterStatus(0)">All</button>
-                  <button style="cursor: pointer;" class="dropdown-item" (click)="filterStatus(1)"> Public </button>
-                  <button style="cursor: pointer;" class="dropdown-item" (click)="filterStatus(2)"> Private </button>
+                  <button style="cursor: pointer;" class="dropdown-item" (click)="filterStatus(0,'All')">All</button>
+                  <button style="cursor: pointer;" class="dropdown-item" (click)="filterStatus(1,'Public')"> Public </button>
+                  <button style="cursor: pointer;" class="dropdown-item" (click)="filterStatus(2,'Private')"> Private </button>
                 </div>
               </div>
               <button class="btn btn-primary mb-2 mr-2"><i class="sl-icon-cloud-download"></i> Export CSV</button>
             </div>
-            <div class="table-responsive">
+            <div class="table-responsive" *ngIf="!noDataToggle;else noOngoingData">
               <table mat-table class=" w-100" [dataSource]="dataSource" matSort>
                 <ng-container matColumnDef="Images">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Type </th>
@@ -332,7 +335,10 @@
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
               </table>
             </div>
-            <div class="col-md-12 text-right">
+            <ng-template  #noOngoingData>
+              <h3 class="m-5 d-flex align-items-center justify-content-center w-100">No data found</h3>
+            </ng-template>
+            <div *ngIf="!noDataToggle" class="col-md-12 text-right">
               <mat-paginator [length]="totalEvents" [pageSize]="page" [pageSizeOptions]="[5, 10, 25, 100]"
                 (page)="onPaginateChange($event)"></mat-paginator>
             </div>
@@ -349,25 +355,25 @@
           <div class="row">
             <div class="col-md-4">
               <form>
-                <div class="mb-2">
+                <div *ngIf="!noDataToggle" class="mb-2">
                   <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="searchitem" (keyup)="search($event)"
                     type="text" class="form-control" id="upcomingSearch" placeholder="Search">
                 </div>
               </form>
             </div>
-            <div class="col-md-8 d-flex  justify-content-end">
+            <div *ngIf="!noDataToggle" class="col-md-8 d-flex  justify-content-end">
               <!-- <div class="mr-2"><button class="btn btn-primary" (click)="Adddetails(Adddetail)"><i class="sl-icon-plus"></i> Add</button></div> -->
               <div ngbDropdown class="d-inline-block mb-2 mr-2">
-                <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle> All </button>
+                <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle> {{filterName}} </button>
                 <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                  <button style="cursor: pointer;" class="dropdown-item" (click)="filterStatus(0)">All</button>
-                  <button style="cursor: pointer;" class="dropdown-item" (click)="filterStatus(1)"> Public </button>
-                  <button style="cursor: pointer;" class="dropdown-item" (click)="filterStatus(2)"> Private </button>
+                  <button style="cursor: pointer;" class="dropdown-item" (click)="filterStatus(0,'All')">All</button>
+                  <button style="cursor: pointer;" class="dropdown-item" (click)="filterStatus(1,'Public')"> Public </button>
+                  <button style="cursor: pointer;" class="dropdown-item" (click)="filterStatus(2,'Private')"> Private </button>
                 </div>
               </div>
               <button class="btn btn-primary mb-2 mr-2"><i class="sl-icon-cloud-download"></i> Export CSV</button>
             </div>
-            <div class="table-responsive">
+            <div class="table-responsive" *ngIf="!noDataToggle;else noUpcomingData">
               <table mat-table class=" w-100" [dataSource]="dataSource" matSort>
                 <ng-container matColumnDef="Images">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Type </th>
@@ -495,7 +501,10 @@
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
               </table>
             </div>
-            <div class="col-md-12 text-right">
+            <ng-template  #noUpcomingData>
+              <h3 class="m-5 d-flex align-items-center justify-content-center w-100">No data found</h3>
+            </ng-template>
+            <div *ngIf="!noDataToggle" class="col-md-12 text-right">
               <mat-paginator [length]="totalEvents" [pageSize]="page" [pageSizeOptions]="[5, 10, 25, 100]"
                 (page)="onPaginateChange($event)"></mat-paginator>
             </div>
@@ -1146,7 +1155,8 @@
               <div class="col-md-12">
                 <div class="form-group has-danger">
                   <label class="control-label"> Name </label>
-                  <input formControlName="pollName" type="text" id="text" class="form-control form-control-danger"
+                  <input formControlName="pollName" #pollName
+                  (keydown.space)="doSomething($event ,pollName.value)" type="text" id="text" class="form-control form-control-danger"
                     placeholder="Enter Poll name">
                     <small *ngIf="addPollForm.controls['pollName'].touched && addPollForm.controls['pollName'].invalid" class="text-danger">
                       *Poll name is required.</small>
@@ -1155,7 +1165,8 @@
               <div class="col-md-12 form-group" formArrayName="options"
                 *ngFor="let option of addPollForm.get('options')['controls']; let i = index;">
                 <div class="input-group " [formGroupName]="i">
-                  <input class="form-control" placeholder="Enter option" formControlName="option">
+                  <input #polloption
+                  (keydown.space)="doSomething($event ,polloption.value)" class="form-control" placeholder="Enter option" formControlName="option">
                   <button class="btn btn-danger" (click)="removeOption(i)"><i class="fa fa-trash"></i></button>
                 </div>
                 <small *ngIf="submitted && option.get('option').hasError('required')" class="text-danger">
@@ -1173,7 +1184,7 @@
               <button *ngIf="!isEditPoll" type="submit" (click)="submitPoll()" class="btn btn-primary mr-3"><i class="fa fa-check"></i>
                 Add</button>
                 <button *ngIf="isEditPoll" type="submit" (click)="editPoll()" class="btn btn-primary mr-3"><i class="fa fa-check"></i>
-                  Edit</button>
+                  Update</button>
               <button type="button" id="close-modal" class="btn btn-dark"
                 (click)="cancelPoll();modal.close('editpoll')">Cancel</button>
             </div>

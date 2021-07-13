@@ -79,6 +79,7 @@ export class OrderlistComponent implements OnInit {
   // @ViewChild(MatSort, { static: true }) sort: MatSort;
   page: any = 10;
   pageindec: any;
+  filterName:string='All';
   searchitem: any;
   searchitemUser: any;
   btnStatus: any = 0;
@@ -124,6 +125,8 @@ export class OrderlistComponent implements OnInit {
   isGuestInvited: boolean=false;
   showToggle: boolean=false;
   memberActionId: any;
+  defaultSelection: any;
+  noDataToggle: boolean=false;
 
   constructor(
     private modalService: NgbModal,
@@ -291,14 +294,16 @@ export class OrderlistComponent implements OnInit {
       if (res.statusCode == 200) {
         if (res?.data?.count) {
           this.eventData = res?.data?.eventData;
+          this.noDataToggle = false;
+          // console.log(this.pollsmodal.event)
           this.dataSource = new MatTableDataSource(res?.data?.eventData);
         } else {
           this.dataSource = null;
+          this.noDataToggle = true;
           this.toaster.error("No data found", "Oops", {
             timeOut: 2000,
           });
         }
-
         this.totalEvents = res?.data?.count;
       } else {
         this.toaster.error(res.message, "Error", {
@@ -313,6 +318,7 @@ export class OrderlistComponent implements OnInit {
     const array = [];
     this.eventTypeService.getEventType().subscribe((res: any) => {
       if (res.statusCode == 200) {
+        this.defaultSelection = res?.data[0]?.adminId
         const array = [];
         for (var x of res.data) {
           array.push({ id: x._id, image: x.eventImage });
@@ -379,7 +385,6 @@ export class OrderlistComponent implements OnInit {
       this.ArrayImage[index]["isSelected"] = true;
     }
     this.iconID = id;
-    console.log(id);
   }
 
   // Filter Type
@@ -389,7 +394,8 @@ export class OrderlistComponent implements OnInit {
   }
 
   // Filter by Status(Public/Private)
-  filterStatus(value) {
+  filterStatus(value,name) {
+    this.filterName = name;
     this.btnStatus = value;
     this.getAllEvents();
   }
@@ -422,71 +428,7 @@ export class OrderlistComponent implements OnInit {
     this.router.navigate(["/login"]);
   }
 
-  table = [
-    {
-      Images: "assets/images/gallery/wedding.jpg",
-      EventName: "Event 1",
-      Event_type: "Public",
-      // Eventtype: 'Drink',
-      datetime: "05/05/21, 10:20 AM",
-      box: "Description will be shown here....",
-      Duration: "2 Days",
-      Durationtime: "10:00 AM - 10:00 PM",
-      Durationdate: "10/10/20 - 12/10/20",
-      location: "London",
-      polls: "View",
-      invited: "150",
-      invited2: "10",
-      guest: "20",
-      attendees: "45",
-      Waiting: "15",
-      messagescount: "250",
-      likes: "30",
-      action: "0",
-    },
-    {
-      Images: "assets/images/gallery/wedding.jpg",
-      EventName: "Event 2",
-      Event_type: "Private",
-      // Eventtype: 'Drink',
-      datetime: "05/05/21, 11:20 AM",
-      box: "Description will be shown here....",
-      Duration: "3 Days",
-      Durationtime: "10:00 AM - 10:00 PM",
-      Durationdate: "10/10/20 - 12/10/20",
-      location: "London",
-      polls: "View",
-      invited: "150",
-      invited2: "15",
-      guest: "20",
-      attendees: "45",
-      Waiting: "15",
-      messagescount: "250",
-      likes: "30",
-      action: "1",
-    },
-    {
-      Images: "assets/images/gallery/wedding.jpg",
-      EventName: "Event 3",
-      Event_type: "Public",
-      // Eventtype: 'Drink',
-      datetime: "05/05/21, 12:20 AM",
-      box: "Description will be shown here....",
-      Duration: "2 Days",
-      Durationtime: "10:00 AM - 10:00 PM",
-      Durationdate: "10/10/20 - 12/10/20",
-      location: "London",
-      polls: "View",
-      invited: "150",
-      invited2: "5",
-      guest: "20",
-      attendees: "45",
-      Waiting: "15",
-      messagescount: "250",
-      likes: "30",
-      action: "1",
-    },
-  ];
+
   userDeleteModal(userDelete, id) {
     this.deleteID = id;
     this.modalService.open(userDelete, {
@@ -508,6 +450,8 @@ export class OrderlistComponent implements OnInit {
     this.isAdd = true;
     this.isEdit = false;
     // this.getEventType();
+    this.selectIcon(this.defaultSelection);
+    console.log(this.defaultSelection);
     this.modalService.open(Adddetail, {
       backdropClass: "light-blue-backdrop",
       centered: true,
@@ -594,13 +538,13 @@ export class OrderlistComponent implements OnInit {
       size: "lg",
     });
   }
-  pollsmodal(polls, id) {
+  pollsmodal(polls,id) {
     const filteredData = this.eventData.find(
       (element: any) => element._id === id
     );
     this.pollsData = filteredData.pollId;
     this.eventID = id;
-
+    // console.log(this.pollsData)
     this.modalService.open(polls, {
       backdropClass: "light-blue-backdrop",
       centered: true,
@@ -643,6 +587,8 @@ export class OrderlistComponent implements OnInit {
   }
 
   addpollmodal(editpoll) {
+    const remove = this.addPollForm.get("options") as FormArray;
+    remove.clear();
     this.modalService.open(editpoll, {
       backdropClass: "light-blue-backdrop",
       centered: true,
@@ -900,8 +846,10 @@ export class OrderlistComponent implements OnInit {
               Swal.fire("Success", res.message, "success");
               document.getElementById("close-modal").click();
               this.modalService.dismissAll();
+              setTimeout(() => {
+                document.getElementById(this.eventID).click();
+              },150)
 
-              document.getElementById(this.eventID).click();
             } else {
               Swal.fire("Oops", res.message, "error");
             }
@@ -944,6 +892,9 @@ export class OrderlistComponent implements OnInit {
               document.getElementById("close-modal").click();
               this.modalService.dismissAll();
               this.getAllEvents();
+              setTimeout(() => {
+                document.getElementById(this.eventID).click();
+              },100)
             } else {
               Swal.fire("Oops", res.message, "error");
             }
@@ -995,6 +946,9 @@ export class OrderlistComponent implements OnInit {
         Swal.fire("Deleted", "Poll deleted successfully", "success");
         this.modalService.dismissAll();
         this.getAllEvents();
+        setTimeout(() => {
+          document.getElementById(this.eventID).click();
+        },100)
       } else {
         Swal.fire("Oops", "Failed to delete Poll", "error");
       }
