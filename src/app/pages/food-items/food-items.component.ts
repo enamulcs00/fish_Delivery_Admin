@@ -85,6 +85,7 @@ export class FoodItemsComponent implements OnInit {
   deleteID: any;
   memberList: any;
   groupRemoveID: any;
+  noDataToggle: boolean=false;
   tempArray: any=[];
   saveStateArray: any=[];
   constructor(
@@ -156,14 +157,16 @@ export class FoodItemsComponent implements OnInit {
       }
       if (res.statusCode == 200) {
         if (res?.data?.count) {
+          this.noDataToggle = false;
           this.groupData = res?.data?.groupData;
           this.dataSource = new MatTableDataSource(res?.data?.groupData);
           this.totalGroups = res?.data?.count;
         } else {
           this.dataSource = null;
-          this.toaster.error("No data found", "Oops", {
-            timeOut: 2000,
-          });
+          this.noDataToggle = true;
+          // this.toaster.error("No data found", "Oops", {
+          //   timeOut: 2000,
+          // });
         }
 
         this.totalGroups = res?.data?.count;

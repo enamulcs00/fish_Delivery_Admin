@@ -668,11 +668,11 @@
                   <input (keypress)="alphabate($event)" #eventName
                     (keydown.space)="doSomething($event ,eventName.value)" formControlName="eventName" type="text"
                     id="eventName" class="form-control" placeholder="Enter Event Name">
-                  <!-- <small
+                  <small
                 *ngIf=" addEventForm.controls['eventName'].touched && addEventForm.controls['eventName'].invalid"
                 class="text-danger d-inline-block pt-1">
-                *Event Name is invalid
-                </small> -->
+                *Event Name is invalid(Max limit - 35)
+                </small>
                   <small class="text-danger" *ngIf="submitted && errorHandling('eventName', 'required')">
                     *Event Name is required!
                   </small>
@@ -799,7 +799,7 @@
                   <small
                     *ngIf=" addEventForm.controls['description'].touched && addEventForm.controls['description'].invalid"
                     class="text-danger d-inline-block pt-1">
-                    *Please enter description!
+                    *Please enter valid description(Max limit - 750)
                   </small>
                   <small class="text-danger" *ngIf="submitted && errorHandling('description', 'required')">
                     *Description is required!
