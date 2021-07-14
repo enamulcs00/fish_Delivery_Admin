@@ -1241,7 +1241,11 @@
     </div>
     <div class="input-group-append">
       <a class="btn mr-0 btn-success text-white my-2 mr-2" type="button" (click)="saveArray();modal.close('invite')">Submit</a>
-      <a class="btn mr-0 btn-danger text-white my-2" type="button" (click)="removeArray();modal.close()">Close</a>
+      <a *ngIf="!isEdit;else editBtn" class="btn mr-0 btn-danger text-white my-2" type="button" (click)="removeArray();modal.close()">Close</a>
+      <ng-template #editBtn>
+        <a  class="btn mr-0 btn-danger text-white my-2" type="button" (click)="removeEditArray();modal.close()">Close</a>
+      </ng-template>
+
     </div>
   </div>
 </ng-template>

@@ -88,6 +88,7 @@ export class FoodItemsComponent implements OnInit {
   noDataToggle: boolean=false;
   tempArray: any=[];
   saveStateArray: any=[];
+  saveEditStateArray: any;
   constructor(
     private modalService: NgbModal,
     private Srvc: GroupsService,
@@ -339,12 +340,18 @@ export class FoodItemsComponent implements OnInit {
   saveArray(){
     this.usersArray = this.tempArray;
     this.saveStateArray = this.usersArray;
+    this.saveEditStateArray = this.usersArray;
     this.tempArray = [].concat(this.saveStateArray);
   }
 
   removeArray(){
     this.usersArray = this.saveStateArray;
     this.tempArray=[].concat(this.usersArray);
+  }
+
+  removeEditArray(){
+    this.usersArray = this.saveEditStateArray;
+    this.tempArray = [].concat(this.usersArray);
   }
 
   // Error Handling
@@ -385,9 +392,13 @@ export class FoodItemsComponent implements OnInit {
     for (var user of row?.invite) {
       this.saveStateArray.push(user._id);
     }
+    this.saveEditStateArray = []
     this.tempArray = [];
     for (var user of this.usersArray) {
       this.tempArray.push(user);
+    }
+    for (var user of this.usersArray) {
+      this.saveEditStateArray.push(user);
     }
 
 

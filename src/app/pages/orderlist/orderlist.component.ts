@@ -127,6 +127,7 @@ export class OrderlistComponent implements OnInit {
   dateTime: string;
   currentTime: string;
   currentDate: string;
+  saveEditStateArray: any[];
 
   constructor(
     private modalService: NgbModal,
@@ -520,8 +521,12 @@ export class OrderlistComponent implements OnInit {
     this.editEventID = row?._id;
 
     this.tempArray = [];
+    this.saveEditStateArray = []
     for (var user of this.usersArray) {
       this.tempArray.push(user);
+    }
+    for (var user of this.usersArray) {
+      this.saveEditStateArray.push(user);
     }
     this.startDateCheckValue = moment(row?.startDate).format("YYYY-MM-DD");
     console.log("startDate", this.startDateCheckValue);
@@ -703,11 +708,18 @@ export class OrderlistComponent implements OnInit {
   saveArray() {
     this.usersArray = this.tempArray;
     this.saveStateArray = this.usersArray;
+    this.saveEditStateArray = this.usersArray;
     this.tempArray = [].concat(this.saveStateArray);
   }
 
   removeArray() {
     this.usersArray = this.saveStateArray;
+    // this.usersArray = this.saveEditStateArray;
+    this.tempArray = [].concat(this.usersArray);
+  }
+
+  removeEditArray(){
+    this.usersArray = this.saveEditStateArray;
     this.tempArray = [].concat(this.usersArray);
   }
 
@@ -1155,7 +1167,7 @@ export class OrderlistComponent implements OnInit {
         this.sessionTerminate();
       }
       if (res.statusCode == 200) {
-        Swal.fire("Removed", "Event member successfully removed", "success");
+        Swal.fire("Removed", res.message, "success");
         this.modalService.dismissAll();
         this.getAllEvents();
       } else {
@@ -1177,7 +1189,7 @@ export class OrderlistComponent implements OnInit {
         this.sessionTerminate();
       }
       if (res.statusCode == 200) {
-        Swal.fire("Success", "Event member successfully accepted", "success");
+        Swal.fire("Success", res.message, "success");
         this.modalService.dismissAll();
         this.getAllEvents();
       } else {
