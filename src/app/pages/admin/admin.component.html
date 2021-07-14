@@ -10,16 +10,19 @@
           <div class="col-md-4">
             <form>
               <div class="mb-2">
-                <input type="text" class="form-control" id="prenametext" placeholder="Search">
+                <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="searchitem" (keyup)="search($event)"
+                  type="text" class="form-control" id="prenametext" placeholder="Search">
               </div>
             </form>
           </div>
           <div class="col-md-8 d-flex  justify-content-end">
             <div ngbDropdown class="d-inline-block mb-2 mr-2">
-              <button class="btn  btn-primary text-white" id="dropdownBasic1" ngbDropdownToggle> Status </button>
+              <button class="btn  btn-primary text-white" id="dropdownBasic1" ngbDropdownToggle> {{filterButton}}
+              </button>
               <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                <button class="dropdown-item">Active</button>
-                <button class="dropdown-item">Inactive</button>
+                <button class="dropdown-item" (click)="filterStatus('all','All')">All</button>
+                <button class="dropdown-item" (click)="filterStatus(false,'Active')">Active</button>
+                <button class="dropdown-item" (click)="filterStatus(true,'Inactive')">Inactive</button>
               </div>
             </div>
             <a routerLink="/pages/manage_admin_form" class="btn btn-primary mb-2"><i class="sl-icon-plus"></i> Add </a>
@@ -62,6 +65,10 @@
                 </tr>
               </tbody>
             </table>
+          </div>
+          <div class="col-md-12 text-right">
+            <mat-paginator [length]="totalAdmin" [pageSize]="page" [pageSizeOptions]="[5, 10, 25, 100]"
+              (page)="onPaginateChange($event)"></mat-paginator>
           </div>
         </div>
       </div>

@@ -321,7 +321,7 @@ export class OrderlistComponent implements OnInit {
     const array = [];
     this.eventTypeService.getEventType().subscribe((res: any) => {
       if (res.statusCode == 200) {
-        this.defaultSelection = res?.data[0]?.adminId;
+        this.defaultSelection = res?.data[0]?._id;
         const array = [];
         for (var x of res.data) {
           array.push({ id: x._id, image: x.eventImage });
@@ -721,9 +721,10 @@ export class OrderlistComponent implements OnInit {
       if (obj.eventFor==1){
         obj.isGuestInvites=true;
       }
-      if (!this.iconID){
-        delete obj.eventType
+      if (!obj.eventType){
+        obj.eventType=this.defaultSelection;
       }
+
       this.Srvc.addEvent(obj).subscribe(
         (res: any) => {
           if (res.statusCode == 401) {
