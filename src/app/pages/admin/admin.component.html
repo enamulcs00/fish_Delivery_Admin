@@ -40,11 +40,16 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td><span class="nowrap"> <img src="assets/images/users/3.jpg" alt="" width="60px"> </span></td>
-                  <td><span class="nowrap"> Ronny </span></td>
-                  <td><span class="text-nowrap">+91-7858485474</span></td>
-                  <td class="text-nowrap">Ronny@example.com</td>
+                <tr *ngFor="let subAdmin of adminData">
+                  <td><span class="nowrap">
+                    <img *ngIf="subAdmin?.image;else alterImage" [src]="subAdmin.image" alt="" width="60px">
+                    <ng-template #alterImage>
+                      <img  [src]="alterImage" alt="" width="60px">
+                    </ng-template>
+                  </span></td>
+                  <td><span class="nowrap">{{subAdmin?.firstName}} {{subAdmin?.lastName}}</span></td>
+                  <td><span class="text-nowrap">{{subAdmin?.dialCode}}-{{subAdmin?.phoneNo}}</span></td>
+                  <td class="text-nowrap">{{subAdmin?.email || "-"}}</td>
                   <td>
                     <div ngbDropdown class="d-inline-block " container="body">
                       <button class="btn btn-outline-primary btn-sm " id="dropdownBasic1" ngbDropdownToggle>

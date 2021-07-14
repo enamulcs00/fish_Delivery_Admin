@@ -61,3 +61,8 @@ input[type="file"] {
     display: inline-block;
     border-radius: 5px;
 }
+
+.cstm_tbl {
+  height: 60vh;
+}
+

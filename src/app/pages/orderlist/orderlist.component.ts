@@ -625,17 +625,18 @@ export class OrderlistComponent implements OnInit {
   // Get Users listing
   getUsers() {
     const data = {
-      limit: this.pageUser,
-      page: this.pageindecUser == null ? 1 : this.pageindecUser,
+      // limit: this.pageUser,
+      // page: this.pageindecUser == null ? 1 : this.pageindecUser,
       search: this.searchitemUser == null ? "" : this.searchitemUser,
+      type:1
     };
-    this.usersService.getAll(data).subscribe((res: any) => {
+    this.usersService.getUsersandUsers(data).subscribe((res: any) => {
       if (res.statusCode == 401) {
         this.sessionTerminate();
       }
       if (res.statusCode == 200) {
-        this.usersData = res?.data?.user;
-        this.totalUsers = res?.data?.count;
+        this.usersData = res?.data?.userList;
+        // this.totalUsers = res?.data?.count;
       } else {
         this.toaster.error(res.message, "Failed to load Users data", {
           timeOut: 2000,

@@ -24,6 +24,7 @@ export class AdminComponent implements OnInit {
   adminData: any;
   totalAdmin: any;
   searchValue: any;
+  alterImage:string="../../../assets/images/users/admin.png";
   constructor(
     private modalService: NgbModal,
     private Srvc: AdminService,
@@ -51,8 +52,8 @@ export class AdminComponent implements OnInit {
         this.sessionTerminate();
       }
       if (res.statusCode == 200) {
-        this.adminData = res.data.data;
-        this.totalAdmin = res.data.totalcount;
+        this.adminData = res?.data?.checkAdmin;
+        this.totalAdmin = res?.data?.count;
       } else {
         this.toastr.error(res.message, "Error", {
           timeOut: 2000,

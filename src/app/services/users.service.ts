@@ -39,4 +39,9 @@ export class UsersService {
   getCountry() {
     return this.http.get(`https://restcountries.eu/rest/v2/all`);
   }
+
+  // GET Groups & Users
+  getUsersandUsers(data){
+    return this.http.post<any>(`${this.baseURL}Admin/contactSync`, data);
+  }
 }
