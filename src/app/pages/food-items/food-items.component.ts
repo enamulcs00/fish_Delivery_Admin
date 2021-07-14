@@ -421,7 +421,7 @@ export class FoodItemsComponent implements OnInit {
       if (obj.groupType==1){
         obj.visibileTo=true;
       }
-      console.log(obj);
+      // console.log(obj);
       // return;
       this.Srvc.addGroup(obj).subscribe(
         (res: any) => {
@@ -501,7 +501,7 @@ export class FoodItemsComponent implements OnInit {
         delete obj.image;
       }
 
-      console.log(obj);
+      // console.log(obj);
       // return;
       this.Srvc.updateGroup(obj).subscribe(
         (res: any) => {

@@ -25,7 +25,7 @@
           <div class="row">
             <div class="col-md-4">
               <form>
-                <div  *ngIf="!noDataToggle" class="mb-2">
+                <div   class="mb-2">
                   <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="searchitem" (keyup)="search($event)"
                     type="text" class="form-control" id="pastSearch" placeholder="Search">
                 </div>
@@ -191,7 +191,7 @@
           <div class="row">
             <div class="col-md-4">
               <form>
-                <div class="mb-2" *ngIf="!noDataToggle">
+                <div class="mb-2" >
                   <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="searchitem" (keyup)="search($event)"
                     type="text" class="form-control" id="ongoingSearch" placeholder="Search">
                 </div>
@@ -359,7 +359,7 @@
           <div class="row">
             <div class="col-md-4">
               <form>
-                <div *ngIf="!noDataToggle" class="mb-2">
+                <div class="mb-2">
                   <input [ngModelOptions]="{ standalone: true }" [(ngModel)]="searchitem" (keyup)="search($event)"
                     type="text" class="form-control" id="upcomingSearch" placeholder="Search">
                 </div>

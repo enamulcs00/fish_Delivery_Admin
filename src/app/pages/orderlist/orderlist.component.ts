@@ -379,7 +379,7 @@ export class OrderlistComponent implements OnInit {
   // Choose Event type icon
   selectIcon(id) {
     this.selectedIcon = true;
-    console.log("Icon selection Called",id);
+    // console.log("Icon selection Called",id);
     let index = this.ArrayImage.findIndex((x) => x.id == id);
     if (index != -1) {
       this.ArrayImage = this.ArrayImage.map((x) => {
@@ -871,9 +871,9 @@ export class OrderlistComponent implements OnInit {
               Swal.fire("Success", res.message, "success");
               document.getElementById("close-modal").click();
               this.modalService.dismissAll();
-              setTimeout(() => {
-                document.getElementById(this.eventID).click();
-              },150)
+              // setTimeout(() => {
+              //   document.getElementById(this.eventID).click();
+              // },150)
 
             } else {
               Swal.fire("Oops", res.message, "error");
@@ -917,9 +917,9 @@ export class OrderlistComponent implements OnInit {
               document.getElementById("close-modal").click();
               this.modalService.dismissAll();
               this.getAllEvents();
-              setTimeout(() => {
-                document.getElementById(this.eventID).click();
-              },100)
+              // setTimeout(() => {
+              //   document.getElementById(this.eventID).click();
+              // },100)
             } else {
               Swal.fire("Oops", res.message, "error");
             }
@@ -1003,7 +1003,7 @@ export class OrderlistComponent implements OnInit {
     ) {
       if (this.startTimeCheckValue && this.endTimeCheckValue) {
         if (this.startTimeCheckValue >= this.endDateCheckValue) {
-          console.log("EndDate Check");
+          // console.log("EndDate Check");
           this.addEventForm.controls["endTime"].reset();
           this.endTimeCheckValue = "";
           this.addEventForm.controls["startTime"].reset();
