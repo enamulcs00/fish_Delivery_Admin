@@ -225,7 +225,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="control-label"> Group Name </label>
-                  <input formControlName="groupName" type="text" id="name" class="form-control"
+                  <input #grpName (keydown.space)="doSomething($event ,grpName.value)" formControlName="groupName" type="text" id="name" class="form-control"
                     placeholder="Event Group Name">
                   <small
                     *ngIf=" addGroupForm.controls['groupName'].touched && addGroupForm.controls['groupName'].invalid"
@@ -286,7 +286,7 @@
               <div class="col-md-6">
                 <div class="form-group has-danger">
                   <label class="control-label"> Group Description </label>
-                  <textarea formControlName="description" class="form-control form-control-danger"
+                  <textarea #description (keydown.space)="doSomething($event ,description.value)" formControlName="description" class="form-control form-control-danger"
                     placeholder="Enter description for this group"></textarea>
                     <small class="text-danger" *ngIf="submitted && errorHandling('description', 'required')">
                       *Description is required!

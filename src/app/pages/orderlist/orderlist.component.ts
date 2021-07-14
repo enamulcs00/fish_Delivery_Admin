@@ -16,12 +16,9 @@ import { EventTypeService } from "src/app/services/event-type.service";
 import { NgForm, FormGroup, FormControl, FormArray } from "@angular/forms";
 import { FormBuilder, Validators } from "@angular/forms";
 import { UsersService } from "src/app/services/users.service";
-import { Pipe, PipeTransform } from '@angular/core';
-
-
+import { Pipe, PipeTransform } from "@angular/core";
 
 export interface UserData {
-
   Images: string;
   EventName: string;
   // Eventtype: string,
@@ -50,8 +47,7 @@ declare var $: any;
   styleUrls: ["./orderlist.component.css"],
 })
 export class OrderlistComponent implements OnInit {
-  @Pipe({name: 'convertFrom24To12Format'})
-
+  @Pipe({ name: "convertFrom24To12Format" })
   moment: any = moment;
   closeResult: string;
   displayedColumns: string[] = [
@@ -79,7 +75,7 @@ export class OrderlistComponent implements OnInit {
   // @ViewChild(MatSort, { static: true }) sort: MatSort;
   page: any = 10;
   pageindec: any;
-  filterName:string='All';
+  filterName: string = "All";
   searchitem: any;
   searchitemUser: any;
   btnStatus: any = 0;
@@ -95,7 +91,6 @@ export class OrderlistComponent implements OnInit {
   waitingList: any;
   selectedIcon: any = false;
 
-
   ArrayImage: any = [];
   usersData: any;
   searchValueUser: any;
@@ -105,7 +100,7 @@ export class OrderlistComponent implements OnInit {
   usersArray: any = [];
   iconID: any;
   submitted: boolean = false;
-  tempArray: any=[];
+  tempArray: any = [];
   isAdd: boolean = false;
   isEdit: boolean = false;
   options: FormArray;
@@ -123,12 +118,15 @@ export class OrderlistComponent implements OnInit {
   endTimeCheckValue: any;
   startTimeConvert: any;
   endTimeConvert: any;
-  isGuestInvited: boolean=false;
-  showToggle: boolean=false;
+  isGuestInvited: boolean = false;
+  showToggle: boolean = false;
   memberActionId: any;
   defaultSelection: any;
-  noDataToggle: boolean=false;
-  saveStateArray: any=[];
+  noDataToggle: boolean = false;
+  saveStateArray: any = [];
+  dateTime: string;
+  currentTime: string;
+  currentDate: string;
 
   constructor(
     private modalService: NgbModal,
@@ -199,15 +197,14 @@ export class OrderlistComponent implements OnInit {
     });
   }
 
-
   transform(time: any): any {
-    let hour = (time.split(':'))[0]
-    let min = (time.split(':'))[1]
-    let part = hour > 12 ? 'pm' : 'am';
-    min = (min+'').length == 1 ? `0${min}` : min;
+    let hour = time.split(":")[0];
+    let min = time.split(":")[1];
+    let part = hour > 12 ? "pm" : "am";
+    min = (min + "").length == 1 ? `0${min}` : min;
     hour = hour > 12 ? hour - 12 : hour;
-    hour = (hour+'').length == 1 ? `0${hour}` : hour;
-    return `${hour}:${min} ${part}`
+    hour = (hour + "").length == 1 ? `0${hour}` : hour;
+    return `${hour}:${min} ${part}`;
   }
 
   toppings = new FormControl();
@@ -222,6 +219,17 @@ export class OrderlistComponent implements OnInit {
   ngOnInit(): void {
     this.getAllEvents();
     this.getEventType();
+    this.getCurrentTime();
+  }
+
+  getCurrentTime() {
+    this.currentTime = new Date().toLocaleTimeString("en-US", {
+      hour12: false,
+      hour: "numeric",
+      minute: "numeric",
+    });
+    this.currentDate = new Date().toISOString().split("T")[0];
+    console.log(this.currentDate);
   }
 
   pushFormArray() {
@@ -247,10 +255,10 @@ export class OrderlistComponent implements OnInit {
     this.addEventForm.reset();
     // this.ArrayImage = [];
     this.submitted = false;
-    this.startTimeCheckValue="";
-    this.endTimeCheckValue="";
-    this.startDateCheckValue="";
-    this.endDateCheckValue="";
+    this.startTimeCheckValue = "";
+    this.endTimeCheckValue = "";
+    this.startDateCheckValue = "";
+    this.endDateCheckValue = "";
     this.selectIcon(this.defaultSelection);
   }
 
@@ -336,11 +344,10 @@ export class OrderlistComponent implements OnInit {
     return new Date().toISOString().split("T")[0];
   }
 
-  getMaxEndDate(){
-    if (this.startDateCheckValue){
+  getMaxEndDate() {
+    if (this.startDateCheckValue) {
       return this.startDateCheckValue;
-    }
-    else {
+    } else {
       return new Date().toISOString().split("T")[0];
     }
   }
@@ -348,33 +355,35 @@ export class OrderlistComponent implements OnInit {
   // Convert time from 24 hr to 12 hr
   tConvert(time) {
     // Check correct time format and split into components
-    time = time.toString ().match (/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+    time = time
+      .toString()
+      .match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
 
-    if (time.length > 1) { // If time format correct
-      time = time.slice (1);  // Remove full string match value
-      time[5] = +time[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
+    if (time.length > 1) {
+      // If time format correct
+      time = time.slice(1); // Remove full string match value
+      time[5] = +time[0] < 12 ? " AM" : " PM"; // Set AM/PM
       time[0] = +time[0] % 12 || 12; // Adjust hours
     }
-    return time.join (''); // return adjusted time or original string
+    return time.join(""); // return adjusted time or original string
   }
 
   // convert Time from 12 hr to 24 hr
   convertTime12to24 = (time12h) => {
-    const [time, modifier] = time12h.split(' ');
+    const [time, modifier] = time12h.split(" ");
 
-    let [hours, minutes] = time.split(':');
+    let [hours, minutes] = time.split(":");
 
-    if (hours === '12') {
-      hours = '00';
+    if (hours === "12") {
+      hours = "00";
     }
 
-    if (modifier === 'PM') {
+    if (modifier === "PM") {
       hours = parseInt(hours, 10) + 12;
     }
 
     return `${hours}:${minutes}`;
-  }
-
+  };
 
   // Choose Event type icon
   selectIcon(id) {
@@ -398,7 +407,7 @@ export class OrderlistComponent implements OnInit {
   }
 
   // Filter by Status(Public/Private)
-  filterStatus(value,name) {
+  filterStatus(value, name) {
     this.filterName = name;
     this.btnStatus = value;
     this.getAllEvents();
@@ -432,7 +441,6 @@ export class OrderlistComponent implements OnInit {
     this.router.navigate(["/login"]);
   }
 
-
   userDeleteModal(userDelete, id) {
     this.deleteID = id;
     this.modalService.open(userDelete, {
@@ -451,6 +459,7 @@ export class OrderlistComponent implements OnInit {
     });
   }
   Adddetails(Adddetail) {
+    this.getCurrentTime();
     this.tempArray = [];
     for (var user of this.usersArray) {
       this.tempArray.push(user);
@@ -469,6 +478,7 @@ export class OrderlistComponent implements OnInit {
     });
   }
   eventsedit(Adddetail, row) {
+    this.getCurrentTime();
     this.isAdd = false;
     this.isEdit = true;
     this.addEventForm.reset();
@@ -477,7 +487,7 @@ export class OrderlistComponent implements OnInit {
     // this.ArrayImage = [];
     this.submitted = false;
     // this.getEventType();
-    this.isGuestInvited = row?.isGuestInvites
+    this.isGuestInvited = row?.isGuestInvites;
     this.addEventForm.controls["eventName"].setValue(row?.eventName);
     this.addEventForm.controls["eventFor"].setValue(row?.eventFor);
     this.addEventForm.controls["maxLength"].setValue(row?.maxLength);
@@ -487,14 +497,18 @@ export class OrderlistComponent implements OnInit {
     this.addEventForm.controls["endDate"].setValue(
       moment(row?.endDate).format("YYYY-MM-DD")
     );
-    this.addEventForm.controls["startTime"].setValue(this.convertTime12to24(row?.startTime));
-    this.addEventForm.controls["endTime"].setValue(this.convertTime12to24(row?.endTime));
+    this.addEventForm.controls["startTime"].setValue(
+      this.convertTime12to24(row?.startTime)
+    );
+    this.addEventForm.controls["endTime"].setValue(
+      this.convertTime12to24(row?.endTime)
+    );
     this.addEventForm.controls["address"].setValue(row?.address);
     this.addEventForm.controls["description"].setValue(row?.description);
-    if (row?.eventFor==1){
+    if (row?.eventFor == 1) {
       this.showToggle = false;
     }
-    if (row?.eventFor==2){
+    if (row?.eventFor == 2) {
       this.showToggle = true;
     }
 
@@ -509,6 +523,17 @@ export class OrderlistComponent implements OnInit {
     for (var user of this.usersArray) {
       this.tempArray.push(user);
     }
+    this.startDateCheckValue = moment(row?.startDate).format("YYYY-MM-DD");
+    console.log("startDate",this.startDateCheckValue);
+
+    this.endDateCheckValue = moment(row?.endDate).format("YYYY-MM-DD");
+    console.log("endDate",this.endDateCheckValue)
+
+    this.startTimeCheckValue = this.convertTime12to24(row?.startTime);
+    console.log("startTime",this.startTimeCheckValue)
+
+    this.endTimeCheckValue = this.convertTime12to24(row?.endTime);
+    console.log("endTime",this.endTimeCheckValue)
 
     this.selectIcon(row?.eventType?._id);
     // console.log(row?.eventType?._id);
@@ -551,7 +576,7 @@ export class OrderlistComponent implements OnInit {
       size: "lg",
     });
   }
-  pollsmodal(polls,id) {
+  pollsmodal(polls, id) {
     const filteredData = this.eventData.find(
       (element: any) => element._id === id
     );
@@ -611,7 +636,7 @@ export class OrderlistComponent implements OnInit {
     });
   }
   invitemodal(invite) {
-    this.pageindecUser=1;
+    this.pageindecUser = 1;
     this.getUsers();
     this.modalService.open(invite, {
       backdropClass: "light-blue-backdrop",
@@ -628,7 +653,7 @@ export class OrderlistComponent implements OnInit {
       // limit: this.pageUser,
       // page: this.pageindecUser == null ? 1 : this.pageindecUser,
       search: this.searchitemUser == null ? "" : this.searchitemUser,
-      type:1
+      type: 1,
     };
     this.usersService.getUsersandUsers(data).subscribe((res: any) => {
       if (res.statusCode == 401) {
@@ -675,36 +700,34 @@ export class OrderlistComponent implements OnInit {
     }
   }
 
-  saveArray(){
+  saveArray() {
     this.usersArray = this.tempArray;
     this.saveStateArray = this.usersArray;
     this.tempArray = [].concat(this.saveStateArray);
   }
 
-  removeArray(){
+  removeArray() {
     this.usersArray = this.saveStateArray;
-    this.tempArray=[].concat(this.usersArray);
+    this.tempArray = [].concat(this.usersArray);
   }
 
   changeGuestInvites(event) {
     this.isGuestInvited = event.checked;
   }
 
-  showInvites(e){
-    if (e.target.value=="2"){
+  showInvites(e) {
+    if (e.target.value == "2") {
       this.showToggle = true;
-    }
-    else {
+    } else {
       this.showToggle = false;
     }
-
   }
 
   submitEvent() {
     this.submitted = true;
     if (this.addEventForm.valid) {
-      this.startTimeConvert = this.tConvert(this.addEventForm.value.startTime)
-      this.endTimeConvert = this.tConvert(this.addEventForm.value.endTime)
+      this.startTimeConvert = this.tConvert(this.addEventForm.value.startTime);
+      this.endTimeConvert = this.tConvert(this.addEventForm.value.endTime);
       let obj = {
         eventType: this.iconID,
         invitedList: this.usersArray,
@@ -717,13 +740,13 @@ export class OrderlistComponent implements OnInit {
         endTime: this.endTimeConvert,
         address: this.addEventForm.value.address,
         description: this.addEventForm.value.description,
-        isGuestInvites : this.isGuestInvited
+        isGuestInvites: this.isGuestInvited,
       };
-      if (obj.eventFor==1){
-        obj.isGuestInvites=true;
+      if (obj.eventFor == 1) {
+        obj.isGuestInvites = true;
       }
-      if (!obj.eventType){
-        obj.eventType=this.defaultSelection;
+      if (!obj.eventType) {
+        obj.eventType = this.defaultSelection;
       }
 
       this.Srvc.addEvent(obj).subscribe(
@@ -739,13 +762,13 @@ export class OrderlistComponent implements OnInit {
             // this.ArrayImage = [];
             this.modalService.dismissAll();
             Swal.fire("Success", res.message, "success");
-            this.startTimeCheckValue="";
-            this.endTimeCheckValue="";
-            this.startTimeConvert="";
-            this.endTimeConvert="";
-            this.startDateCheckValue="";
-            this.endDateCheckValue="";
-            this.showToggle=false;
+            this.startTimeCheckValue = "";
+            this.endTimeCheckValue = "";
+            this.startTimeConvert = "";
+            this.endTimeConvert = "";
+            this.startDateCheckValue = "";
+            this.endDateCheckValue = "";
+            this.showToggle = false;
             this.getAllEvents();
             this.selectIcon(this.defaultSelection);
           } else {
@@ -792,12 +815,12 @@ export class OrderlistComponent implements OnInit {
             this.usersArray = [];
             this.iconID = null;
             // this.ArrayImage = [];
-            this.startTimeCheckValue="";
-            this.endTimeCheckValue="";
-            this.startDateCheckValue="";
-            this.endDateCheckValue="";
+            this.startTimeCheckValue = "";
+            this.endTimeCheckValue = "";
+            this.startDateCheckValue = "";
+            this.endDateCheckValue = "";
             this.modalService.dismissAll();
-            this.showToggle=false;
+            this.showToggle = false;
             Swal.fire("Success", res.message, "success");
             this.getAllEvents();
             this.selectIcon(this.defaultSelection);
@@ -876,7 +899,6 @@ export class OrderlistComponent implements OnInit {
               // setTimeout(() => {
               //   document.getElementById(this.eventID).click();
               // },150)
-
             } else {
               Swal.fire("Oops", res.message, "error");
             }
@@ -975,7 +997,7 @@ export class OrderlistComponent implements OnInit {
         this.getAllEvents();
         setTimeout(() => {
           document.getElementById(this.eventID).click();
-        },100)
+        }, 100);
       } else {
         Swal.fire("Oops", "Failed to delete Poll", "error");
       }
@@ -985,14 +1007,13 @@ export class OrderlistComponent implements OnInit {
   // Date / Time Checks
   startDateCheck(e) {
     this.startDateCheckValue = e.target.value;
-
-    if (this.endDateCheckValue){
-      if (this.startDateCheckValue>this.endDateCheckValue){
-        this.startDateCheckValue="";
-        this.endDateCheckValue="";
+    if (this.endDateCheckValue && this.currentDate == this.startDateCheckValue) {
+      if (this.startDateCheckValue > this.endDateCheckValue) {
+        this.startDateCheckValue = "";
+        this.endDateCheckValue = "";
         this.addEventForm.controls["startDate"].reset();
         this.addEventForm.controls["endDate"].reset();
-        this.toaster.error("Please check start date & end date again!");
+        this.toaster.error("Start time should be less than end time!");
       }
     }
   }
@@ -1003,14 +1024,24 @@ export class OrderlistComponent implements OnInit {
       this.startDateCheckValue &&
       this.startDateCheckValue === this.endDateCheckValue
     ) {
-      if (this.startTimeCheckValue && this.endTimeCheckValue) {
-        if (this.startTimeCheckValue >= this.endDateCheckValue) {
-          // console.log("EndDate Check");
+      if (this.currentDate == this.startDateCheckValue) {
+        if (this.currentTime < this.startTimeCheckValue) {
+          if (this.startTimeCheckValue && this.endTimeCheckValue) {
+            if (this.startTimeCheckValue >= this.endDateCheckValue) {
+              // console.log("EndDate Check");
+              this.addEventForm.controls["endTime"].reset();
+              this.endTimeCheckValue = "";
+              this.addEventForm.controls["startTime"].reset();
+              this.startTimeCheckValue = "";
+              this.toaster.error("Start time should be less than end time!");
+            }
+          }
+        } else {
           this.addEventForm.controls["endTime"].reset();
           this.endTimeCheckValue = "";
           this.addEventForm.controls["startTime"].reset();
           this.startTimeCheckValue = "";
-          this.toaster.error("Please check start time & end time again!");
+          this.toaster.error("Cannot choose past time!");
         }
       }
     }
@@ -1018,40 +1049,64 @@ export class OrderlistComponent implements OnInit {
 
   startTimeCheck(e) {
     this.startTimeCheckValue = e.target.value;
-    if (this.startDateCheckValue == this.endDateCheckValue) {
-      if (this.startTimeCheckValue && this.endTimeCheckValue) {
-        if (this.startTimeCheckValue >= this.endTimeCheckValue) {
+    if (this.startDateCheckValue==this.currentDate && this.currentTime<this.startTimeCheckValue){
+      if (
+        this.startDateCheckValue == this.endDateCheckValue &&
+        this.currentDate == this.startDateCheckValue
+      ) {
+        if (this.currentTime < this.startTimeCheckValue) {
+          if (this.startTimeCheckValue && this.endTimeCheckValue) {
+            if (this.startTimeCheckValue >= this.endTimeCheckValue) {
+              this.addEventForm.controls["endTime"].reset();
+              this.endTimeCheckValue = "";
+              this.addEventForm.controls["startTime"].reset();
+              this.startTimeCheckValue = "";
+              this.toaster.error("Start time should be less than end time!");
+            }
+          }
+        } else {
           this.addEventForm.controls["endTime"].reset();
           this.endTimeCheckValue = "";
           this.addEventForm.controls["startTime"].reset();
           this.startTimeCheckValue = "";
-          this.toaster.error("Please check start time & end time again!");
+          this.toaster.error("Cannot choose past time!");
         }
       }
     }
+    else {
+      this.addEventForm.controls["endTime"].reset();
+          this.endTimeCheckValue = "";
+          this.addEventForm.controls["startTime"].reset();
+          this.startTimeCheckValue = "";
+          this.toaster.error("Cannot choose past time!");
+    }
+
   }
 
   endTimeCheck(e) {
     this.endTimeCheckValue = e.target.value;
-    if (this.startDateCheckValue == this.endDateCheckValue) {
+    if (
+      this.startDateCheckValue == this.endDateCheckValue &&
+      this.currentDate == this.startDateCheckValue
+    ) {
       if (this.startTimeCheckValue && this.endTimeCheckValue) {
         if (this.startTimeCheckValue >= this.endTimeCheckValue) {
           this.addEventForm.controls["endTime"].reset();
           this.endTimeCheckValue = "";
           this.addEventForm.controls["startTime"].reset();
           this.startTimeCheckValue = "";
-          this.toaster.error("Please check Start time & end time again!");
+          this.toaster.error("Start time should be less than end time!");
         }
       }
     }
   }
 
   // Remove a Member
-  removeMember(id){
+  removeMember(id) {
     const data = {
       groupId: this.memberActionId,
       userId: id,
-      isJoin:false
+      isJoin: false,
     };
 
     this.Srvc.memberAction(data).subscribe((res: any) => {
@@ -1069,11 +1124,11 @@ export class OrderlistComponent implements OnInit {
   }
 
   // Accept a Member
-  acceptMember(id){
+  acceptMember(id) {
     const data = {
       groupId: this.memberActionId,
       userId: id,
-      isJoin:true
+      isJoin: true,
     };
 
     this.Srvc.memberAction(data).subscribe((res: any) => {
@@ -1084,7 +1139,6 @@ export class OrderlistComponent implements OnInit {
         Swal.fire("Success", "Event member successfully accepted", "success");
         this.modalService.dismissAll();
         this.getAllEvents();
-
       } else {
         Swal.fire("Oops", res.message, "error");
       }
