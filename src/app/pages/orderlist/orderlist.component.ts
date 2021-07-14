@@ -524,16 +524,16 @@ export class OrderlistComponent implements OnInit {
       this.tempArray.push(user);
     }
     this.startDateCheckValue = moment(row?.startDate).format("YYYY-MM-DD");
-    console.log("startDate",this.startDateCheckValue);
+    console.log("startDate", this.startDateCheckValue);
 
     this.endDateCheckValue = moment(row?.endDate).format("YYYY-MM-DD");
-    console.log("endDate",this.endDateCheckValue)
+    console.log("endDate", this.endDateCheckValue);
 
     this.startTimeCheckValue = this.convertTime12to24(row?.startTime);
-    console.log("startTime",this.startTimeCheckValue)
+    console.log("startTime", this.startTimeCheckValue);
 
     this.endTimeCheckValue = this.convertTime12to24(row?.endTime);
-    console.log("endTime",this.endTimeCheckValue)
+    console.log("endTime", this.endTimeCheckValue);
 
     this.selectIcon(row?.eventType?._id);
     // console.log(row?.eventType?._id);
@@ -1007,7 +1007,10 @@ export class OrderlistComponent implements OnInit {
   // Date / Time Checks
   startDateCheck(e) {
     this.startDateCheckValue = e.target.value;
-    if (this.endDateCheckValue && this.currentDate == this.startDateCheckValue) {
+    if (
+      this.endDateCheckValue &&
+      this.currentDate == this.startDateCheckValue
+    ) {
       if (this.startDateCheckValue > this.endDateCheckValue) {
         this.startDateCheckValue = "";
         this.endDateCheckValue = "";
@@ -1049,19 +1052,27 @@ export class OrderlistComponent implements OnInit {
 
   startTimeCheck(e) {
     this.startTimeCheckValue = e.target.value;
-    if (this.startDateCheckValue==this.currentDate && this.currentTime<this.startTimeCheckValue){
+
+    if (
+      this.startDateCheckValue == this.currentDate &&
+      this.currentTime < this.startTimeCheckValue
+    ) {
       if (
         this.startDateCheckValue == this.endDateCheckValue &&
         this.currentDate == this.startDateCheckValue
       ) {
         if (this.currentTime < this.startTimeCheckValue) {
           if (this.startTimeCheckValue && this.endTimeCheckValue) {
-            if (this.startTimeCheckValue >= this.endTimeCheckValue) {
+            if (this.startTimeCheckValue > this.endTimeCheckValue) {
               this.addEventForm.controls["endTime"].reset();
               this.endTimeCheckValue = "";
               this.addEventForm.controls["startTime"].reset();
               this.startTimeCheckValue = "";
               this.toaster.error("Start time should be less than end time!");
+              this.startDateCheckValue = "";
+              this.endDateCheckValue = "";
+              this.addEventForm.controls["startDate"].reset();
+              this.addEventForm.controls["endDate"].reset();
             }
           }
         } else {
@@ -1069,28 +1080,47 @@ export class OrderlistComponent implements OnInit {
           this.endTimeCheckValue = "";
           this.addEventForm.controls["startTime"].reset();
           this.startTimeCheckValue = "";
-          this.toaster.error("Cannot choose past time!");
+          this.startDateCheckValue = "";
+          this.endDateCheckValue = "";
+          this.addEventForm.controls["startDate"].reset();
+          this.addEventForm.controls["endDate"].reset();
+          this.toaster.error("a1Cannot choose past time!");
         }
       }
-    }
-    else {
-      this.addEventForm.controls["endTime"].reset();
+    } else {
+      if (this.endDateCheckValue == this.startDateCheckValue) {
+        if (
+          this.endTimeCheckValue &&
+          this.startTimeCheckValue > this.endTimeCheckValue
+        ) {
+          this.addEventForm.controls["endTime"].reset();
           this.endTimeCheckValue = "";
           this.addEventForm.controls["startTime"].reset();
           this.startTimeCheckValue = "";
-          this.toaster.error("Cannot choose past time!");
-    }
+          this.toaster.error("Start time should be less than end time!");
+        }
+      } else {
+        if (this.endTimeCheckValue && this.startTimeCheckValue>this.endTimeCheckValue){
+          this.addEventForm.controls["endTime"].reset();
+        this.endTimeCheckValue = "";
+        this.addEventForm.controls["startTime"].reset();
+        this.startTimeCheckValue = "";
+        this.toaster.error("a2Cannot choose past time!");
+        }
 
+      }
+    }
   }
 
   endTimeCheck(e) {
+    debugger;
     this.endTimeCheckValue = e.target.value;
     if (
       this.startDateCheckValue == this.endDateCheckValue &&
       this.currentDate == this.startDateCheckValue
     ) {
       if (this.startTimeCheckValue && this.endTimeCheckValue) {
-        if (this.startTimeCheckValue >= this.endTimeCheckValue) {
+        if (this.startTimeCheckValue > this.endTimeCheckValue) {
           this.addEventForm.controls["endTime"].reset();
           this.endTimeCheckValue = "";
           this.addEventForm.controls["startTime"].reset();
@@ -1098,6 +1128,17 @@ export class OrderlistComponent implements OnInit {
           this.toaster.error("Start time should be less than end time!");
         }
       }
+    } else {
+      if (this.startDateCheckValue == this.endDateCheckValue) {
+        if (this.startTimeCheckValue > this.endTimeCheckValue) {
+          this.addEventForm.controls["endTime"].reset();
+          this.endTimeCheckValue = "";
+          this.addEventForm.controls["startTime"].reset();
+          this.startTimeCheckValue = "";
+          this.toaster.error("Start time should be less than end time!");
+        }
+      }
+
     }
   }
 

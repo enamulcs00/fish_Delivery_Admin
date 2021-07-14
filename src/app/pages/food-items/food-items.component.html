@@ -183,13 +183,13 @@
         </thead>
         <tbody>
           <tr *ngFor="let item of memberList">
-            <td>{{item?.firstName}} {{item?._lastName}}</td>
+            <td>{{item?.firstName}} {{item?.lastName}}</td>
             <td>{{item?.userName || "-"}}</td>
             <td>{{item?.dialCode}}-{{item?.phoneNo}}</td>
             <td> {{item?.createdAt | date: 'medium'}} </td>
-            <td>{{item?.attendedEventCount || "-"}}</td>
-            <td>{{item?.hostedEventCount || "-"}}</td>
-            <td>{{item?.attendedGroupCount || "-"}}</td>
+            <td>{{item?.attendedEventCount || "0"}}</td>
+            <td>{{item?.hostedEventCount || "0"}}</td>
+            <td>{{item?.attendedGroupCount || "0"}}</td>
             <td> <a class="btn btn-outline-primary btn-sm" (click)="removeMember(item?._id)"> Remove </a> </td>
           </tr>
 
