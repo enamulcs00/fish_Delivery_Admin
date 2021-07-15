@@ -131,6 +131,9 @@ export class OrderlistComponent implements OnInit {
   currentTime: string;
   currentDate: string;
   saveEditStateArray: any[];
+  rejectMemberID: any;
+  guestListMemberID: any;
+  waitingListEventID: any;
 
   constructor(
     private modalService: NgbModal,
@@ -590,6 +593,7 @@ export class OrderlistComponent implements OnInit {
       (element: any) => element._id === id
     );
     this.guestList = filteredData.acceptedList;
+    this.guestListMemberID = id;
     this.modalService.open(car, {
       backdropClass: "light-blue-backdrop",
       centered: true,
@@ -601,7 +605,7 @@ export class OrderlistComponent implements OnInit {
       (element: any) => element._id === id
     );
     this.waitingList = filteredData.waitingList;
-    this.memberActionId = id;
+    this.waitingListEventID = id;
     this.modalService.open(car2, {
       backdropClass: "light-blue-backdrop",
       centered: true,
@@ -1122,7 +1126,29 @@ export class OrderlistComponent implements OnInit {
   // Remove a Member
   removeMember(id) {
     const data = {
-      eventId: this.memberActionId,
+      eventId: this.guestListMemberID,
+      userId: id,
+      isJoin: false,
+    };
+
+    this.Srvc.memberAction(data).subscribe((res: any) => {
+      if (res.statusCode == 401) {
+        this.sessionTerminate();
+      }
+      if (res.statusCode == 200) {
+        Swal.fire("Removed", res.message, "success");
+        this.modalService.dismissAll();
+        this.getAllEvents();
+      } else {
+        Swal.fire("Oops", res.message, "error");
+      }
+    });
+  }
+
+  // Remove a Waiting List
+  removeWaitingMember(id) {
+    const data = {
+      eventId: this.waitingListEventID,
       userId: id,
       isJoin: false,
     };
@@ -1144,7 +1170,7 @@ export class OrderlistComponent implements OnInit {
   // Accept a Member
   acceptMember(id) {
     const data = {
-      eventId: this.memberActionId,
+      eventId: this.waitingListEventID,
       userId: id,
       isJoin: true,
     };
