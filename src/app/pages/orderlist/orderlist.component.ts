@@ -839,6 +839,7 @@ export class OrderlistComponent implements OnInit {
         endTime: this.addEventForm.value.endTime,
         address: this.addEventForm.value.address,
         description: this.addEventForm.value.description,
+
       };
 
       // console.log(obj);
@@ -1021,12 +1022,11 @@ export class OrderlistComponent implements OnInit {
 
   deletePoll() {
     const data = {
-      eventId: this.eventID,
-      pollId: this.deletePollID,
-      isDeleted: true,
+      // eventId: this.eventID,
+      id: this.deletePollID,
     };
 
-    this.Srvc.updatePoll(data).subscribe((res: any) => {
+    this.Srvc.deletePoll(data).subscribe((res: any) => {
       if (res.statusCode == 401) {
         this.sessionTerminate();
       }
@@ -1034,9 +1034,9 @@ export class OrderlistComponent implements OnInit {
         Swal.fire("Deleted", res.message, "success");
         this.modalService.dismissAll();
         this.getAllEvents();
-        setTimeout(() => {
-          document.getElementById(this.eventID).click();
-        }, 100);
+        // setTimeout(() => {
+        //   document.getElementById(this.eventID).click();
+        // }, 100);
       } else {
         Swal.fire("Oops", res.message, "error");
       }
@@ -1046,145 +1046,21 @@ export class OrderlistComponent implements OnInit {
   // Date / Time Checks
   startDateCheck(e) {
     this.startDateCheckValue = e.target.value;
-    if (
-      this.endDateCheckValue &&
-      this.currentDate == this.startDateCheckValue
-    ) {
-      if (this.startDateCheckValue > this.endDateCheckValue) {
-        this.startDateCheckValue = "";
-        this.endDateCheckValue = "";
-        this.addEventForm.controls["startDate"].reset();
-        this.addEventForm.controls["endDate"].reset();
-        this.toaster.error("Start time should be less than end time!");
-      }
-    }
+
   }
 
   endDateCheck(e) {
     this.endDateCheckValue = e.target.value;
-    if (
-      this.startDateCheckValue &&
-      this.startDateCheckValue === this.endDateCheckValue
-    ) {
-      if (this.currentDate == this.startDateCheckValue) {
-        if (this.currentTime < this.startTimeCheckValue) {
-          if (this.startTimeCheckValue && this.endTimeCheckValue) {
-            if (this.startTimeCheckValue >= this.endDateCheckValue) {
-              // console.log("EndDate Check");
-              this.addEventForm.controls["endTime"].reset();
-              this.endTimeCheckValue = "";
-              this.addEventForm.controls["startTime"].reset();
-              this.startTimeCheckValue = "";
-              this.toaster.error("Start time should be less than end time!");
-            }
-          }
-        } else {
-          this.addEventForm.controls["endTime"].reset();
-          this.endTimeCheckValue = "";
-          this.addEventForm.controls["startTime"].reset();
-          this.startTimeCheckValue = "";
-          this.toaster.error("Cannot choose past time!");
-        }
-      }
-    }
+
   }
 
   startTimeCheck(e) {
     this.startTimeCheckValue = e.target.value;
-
-    if (
-      this.startDateCheckValue == this.currentDate &&
-      this.currentTime < this.startTimeCheckValue
-    ) {
-      if (
-        this.startDateCheckValue == this.endDateCheckValue &&
-        this.currentDate == this.startDateCheckValue
-      ) {
-        if (this.currentTime < this.startTimeCheckValue) {
-          if (this.startTimeCheckValue && this.endTimeCheckValue) {
-            if (this.startTimeCheckValue > this.endTimeCheckValue) {
-              this.addEventForm.controls["endTime"].reset();
-              this.endTimeCheckValue = "";
-              this.addEventForm.controls["startTime"].reset();
-              this.startTimeCheckValue = "";
-              this.toaster.error("Start time should be less than end time!");
-              this.startDateCheckValue = "";
-              this.endDateCheckValue = "";
-              this.addEventForm.controls["startDate"].reset();
-              this.addEventForm.controls["endDate"].reset();
-            }
-          }
-        } else {
-          this.addEventForm.controls["endTime"].reset();
-          this.endTimeCheckValue = "";
-          this.addEventForm.controls["startTime"].reset();
-          this.startTimeCheckValue = "";
-          this.startDateCheckValue = "";
-          this.endDateCheckValue = "";
-          this.addEventForm.controls["startDate"].reset();
-          this.addEventForm.controls["endDate"].reset();
-          this.toaster.error("Cannot choose past time!");
-        }
-      }
-    } else {
-
-      if (this.endDateCheckValue == this.startDateCheckValue) {
-        if (
-          this.endTimeCheckValue &&
-          this.startTimeCheckValue > this.endTimeCheckValue
-        ) {
-          this.addEventForm.controls["endTime"].reset();
-          this.endTimeCheckValue = "";
-          this.addEventForm.controls["startTime"].reset();
-          this.startTimeCheckValue = "";
-          this.toaster.error("Start time should be less than end time!");
-        }
-      } else {
-        if (this.currentDate == this.startDateCheckValue && this.currentTime > this.startTimeCheckValue){
-          this.addEventForm.controls["startTime"].reset();
-        this.startTimeCheckValue = "";
-        this.toaster.error("Cannot choose past time!");
-        }
-        if (this.endTimeCheckValue && this.startTimeCheckValue>this.endTimeCheckValue){
-          this.addEventForm.controls["endTime"].reset();
-        this.endTimeCheckValue = "";
-        this.addEventForm.controls["startTime"].reset();
-        this.startTimeCheckValue = "";
-        this.toaster.error("Cannot choose past time!");
-        }
-
-      }
-    }
   }
 
   endTimeCheck(e) {
-    debugger;
     this.endTimeCheckValue = e.target.value;
-    if (
-      this.startDateCheckValue == this.endDateCheckValue &&
-      this.currentDate == this.startDateCheckValue
-    ) {
-      if (this.startTimeCheckValue && this.endTimeCheckValue) {
-        if (this.startTimeCheckValue > this.endTimeCheckValue) {
-          this.addEventForm.controls["endTime"].reset();
-          this.endTimeCheckValue = "";
-          this.addEventForm.controls["startTime"].reset();
-          this.startTimeCheckValue = "";
-          this.toaster.error("Start time should be less than end time!");
-        }
-      }
-    } else {
-      if (this.startDateCheckValue == this.endDateCheckValue) {
-        if (this.startTimeCheckValue > this.endTimeCheckValue) {
-          this.addEventForm.controls["endTime"].reset();
-          this.endTimeCheckValue = "";
-          this.addEventForm.controls["startTime"].reset();
-          this.startTimeCheckValue = "";
-          this.toaster.error("Start time should be less than end time!");
-        }
-      }
 
-    }
   }
 
   // Remove a Member

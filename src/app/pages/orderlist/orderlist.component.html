@@ -6,10 +6,10 @@
       <a class="nav-link active" href="#Past" role="tab" (click)="changeFilterType(0);changetabPast()" data-toggle="tab">Past Events</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#ongoing" role="tab" (click)="changeFilterType(1)" data-toggle="tab">Ongoing Events</a>
+      <a class="nav-link" href="#ongoing" role="tab" (click)="changeFilterType(1);changetabOngoing()" data-toggle="tab">Ongoing Events</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#upcoming" role="tab" (click)="changeFilterType(2)" data-toggle="tab">Upcoming
+      <a class="nav-link" href="#upcoming" role="tab" (click)="changeFilterType(2);changetabUpcoming()" data-toggle="tab">Upcoming
         Events</a>
     </li>
   </ul>
@@ -1140,7 +1140,8 @@
         <p>No Poll added</p>
       </ng-template>
 
-      <button *ngIf="!isPast" class="btn btn-primary d-block mx-1" (click)="isModalEnable = true; addpollmodal(editpoll)">Add Poll</button>
+      <button *ngIf="isOngoing" class="btn btn-primary d-block mx-1" (click)="isModalEnable = true; addpollmodal(editpoll)">Add Poll</button>
+      <button *ngIf="isUpcoming" class="btn btn-primary d-block mx-1" (click)="isModalEnable = true; addpollmodal(editpoll)">Add Poll</button>
       <a class="btn btn-danger text-white my-2 mx-1" type="button" (click)="modal.close()">Close</a>
     </div>
   </div>
