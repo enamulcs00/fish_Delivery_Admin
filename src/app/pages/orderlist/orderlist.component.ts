@@ -90,9 +90,9 @@ export class OrderlistComponent implements OnInit {
   eventData: any;
   waitingList: any;
   selectedIcon: any = false;
-  isPast:boolean=true;
-  isOngoing:boolean=false;
-  isUpcoming:boolean=false;
+  isPast: boolean = true;
+  isOngoing: boolean = false;
+  isUpcoming: boolean = false;
 
   ArrayImage: any = [];
   usersData: any;
@@ -233,7 +233,7 @@ export class OrderlistComponent implements OnInit {
       minute: "numeric",
     });
     this.currentDate = new Date().toISOString().split("T")[0];
-    console.log(this.currentDate);
+    // console.log(this.currentDate);
   }
 
   pushFormArray() {
@@ -292,20 +292,20 @@ export class OrderlistComponent implements OnInit {
     // this.dataSource.sort = this.sort;
   }
 
-  changetabPast(){
-    console.log
+  changetabPast() {
+    // console.log;
     this.isPast = true;
     this.isUpcoming = false;
     this.isOngoing = false;
   }
-  changetabUpcoming(){
-    console.log
+  changetabUpcoming() {
+    // console.log;
     this.isPast = false;
     this.isUpcoming = true;
     this.isOngoing = false;
   }
-  changetabOngoing(){
-    console.log
+  changetabOngoing() {
+    // console.log;
     this.isPast = false;
     this.isUpcoming = false;
     this.isOngoing = true;
@@ -548,7 +548,7 @@ export class OrderlistComponent implements OnInit {
     this.editEventID = row?._id;
 
     this.tempArray = [];
-    this.saveEditStateArray = []
+    this.saveEditStateArray = [];
     for (var user of this.usersArray) {
       this.tempArray.push(user);
     }
@@ -556,16 +556,16 @@ export class OrderlistComponent implements OnInit {
       this.saveEditStateArray.push(user);
     }
     this.startDateCheckValue = moment(row?.startDate).format("YYYY-MM-DD");
-    console.log("startDate", this.startDateCheckValue);
+    // console.log("startDate", this.startDateCheckValue);
 
     this.endDateCheckValue = moment(row?.endDate).format("YYYY-MM-DD");
-    console.log("endDate", this.endDateCheckValue);
+    // console.log("endDate", this.endDateCheckValue);
 
     this.startTimeCheckValue = this.convertTime12to24(row?.startTime);
-    console.log("startTime", this.startTimeCheckValue);
+    // console.log("startTime", this.startTimeCheckValue);
 
     this.endTimeCheckValue = this.convertTime12to24(row?.endTime);
-    console.log("endTime", this.endTimeCheckValue);
+    // console.log("endTime", this.endTimeCheckValue);
 
     this.selectIcon(row?.eventType?._id);
     // console.log(row?.eventType?._id);
@@ -745,7 +745,7 @@ export class OrderlistComponent implements OnInit {
     this.tempArray = [].concat(this.usersArray);
   }
 
-  removeEditArray(){
+  removeEditArray() {
     this.usersArray = this.saveEditStateArray;
     this.tempArray = [].concat(this.usersArray);
   }
@@ -839,7 +839,6 @@ export class OrderlistComponent implements OnInit {
         endTime: this.addEventForm.value.endTime,
         address: this.addEventForm.value.address,
         description: this.addEventForm.value.description,
-
       };
 
       if (!obj.eventType) {
@@ -1050,23 +1049,75 @@ export class OrderlistComponent implements OnInit {
   // Date / Time Checks
   startDateCheck(e) {
     this.startDateCheckValue = e.target.value;
-    this.addEventForm.controls["startTime"].reset();
+    this.dateTimeStrictCheck();
   }
 
   endDateCheck(e) {
     this.endDateCheckValue = e.target.value;
-
+    if (this.startDateCheckValue) {
+      this.dateTimeStrictCheck();
+    } else {
+      this.resetValues();
+      this.toaster.error("Please choose Start date first !");
+    }
   }
 
   startTimeCheck(e) {
+    // debugger;
     this.startTimeCheckValue = e.target.value;
+    if (this.startDateCheckValue && this.endDateCheckValue) {
+      this.dateTimeStrictCheck();
+    } else {
+      this.resetValues();
+      this.toaster.error("Please choose Start date & End date first !");
+    }
   }
 
   endTimeCheck(e) {
     this.endTimeCheckValue = e.target.value;
-
+    if (
+      this.startDateCheckValue &&
+      this.endDateCheckValue &&
+      this.startTimeCheckValue
+    ) {
+      this.dateTimeStrictCheck();
+    } else {
+      this.resetValues();
+      this.toaster.error("Please choose Start date & End date first !");
+    }
   }
 
+  resetValues() {
+    // console.log("reset Called")
+    this.startDateCheckValue = "";
+    this.startTimeCheckValue = "";
+    this.endTimeCheckValue = "";
+    this.endDateCheckValue = "";
+    this.addEventForm.controls["endDate"].reset();
+    this.addEventForm.controls["endTime"].reset();
+    this.addEventForm.controls["startDate"].reset();
+    this.addEventForm.controls["startTime"].reset();
+    this.toaster.error("Invalid date/time !");
+  }
+
+  dateTimeStrictCheck(){
+    // debugger
+    if (this.startDateCheckValue && this.endDateCheckValue && this.startTimeCheckValue && this.endTimeCheckValue){
+      // console.log("Lvl 1");
+      if (this.startDateCheckValue ==this.currentDate || this.startDateCheckValue==this.endDateCheckValue){
+        // console.log("Lvl 2")
+        if (this.startTimeCheckValue>this.endTimeCheckValue || this.startTimeCheckValue<this.currentTime){
+          // console.log("Lvl 3")
+          this.resetValues();
+        }
+      }
+      else {
+        console.log("All Good");
+      }
+    }
+
+
+  }
 
   // Remove a Member
   removeMember(id) {
@@ -1112,12 +1163,11 @@ export class OrderlistComponent implements OnInit {
     });
   }
 
-  calculateTotalLength(row){
+  calculateTotalLength(row) {
     // debugger
-    let users = row.invitedList.length
-    let group = row.inviteGroup.length
-    let total = users + group
-    return total
-
+    let users = row.invitedList.length;
+    let group = row.inviteGroup.length;
+    let total = users + group;
+    return total;
   }
 }

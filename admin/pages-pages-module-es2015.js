@@ -35143,7 +35143,7 @@ function OrderlistComponent_div_26_td_28_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const row_r88 = ctx.$implicit;
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", row_r88 == null ? null : row_r88.invitedList.length, " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"]((row_r88 == null ? null : row_r88.invitedList.length) + row_r88.inviteGroup.length);
 } }
 function OrderlistComponent_div_26_th_30_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "th", 71);
@@ -35578,7 +35578,7 @@ function OrderlistComponent_div_40_td_28_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const row_r162 = ctx.$implicit;
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", row_r162 == null ? null : row_r162.invitedList.length, " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", (row_r162 == null ? null : row_r162.invitedList.length) + row_r162.inviteGroup.length, " ");
 } }
 function OrderlistComponent_div_40_th_30_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "th", 71);
@@ -36013,7 +36013,7 @@ function OrderlistComponent_div_54_td_28_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const row_r237 = ctx.$implicit;
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", row_r237 == null ? null : row_r237.invitedList.length, " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", (row_r237 == null ? null : row_r237.invitedList.length) + row_r237.inviteGroup.length, " ");
 } }
 function OrderlistComponent_div_54_th_30_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "th", 71);
@@ -37598,7 +37598,7 @@ class OrderlistComponent {
             minute: "numeric",
         });
         this.currentDate = new Date().toISOString().split("T")[0];
-        console.log(this.currentDate);
+        // console.log(this.currentDate);
     }
     pushFormArray() {
         this.options = this.addPollForm.get("options");
@@ -37650,19 +37650,19 @@ class OrderlistComponent {
         // this.dataSource.sort = this.sort;
     }
     changetabPast() {
-        console.log;
+        // console.log;
         this.isPast = true;
         this.isUpcoming = false;
         this.isOngoing = false;
     }
     changetabUpcoming() {
-        console.log;
+        // console.log;
         this.isPast = false;
         this.isUpcoming = true;
         this.isOngoing = false;
     }
     changetabOngoing() {
-        console.log;
+        // console.log;
         this.isPast = false;
         this.isUpcoming = false;
         this.isOngoing = true;
@@ -37873,13 +37873,13 @@ class OrderlistComponent {
             this.saveEditStateArray.push(user);
         }
         this.startDateCheckValue = moment__WEBPACK_IMPORTED_MODULE_8__(row === null || row === void 0 ? void 0 : row.startDate).format("YYYY-MM-DD");
-        console.log("startDate", this.startDateCheckValue);
+        // console.log("startDate", this.startDateCheckValue);
         this.endDateCheckValue = moment__WEBPACK_IMPORTED_MODULE_8__(row === null || row === void 0 ? void 0 : row.endDate).format("YYYY-MM-DD");
-        console.log("endDate", this.endDateCheckValue);
+        // console.log("endDate", this.endDateCheckValue);
         this.startTimeCheckValue = this.convertTime12to24(row === null || row === void 0 ? void 0 : row.startTime);
-        console.log("startTime", this.startTimeCheckValue);
+        // console.log("startTime", this.startTimeCheckValue);
         this.endTimeCheckValue = this.convertTime12to24(row === null || row === void 0 ? void 0 : row.endTime);
-        console.log("endTime", this.endTimeCheckValue);
+        // console.log("endTime", this.endTimeCheckValue);
         this.selectIcon((_a = row === null || row === void 0 ? void 0 : row.eventType) === null || _a === void 0 ? void 0 : _a._id);
         // console.log(row?.eventType?._id);
         this.modalService.open(Adddetail, {
@@ -38077,7 +38077,7 @@ class OrderlistComponent {
                 obj.isGuestInvites = true;
             }
             if (!obj.eventType) {
-                obj.eventType = this.defaultSelection;
+                delete obj.eventType;
             }
             this.Srvc.addEvent(obj).subscribe((res) => {
                 if (res.statusCode == 401) {
@@ -38129,6 +38129,9 @@ class OrderlistComponent {
                 address: this.addEventForm.value.address,
                 description: this.addEventForm.value.description,
             };
+            if (!obj.eventType) {
+                delete obj.eventType;
+            }
             // console.log(obj);
             // return;
             this.Srvc.updateEvent(obj).subscribe((res) => {
@@ -38317,20 +38320,73 @@ class OrderlistComponent {
     // Date / Time Checks
     startDateCheck(e) {
         this.startDateCheckValue = e.target.value;
+        this.dateTimeStrictCheck();
     }
     endDateCheck(e) {
         this.endDateCheckValue = e.target.value;
+        if (this.startDateCheckValue) {
+            this.dateTimeStrictCheck();
+        }
+        else {
+            this.resetValues();
+            this.toaster.error("Please choose Start date first !");
+        }
     }
     startTimeCheck(e) {
+        // debugger;
         this.startTimeCheckValue = e.target.value;
+        if (this.startDateCheckValue && this.endDateCheckValue) {
+            this.dateTimeStrictCheck();
+        }
+        else {
+            this.resetValues();
+            this.toaster.error("Please choose Start date & End date first !");
+        }
     }
     endTimeCheck(e) {
         this.endTimeCheckValue = e.target.value;
+        if (this.startDateCheckValue &&
+            this.endDateCheckValue &&
+            this.startTimeCheckValue) {
+            this.dateTimeStrictCheck();
+        }
+        else {
+            this.resetValues();
+            this.toaster.error("Please choose Start date & End date first !");
+        }
+    }
+    resetValues() {
+        // console.log("reset Called")
+        this.startDateCheckValue = "";
+        this.startTimeCheckValue = "";
+        this.endTimeCheckValue = "";
+        this.endDateCheckValue = "";
+        this.addEventForm.controls["endDate"].reset();
+        this.addEventForm.controls["endTime"].reset();
+        this.addEventForm.controls["startDate"].reset();
+        this.addEventForm.controls["startTime"].reset();
+        this.toaster.error("Invalid date/time !");
+    }
+    dateTimeStrictCheck() {
+        // debugger
+        if (this.startDateCheckValue && this.endDateCheckValue && this.startTimeCheckValue && this.endTimeCheckValue) {
+            // console.log("Lvl 1");
+            if (this.startDateCheckValue == this.currentDate || this.startDateCheckValue == this.endDateCheckValue) {
+                // console.log("Lvl 2")
+                if (this.startTimeCheckValue > this.endTimeCheckValue || this.startTimeCheckValue < this.currentTime) {
+                    // console.log("Lvl 3")
+                    this.resetValues();
+                }
+            }
+            else {
+                console.log("All Good");
+            }
+        }
     }
     // Remove a Member
     removeMember(id) {
         const data = {
-            groupId: this.memberActionId,
+            eventId: this.memberActionId,
             userId: id,
             isJoin: false,
         };
@@ -38351,7 +38407,7 @@ class OrderlistComponent {
     // Accept a Member
     acceptMember(id) {
         const data = {
-            groupId: this.memberActionId,
+            eventId: this.memberActionId,
             userId: id,
             isJoin: true,
         };
@@ -38368,6 +38424,13 @@ class OrderlistComponent {
                 sweetalert2__WEBPACK_IMPORTED_MODULE_5___default.a.fire("Oops", res.message, "error");
             }
         });
+    }
+    calculateTotalLength(row) {
+        // debugger
+        let users = row.invitedList.length;
+        let group = row.inviteGroup.length;
+        let total = users + group;
+        return total;
     }
 }
 OrderlistComponent.ɵfac = function OrderlistComponent_Factory(t) { return new (t || OrderlistComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_1__["NgbModal"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_services_events_service__WEBPACK_IMPORTED_MODULE_4__["EventsService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_6__["ActivatedRoute"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](ngx_toastr__WEBPACK_IMPORTED_MODULE_7__["ToastrService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_services_event_type_service__WEBPACK_IMPORTED_MODULE_9__["EventTypeService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_10__["FormBuilder"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_services_users_service__WEBPACK_IMPORTED_MODULE_11__["UsersService"])); };

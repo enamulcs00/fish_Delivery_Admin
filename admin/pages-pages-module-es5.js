@@ -65808,7 +65808,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", row_r88 == null ? null : row_r88.invitedList.length, " ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"]((row_r88 == null ? null : row_r88.invitedList.length) + row_r88.inviteGroup.length);
         }
       }
 
@@ -66744,7 +66744,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", row_r162 == null ? null : row_r162.invitedList.length, " ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", (row_r162 == null ? null : row_r162.invitedList.length) + row_r162.inviteGroup.length, " ");
         }
       }
 
@@ -67688,7 +67688,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", row_r237 == null ? null : row_r237.invitedList.length, " ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", (row_r237 == null ? null : row_r237.invitedList.length) + row_r237.inviteGroup.length, " ");
         }
       }
 
@@ -71020,8 +71020,7 @@
               hour: "numeric",
               minute: "numeric"
             });
-            this.currentDate = new Date().toISOString().split("T")[0];
-            console.log(this.currentDate);
+            this.currentDate = new Date().toISOString().split("T")[0]; // console.log(this.currentDate);
           }
         }, {
           key: "pushFormArray",
@@ -71086,7 +71085,7 @@
         }, {
           key: "changetabPast",
           value: function changetabPast() {
-            console.log;
+            // console.log;
             this.isPast = true;
             this.isUpcoming = false;
             this.isOngoing = false;
@@ -71094,7 +71093,7 @@
         }, {
           key: "changetabUpcoming",
           value: function changetabUpcoming() {
-            console.log;
+            // console.log;
             this.isPast = false;
             this.isUpcoming = true;
             this.isOngoing = false;
@@ -71102,7 +71101,7 @@
         }, {
           key: "changetabOngoing",
           value: function changetabOngoing() {
-            console.log;
+            // console.log;
             this.isPast = false;
             this.isUpcoming = false;
             this.isOngoing = true;
@@ -71433,14 +71432,14 @@
               _iterator26.f();
             }
 
-            this.startDateCheckValue = moment__WEBPACK_IMPORTED_MODULE_8__(row === null || row === void 0 ? void 0 : row.startDate).format("YYYY-MM-DD");
-            console.log("startDate", this.startDateCheckValue);
-            this.endDateCheckValue = moment__WEBPACK_IMPORTED_MODULE_8__(row === null || row === void 0 ? void 0 : row.endDate).format("YYYY-MM-DD");
-            console.log("endDate", this.endDateCheckValue);
-            this.startTimeCheckValue = this.convertTime12to24(row === null || row === void 0 ? void 0 : row.startTime);
-            console.log("startTime", this.startTimeCheckValue);
-            this.endTimeCheckValue = this.convertTime12to24(row === null || row === void 0 ? void 0 : row.endTime);
-            console.log("endTime", this.endTimeCheckValue);
+            this.startDateCheckValue = moment__WEBPACK_IMPORTED_MODULE_8__(row === null || row === void 0 ? void 0 : row.startDate).format("YYYY-MM-DD"); // console.log("startDate", this.startDateCheckValue);
+
+            this.endDateCheckValue = moment__WEBPACK_IMPORTED_MODULE_8__(row === null || row === void 0 ? void 0 : row.endDate).format("YYYY-MM-DD"); // console.log("endDate", this.endDateCheckValue);
+
+            this.startTimeCheckValue = this.convertTime12to24(row === null || row === void 0 ? void 0 : row.startTime); // console.log("startTime", this.startTimeCheckValue);
+
+            this.endTimeCheckValue = this.convertTime12to24(row === null || row === void 0 ? void 0 : row.endTime); // console.log("endTime", this.endTimeCheckValue);
+
             this.selectIcon((_a = row === null || row === void 0 ? void 0 : row.eventType) === null || _a === void 0 ? void 0 : _a._id); // console.log(row?.eventType?._id);
 
             this.modalService.open(Adddetail, {
@@ -71701,7 +71700,7 @@
               }
 
               if (!obj.eventType) {
-                obj.eventType = this.defaultSelection;
+                delete obj.eventType;
               }
 
               this.Srvc.addEvent(obj).subscribe(function (res) {
@@ -71762,8 +71761,13 @@
                 endTime: this.addEventForm.value.endTime,
                 address: this.addEventForm.value.address,
                 description: this.addEventForm.value.description
-              }; // console.log(obj);
+              };
+
+              if (!obj.eventType) {
+                delete obj.eventType;
+              } // console.log(obj);
               // return;
+
 
               this.Srvc.updateEvent(obj).subscribe(function (res) {
                 if (res.statusCode == 401) {
@@ -71994,21 +71998,75 @@
           key: "startDateCheck",
           value: function startDateCheck(e) {
             this.startDateCheckValue = e.target.value;
+            this.dateTimeStrictCheck();
           }
         }, {
           key: "endDateCheck",
           value: function endDateCheck(e) {
             this.endDateCheckValue = e.target.value;
+
+            if (this.startDateCheckValue) {
+              this.dateTimeStrictCheck();
+            } else {
+              this.resetValues();
+              this.toaster.error("Please choose Start date first !");
+            }
           }
         }, {
           key: "startTimeCheck",
           value: function startTimeCheck(e) {
+            // debugger;
             this.startTimeCheckValue = e.target.value;
+
+            if (this.startDateCheckValue && this.endDateCheckValue) {
+              this.dateTimeStrictCheck();
+            } else {
+              this.resetValues();
+              this.toaster.error("Please choose Start date & End date first !");
+            }
           }
         }, {
           key: "endTimeCheck",
           value: function endTimeCheck(e) {
             this.endTimeCheckValue = e.target.value;
+
+            if (this.startDateCheckValue && this.endDateCheckValue && this.startTimeCheckValue) {
+              this.dateTimeStrictCheck();
+            } else {
+              this.resetValues();
+              this.toaster.error("Please choose Start date & End date first !");
+            }
+          }
+        }, {
+          key: "resetValues",
+          value: function resetValues() {
+            // console.log("reset Called")
+            this.startDateCheckValue = "";
+            this.startTimeCheckValue = "";
+            this.endTimeCheckValue = "";
+            this.endDateCheckValue = "";
+            this.addEventForm.controls["endDate"].reset();
+            this.addEventForm.controls["endTime"].reset();
+            this.addEventForm.controls["startDate"].reset();
+            this.addEventForm.controls["startTime"].reset();
+            this.toaster.error("Invalid date/time !");
+          }
+        }, {
+          key: "dateTimeStrictCheck",
+          value: function dateTimeStrictCheck() {
+            // debugger
+            if (this.startDateCheckValue && this.endDateCheckValue && this.startTimeCheckValue && this.endTimeCheckValue) {
+              // console.log("Lvl 1");
+              if (this.startDateCheckValue == this.currentDate || this.startDateCheckValue == this.endDateCheckValue) {
+                // console.log("Lvl 2")
+                if (this.startTimeCheckValue > this.endTimeCheckValue || this.startTimeCheckValue < this.currentTime) {
+                  // console.log("Lvl 3")
+                  this.resetValues();
+                }
+              } else {
+                console.log("All Good");
+              }
+            }
           } // Remove a Member
 
         }, {
@@ -72017,7 +72075,7 @@
             var _this154 = this;
 
             var data = {
-              groupId: this.memberActionId,
+              eventId: this.memberActionId,
               userId: id,
               isJoin: false
             };
@@ -72044,7 +72102,7 @@
             var _this155 = this;
 
             var data = {
-              groupId: this.memberActionId,
+              eventId: this.memberActionId,
               userId: id,
               isJoin: true
             };
@@ -72063,6 +72121,15 @@
                 sweetalert2__WEBPACK_IMPORTED_MODULE_5___default.a.fire("Oops", res.message, "error");
               }
             });
+          }
+        }, {
+          key: "calculateTotalLength",
+          value: function calculateTotalLength(row) {
+            // debugger
+            var users = row.invitedList.length;
+            var group = row.inviteGroup.length;
+            var total = users + group;
+            return total;
           }
         }]);
 
