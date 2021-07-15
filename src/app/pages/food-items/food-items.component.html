@@ -488,7 +488,7 @@
         <tbody>
           <tr *ngFor="let user of usersData">
             <td> <input (change)="inviteUsers($event,user?._id)" type="checkbox"
-                [checked]="usersArray.includes(user?._id)"> </td>
+                [checked]="tempArray.includes(user?._id)"> </td>
             <td>{{user?.firstName}} {{user?.lastName}}</td>
             <td>{{user?.userName|| "-"}}</td>
             <td class="text-nowrap">{{user?.dialCode}}-{{user?.phoneNo}}</td>

@@ -26353,7 +26353,7 @@ function FoodItemsComponent_ng_template_37_tr_25_Template(rf, ctx) { if (rf & 1)
     const user_r110 = ctx.$implicit;
     const ctx_r106 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("checked", ctx_r106.usersArray.includes(user_r110 == null ? null : user_r110._id));
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("checked", ctx_r106.tempArray.includes(user_r110 == null ? null : user_r110._id));
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate2"]("", user_r110 == null ? null : user_r110.firstName, " ", user_r110 == null ? null : user_r110.lastName, "");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
@@ -37340,7 +37340,7 @@ function OrderlistComponent_ng_template_76_tr_25_Template(rf, ctx) { if (rf & 1)
     const user_r381 = ctx.$implicit;
     const ctx_r377 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("checked", ctx_r377.usersArray.includes(user_r381 == null ? null : user_r381._id));
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("checked", ctx_r377.tempArray.includes(user_r381 == null ? null : user_r381._id));
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate2"]("", user_r381 == null ? null : user_r381.firstName, " ", user_r381 == null ? null : user_r381.lastName, "");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
