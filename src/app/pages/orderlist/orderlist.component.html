@@ -665,7 +665,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="control-label"> Event Name </label>
-                  <input (keypress)="alphabate($event)" #eventName
+                  <input #eventName
                     (keydown.space)="doSomething($event ,eventName.value)" formControlName="eventName" type="text"
                     id="eventName" class="form-control" placeholder="Enter Event Name">
                   <small
