@@ -1097,7 +1097,7 @@ export class OrderlistComponent implements OnInit {
     this.addEventForm.controls["endTime"].reset();
     this.addEventForm.controls["startDate"].reset();
     this.addEventForm.controls["startTime"].reset();
-    this.toaster.error("Invalid date/time !");
+    this.toaster.error("End time cannot come before start time !");
   }
 
   dateTimeStrictCheck(){
