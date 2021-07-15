@@ -785,7 +785,7 @@ export class OrderlistComponent implements OnInit {
         obj.isGuestInvites = true;
       }
       if (!obj.eventType) {
-        obj.eventType = this.defaultSelection;
+        delete obj.eventType;
       }
 
       this.Srvc.addEvent(obj).subscribe(
@@ -841,6 +841,10 @@ export class OrderlistComponent implements OnInit {
         description: this.addEventForm.value.description,
 
       };
+
+      if (!obj.eventType) {
+        delete obj.eventType;
+      }
 
       // console.log(obj);
       // return;
@@ -1046,7 +1050,7 @@ export class OrderlistComponent implements OnInit {
   // Date / Time Checks
   startDateCheck(e) {
     this.startDateCheckValue = e.target.value;
-
+    this.addEventForm.controls["startTime"].reset();
   }
 
   endDateCheck(e) {
@@ -1063,10 +1067,11 @@ export class OrderlistComponent implements OnInit {
 
   }
 
+
   // Remove a Member
   removeMember(id) {
     const data = {
-      groupId: this.memberActionId,
+      eventId: this.memberActionId,
       userId: id,
       isJoin: false,
     };
@@ -1088,7 +1093,7 @@ export class OrderlistComponent implements OnInit {
   // Accept a Member
   acceptMember(id) {
     const data = {
-      groupId: this.memberActionId,
+      eventId: this.memberActionId,
       userId: id,
       isJoin: true,
     };
@@ -1105,5 +1110,14 @@ export class OrderlistComponent implements OnInit {
         Swal.fire("Oops", res.message, "error");
       }
     });
+  }
+
+  calculateTotalLength(row){
+    // debugger
+    let users = row.invitedList.length
+    let group = row.inviteGroup.length
+    let total = users + group
+    return total
+
   }
 }
