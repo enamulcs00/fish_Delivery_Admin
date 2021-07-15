@@ -90,6 +90,9 @@ export class OrderlistComponent implements OnInit {
   eventData: any;
   waitingList: any;
   selectedIcon: any = false;
+  isPast:boolean=true;
+  isOngoing:boolean=false;
+  isUpcoming:boolean=false;
 
   ArrayImage: any = [];
   usersData: any;
@@ -287,6 +290,25 @@ export class OrderlistComponent implements OnInit {
   ngAfterViewInit() {
     // this.dataSource.paginator = this.paginator;
     // this.dataSource.sort = this.sort;
+  }
+
+  changetabPast(){
+    console.log
+    this.isPast = true;
+    this.isUpcoming = false;
+    this.isOngoing = false;
+  }
+  changetabUpcoming(){
+    console.log
+    this.isPast = false;
+    this.isUpcoming = true;
+    this.isOngoing = false;
+  }
+  changetabOngoing(){
+    console.log
+    this.isPast = false;
+    this.isUpcoming = false;
+    this.isOngoing = true;
   }
 
   // Get All Events
@@ -515,6 +537,11 @@ export class OrderlistComponent implements OnInit {
 
     // Push the User ID in User Array
     for (var user of row.invitedList) {
+      this.usersArray.push(user._id);
+    }
+
+    // Push the User ID in User Array
+    for (var user of row.inviteGroup) {
       this.usersArray.push(user._id);
     }
 
@@ -920,7 +947,7 @@ export class OrderlistComponent implements OnInit {
           }
         );
       } else {
-        this.toaster.error("Atleast 1 option is required");
+        this.toaster.error("Atleast 2 options are required");
       }
     } else {
       this.toaster.error("Please fill all the required fields");
@@ -965,7 +992,7 @@ export class OrderlistComponent implements OnInit {
           }
         );
       } else {
-        this.toaster.error("Atleast 1 option is required");
+        this.toaster.error("Atleast 2 options are required");
       }
     } else {
       this.toaster.error("Please fill all the required fields");
@@ -1004,14 +1031,14 @@ export class OrderlistComponent implements OnInit {
         this.sessionTerminate();
       }
       if (res.statusCode == 200) {
-        Swal.fire("Deleted", "Poll deleted successfully", "success");
+        Swal.fire("Deleted", res.message, "success");
         this.modalService.dismissAll();
         this.getAllEvents();
         setTimeout(() => {
           document.getElementById(this.eventID).click();
         }, 100);
       } else {
-        Swal.fire("Oops", "Failed to delete Poll", "error");
+        Swal.fire("Oops", res.message, "error");
       }
     });
   }
@@ -1096,10 +1123,11 @@ export class OrderlistComponent implements OnInit {
           this.endDateCheckValue = "";
           this.addEventForm.controls["startDate"].reset();
           this.addEventForm.controls["endDate"].reset();
-          this.toaster.error("a1Cannot choose past time!");
+          this.toaster.error("Cannot choose past time!");
         }
       }
     } else {
+
       if (this.endDateCheckValue == this.startDateCheckValue) {
         if (
           this.endTimeCheckValue &&
@@ -1112,12 +1140,17 @@ export class OrderlistComponent implements OnInit {
           this.toaster.error("Start time should be less than end time!");
         }
       } else {
+        if (this.currentDate == this.startDateCheckValue && this.currentTime > this.startTimeCheckValue){
+          this.addEventForm.controls["startTime"].reset();
+        this.startTimeCheckValue = "";
+        this.toaster.error("Cannot choose past time!");
+        }
         if (this.endTimeCheckValue && this.startTimeCheckValue>this.endTimeCheckValue){
           this.addEventForm.controls["endTime"].reset();
         this.endTimeCheckValue = "";
         this.addEventForm.controls["startTime"].reset();
         this.startTimeCheckValue = "";
-        this.toaster.error("a2Cannot choose past time!");
+        this.toaster.error("Cannot choose past time!");
         }
 
       }

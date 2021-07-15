@@ -3,7 +3,7 @@
 <div class="d-flex align-items-center justify-content-between">
   <ul class="nav nav-tabs cstm_tab" role="tablist">
     <li class="nav-item">
-      <a class="nav-link active" href="#Past" role="tab" (click)="changeFilterType(0)" data-toggle="tab">Past Events</a>
+      <a class="nav-link active" href="#Past" role="tab" (click)="changeFilterType(0);changetabPast()" data-toggle="tab">Past Events</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="#ongoing" role="tab" (click)="changeFilterType(1)" data-toggle="tab">Ongoing Events</a>
@@ -18,7 +18,7 @@
 </div>
 <!-- Past  -->
 <div class="tab-content">
-  <div role="tabpanel" class="tab-pane show active" id="Past">
+  <div role="tabpanel"  class="tab-pane show active" id="Past">
     <div class="col-lg-12">
       <div class="card">
         <div class="card-body">
@@ -1139,7 +1139,8 @@
       <ng-template #noPollsData>
         <p>No Poll added</p>
       </ng-template>
-      <button class="btn btn-primary d-block mx-1" (click)="isModalEnable = true; addpollmodal(editpoll)">Add Poll</button>
+
+      <button *ngIf="!isPast" class="btn btn-primary d-block mx-1" (click)="isModalEnable = true; addpollmodal(editpoll)">Add Poll</button>
       <a class="btn btn-danger text-white my-2 mx-1" type="button" (click)="modal.close()">Close</a>
     </div>
   </div>
