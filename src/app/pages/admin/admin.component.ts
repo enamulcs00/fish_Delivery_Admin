@@ -37,6 +37,13 @@ export class AdminComponent implements OnInit {
     this.getAllAdmins();
   }
 
+  // Route to Edit
+  sendID(id) {
+    this.router.navigate(["/pages/manage_admin_edit"], {
+      queryParams: { id: id },
+    });
+  }
+
   getAllAdmins() {
     const data = {
       limit: this.page,

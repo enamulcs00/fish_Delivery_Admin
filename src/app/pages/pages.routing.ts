@@ -52,6 +52,7 @@ import { VendorbusinessComponent } from './vendorbusiness/vendorbusiness.compone
 import { TrucklistComponent } from './trucklist/trucklist.component';
 import { TruckcategoryComponent } from './truckcategory/truckcategory.component';
 import { TermsComponent } from './terms/terms.component';
+import { ManageAdminEditComponent } from './manage-admin-edit/manage-admin-edit.component';
 
 
 export const PagesRoutes: Routes = [
@@ -436,6 +437,19 @@ export const PagesRoutes: Routes = [
         component: AdminformComponent,
         data: {
           title: 'Admin Detail',
+          urls: [
+            { title: 'Dashboard', url: '/manage_admin' },
+            { title: 'Profile' }
+          ]
+        },
+        canActivate: [AuthGuardGuard]
+      },
+      {
+        path: 'manage_admin_edit',
+        //canActivate: [AuthGaurdGuard],
+        component: ManageAdminEditComponent,
+        data: {
+          title: 'Edit Admin Detail',
           urls: [
             { title: 'Dashboard', url: '/manage_admin' },
             { title: 'Profile' }

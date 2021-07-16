@@ -74,6 +74,7 @@ import { TrucklistComponent } from "./trucklist/trucklist.component";
 import { TruckcategoryComponent } from "./truckcategory/truckcategory.component";
 import { TrucklocationComponent } from "./trucklocation/trucklocation.component";
 import { TermsComponent } from "./terms/terms.component";
+import { ManageAdminEditComponent } from './manage-admin-edit/manage-admin-edit.component';
 
 @NgModule({
   imports: [
@@ -153,6 +154,7 @@ import { TermsComponent } from "./terms/terms.component";
     TruckcategoryComponent,
     TrucklocationComponent,
     TermsComponent,
+    ManageAdminEditComponent,
   ],
 })
 export class PagesModule {}

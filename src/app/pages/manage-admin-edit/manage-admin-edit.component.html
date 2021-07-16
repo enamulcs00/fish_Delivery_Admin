@@ -1,0 +1,420 @@
+<div class="card">
+  <div class="card-body">
+    <div class="col-md-12 text-right">
+      <button class="btn btn-primary" (click)="back()">Back</button>
+    </div>
+    <form [formGroup]="addAdminForm" (submit)="addAdminData()">
+      <div class="form-body">
+        <div class="card-body">
+          <div class="row p-t-20">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label">First Name</label>
+                <input #fName (keydown.space)="doSomething($event ,fName.value)" formControlName="firstName" (keypress)="alphabate($event)" type="text" id="firstName" class="form-control" >
+                <mat-error *ngIf="addAdminForm.controls['firstName'].touched && addAdminForm.controls['firstName'].invalid">
+                  *Please enter valid First Name(Max Limit - 35)
+                </mat-error>
+                <p class="text-danger" *ngIf="submitted && errorHandling('firstName', 'required')">
+                  *First Name is required!
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label">Last Name</label>
+                <input (keypress)="textOnly($event)" type="text" formControlName="lastName" id="lastName" class="form-control">
+                <mat-error *ngIf="addAdminForm.controls['lastName'].touched && addAdminForm.controls['lastName'].invalid">
+                  *Please enter valid Last Name!
+                </mat-error>
+                <p class="text-danger" *ngIf="submitted && errorHandling('lastName', 'required')">
+                  *Last Name is required!
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label">Dial Code</label>
+                <select type="text" formControlName="dialCode" id="dialCode" class="form-control" placeholder="+1">
+                  <option *ngFor="let dialCode of dialCodeList" value="{{'+'+dialCode.callingCodes}}">
+                    +{{dialCode.callingCodes}} - {{dialCode.name}}</option>
+                </select>
+                <p class="text-danger" *ngIf="submitted && errorHandling('dialCode', 'required')">
+                  *Dial Code is required!
+                </p>
+              </div>
+            </div>
+
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label">Contact No</label>
+                <input (keypress)="phoneNoInput($event)" type="text" formControlName="phoneNo" id="phoneNo" class="form-control" >
+                <mat-error *ngIf="addAdminForm.controls['phoneNo'].touched && addAdminForm.controls['phoneNo'].invalid">
+                  *Please enter valid contact number
+                </mat-error>
+                <p class="text-danger" *ngIf="submitted && errorHandling('phoneNo', 'required')">
+                  *Contact Number is required!
+                </p>
+              </div>
+            </div>
+
+          </div>
+          <div class="row ">
+            <div class="col-md-6">
+              <div class="form-group has-success">
+                <div class="form-group">
+                  <label class="control-label">Upload Profile</label>
+                  <div class="custom-file"><input formControlName="image" (change)="upload($event)" class="custom-file-input" id="inputGroupFile01" type="file"><label
+                      class="custom-file-label" for="inputGroupFile01">{{fileName}}</label></div>
+                      <mat-error *ngIf="addAdminForm.controls['image'].invalid && imageFlag">
+                        *Please upload image
+                      </mat-error>
+                      <p class="text-danger" *ngIf="submitted && errorHandling('image', 'required')">
+                        *Image is required!
+                      </p>
+                </div>
+              </div>
+            </div>
+
+            <!--/span-->
+            <div class="col-md-6">
+              <div class="form-group has-danger">
+                <label class="control-label">Email</label>
+                <input formControlName="email"  #email (keydown.space)="doSomething($event ,email.value)" type="email" id="email" class="form-control form-control-danger">
+                <mat-error *ngIf="addAdminForm.controls['email'].touched && addAdminForm.controls['email'].invalid">
+                  *Please enter valid email
+                </mat-error>
+                <p class="text-danger" *ngIf="submitted && errorHandling('email', 'required')">
+                  *Email is required!
+                </p>
+              </div>
+            </div>
+            <!--/span-->
+          </div>
+          <!--/row-->
+          <div class="table-responsive mt-3">
+            <table class="table">
+              <tr>
+                <th>Name</th>
+                <th>Add</th>
+                <th>Edit/Delete</th>
+                <th>View</th>
+              </tr>
+              <tbody>
+                <!-- Dashboard -->
+                <tr>
+                  <td>Dashboard</td>
+                  <td>
+                    <div class="custom-control custom-checkbox">
+                      <input formControlName="isDashboardAdd" class="custom-control-input" id="customCheck1" type="checkbox">
+                      <label class="custom-control-label" for="customCheck1"></label>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="custom-control custom-checkbox">
+                      <input formControlName="isDashboardEdit" class="custom-control-input" id="customCheck2" type="checkbox">
+                      <label class="custom-control-label" for="customCheck2"></label>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="custom-control custom-checkbox">
+                      <input formControlName="isDashboardView" class="custom-control-input" id="customCheck101" type="checkbox">
+                      <label class="custom-control-label" for="customCheck101"></label>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Users -->
+                <tr>
+                  <td>Users</td>
+                  <td>
+                    <div class="custom-control custom-checkbox">
+                      <input formControlName="isUsersAdd" class="custom-control-input" id="customCheck3" type="checkbox">
+                      <label class="custom-control-label" for="customCheck3"></label>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="custom-control custom-checkbox">
+                      <input formControlName="isUsersEdit" class="custom-control-input" id="customCheck4" type="checkbox">
+                      <label class="custom-control-label" for="customCheck4"></label>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="custom-control custom-checkbox">
+                      <input formControlName="isUsersView" class="custom-control-input" id="customCheck102" type="checkbox">
+                      <label class="custom-control-label" for="customCheck102"></label>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Admin -->
+                <tr>
+                  <td> Admin </td>
+                  <td>
+                    <div class="custom-control custom-checkbox">
+                      <input formControlName="isAdminAdd" class="custom-control-input" id="customCheck5" type="checkbox">
+                      <label class="custom-control-label" for="customCheck5"></label>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="custom-control custom-checkbox">
+                      <input formControlName="isAdminEdit" class="custom-control-input" id="customCheck6" type="checkbox">
+                      <label class="custom-control-label" for="customCheck6"></label>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="custom-control custom-checkbox">
+                      <input formControlName="isAdminView" class="custom-control-input" id="customCheck103" type="checkbox">
+                      <label class="custom-control-label" for="customCheck103"></label>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- Events -->
+                <tr>
+                  <td>Events</td>
+                  <td>
+                    <div class="custom-control custom-checkbox">
+                      <input formControlName="isEventsAdd" class="custom-control-input" id="customCheck7" type="checkbox">
+                      <label class="custom-control-label" for="customCheck7"></label>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="custom-control custom-checkbox">
+                      <input formControlName="isEventsEdit" class="custom-control-input" id="customCheck8" type="checkbox">
+                      <label class="custom-control-label" for="customCheck8"></label>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="custom-control custom-checkbox">
+                      <input formControlName="isEventsView" class="custom-control-input" id="customCheck104" type="checkbox">
+                      <label class="custom-control-label" for="customCheck104"></label>
+                    </div>
+                  </td>
+                </tr>
+                <!-- Groups -->
+                <tr>
+                  <td>Groups</td>
+                  <td>
+                    <div class="custom-control custom-checkbox">
+                      <input  formControlName="isGroupsAdd" class="custom-control-input" id="customCheck9" type="checkbox">
+                      <label class="custom-control-label" for="customCheck9"></label>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="custom-control custom-checkbox">
+                      <input formControlName="isGroupsEdit" class="custom-control-input" id="customCheck10" type="checkbox">
+                      <label class="custom-control-label" for="customCheck10"></label>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="custom-control custom-checkbox">
+                      <input formControlName="isGroupsView" class="custom-control-input" id="customCheck105" type="checkbox">
+                      <label class="custom-control-label" for="customCheck105"></label>
+                    </div>
+                  </td>
+                </tr>
+                <!-- <tr>
+                                <td>Food Categories</td>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input   class="custom-control-input" id="customCheck8" type="checkbox">
+                                        <label class="custom-control-label" for="customCheck8"></label>
+                                    </div>
+                                 </td>
+                                 <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input   class="custom-control-input" id="customCheck9" type="checkbox">
+                                        <label class="custom-control-label" for="customCheck9"></label>
+                                    </div>
+                                 </td>
+                            </tr>
+                            <tr>
+                                <td>Food </td>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input   class="custom-control-input" id="customCheck10" type="checkbox">
+                                        <label class="custom-control-label" for="customCheck10"></label>
+                                    </div>
+                                 </td>
+                                 <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input   class="custom-control-input" id="customCheck11" type="checkbox">
+                                        <label class="custom-control-label" for="customCheck11"></label>
+                                    </div>
+                                 </td>
+                            </tr>
+                            <tr>
+                                <td>Order List </td>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input   class="custom-control-input" id="customCheck12" type="checkbox">
+                                        <label class="custom-control-label" for="customCheck12"></label>
+                                    </div>
+                                 </td>
+                                 <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input   class="custom-control-input" id="customCheck13" type="checkbox">
+                                        <label class="custom-control-label" for="customCheck13"></label>
+                                    </div>
+                                 </td>
+                            </tr>
+                            <tr>
+                                <td> Banner </td>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input   class="custom-control-input" id="customCheck14" type="checkbox">
+                                        <label class="custom-control-label" for="customCheck14"></label>
+                                    </div>
+                                 </td>
+                                 <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input   class="custom-control-input" id="customCheck15" type="checkbox">
+                                        <label class="custom-control-label" for="customCheck15"></label>
+                                    </div>
+                                 </td>
+                            </tr>
+                            <tr>
+                                <td> Revenue </td>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input   class="custom-control-input" id="customCheck16" type="checkbox">
+                                        <label class="custom-control-label" for="customCheck16"></label>
+                                    </div>
+                                 </td>
+                                 <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input   class="custom-control-input" id="customCheck17" type="checkbox">
+                                        <label class="custom-control-label" for="customCheck17"></label>
+                                    </div>
+                                 </td>
+                            </tr>
+                            <tr>
+                                <td> Reviews </td>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input   class="custom-control-input" id="customCheck18" type="checkbox">
+                                        <label class="custom-control-label" for="customCheck18"></label>
+                                    </div>
+                                 </td>
+                                 <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input   class="custom-control-input" id="customCheck19" type="checkbox">
+                                        <label class="custom-control-label" for="customCheck19"></label>
+                                    </div>
+                                 </td>
+                            </tr>
+                            <tr>
+                                <td> Discount </td>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input   class="custom-control-input" id="customCheck20" type="checkbox">
+                                        <label class="custom-control-label" for="customCheck20"></label>
+                                    </div>
+                                 </td>
+                                 <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input   class="custom-control-input" id="customCheck21" type="checkbox">
+                                        <label class="custom-control-label" for="customCheck21"></label>
+                                    </div>
+                                 </td>
+                            </tr>
+                            <tr>
+                                <td> Feedback </td>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input   class="custom-control-input" id="customCheck22" type="checkbox">
+                                        <label class="custom-control-label" for="customCheck22"></label>
+                                    </div>
+                                 </td>
+                                 <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input   class="custom-control-input" id="customCheck23" type="checkbox">
+                                        <label class="custom-control-label" for="customCheck23"></label>
+                                    </div>
+                                 </td>
+                            </tr> -->
+
+                <!-- REPORT -->
+                <tr>
+                  <td>Report</td>
+                  <td>
+                    <div class="custom-control custom-checkbox">
+                      <input formControlName="isReportAdd" class="custom-control-input" id="customCheck11" type="checkbox">
+                      <label class="custom-control-label" for="customCheck11"></label>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="custom-control custom-checkbox">
+                      <input formControlName="isReportEdit" class="custom-control-input" id="customCheck12" type="checkbox">
+                      <label class="custom-control-label" for="customCheck12"></label>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="custom-control custom-checkbox">
+                      <input formControlName="isReportView" class="custom-control-input" id="customCheck106" type="checkbox">
+                      <label class="custom-control-label" for="customCheck106"></label>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- EVENT Type (Icons) -->
+                <tr>
+                  <td>Event Types</td>
+                  <td>
+                    <div class="custom-control custom-checkbox">
+                      <input  formControlName="isEventTypeAdd" class="custom-control-input" id="customCheck13" type="checkbox">
+                      <label class="custom-control-label" for="customCheck13"></label>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="custom-control custom-checkbox">
+                      <input  formControlName="isEventTypeEdit" class="custom-control-input" id="customCheck14" type="checkbox">
+                      <label class="custom-control-label" for="customCheck14"></label>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="custom-control custom-checkbox">
+                      <input formControlName="isEventTypeView" class="custom-control-input" id="customCheck107" type="checkbox">
+                      <label class="custom-control-label" for="customCheck107"></label>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- Notification -->
+                <tr>
+                  <td>Notification</td>
+                  <td>
+                    <div class="custom-control custom-checkbox">
+                      <input formControlName="isNotificationAdd" class="custom-control-input" id="customCheck15" type="checkbox">
+                      <label class="custom-control-label" for="customCheck15"></label>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="custom-control custom-checkbox">
+                      <input formControlName="isNotificationEdit" class="custom-control-input" id="customCheck16" type="checkbox">
+                      <label class="custom-control-label" for="customCheck16"></label>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="custom-control custom-checkbox">
+                      <input formControlName="isNotificationView" class="custom-control-input" id="customCheck200" type="checkbox">
+                      <label class="custom-control-label" for="customCheck200"></label>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="form-actions ">
+            <button type="submit" class="btn btn-success mr-3">
+              <i ></i>Update</button>
+          </div>
+          <!--/row-->
+        </div>
+
+
+      </div>
+    </form>
+  </div>
+</div>

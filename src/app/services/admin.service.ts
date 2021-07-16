@@ -35,4 +35,9 @@ export class AdminService {
     return this.http.post(`${this.baseURL}User/uploadFile`, data);
   }
 
+  // Get Country
+  getCountry() {
+    return this.http.get(`https://restcountries.eu/rest/v2/all`);
+  }
+
 }
