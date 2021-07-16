@@ -116,6 +116,7 @@ export class AdminComponent implements OnInit {
       }
       if (res.statusCode == 200) {
         Swal.fire("Deleted", "Admin successfully deleted", "success");
+        this.modalService.dismissAll();
         this.getAllAdmins();
       } else {
         Swal.fire("Error", res.message, "error");

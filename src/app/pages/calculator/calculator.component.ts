@@ -150,6 +150,7 @@ export class CalculatorComponent implements OnInit {
 
   // Logout if Token is invalid
   sessionTerminate() {
+    this.modalService.dismissAll();
     Swal.fire("Oops", "Session is Terminated", "error");
     sessionStorage.removeItem("token");
     this.router.navigate(["/login"]);

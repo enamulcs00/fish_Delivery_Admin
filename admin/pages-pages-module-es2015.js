@@ -19375,6 +19375,7 @@ class AdminComponent {
             }
             if (res.statusCode == 200) {
                 sweetalert2__WEBPACK_IMPORTED_MODULE_5___default.a.fire("Deleted", "Admin successfully deleted", "success");
+                this.modalService.dismissAll();
                 this.getAllAdmins();
             }
             else {
@@ -19803,8 +19804,11 @@ class AdminformComponent {
             console.log(obj);
             // return;
             this.Srvc.addAdmin(obj).subscribe((res) => {
+                if (res.statusCode == 401) {
+                    this.sessionTerminate();
+                }
                 if (res.statusCode === 200) {
-                    this.toastr.success("Sub Admin added Successfully");
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_4___default.a.fire("Success", "Admin added successfully", "success");
                     this.addAdminForm.reset();
                     this.submitted = false;
                     this.router.navigate(["/pages/manage_admin"]);
@@ -19817,6 +19821,12 @@ class AdminformComponent {
         else {
             this.toastr.error("Please fill all the required fields");
         }
+    }
+    // Logout if Token is invalid
+    sessionTerminate() {
+        sweetalert2__WEBPACK_IMPORTED_MODULE_4___default.a.fire("Oops", "Session is Terminated", "error");
+        sessionStorage.removeItem("token");
+        this.router.navigate(["/login"]);
     }
     back() {
         this.router.navigate(["/pages/manage_admin"]);
@@ -19865,6 +19875,9 @@ class AdminformComponent {
             formData.append("file", this.file);
             this.Srvc.uploadFile(formData).subscribe((res) => {
                 var _a;
+                if (res.statusCode == 401) {
+                    this.sessionTerminate();
+                }
                 if (res.statusCode === 200) {
                     this.imageResPath = (_a = res === null || res === void 0 ? void 0 : res.data) === null || _a === void 0 ? void 0 : _a.image;
                     this.fileName = this.file.name;
@@ -21907,6 +21920,7 @@ class CalculatorComponent {
     }
     // Logout if Token is invalid
     sessionTerminate() {
+        this.modalService.dismissAll();
         sweetalert2__WEBPACK_IMPORTED_MODULE_2___default.a.fire("Oops", "Session is Terminated", "error");
         sessionStorage.removeItem("token");
         this.router.navigate(["/login"]);
@@ -35187,6 +35201,9 @@ class ManageAdminEditComponent {
         };
         this.Srvc.getAdmin(body).subscribe((res) => {
             var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5;
+            if (res.statusCode == 401) {
+                this.sessionTerminate();
+            }
             if (res.statusCode === 200) {
                 this.addAdminForm.controls["firstName"].setValue((_a = res === null || res === void 0 ? void 0 : res.data[0]) === null || _a === void 0 ? void 0 : _a.firstName);
                 this.addAdminForm.controls["lastName"].setValue((_b = res === null || res === void 0 ? void 0 : res.data[0]) === null || _b === void 0 ? void 0 : _b.lastName);
@@ -35321,8 +35338,11 @@ class ManageAdminEditComponent {
             console.log(obj);
             // return;
             this.Srvc.updateAdmin(obj).subscribe((res) => {
+                if (res.statusCode == 401) {
+                    this.sessionTerminate();
+                }
                 if (res.statusCode === 200) {
-                    this.toastr.success("Sub Admin added Successfully");
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_4___default.a.fire("Updated", "Admin details successfully updated", "success");
                     this.addAdminForm.reset();
                     this.submitted = false;
                     this.router.navigate(["/pages/manage_admin"]);
@@ -35335,6 +35355,12 @@ class ManageAdminEditComponent {
         else {
             this.toastr.error("Please fill all the required fields");
         }
+    }
+    // Logout if Token is invalid
+    sessionTerminate() {
+        sweetalert2__WEBPACK_IMPORTED_MODULE_4___default.a.fire("Oops", "Session is Terminated", "error");
+        sessionStorage.removeItem("token");
+        this.router.navigate(["/login"]);
     }
     back() {
         this.router.navigate(["/pages/manage_admin"]);

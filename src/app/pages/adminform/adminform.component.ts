@@ -176,8 +176,11 @@ export class AdminformComponent implements OnInit {
       console.log(obj);
       // return;
       this.Srvc.addAdmin(obj).subscribe((res: any) => {
+        if (res.statusCode == 401) {
+          this.sessionTerminate();
+        }
         if (res.statusCode === 200) {
-          this.toastr.success("Sub Admin added Successfully");
+          Swal.fire("Success", "Admin added successfully", "success");
           this.addAdminForm.reset();
           this.submitted = false;
           this.router.navigate(["/pages/manage_admin"]);
@@ -188,6 +191,13 @@ export class AdminformComponent implements OnInit {
     } else {
       this.toastr.error("Please fill all the required fields");
     }
+  }
+
+  // Logout if Token is invalid
+  sessionTerminate() {
+    Swal.fire("Oops", "Session is Terminated", "error");
+    sessionStorage.removeItem("token");
+    this.router.navigate(["/login"]);
   }
 
   back() {
@@ -252,6 +262,9 @@ export class AdminformComponent implements OnInit {
       const formData = new FormData();
       formData.append("file", this.file);
       this.Srvc.uploadFile(formData).subscribe((res: any) => {
+        if (res.statusCode == 401) {
+          this.sessionTerminate();
+        }
         if (res.statusCode === 200) {
           this.imageResPath = res?.data?.image;
           this.fileName = this.file.name;
@@ -266,6 +279,7 @@ export class AdminformComponent implements OnInit {
       });
     }
   }
+
 
   dashboardCheck(e){
     if (e.target.checked){

@@ -107,6 +107,9 @@ export class ManageAdminEditComponent implements OnInit {
       adminId : this.localID
     }
     this.Srvc.getAdmin(body).subscribe((res: any) => {
+      if (res.statusCode == 401) {
+        this.sessionTerminate();
+      }
 
       if (res.statusCode === 200) {
         this.addAdminForm.controls["firstName"].setValue(res?.data[0]?.firstName);
@@ -255,8 +258,11 @@ export class ManageAdminEditComponent implements OnInit {
       console.log(obj);
       // return;
       this.Srvc.updateAdmin(obj).subscribe((res: any) => {
+        if (res.statusCode == 401) {
+          this.sessionTerminate();
+        }
         if (res.statusCode === 200) {
-          this.toastr.success("Sub Admin added Successfully");
+          Swal.fire("Updated", "Admin details successfully updated", "success");
           this.addAdminForm.reset();
           this.submitted = false;
           this.router.navigate(["/pages/manage_admin"]);
@@ -267,6 +273,13 @@ export class ManageAdminEditComponent implements OnInit {
     } else {
       this.toastr.error("Please fill all the required fields");
     }
+  }
+
+  // Logout if Token is invalid
+  sessionTerminate() {
+    Swal.fire("Oops", "Session is Terminated", "error");
+    sessionStorage.removeItem("token");
+    this.router.navigate(["/login"]);
   }
 
 
