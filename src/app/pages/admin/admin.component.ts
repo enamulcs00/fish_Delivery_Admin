@@ -26,6 +26,7 @@ export class AdminComponent implements OnInit {
   searchValue: any;
   alterImage: string = "../../../assets/images/users/admin.png";
   noDataToggle: boolean=false;
+  deleteID: any;
   constructor(
     private modalService: NgbModal,
     private Srvc: AdminService,
@@ -79,7 +80,7 @@ export class AdminComponent implements OnInit {
   // Change isActive Status of Admin
   changeStatus(status, id) {
     const data = {
-      adminId: id,
+      subAdminId: id,
       isBlocked: status,
     };
     if (status == "active") {
@@ -95,6 +96,26 @@ export class AdminComponent implements OnInit {
       }
       if (res.statusCode == 200) {
         Swal.fire("Updated", "Admin status successfully changed", "success");
+        this.getAllAdmins();
+      } else {
+        Swal.fire("Error", res.message, "error");
+      }
+    });
+  }
+
+  // Change isActive Status of Admin
+  delete() {
+    const data = {
+      subAdminId: this.deleteID,
+      isDeleted: true,
+    };
+
+    this.Srvc.updateAdmin(data).subscribe((res: any) => {
+      if (res.statusCode == 401) {
+        this.sessionTerminate();
+      }
+      if (res.statusCode == 200) {
+        Swal.fire("Deleted", "Admin successfully deleted", "success");
         this.getAllAdmins();
       } else {
         Swal.fire("Error", res.message, "error");
@@ -153,7 +174,8 @@ export class AdminComponent implements OnInit {
       size: "lg",
     });
   }
-  userDeleteModal(userDelete) {
+  userDeleteModal(userDelete,id) {
+    this.deleteID = id;
     this.modalService.open(userDelete, {
       backdropClass: "light-blue-backdrop",
       centered: true,

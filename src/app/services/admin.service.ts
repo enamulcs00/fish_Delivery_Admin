@@ -17,12 +17,12 @@ export class AdminService {
 
   // Get by ID
   getAdmin(body){
-    return this.http.post(this.baseURL+"Admin/getGroupById",body);
+    return this.http.post(this.baseURL+"Admin/getSubAdminById",body);
   }
 
   // Update Sub Admin
   updateAdmin(body){
-    return this.http.put(this.baseURL+"Admin/updateSubAdmin",body);
+    return this.http.post(this.baseURL+"Admin/updateSubAdmin",body);
   }
 
   // Add Sub Admin

@@ -266,4 +266,52 @@ export class AdminformComponent implements OnInit {
       });
     }
   }
+
+  dashboardCheck(e){
+    if (e.target.checked){
+      this.addAdminForm.controls["isDashboardView"].setValue(true)
+    }
+  }
+
+  usersCheck(e){
+    if (e.target.checked){
+      this.addAdminForm.controls["isUsersView"].setValue(true)
+    }
+  }
+
+  adminCheck(e){
+    if (e.target.checked){
+      this.addAdminForm.controls["isAdminView"].setValue(true)
+    }
+  }
+
+  eventsCheck(e){
+    if (e.target.checked){
+      this.addAdminForm.controls["isEventsView"].setValue(true)
+    }
+  }
+
+  groupsCheck(e){
+    if (e.target.checked){
+      this.addAdminForm.controls["isGroupsView"].setValue(true)
+    }
+  }
+
+  reportCheck(e){
+    if (e.target.checked){
+      this.addAdminForm.controls["isReportView"].setValue(true)
+    }
+  }
+
+  eventTypeCheck(e){
+    if (e.target.checked){
+      this.addAdminForm.controls["isEventTypeView"].setValue(true)
+    }
+  }
+
+  notificationCheck(e){
+    if (e.target.checked){
+      this.addAdminForm.controls["isNotificationView"].setValue(true)
+    }
+  }
 }

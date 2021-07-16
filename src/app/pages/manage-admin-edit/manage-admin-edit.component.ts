@@ -19,6 +19,7 @@ export class ManageAdminEditComponent implements OnInit {
   fileName: any = "Choose File";
   imageFlag: boolean;
   localID: any;
+  adminData: any;
 
   constructor(
     private Srvc: AdminService,
@@ -50,7 +51,7 @@ export class ManageAdminEditComponent implements OnInit {
         Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$"),
       ],
     ],
-    image: ["", Validators.required],
+    image: [""],
 
     //Dashboard Permissions
     isDashboardAdd: [false],
@@ -97,7 +98,75 @@ export class ManageAdminEditComponent implements OnInit {
     this.getCountries();
     this._route.queryParams.subscribe((params) => {
       this.localID = params.id;
-      // this.getAdminDetails();
+      this.getAdminDetails();
+    });
+  }
+
+  getAdminDetails(){
+    let body = {
+      adminId : this.localID
+    }
+    this.Srvc.getAdmin(body).subscribe((res: any) => {
+
+      if (res.statusCode === 200) {
+        this.addAdminForm.controls["firstName"].setValue(res?.data[0]?.firstName);
+        this.addAdminForm.controls["lastName"].setValue(res?.data[0]?.lastName);
+        this.addAdminForm.controls["email"].setValue(res?.data[0]?.email);
+        this.addAdminForm.controls["dialCode"].setValue(res?.data[0]?.dialCode);
+        this.addAdminForm.controls["phoneNo"].setValue(res?.data[0]?.phoneNo);
+
+        // Dashboard Permission
+        this.addAdminForm.controls["isDashboardAdd"].setValue(res?.data[0]?.permission[0].isAdd);
+        this.addAdminForm.controls["isDashboardEdit"].setValue(res?.data[0]?.permission[0].isEdit);
+        this.addAdminForm.controls["isDashboardView"].setValue(res?.data[0]?.permission[0].isView);
+
+        // Users Permissions
+        this.addAdminForm.controls["isUsersAdd"].setValue(res?.data[0]?.permission[1].isAdd);
+        this.addAdminForm.controls["isUsersEdit"].setValue(res?.data[0]?.permission[1].isEdit);
+        this.addAdminForm.controls["isUsersView"].setValue(res?.data[0]?.permission[1].isView);
+
+        // Admin Permissions
+        this.addAdminForm.controls["isAdminAdd"].setValue(res?.data[0]?.permission[2].isAdd);
+        this.addAdminForm.controls["isAdminEdit"].setValue(res?.data[0]?.permission[2].isEdit);
+        this.addAdminForm.controls["isAdminView"].setValue(res?.data[0]?.permission[2].isView);
+
+        // Events Permissions
+        this.addAdminForm.controls["isEventsAdd"].setValue(res?.data[0]?.permission[3].isAdd);
+        this.addAdminForm.controls["isEventsEdit"].setValue(res?.data[0]?.permission[3].isEdit);
+        this.addAdminForm.controls["isEventsView"].setValue(res?.data[0]?.permission[3].isView);
+
+        // Groups Permissions
+        this.addAdminForm.controls["isGroupsAdd"].setValue(res?.data[0]?.permission[4].isAdd);
+        this.addAdminForm.controls["isGroupsEdit"].setValue(res?.data[0]?.permission[4].isEdit);
+        this.addAdminForm.controls["isGroupsView"].setValue(res?.data[0]?.permission[4].isView);
+
+        // Report Permissions
+        this.addAdminForm.controls["isReportAdd"].setValue(res?.data[0]?.permission[5].isAdd);
+        this.addAdminForm.controls["isReportEdit"].setValue(res?.data[0]?.permission[5].isEdit);
+        this.addAdminForm.controls["isReportView"].setValue(res?.data[0]?.permission[5].isView);
+
+        // Event type Permissions
+        this.addAdminForm.controls["isEventTypeAdd"].setValue(res?.data[0]?.permission[6].isAdd);
+        this.addAdminForm.controls["isEventTypeEdit"].setValue(res?.data[0]?.permission[6].isEdit);
+        this.addAdminForm.controls["isEventTypeView"].setValue(res?.data[0]?.permission[6].isView);
+
+        // Notification Permissions
+        this.addAdminForm.controls["isNotificationAdd"].setValue(res?.data[0]?.permission[7].isAdd);
+        this.addAdminForm.controls["isNotificationEdit"].setValue(res?.data[0]?.permission[7].isEdit);
+        this.addAdminForm.controls["isNotificationView"].setValue(res?.data[0]?.permission[7].isView);
+
+
+        if ((res?.data[0]?.image)!=""){
+          this.fileName="Image.jpg"
+        }
+        else
+        {
+          this.fileName="Choose File";
+        }
+      }
+      else {
+        this.toastr.error("Failed to load data , Server Error");
+      }
     });
   }
 
@@ -113,6 +182,7 @@ export class ManageAdminEditComponent implements OnInit {
     this.submitted = true;
     if (this.addAdminForm.valid) {
       let obj = {
+        subAdminId: this.localID,
         firstName: this.addAdminForm.value.firstName,
         lastName: this.addAdminForm.value.lastName,
         name: this.addAdminForm.value.firstName+' '+this.addAdminForm.value.lastName,
@@ -179,9 +249,12 @@ export class ManageAdminEditComponent implements OnInit {
           },
         ],
       };
+      if (!obj.image){
+        delete obj.image
+      }
       console.log(obj);
       // return;
-      this.Srvc.addAdmin(obj).subscribe((res: any) => {
+      this.Srvc.updateAdmin(obj).subscribe((res: any) => {
         if (res.statusCode === 200) {
           this.toastr.success("Sub Admin added Successfully");
           this.addAdminForm.reset();
@@ -195,6 +268,8 @@ export class ManageAdminEditComponent implements OnInit {
       this.toastr.error("Please fill all the required fields");
     }
   }
+
+
 
   back() {
     this.router.navigate(["/pages/manage_admin"]);
@@ -270,6 +345,54 @@ export class ManageAdminEditComponent implements OnInit {
           Swal.fire("Oops", res.message, "error");
         }
       });
+    }
+  }
+
+  dashboardCheck(e){
+    if (e.target.checked){
+      this.addAdminForm.controls["isDashboardView"].setValue(true)
+    }
+  }
+
+  usersCheck(e){
+    if (e.target.checked){
+      this.addAdminForm.controls["isUsersView"].setValue(true)
+    }
+  }
+
+  adminCheck(e){
+    if (e.target.checked){
+      this.addAdminForm.controls["isAdminView"].setValue(true)
+    }
+  }
+
+  eventsCheck(e){
+    if (e.target.checked){
+      this.addAdminForm.controls["isEventsView"].setValue(true)
+    }
+  }
+
+  groupsCheck(e){
+    if (e.target.checked){
+      this.addAdminForm.controls["isGroupsView"].setValue(true)
+    }
+  }
+
+  reportCheck(e){
+    if (e.target.checked){
+      this.addAdminForm.controls["isReportView"].setValue(true)
+    }
+  }
+
+  eventTypeCheck(e){
+    if (e.target.checked){
+      this.addAdminForm.controls["isEventTypeView"].setValue(true)
+    }
+  }
+
+  notificationCheck(e){
+    if (e.target.checked){
+      this.addAdminForm.controls["isNotificationView"].setValue(true)
     }
   }
 }

@@ -108,13 +108,13 @@
                   <td>Dashboard</td>
                   <td>
                     <div class="custom-control custom-checkbox">
-                      <input formControlName="isDashboardAdd" class="custom-control-input" id="customCheck1" type="checkbox">
+                      <input (change)="dashboardCheck($event)" formControlName="isDashboardAdd" class="custom-control-input" id="customCheck1" type="checkbox">
                       <label class="custom-control-label" for="customCheck1"></label>
                     </div>
                   </td>
                   <td>
                     <div class="custom-control custom-checkbox">
-                      <input formControlName="isDashboardEdit" class="custom-control-input" id="customCheck2" type="checkbox">
+                      <input (change)="dashboardCheck($event)" formControlName="isDashboardEdit" class="custom-control-input" id="customCheck2" type="checkbox">
                       <label class="custom-control-label" for="customCheck2"></label>
                     </div>
                   </td>
@@ -130,13 +130,13 @@
                   <td>Users</td>
                   <td>
                     <div class="custom-control custom-checkbox">
-                      <input formControlName="isUsersAdd" class="custom-control-input" id="customCheck3" type="checkbox">
+                      <input (change)="usersCheck($event)" formControlName="isUsersAdd" class="custom-control-input" id="customCheck3" type="checkbox">
                       <label class="custom-control-label" for="customCheck3"></label>
                     </div>
                   </td>
                   <td>
                     <div class="custom-control custom-checkbox">
-                      <input formControlName="isUsersEdit" class="custom-control-input" id="customCheck4" type="checkbox">
+                      <input (change)="usersCheck($event)" formControlName="isUsersEdit" class="custom-control-input" id="customCheck4" type="checkbox">
                       <label class="custom-control-label" for="customCheck4"></label>
                     </div>
                   </td>
@@ -152,13 +152,13 @@
                   <td> Admin </td>
                   <td>
                     <div class="custom-control custom-checkbox">
-                      <input formControlName="isAdminAdd" class="custom-control-input" id="customCheck5" type="checkbox">
+                      <input (change)="adminCheck($event)" formControlName="isAdminAdd" class="custom-control-input" id="customCheck5" type="checkbox">
                       <label class="custom-control-label" for="customCheck5"></label>
                     </div>
                   </td>
                   <td>
                     <div class="custom-control custom-checkbox">
-                      <input formControlName="isAdminEdit" class="custom-control-input" id="customCheck6" type="checkbox">
+                      <input (change)="adminCheck($event)" formControlName="isAdminEdit" class="custom-control-input" id="customCheck6" type="checkbox">
                       <label class="custom-control-label" for="customCheck6"></label>
                     </div>
                   </td>
@@ -175,13 +175,13 @@
                   <td>Events</td>
                   <td>
                     <div class="custom-control custom-checkbox">
-                      <input formControlName="isEventsAdd" class="custom-control-input" id="customCheck7" type="checkbox">
+                      <input (change)="eventsCheck($event)" formControlName="isEventsAdd" class="custom-control-input" id="customCheck7" type="checkbox">
                       <label class="custom-control-label" for="customCheck7"></label>
                     </div>
                   </td>
                   <td>
                     <div class="custom-control custom-checkbox">
-                      <input formControlName="isEventsEdit" class="custom-control-input" id="customCheck8" type="checkbox">
+                      <input (change)="eventsCheck($event)" formControlName="isEventsEdit" class="custom-control-input" id="customCheck8" type="checkbox">
                       <label class="custom-control-label" for="customCheck8"></label>
                     </div>
                   </td>
@@ -197,13 +197,13 @@
                   <td>Groups</td>
                   <td>
                     <div class="custom-control custom-checkbox">
-                      <input  formControlName="isGroupsAdd" class="custom-control-input" id="customCheck9" type="checkbox">
+                      <input (change)="groupsCheck($event)" formControlName="isGroupsAdd" class="custom-control-input" id="customCheck9" type="checkbox">
                       <label class="custom-control-label" for="customCheck9"></label>
                     </div>
                   </td>
                   <td>
                     <div class="custom-control custom-checkbox">
-                      <input formControlName="isGroupsEdit" class="custom-control-input" id="customCheck10" type="checkbox">
+                      <input (change)="groupsCheck($event)" formControlName="isGroupsEdit" class="custom-control-input" id="customCheck10" type="checkbox">
                       <label class="custom-control-label" for="customCheck10"></label>
                     </div>
                   </td>
@@ -340,13 +340,13 @@
                   <td>Report</td>
                   <td>
                     <div class="custom-control custom-checkbox">
-                      <input formControlName="isReportAdd" class="custom-control-input" id="customCheck11" type="checkbox">
+                      <input (change)="reportCheck($event)" formControlName="isReportAdd" class="custom-control-input" id="customCheck11" type="checkbox">
                       <label class="custom-control-label" for="customCheck11"></label>
                     </div>
                   </td>
                   <td>
                     <div class="custom-control custom-checkbox">
-                      <input formControlName="isReportEdit" class="custom-control-input" id="customCheck12" type="checkbox">
+                      <input (change)="reportCheck($event)" formControlName="isReportEdit" class="custom-control-input" id="customCheck12" type="checkbox">
                       <label class="custom-control-label" for="customCheck12"></label>
                     </div>
                   </td>
@@ -363,13 +363,13 @@
                   <td>Event Types</td>
                   <td>
                     <div class="custom-control custom-checkbox">
-                      <input  formControlName="isEventTypeAdd" class="custom-control-input" id="customCheck13" type="checkbox">
+                      <input (change)="eventTypeCheck($event)" formControlName="isEventTypeAdd" class="custom-control-input" id="customCheck13" type="checkbox">
                       <label class="custom-control-label" for="customCheck13"></label>
                     </div>
                   </td>
                   <td>
                     <div class="custom-control custom-checkbox">
-                      <input  formControlName="isEventTypeEdit" class="custom-control-input" id="customCheck14" type="checkbox">
+                      <input (change)="eventTypeCheck($event)" formControlName="isEventTypeEdit" class="custom-control-input" id="customCheck14" type="checkbox">
                       <label class="custom-control-label" for="customCheck14"></label>
                     </div>
                   </td>
@@ -386,13 +386,13 @@
                   <td>Notification</td>
                   <td>
                     <div class="custom-control custom-checkbox">
-                      <input formControlName="isNotificationAdd" class="custom-control-input" id="customCheck15" type="checkbox">
+                      <input (change)="notificationCheck($event)" formControlName="isNotificationAdd" class="custom-control-input" id="customCheck15" type="checkbox">
                       <label class="custom-control-label" for="customCheck15"></label>
                     </div>
                   </td>
                   <td>
                     <div class="custom-control custom-checkbox">
-                      <input formControlName="isNotificationEdit" class="custom-control-input" id="customCheck16" type="checkbox">
+                      <input (change)="notificationCheck($event)" formControlName="isNotificationEdit" class="custom-control-input" id="customCheck16" type="checkbox">
                       <label class="custom-control-label" for="customCheck16"></label>
                     </div>
                   </td>
