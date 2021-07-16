@@ -21,13 +21,13 @@
               </button>
               <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                 <button class="dropdown-item" (click)="filterStatus('all','All')">All</button>
-                <button class="dropdown-item" (click)="filterStatus(false,'Active')">Active</button>
-                <button class="dropdown-item" (click)="filterStatus(true,'Inactive')">Inactive</button>
+                <button class="dropdown-item" (click)="filterStatus(true,'Active')">Active</button>
+                <button class="dropdown-item" (click)="filterStatus(false,'Inactive')">Inactive</button>
               </div>
             </div>
             <a routerLink="/pages/manage_admin_form" class="btn btn-primary mb-2"><i class="sl-icon-plus"></i> Add </a>
           </div>
-          <div class="table-responsive">
+          <div class="table-responsive" *ngIf="!noDataToggle;else noDataHolder">
             <table class="table v-middle product-overview" id="zero_config">
               <thead>
                 <tr>
@@ -52,12 +52,15 @@
                   <td class="text-nowrap">{{subAdmin?.email || "-"}}</td>
                   <td>
                     <div ngbDropdown class="d-inline-block " container="body">
-                      <button class="btn btn-outline-primary btn-sm " id="dropdownBasic1" ngbDropdownToggle>
-                        Status
+                      <button *ngIf="!subAdmin?.isBlocked" class="btn btn-outline-success btn-sm " id="dropdownBasic1" ngbDropdownToggle>
+                        Enabled
+                      </button>
+                      <button *ngIf="subAdmin?.isBlocked" class="btn btn-outline-danger btn-sm " id="dropdownBasic1" ngbDropdownToggle>
+                        Disabled
                       </button>
                       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                        <button class="dropdown-item">Active</button>
-                        <button class="dropdown-item">Inactive</button>
+                        <button style="cursor: pointer;" (click)="changeStatus('active',subAdmin?._id)" class="dropdown-item">Active</button>
+                        <button style="cursor: pointer;" (click)="changeStatus('inactive',subAdmin?._id)" class="dropdown-item">Inactive</button>
                       </div>
                     </div>
                   </td>
@@ -71,7 +74,11 @@
               </tbody>
             </table>
           </div>
-          <div class="col-md-12 text-right">
+
+          <ng-template #noDataHolder>
+            <h3 class="m-5 d-flex align-items-center justify-content-center w-100">No data found</h3>
+          </ng-template>
+          <div *ngIf="!noDataToggle" class="col-md-12 text-right">
             <mat-paginator [length]="totalAdmin" [pageSize]="page" [pageSizeOptions]="[5, 10, 25, 100]"
               (page)="onPaginateChange($event)"></mat-paginator>
           </div>

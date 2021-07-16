@@ -16,15 +16,16 @@ import Swal from "sweetalert2";
   styleUrls: ["./admin.component.css"],
 })
 export class AdminComponent implements OnInit {
-  page: any=10;
+  page: any = 10;
   pageindec: any;
   searchitem: any;
-  btnStatus: any='all';
-  filterButton:any='All'
+  btnStatus: any = "all";
+  filterButton: any = "All";
   adminData: any;
   totalAdmin: any;
   searchValue: any;
-  alterImage:string="../../../assets/images/users/admin.png";
+  alterImage: string = "../../../assets/images/users/admin.png";
+  noDataToggle: boolean=false;
   constructor(
     private modalService: NgbModal,
     private Srvc: AdminService,
@@ -52,12 +53,44 @@ export class AdminComponent implements OnInit {
         this.sessionTerminate();
       }
       if (res.statusCode == 200) {
-        this.adminData = res?.data?.checkAdmin;
+        if (res?.data?.count) {
+          this.adminData = res?.data?.checkAdmin;
+
+          this.noDataToggle = false;
+        } else {
+          this.noDataToggle = true;
+        }
         this.totalAdmin = res?.data?.count;
       } else {
         this.toastr.error(res.message, "Error", {
           timeOut: 2000,
         });
+      }
+    });
+  }
+
+  // Change isActive Status of Admin
+  changeStatus(status, id) {
+    const data = {
+      adminId: id,
+      isBlocked: status,
+    };
+    if (status == "active") {
+      data.isBlocked = false;
+    }
+    if (status == "inactive") {
+      data.isBlocked = true;
+    }
+
+    this.Srvc.updateAdmin(data).subscribe((res: any) => {
+      if (res.statusCode == 401) {
+        this.sessionTerminate();
+      }
+      if (res.statusCode == 200) {
+        Swal.fire("Updated", "Admin status successfully changed", "success");
+        this.getAllAdmins();
+      } else {
+        Swal.fire("Error", res.message, "error");
       }
     });
   }
@@ -84,14 +117,15 @@ export class AdminComponent implements OnInit {
   }
 
   // Filter by Status(Active/Inactive)
-  filterStatus(value,name) {
-    this.filterButton=name;
+  filterStatus(value, name) {
+    this.filterButton = name;
     this.btnStatus = value;
     this.getAllAdmins();
   }
 
   // Logout if Token is invalid
   sessionTerminate() {
+    this.modalService.dismissAll();
     Swal.fire("Oops", "Session is Terminated", "error");
     sessionStorage.removeItem("token");
     this.router.navigate(["/login"]);
