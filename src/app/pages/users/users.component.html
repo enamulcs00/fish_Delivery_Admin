@@ -115,10 +115,10 @@
                         class="ti-eye"></i>
                       View
                     </a>
-                    <button style="cursor: pointer;" class="dropdown-item" (click)="addUserModal(addUser,row?._id)"><i
+                    <button *ngIf="editPermission" style="cursor: pointer;" class="dropdown-item" (click)="addUserModal(addUser,row?._id)"><i
                         _ngcontent-axh-c146="" class="ti-marker-alt"></i> Edit</button>
 
-                    <button style="cursor: pointer;" class="dropdown-item" (click)="userDeleteModal(userDelete,row?._id)"><i
+                    <button *ngIf="editPermission" style="cursor: pointer;" class="dropdown-item" (click)="userDeleteModal(userDelete,row?._id)"><i
                         class="ti-trash"></i>
                       Delete</button>
                   </div>

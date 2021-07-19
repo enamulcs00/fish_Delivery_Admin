@@ -16,7 +16,7 @@
         Events</a>
     </li>
   </ul>
-  <div class="text-right mr-3"><button class="btn btn-primary" (click)="Adddetails(Adddetail)"><i
+  <div class="text-right mr-3"><button *ngIf="addPermission" class="btn btn-primary" (click)="Adddetails(Adddetail)"><i
         class="sl-icon-plus"></i> Add</button></div>
 </div>
 <!-- Past  -->
@@ -563,7 +563,7 @@
           <th class="text-nowrap">Number of events attended</th>
           <th class="text-nowrap">Number of events hosted</th>
           <th class="text-nowrap">Number of groups he/she is in</th>
-          <th>Action</th>
+          <th *ngIf="editPermission">Action</th>
         </thead>
         <tbody>
           <tr *ngFor="let item of guestList">
@@ -575,7 +575,7 @@
             <td>{{item?.hostedEventCount}}</td>
             <td>{{item?.attendedGroupCount}}</td>
 
-            <td>
+            <td *ngIf="editPermission">
               <a *ngIf="isUpcoming" class="btn btn-outline-primary btn-sm" id="dropdownBasic1"
                 (click)="removeMember(item?._id)"> Remove </a>
 
@@ -608,7 +608,7 @@
           <th class="text-nowrap">Number of events attended</th>
           <th class="text-nowrap">Number of events hosted</th>
           <th class="text-nowrap">Number of groups he/she is in</th>
-          <th>Action</th>
+          <th *ngIf="editPermission">Action</th>
         </thead>
         <tbody>
           <tr *ngFor="let item of waitingList">
@@ -619,7 +619,7 @@
             <td>{{item?.attendedEventCount}}</td>
             <td>{{item?.hostedEventCount}}</td>
             <td>{{item?.attendedGroupCount}}</td>
-            <td>
+            <td *ngIf="editPermission">
               <a *ngIf="isUpcoming" class="btn btn-outline-success btn-sm" id="dropdownBasic1" (click)="acceptMember(item?._id)"> Accept
               </a>
               <a *ngIf="isOngoing" class="btn btn-outline-success btn-sm" id="dropdownBasic1" (click)="acceptMember(item?._id)"> Accept
@@ -720,7 +720,7 @@
                 <div class="form-group has-danger">
                   <label class="control-label"> Max Attendees </label>
                   <input formControlName="maxLength" min="0" max="9999" minlength="1" maxlength="4" type="number"
-                    id="maxAttendees" class="form-control form-control-danger" placeholder="Enter duration of event">
+                    id="maxAttendees" class="form-control form-control-danger" >
                   <small
                     *ngIf=" addEventForm.controls['maxLength'].touched && addEventForm.controls['maxLength'].invalid"
                     class="text-danger d-inline-block pt-1">
@@ -1134,7 +1134,7 @@
         <thead>
           <th class="text-nowrap">Name</th>
           <th class="text-nowrap">Options</th>
-          <th>Action</th>
+          <th *ngIf="editPermission">Action</th>
         </thead>
         <tbody>
           <tr *ngFor="let polls of pollsData">
@@ -1153,7 +1153,7 @@
                 </tbody>
               </table>
             </td>
-            <td>
+            <td *ngIf="editPermission">
               <a class="btn btn-danger btn-sm" (click)="editpollmodal(editpoll,polls)"> <i
                   class="fa fa-pencil-square-o text-white"></i> </a>
               <a (click)="pollDeleteModal(pollDelete,polls?._id)" class="btn btn-danger btn-sm ml-2"> <i
@@ -1166,9 +1166,9 @@
         <p>No Poll added</p>
       </ng-template>
 
-      <button *ngIf="isOngoing" class="btn btn-primary d-block mx-1"
+      <button *ngIf="isOngoing && addPermission" class="btn btn-primary d-block mx-1"
         (click)="isModalEnable = true; addpollmodal(editpoll)">Add Poll</button>
-      <button *ngIf="isUpcoming" class="btn btn-primary d-block mx-1"
+      <button *ngIf="isUpcoming && addPermission" class="btn btn-primary d-block mx-1"
         (click)="isModalEnable = true; addpollmodal(editpoll)">Add Poll</button>
       <a class="btn btn-danger text-white my-2 mx-1" type="button" (click)="modal.close()">Close</a>
     </div>

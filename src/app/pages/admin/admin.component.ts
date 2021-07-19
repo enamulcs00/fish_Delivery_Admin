@@ -27,6 +27,9 @@ export class AdminComponent implements OnInit {
   alterImage: string = "../../../assets/images/users/admin.png";
   noDataToggle: boolean=false;
   deleteID: any;
+  permissions: any;
+  addPermission: boolean = false;
+  editPermission: boolean = false;
   constructor(
     private modalService: NgbModal,
     private Srvc: AdminService,
@@ -36,6 +39,17 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllAdmins();
+
+    this.permissions = JSON.parse(sessionStorage.getItem("permission"));
+    if (this.permissions == null) {
+      this.addPermission = true;
+      this.editPermission = true;
+    } else {
+      this.addPermission = this.permissions[2].isAdd;
+      this.editPermission = this.permissions[2].isEdit;
+    }
+    // console.log("Add",this.addPermission);
+    // console.log("Edit",this.editPermission);
   }
 
   // Route to Edit

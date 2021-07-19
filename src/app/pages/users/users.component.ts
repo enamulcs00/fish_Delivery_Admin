@@ -39,24 +39,14 @@ export class UsersComponent implements OnInit {
   baseURL: any = "http://15.207.74.128:9041";
 
   //table: any
-  displayedColumns: string[] = [
-    "serial_no",
-    "name",
-    "id",
-    "contact",
-    "date",
-    "events",
-    "hosted",
-    "groups",
-    "status",
-    "action",
-  ];
+
+  displayedColumns: string[] = []
   dataSource: MatTableDataSource<UserData>;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   page: any = 10;
-  pageindec: any=1;
+  pageindec: any = 1;
   searchitem: any;
   totalUsers: any;
   deleteID: any;
@@ -66,6 +56,9 @@ export class UsersComponent implements OnInit {
   userData: any;
   submitted: boolean = false;
   dialCodeList: any;
+  permissions: any;
+  addPermission: boolean = false;
+  editPermission: boolean = false;
 
   constructor(
     private modalService: NgbModal,
@@ -80,6 +73,41 @@ export class UsersComponent implements OnInit {
   ngOnInit(): void {
     this.getAllUsers();
     this.getCountries();
+    this.permissions = JSON.parse(sessionStorage.getItem("permission"));
+    if (this.permissions == null) {
+      this.addPermission = true;
+      this.editPermission = true;
+    } else {
+      this.addPermission = this.permissions[1].isAdd;
+      this.editPermission = this.permissions[1].isEdit;
+    }
+    if (this.editPermission){
+      this.displayedColumns=[
+        "serial_no",
+        "name",
+        "id",
+        "contact",
+        "date",
+        "events",
+        "hosted",
+        "groups",
+        "status",
+        "action",
+      ];
+    }
+    if (!this.editPermission){
+      this.displayedColumns=[
+        "serial_no",
+        "name",
+        "id",
+        "contact",
+        "date",
+        "events",
+        "hosted",
+        "groups",
+        "action",
+      ];
+    }
   }
 
   getAllUsers() {
@@ -286,7 +314,7 @@ export class UsersComponent implements OnInit {
       size: "lg",
     });
   }
-  userDeleteModal(userDelete,id) {
+  userDeleteModal(userDelete, id) {
     this.deleteID = id;
     this.modalService.open(userDelete, {
       backdropClass: "light-blue-backdrop",
@@ -414,10 +442,18 @@ export class UsersComponent implements OnInit {
     console.log(data);
     this.Srvc.getUser(data).subscribe((res: any) => {
       if (res.statusCode === 200) {
-        this.editUserForm.controls["firstName"].setValue(res?.data?.user?.firstName);
-        this.editUserForm.controls["lastName"].setValue(res?.data?.user?.lastName);
-        this.editUserForm.controls["dialCode"].setValue(res?.data?.user?.dialCode);
-        this.editUserForm.controls["phoneNo"].setValue(res?.data?.user?.phoneNo);
+        this.editUserForm.controls["firstName"].setValue(
+          res?.data?.user?.firstName
+        );
+        this.editUserForm.controls["lastName"].setValue(
+          res?.data?.user?.lastName
+        );
+        this.editUserForm.controls["dialCode"].setValue(
+          res?.data?.user?.dialCode
+        );
+        this.editUserForm.controls["phoneNo"].setValue(
+          res?.data?.user?.phoneNo
+        );
       } else {
         Swal.fire(
           "Server Error",

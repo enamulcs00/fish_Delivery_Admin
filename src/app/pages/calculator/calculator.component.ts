@@ -24,6 +24,9 @@ export class CalculatorComponent implements OnInit {
   tempImag: any;
   indexValue: any;
   isUpload:boolean=true;
+  permissions: any;
+  addPermission: boolean = false;
+  editPermission: boolean = false;
 
   constructor(
     private modalService: NgbModal,
@@ -35,6 +38,17 @@ export class CalculatorComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAll();
+
+    this.permissions = JSON.parse(sessionStorage.getItem("permission"));
+    if (this.permissions == null) {
+      this.addPermission = true;
+      this.editPermission = true;
+    } else {
+      this.addPermission = this.permissions[6].isAdd;
+      this.editPermission = this.permissions[6].isEdit;
+    }
+    // console.log("Add",this.addPermission);
+    // console.log("Edit",this.editPermission);
   }
 
   getAll() {

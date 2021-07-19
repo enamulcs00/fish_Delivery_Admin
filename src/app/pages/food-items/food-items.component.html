@@ -23,7 +23,7 @@
               <button class="dropdown-item">Pending</button>
           </div>
       </div> -->
-          <div class="mr-2"><button class="btn btn-primary" (click)="Adddetails(Adddetail)"><i class="sl-icon-plus"></i>
+          <div *ngIf="addPermission" class="mr-2"><button class="btn btn-primary" (click)="Adddetails(Adddetail)"><i class="sl-icon-plus"></i>
               Add</button></div>
           <div ngbDropdown class="d-inline-block mb-2 mr-2">
             <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle> {{filterName}} </button>
@@ -73,7 +73,7 @@
             <ng-container matColumnDef="email">
               <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Group Members </th>
               <td mat-cell *matCellDef="let row" id="{{row._id}}" class="text-nowrap">{{row?.join.length}}
-                <a href="javascript:void()" (click)="carModal(car,row?._id)"><i class="sl-icon-info"></i></a>
+                <a href="javascript:void(0)" (click)="carModal(car,row?._id)"><i class="sl-icon-info"></i></a>
               </td>
             </ng-container>
             <ng-container matColumnDef="groupdescription">
@@ -179,7 +179,7 @@
           <th class="text-nowrap">Number of events attended</th>
           <th class="text-nowrap">Number of events hosted</th>
           <th class="text-nowrap">Number of groups he/she is in</th>
-          <th>Action</th>
+          <th *ngIf="editPermission">Action</th>
         </thead>
         <tbody>
           <tr *ngFor="let item of memberList">
@@ -190,7 +190,7 @@
             <td>{{item?.attendedEventCount || "0"}}</td>
             <td>{{item?.hostedEventCount || "0"}}</td>
             <td>{{item?.attendedGroupCount || "0"}}</td>
-            <td> <a class="btn btn-outline-primary btn-sm" (click)="removeMember(item?._id)"> Remove </a> </td>
+            <td *ngIf="editPermission"> <a class="btn btn-outline-primary btn-sm" (click)="removeMember(item?._id)"> Remove </a> </td>
           </tr>
 
         </tbody>

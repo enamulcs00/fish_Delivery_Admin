@@ -20,12 +20,12 @@
               <button class="btn  btn-primary text-white" id="dropdownBasic1" ngbDropdownToggle> {{filterButton}}
               </button>
               <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                <button class="dropdown-item" (click)="filterStatus('all','All')">All</button>
-                <button class="dropdown-item" (click)="filterStatus(true,'Active')">Active</button>
-                <button class="dropdown-item" (click)="filterStatus(false,'Inactive')">Inactive</button>
+                <button style="cursor: pointer;" class="dropdown-item" (click)="filterStatus('all','All')">All</button>
+                <button style="cursor: pointer;" class="dropdown-item" (click)="filterStatus(true,'Active')">Active</button>
+                <button style="cursor: pointer;" class="dropdown-item" (click)="filterStatus(false,'Inactive')">Inactive</button>
               </div>
             </div>
-            <a routerLink="/pages/manage_admin_form" class="btn btn-primary mb-2"><i class="sl-icon-plus"></i> Add </a>
+            <a *ngIf="addPermission" routerLink="/pages/manage_admin_form" class="btn btn-primary mb-2"><i class="sl-icon-plus"></i> Add </a>
           </div>
           <div class="table-responsive" *ngIf="!noDataToggle;else noDataHolder">
             <table class="table v-middle product-overview" id="zero_config">
@@ -35,8 +35,8 @@
                   <th>Name</th>
                   <th>Contact</th>
                   <th>Email</th>
-                  <th>Status</th>
-                  <th>Action</th>
+                  <th *ngIf="editPermission">Status</th>
+                  <th *ngIf="editPermission">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -50,7 +50,7 @@
                   <td><span class="nowrap">{{subAdmin?.firstName}} {{subAdmin?.lastName}}</span></td>
                   <td><span class="text-nowrap">{{subAdmin?.dialCode}}-{{subAdmin?.phoneNo}}</span></td>
                   <td class="text-nowrap">{{subAdmin?.email || "-"}}</td>
-                  <td>
+                  <td *ngIf="editPermission">
                     <div ngbDropdown class="d-inline-block " container="body">
                       <button *ngIf="!subAdmin?.isBlocked" class="btn btn-outline-success btn-sm " id="dropdownBasic1" ngbDropdownToggle>
                         Enabled
@@ -64,7 +64,7 @@
                       </div>
                     </div>
                   </td>
-                  <td>
+                  <td *ngIf="editPermission">
                     <a style="color: white;" (click)="sendID(subAdmin?._id)" class="btn btn-primary"><i _ngcontent-axh-c146=""
                         class="ti-marker-alt"></i> </a>
                     <button class="btn btn-primary ml-2" (click)="userDeleteModal(userDelete,subAdmin?._id)"><i class="ti-trash"></i>

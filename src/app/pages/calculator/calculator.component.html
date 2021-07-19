@@ -34,7 +34,7 @@
         <div class="row col-12">
           <div class="col-md-2 mb-2 pl-2 pr-2" *ngFor="let item of ArrayImage;let i = index;">
             <div class="icon_inner">
-              <button class="btn-cross btn" (click)="Remove(i,item.id,userDelete)">
+              <button *ngIf="editPermission" class="btn-cross btn" (click)="Remove(i,item.id,userDelete)">
                 <span>&times;</span>
               </button>
               <img [src]="item.image?item.image:'assets/images/dashed.png'" height="80" width="90" alt="123" />
@@ -52,7 +52,7 @@
         </div>
 
       </div>
-      <button class="btn btn-primary" (click)="uploadImage()">
+      <button *ngIf="addPermission" class="btn btn-primary" (click)="uploadImage()">
         Save
       </button>
     </form>

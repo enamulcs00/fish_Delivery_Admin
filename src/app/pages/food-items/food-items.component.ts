@@ -42,16 +42,7 @@ export interface UserData {
 })
 export class FoodItemsComponent implements OnInit {
   closeResult: string;
-  displayedColumns: string[] = [
-    "Images",
-    "EventName",
-    "Eventtype",
-    "Date",
-    "email",
-    "groupdescription",
-    "Duration",
-    "action",
-  ];
+  displayedColumns: string[] = []
   dataSource: MatTableDataSource<UserData>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -89,6 +80,9 @@ export class FoodItemsComponent implements OnInit {
   tempArray: any=[];
   saveStateArray: any=[];
   saveEditStateArray: any;
+  permissions: any;
+  addPermission: boolean = false;
+  editPermission: boolean = false;
   constructor(
     private modalService: NgbModal,
     private Srvc: GroupsService,
@@ -136,6 +130,41 @@ export class FoodItemsComponent implements OnInit {
   ngOnInit(): void {
     this.getAllGroups();
     this.getUsers();
+
+    this.permissions = JSON.parse(sessionStorage.getItem("permission"));
+    if (this.permissions == null) {
+      this.addPermission = true;
+      this.editPermission = true;
+    } else {
+      this.addPermission = this.permissions[4].isAdd;
+      this.editPermission = this.permissions[4].isEdit;
+    }
+    // console.log("Add",this.addPermission);
+    // console.log("Edit",this.editPermission);
+    if (this.editPermission){
+      this.displayedColumns=[
+        "Images",
+        "EventName",
+        "Eventtype",
+        "Date",
+        "email",
+        "groupdescription",
+        "Duration",
+        "action",
+      ];
+    }
+    if (!this.editPermission){
+      this.displayedColumns=[
+        "Images",
+        "EventName",
+        "Eventtype",
+        "Date",
+        "email",
+        "groupdescription",
+        "Duration",
+      ];
+    }
+
   }
 
   ngAfterViewInit() {

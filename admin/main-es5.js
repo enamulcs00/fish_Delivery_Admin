@@ -1,4 +1,16 @@
 (function () {
+  function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+  function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+  function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+  function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
   function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
   function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
@@ -2854,7 +2866,13 @@
       /* harmony import */
 
 
-      var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      var src_app_services_onboarding_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! src/app/services/onboarding.service */
+      "./src/app/services/onboarding.service.ts");
+      /* harmony import */
+
+
+      var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! @angular/common */
       "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 
@@ -3141,14 +3159,16 @@
       }
 
       var SidebarComponent = /*#__PURE__*/function () {
-        function SidebarComponent(modalService, router, route) {
+        function SidebarComponent(modalService, router, route, Srvc) {
           _classCallCheck(this, SidebarComponent);
 
           this.modalService = modalService;
           this.router = router;
           this.route = route;
+          this.Srvc = Srvc;
           this.showMenu = '';
           this.showSubMenu = '';
+          this.checkArr = [];
         } // this is for the open close
 
 
@@ -3174,8 +3194,38 @@
         }, {
           key: "ngOnInit",
           value: function ngOnInit() {
-            this.sidebarnavItems = _menu_items__WEBPACK_IMPORTED_MODULE_1__["ROUTES"].filter(function (sidebarnavItem) {
-              return sidebarnavItem;
+            var _this4 = this;
+
+            this.Srvc.getProfile().subscribe(function (res) {
+              var _a;
+
+              if (res.data.role == 2) {
+                _this4.permission = (_a = res === null || res === void 0 ? void 0 : res.data) === null || _a === void 0 ? void 0 : _a.permission; // console.log(this.permission)
+
+                sessionStorage.setItem("permission", JSON.stringify(_this4.permission));
+
+                for (var _i = 0, _Object$entries = Object.entries(_this4.permission); _i < _Object$entries.length; _i++) {
+                  var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+                      key = _Object$entries$_i[0],
+                      value = _Object$entries$_i[1];
+
+                  if (value['isView']) {
+                    _this4.checkArr.push(value['label']);
+                  }
+                }
+              }
+
+              _this4.sidebarnavItems = _menu_items__WEBPACK_IMPORTED_MODULE_1__["ROUTES"].filter(function (sidebarnavItem) {
+                if (res.data.role == 2) {
+                  for (var index = 0; index < _this4.checkArr.length; index++) {
+                    if (_this4.checkArr[index] == sidebarnavItem.title) {
+                      return sidebarnavItem;
+                    }
+                  }
+                } else {
+                  return sidebarnavItem;
+                }
+              }); //console.log(this.checkArr);
             });
           }
         }]);
@@ -3184,7 +3234,7 @@
       }();
 
       SidebarComponent.ɵfac = function SidebarComponent_Factory(t) {
-        return new (t || SidebarComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_3__["NgbModal"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]));
+        return new (t || SidebarComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_3__["NgbModal"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_services_onboarding_service__WEBPACK_IMPORTED_MODULE_4__["OnboardingService"]));
       };
 
       SidebarComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
@@ -3212,7 +3262,7 @@
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.sidebarnavItems);
           }
         },
-        directives: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["NgForOf"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterLinkActive"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["NgIf"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["NgClass"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterLinkWithHref"]],
+        directives: [_angular_common__WEBPACK_IMPORTED_MODULE_5__["NgForOf"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterLinkActive"], _angular_common__WEBPACK_IMPORTED_MODULE_5__["NgIf"], _angular_common__WEBPACK_IMPORTED_MODULE_5__["NgClass"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterLinkWithHref"]],
         encapsulation: 2
       });
       /*@__PURE__*/
@@ -3231,6 +3281,8 @@
             type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
           }, {
             type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]
+          }, {
+            type: src_app_services_onboarding_service__WEBPACK_IMPORTED_MODULE_4__["OnboardingService"]
           }];
         }, null);
       })();
@@ -3294,7 +3346,7 @@
 
       var SpinnerComponent = /*#__PURE__*/function () {
         function SpinnerComponent(router, document) {
-          var _this4 = this;
+          var _this5 = this;
 
           _classCallCheck(this, SpinnerComponent);
 
@@ -3304,12 +3356,12 @@
           this.backgroundColor = 'rgba(0, 115, 170, 0.69)';
           this.router.events.subscribe(function (event) {
             if (event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__["NavigationStart"]) {
-              _this4.isSpinnerVisible = true;
+              _this5.isSpinnerVisible = true;
             } else if (event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__["NavigationEnd"] || event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__["NavigationCancel"] || event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__["NavigationError"]) {
-              _this4.isSpinnerVisible = false;
+              _this5.isSpinnerVisible = false;
             }
           }, function () {
-            _this4.isSpinnerVisible = false;
+            _this5.isSpinnerVisible = false;
           });
         }
 

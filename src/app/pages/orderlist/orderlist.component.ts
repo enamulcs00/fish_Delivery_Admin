@@ -50,26 +50,7 @@ export class OrderlistComponent implements OnInit {
   @Pipe({ name: "convertFrom24To12Format" })
   moment: any = moment;
   closeResult: string;
-  displayedColumns: string[] = [
-    "Images",
-    "EventName",
-    "Event_type",
-    "datetime",
-    "box",
-    "Duration",
-    "Durationtime",
-    "Durationdate",
-    "location",
-    "polls",
-    "invited",
-    "invited2",
-    "guest",
-    "attendees",
-    "Waiting",
-    "messagescount",
-    "likes",
-    "action",
-  ];
+  displayedColumns: string[] = [];
   dataSource: any;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   // @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -134,6 +115,9 @@ export class OrderlistComponent implements OnInit {
   rejectMemberID: any;
   guestListMemberID: any;
   waitingListEventID: any;
+  permissions: any;
+  addPermission: boolean = false;
+  editPermission: boolean = false;
 
   constructor(
     private modalService: NgbModal,
@@ -227,6 +211,60 @@ export class OrderlistComponent implements OnInit {
     this.getAllEvents();
     this.getEventType();
     this.getCurrentTime();
+
+    this.permissions = JSON.parse(sessionStorage.getItem("permission"));
+    if (this.permissions == null) {
+      this.addPermission = true;
+      this.editPermission = true;
+    } else {
+      this.addPermission = this.permissions[3].isAdd;
+      this.editPermission = this.permissions[3].isEdit;
+    }
+    console.log("Add", this.addPermission);
+    console.log("Edit", this.editPermission);
+    if (this.editPermission) {
+      this.displayedColumns = [
+        "Images",
+        "EventName",
+        "Event_type",
+        "datetime",
+        "box",
+        "Duration",
+        "Durationtime",
+        "Durationdate",
+        "location",
+        "polls",
+        "invited",
+        "invited2",
+        "guest",
+        "attendees",
+        "Waiting",
+        "messagescount",
+        "likes",
+        "action",
+      ];
+    }
+    if (!this.editPermission) {
+      this.displayedColumns = [
+        "Images",
+        "EventName",
+        "Event_type",
+        "datetime",
+        "box",
+        "Duration",
+        "Durationtime",
+        "Durationdate",
+        "location",
+        "polls",
+        "invited",
+        "invited2",
+        "guest",
+        "attendees",
+        "Waiting",
+        "messagescount",
+        "likes",
+      ];
+    }
   }
 
   getCurrentTime() {
@@ -1105,23 +1143,31 @@ export class OrderlistComponent implements OnInit {
     this.toaster.error("End time cannot come before start time !");
   }
 
-  dateTimeStrictCheck(){
+  dateTimeStrictCheck() {
     // debugger
-    if (this.startDateCheckValue && this.endDateCheckValue && this.startTimeCheckValue && this.endTimeCheckValue){
+    if (
+      this.startDateCheckValue &&
+      this.endDateCheckValue &&
+      this.startTimeCheckValue &&
+      this.endTimeCheckValue
+    ) {
       // console.log("Lvl 1");
-      if (this.startDateCheckValue ==this.currentDate || this.startDateCheckValue==this.endDateCheckValue){
+      if (
+        this.startDateCheckValue == this.currentDate ||
+        this.startDateCheckValue == this.endDateCheckValue
+      ) {
         // console.log("Lvl 2")
-        if (this.startTimeCheckValue>this.endTimeCheckValue || this.startTimeCheckValue<this.currentTime){
+        if (
+          this.startTimeCheckValue > this.endTimeCheckValue ||
+          this.startTimeCheckValue < this.currentTime
+        ) {
           // console.log("Lvl 3")
           this.resetValues();
         }
-      }
-      else {
+      } else {
         console.log("All Good");
       }
     }
-
-
   }
 
   // Remove a Member
