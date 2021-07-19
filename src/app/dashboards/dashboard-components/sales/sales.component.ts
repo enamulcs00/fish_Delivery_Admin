@@ -22,6 +22,8 @@ export interface Chart {
     styleUrls: ['./sales.component.scss']
 })
 export class SalesComponent implements AfterViewInit {
+  permissions: any;
+  viewPermission: boolean = false;
 
   barChart1: Chart = {
     type: 'Bar',
@@ -106,6 +108,15 @@ export class SalesComponent implements AfterViewInit {
                 pattern: ['#fbb03b']
             }
         });
+    }
+
+    ngOnInit(): void {
+      this.permissions = JSON.parse(sessionStorage.getItem("permission"));
+      if (this.permissions == null) {
+        this.viewPermission = true;
+      } else {
+        this.viewPermission = this.permissions[0].isView;
+      }
     }
 
 }

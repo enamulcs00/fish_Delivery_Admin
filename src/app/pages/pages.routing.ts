@@ -426,7 +426,7 @@ export const PagesRoutes: Routes = [
           title: 'Admin',
           urls: [
             { title: 'Dashboard', url: '/manage_admin' },
-            { title: 'Profile' }
+            { title: 'Admin' }
           ]
         },
         canActivate: [AuthGuardGuard]
@@ -439,7 +439,7 @@ export const PagesRoutes: Routes = [
           title: 'Admin Detail',
           urls: [
             { title: 'Dashboard', url: '/manage_admin' },
-            { title: 'Profile' }
+            { title: 'Admin' }
           ]
         },
         canActivate: [AuthGuardGuard]
@@ -452,7 +452,7 @@ export const PagesRoutes: Routes = [
           title: 'Edit Admin Detail',
           urls: [
             { title: 'Dashboard', url: '/manage_admin' },
-            { title: 'Profile' }
+            { title: 'Admin' }
           ]
         },
         canActivate: [AuthGuardGuard]

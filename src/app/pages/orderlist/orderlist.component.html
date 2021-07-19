@@ -1,6 +1,6 @@
 <!-- Column -->
 <!-- delete modal -->
-<div class="d-flex align-items-center justify-content-between">
+<div *ngIf="viewPermission" class="d-flex align-items-center justify-content-between">
   <ul class="nav nav-tabs cstm_tab" role="tablist">
     <li class="nav-item">
       <a class="nav-link active" href="#Past" role="tab" (click)="changeFilterType(0);changetabPast()"
@@ -19,8 +19,14 @@
   <div class="text-right mr-3"><button *ngIf="addPermission" class="btn btn-primary" (click)="Adddetails(Adddetail)"><i
         class="sl-icon-plus"></i> Add</button></div>
 </div>
+<ng-template #noPermission>
+  <div class="card">
+  <h2 class="m-5 d-flex align-items-center justify-content-center w-100">You don't have Permission to view this section</h2>
+
+  </div>
+</ng-template>
 <!-- Past  -->
-<div class="tab-content">
+<div *ngIf="viewPermission;else noPermission" class="tab-content">
   <div role="tabpanel" class="tab-pane show active" id="Past">
     <div class="col-lg-12">
       <div class="card">

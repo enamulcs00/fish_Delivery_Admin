@@ -20,6 +20,8 @@ export class ManageAdminEditComponent implements OnInit {
   imageFlag: boolean;
   localID: any;
   adminData: any;
+  permissions: any;
+  viewPermission:boolean = false;
 
   constructor(
     private Srvc: AdminService,
@@ -100,6 +102,13 @@ export class ManageAdminEditComponent implements OnInit {
       this.localID = params.id;
       this.getAdminDetails();
     });
+
+    this.permissions = JSON.parse(sessionStorage.getItem("permission"));
+    if (this.permissions == null) {
+      this.viewPermission = true;
+    } else {
+      this.viewPermission = this.permissions[2].isView;
+    }
   }
 
   getAdminDetails(){

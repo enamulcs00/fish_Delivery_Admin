@@ -18,6 +18,8 @@ export class AdminformComponent implements OnInit {
   file: any;
   fileName: any="Choose File";
   imageFlag: boolean;
+  permissions: any;
+  viewPermission:boolean = false;
 
   constructor(
     private Srvc: AdminService,
@@ -93,6 +95,13 @@ export class AdminformComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCountries();
+
+    this.permissions = JSON.parse(sessionStorage.getItem("permission"));
+    if (this.permissions == null) {
+      this.viewPermission = true;
+    } else {
+      this.viewPermission = this.permissions[2].isView;
+    }
   }
 
   // Get Country Code

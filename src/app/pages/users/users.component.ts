@@ -59,6 +59,7 @@ export class UsersComponent implements OnInit {
   permissions: any;
   addPermission: boolean = false;
   editPermission: boolean = false;
+  viewPermission: boolean = false;
 
   constructor(
     private modalService: NgbModal,
@@ -77,9 +78,11 @@ export class UsersComponent implements OnInit {
     if (this.permissions == null) {
       this.addPermission = true;
       this.editPermission = true;
+      this.viewPermission = true;
     } else {
       this.addPermission = this.permissions[1].isAdd;
       this.editPermission = this.permissions[1].isEdit;
+      this.viewPermission = this.permissions[1].isView;
     }
     if (this.editPermission){
       this.displayedColumns=[

@@ -1,5 +1,5 @@
 <div class="card">
-  <div class="card-body">
+  <div *ngIf="viewPermission;else noPermission" class="card-body">
     <div class="col-md-12 text-right">
       <button class="btn btn-primary" (click)="back()">Back</button>
     </div>
@@ -417,4 +417,7 @@
       </div>
     </form>
   </div>
+  <ng-template #noPermission>
+    <h2 class="m-5 d-flex align-items-center justify-content-center w-100">You don't have Permission to view this section</h2>
+  </ng-template>
 </div>

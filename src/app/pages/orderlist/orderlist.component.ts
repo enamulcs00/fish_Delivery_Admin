@@ -118,6 +118,7 @@ export class OrderlistComponent implements OnInit {
   permissions: any;
   addPermission: boolean = false;
   editPermission: boolean = false;
+  viewPermission:boolean = false;
 
   constructor(
     private modalService: NgbModal,
@@ -216,9 +217,11 @@ export class OrderlistComponent implements OnInit {
     if (this.permissions == null) {
       this.addPermission = true;
       this.editPermission = true;
+      this.viewPermission = true;
     } else {
       this.addPermission = this.permissions[3].isAdd;
       this.editPermission = this.permissions[3].isEdit;
+      this.viewPermission = this.permissions[3].isView;
     }
     console.log("Add", this.addPermission);
     console.log("Edit", this.editPermission);

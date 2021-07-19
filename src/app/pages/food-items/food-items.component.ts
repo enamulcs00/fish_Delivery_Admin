@@ -83,6 +83,7 @@ export class FoodItemsComponent implements OnInit {
   permissions: any;
   addPermission: boolean = false;
   editPermission: boolean = false;
+  viewPermission:boolean = false;
   constructor(
     private modalService: NgbModal,
     private Srvc: GroupsService,
@@ -135,9 +136,11 @@ export class FoodItemsComponent implements OnInit {
     if (this.permissions == null) {
       this.addPermission = true;
       this.editPermission = true;
+      this.viewPermission = true;
     } else {
       this.addPermission = this.permissions[4].isAdd;
       this.editPermission = this.permissions[4].isEdit;
+      this.viewPermission = this.permissions[4].isView;
     }
     // console.log("Add",this.addPermission);
     // console.log("Edit",this.editPermission);

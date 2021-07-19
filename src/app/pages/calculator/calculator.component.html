@@ -27,7 +27,7 @@
     </div>
 </div> -->
 <div class="card">
-  <div class="card-body">
+  <div *ngIf="viewPermission;else noPermission" class="card-body">
     <form action="">
       <div class="icon_outr">
 
@@ -69,4 +69,7 @@
       </div>
     </ng-template>
   </div>
+  <ng-template #noPermission>
+    <h2 class="m-5 d-flex align-items-center justify-content-center w-100">You don't have Permission to view this section</h2>
+  </ng-template>
 </div>
