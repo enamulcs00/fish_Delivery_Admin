@@ -730,11 +730,11 @@
                   <small
                     *ngIf=" addEventForm.controls['maxLength'].touched && addEventForm.controls['maxLength'].invalid"
                     class="text-danger d-inline-block pt-1">
-                    *Please enter Max Attendees, limit is 0-9999 !
+                    *Please enter valid Max Attendees, limit is 0-9999 !
                   </small>
-                  <small class="text-danger" *ngIf="submitted && errorHandling('maxLength', 'required')">
+                  <!-- <small class="text-danger" *ngIf="submitted && errorHandling('maxLength', 'required')">
                     *Max Attendees is required!
-                  </small>
+                  </small> -->
                 </div>
               </div>
               <!-- <div class="col-md-6">
@@ -755,9 +755,9 @@
                     class="text-danger d-inline-block pt-1">
                     *Please choose start date !
                   </small>
-                  <small class="text-danger" *ngIf="submitted && errorHandling('startDate', 'required')">
+                  <!-- <small class="text-danger" *ngIf="submitted && errorHandling('startDate', 'required')">
                     *Start date is required!
-                  </small>
+                  </small> -->
                 </div>
               </div>
               <div class="col-md-6">
@@ -769,9 +769,9 @@
                     class="text-danger d-inline-block pt-1">
                     *Please choose end date !
                   </small>
-                  <small class="text-danger" *ngIf="submitted && errorHandling('endDate', 'required')">
+                  <!-- <small class="text-danger" *ngIf="submitted && errorHandling('endDate', 'required')">
                     *End date is required!
-                  </small>
+                  </small> -->
                 </div>
               </div>
               <div class="col-md-6">
@@ -784,9 +784,9 @@
                     class="text-danger d-inline-block pt-1">
                     *Please choose start time !
                   </small>
-                  <small class="text-danger" *ngIf="submitted && errorHandling('startTime', 'required')">
+                  <!-- <small class="text-danger" *ngIf="submitted && errorHandling('startTime', 'required')">
                     *Start time is required!
-                  </small>
+                  </small> -->
                 </div>
               </div>
               <div class="col-md-6">
@@ -798,9 +798,9 @@
                     class="text-danger d-inline-block pt-1">
                     *Please choose end time !
                   </small>
-                  <small class="text-danger" *ngIf="submitted && errorHandling('endTime', 'required')">
+                  <!-- <small class="text-danger" *ngIf="submitted && errorHandling('endTime', 'required')">
                     *End time is required!
-                  </small>
+                  </small> -->
                 </div>
               </div>
               <!-- /span -->
@@ -814,9 +814,9 @@
                     class="text-danger d-inline-block pt-1">
                     *Please choose location!
                   </small>
-                  <small class="text-danger" *ngIf="submitted && errorHandling('address', 'required')">
+                  <!-- <small class="text-danger" *ngIf="submitted && errorHandling('address', 'required')">
                     *Location is required!
-                  </small>
+                  </small> -->
                 </div>
               </div>
               <!--/span-->
@@ -831,9 +831,9 @@
                     class="text-danger d-inline-block pt-1">
                     *Please enter valid description(Max limit - 750)
                   </small>
-                  <small class="text-danger" *ngIf="submitted && errorHandling('description', 'required')">
+                  <!-- <small class="text-danger" *ngIf="submitted && errorHandling('description', 'required')">
                     *Description is required!
-                  </small>
+                  </small> -->
                 </div>
               </div>
 

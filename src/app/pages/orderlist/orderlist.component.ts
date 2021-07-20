@@ -145,7 +145,7 @@ export class OrderlistComponent implements OnInit {
       maxLength: [
         "",
         [
-          Validators.required,
+          // Validators.required,
           Validators.min(0),
           Validators.max(9999),
           Validators.minLength(1),
@@ -153,24 +153,32 @@ export class OrderlistComponent implements OnInit {
         ],
       ],
 
-      startDate: ["", [Validators.required]],
-      endDate: ["", [Validators.required]],
-      startTime: ["", [Validators.required]],
-      endTime: ["", [Validators.required]],
+      startDate: ["",
+      //  [Validators.required]
+      ],
+      endDate: ["",
+      // [Validators.required]
+    ],
+      startTime: ["",
+      // [Validators.required]
+    ],
+      endTime: ["",
+      // [Validators.required]
+    ],
 
       address: [
         "",
         [
-          Validators.required,
-          Validators.minLength(1),
+          // Validators.required,
+          // Validators.minLength(1),
           Validators.maxLength(150),
         ],
       ],
       description: [
         "",
         [
-          Validators.required,
-          Validators.minLength(2),
+          // Validators.required,
+          // Validators.minLength(2),
           Validators.maxLength(750),
         ],
       ],
