@@ -291,9 +291,9 @@
                   <label class="control-label"> Group Description </label>
                   <textarea #description (keydown.space)="doSomething($event ,description.value)" formControlName="description" class="form-control form-control-danger"
                     placeholder="Enter description for this group"></textarea>
-                    <small class="text-danger" *ngIf="submitted && errorHandling('description', 'required')">
+                    <!-- <small class="text-danger" *ngIf="submitted && errorHandling('description', 'required')">
                       *Description is required!
-                    </small>
+                    </small> -->
                 </div>
               </div>
 

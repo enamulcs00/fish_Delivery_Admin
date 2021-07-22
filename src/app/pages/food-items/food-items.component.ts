@@ -108,7 +108,6 @@ export class FoodItemsComponent implements OnInit {
       description: [
         "",
         [
-          Validators.required,
           Validators.minLength(1),
           Validators.maxLength(250),
         ],
@@ -453,8 +452,6 @@ export class FoodItemsComponent implements OnInit {
   submitGroup() {
     this.submitted = true;
     if (this.addGroupForm.valid) {
-      if (this.isImageAttached){
-
 
       let obj = {
         invite: this.usersArray,
@@ -495,9 +492,7 @@ export class FoodItemsComponent implements OnInit {
         }
       );
 
-      } else {
-        this.toaster.error("Please choose a Group image");
-      }
+
     } else {
       this.toaster.error("Please fill all the required fields");
     }

@@ -56,14 +56,14 @@ export class NotificationComponent implements OnInit {
     this.submitted = true;
     if (this.notificationForm.valid) {
       let obj = {
-        notification: this.notificationForm.value.notification,
-        users: this.notificationForm.value.users,
+        msgType: this.notificationForm.value.notification,
+        userId: this.notificationForm.value.users,
         title: this.notificationForm.value.title,
         message: this.notificationForm.value.message,
       };
-      if (!obj.users){
-        delete obj.users
-      }
+      // if (!obj.users){
+      //   delete obj.users
+      // }
       console.log(obj);
       return;
       this.Srvc.sendNotification(obj).subscribe(
