@@ -1,5 +1,5 @@
 <div class="card">
-  <div class="card-body">
+  <div class="card-body" *ngIf="viewPermission;else noPermission">
 
     <div class="row">
       <div class="col-md-12">
@@ -50,11 +50,11 @@
           <div class="col-md-12">
             <div class="form-group">
               <label>Add Heading</label>
-              <input  #ref (keydown.space)="avoidBlankSpace($event ,ref.value)" formControlName="title" type="text" placeholder="" class="form-control form-control-line" placeholder="Add Heading">
+              <input  #ref (keydown.space)="avoidBlankSpace($event ,ref.value)" formControlName="title" type="text" placeholder="" class="form-control form-control-line" placeholder="">
               <mat-error
                 *ngIf="notificationForm.controls['title'].touched && notificationForm.controls['title'].invalid"
                 class="text-danger d-inline-block pt-1">
-                *Please enter Notification Heading
+                *Please enter Notification Heading (Max Limit - 35)
               </mat-error>
                   <p class="text-danger" *ngIf="submitted && errorHandling('title', 'required')">
                     *Heading is required
@@ -64,17 +64,17 @@
           <div class="col-md-12">
             <div class="form-group">
               <label>Add Content</label>
-              <textarea #message (keydown.space)="avoidBlankSpace($event ,message.value)" formControlName="message" class="form-control" rows="5" placeholder="Add Content"></textarea>
+              <textarea #message (keydown.space)="avoidBlankSpace($event ,message.value)" formControlName="message" class="form-control" rows="5" placeholder=""></textarea>
               <mat-error
                 *ngIf="notificationForm.controls['message'].touched && notificationForm.controls['message'].invalid"
                 class="text-danger d-inline-block pt-1">
-                *Please enter Notification content
+                *Please enter Notification content (Max Limit - 150)
               </mat-error>
                 <p class="text-danger" *ngIf="submitted && errorHandling('message', 'required')">
                   *Notification content is required
                 </p>
             </div>
-            <button type="submit" class="btn btn-success" (click)="submit()">
+            <button *ngIf="addPermission" type="submit" class="btn btn-success" (click)="submit()">
               <i class="fa fa-check"></i> Send</button>
 
           </div>
@@ -137,4 +137,7 @@
 
 
   </div>
+  <ng-template #noPermission>
+    <h2 class="m-5 d-flex align-items-center justify-content-center w-100">You don't have Permission to view this section</h2>
+  </ng-template>
 </div>

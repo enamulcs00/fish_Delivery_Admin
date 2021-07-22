@@ -169,6 +169,19 @@ export class UsersComponent implements OnInit {
     });
   }
 
+  downloadCSV(){
+    this.Srvc.downloadCSV().subscribe((res: any) => {
+      if (res.statusCode == 401) {
+        this.sessionTerminate();
+      }
+      if (res.statusCode == 200) {
+        window.open(res?.data?.redirection);
+      } else {
+        Swal.fire("Error", res.message, "error");
+      }
+    });
+  }
+
   // Filter by Status(Active/Inactive)
   filterStatus(value) {
     this.btnStatus = value;

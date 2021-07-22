@@ -44,4 +44,9 @@ export class UsersService {
   getUsersandUsers(data){
     return this.http.post<any>(`${this.baseURL}Admin/contactSync`, data);
   }
+
+  // Download CSV
+  downloadCSV(){
+    return this.http.get<any>(`${this.baseURL}Admin/getUerCsv`);
+  }
 }

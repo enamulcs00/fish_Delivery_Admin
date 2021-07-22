@@ -1,10 +1,10 @@
 <div class="card">
-    <div class="card-body">
+    <div class="card-body" *ngIf="viewPermission;else noPermission">
         <div class="row  pr-2 mt-2 ">
             <div class="col-md-4">
                 <form>
                     <div class="mb-2">
-                        <input type="text" class="form-control" id="prenametext" placeholder="Search">
+                        <input  [ngModelOptions]="{ standalone: true }" [(ngModel)]="searchitem" (keyup)="search($event)" type="text" class="form-control" id="prenametext" placeholder="Search">
                     </div>
                 </form>
             </div>
@@ -22,7 +22,7 @@
                 <a routerLink="/pages/notification" class="btn btn-primary ml-2">Back</a>
             </div>
         </div>
-        <div class="table-responsive">
+        <div class="table-responsive" *ngIf="!noDataToggle;else noDataHolder">
             <table class="table">
                 <tr>
                     <th class="text-nowrap">#</th>
@@ -34,42 +34,31 @@
                     <th class="text-nowrap">Heading</th>
                     <th>Massage</th>
                 </tr>
-                <tr>
-                    <td>1</td>
+                <tr *ngFor="let item of notificationData;let i = index;">
+                    <td>{{page * (pageindec-1)+ i+1}}</td>
                     <!-- <td>Sonu</td>
                     <td>Sonu656</td>
                     <td>-</td>
                     <td>-</td>
                     <td>-</td> -->
-                    <td> Update </td>
-                    <td>Lorem ipsum dummy content It is useful for all type site and use for dummy content all type site and use for dummy content all type site and use for dummy content..... <a href="javascript:void(0)" (click)="reviewModal(review)">Read More</a></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <!-- <td>-</td>
-                    <td>-</td>
-                    <td>Sam</td>
-                    <td>Sam3435</td>
-                    <td>-</td> -->
-                    <td> Activity Updates </td>
-                    <td>Lorem ipsum dummy content It is useful for all type site and use for dummy content all type site and use for dummy content all type site and use for dummy content..... <a href="javascript:void(0)" (click)="reviewModal(review)">Read More</a></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <!-- <td>-</td>
-                  <td>-</td>
-                  <td>Sam</td>
-                  <td>Sam3435</td>
-                  <td>-</td> -->
-                    <td> Updates To All </td>
-                    <td>Lorem ipsum dummy content It is useful for all type site and use for dummy content all type site and use for dummy content all type site and use for dummy content..... <a href="javascript:void(0)" (click)="reviewModal(review)">Read More</a></td>
+                    <td> {{item?.title || "-"}} </td>
+                    <td>{{item?.message|slice:0:100}} <a href="javascript:void(0)" (click)="reviewModal(review,item?.message)">{{item?.message.length>100?'Read More':''}}</a></td>
                 </tr>
 
+
+
             </table>
-            <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
-            </mat-paginator>
+            <mat-paginator *ngIf="!noDataToggle" [length]="totalNotifications" [pageSize]="page" [pageSizeOptions]="[5, 10, 25, 100]"
+          (page)="onPaginateChange($event)"></mat-paginator>
         </div>
+        <ng-template #noDataHolder>
+          <h3 class="m-5 d-flex align-items-center justify-content-center w-100">No data found</h3>
+        </ng-template>
     </div>
+
+    <ng-template #noPermission>
+      <h2 class="m-5 d-flex align-items-center justify-content-center w-100">You don't have Permission to view this section</h2>
+    </ng-template>
 </div>
 
 <!-- view modal -->
@@ -87,9 +76,7 @@
                         <div class="row pt-2">
                             <div class="col-md-12">
                                 <p>
-                                    It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here,
-                                    content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites
-                                    still in their infancy.
+                                    {{message}}
                                 </p>
                             </div>
                         </div>

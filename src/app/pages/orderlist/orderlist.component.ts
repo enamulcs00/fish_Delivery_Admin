@@ -283,6 +283,22 @@ export class OrderlistComponent implements OnInit {
     }
   }
 
+  downloadCSV(type){
+    let body = {
+      filterType:type
+    }
+    this.Srvc.downloadCSV(body).subscribe((res: any) => {
+      if (res.statusCode == 401) {
+        this.sessionTerminate();
+      }
+      if (res.statusCode == 200) {
+        window.open(res?.data?.redirection);
+      } else {
+        Swal.fire("Error", res.message, "error");
+      }
+    });
+  }
+
   getCurrentTime() {
     this.currentTime = new Date().toLocaleTimeString("en-US", {
       hour12: false,

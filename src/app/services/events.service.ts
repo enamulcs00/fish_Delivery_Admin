@@ -54,4 +54,9 @@ export class EventsService {
     return this.http.post<any>(`${this.baseURL}Admin/deletePoll`, body);
   }
 
+  // Download CSV
+  downloadCSV(body){
+    return this.http.post<any>(`${this.baseURL}Admin/getEventsCsv`, body);
+  }
+
 }

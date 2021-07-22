@@ -12,7 +12,12 @@ export class NotificationService {
 
   // Send Notification
   sendNotification(body){
-    return this.http.post(this.baseURL+"admin/sendNotification",body);
+    return this.http.post(this.baseURL+"Admin/sendBulkNotificationToUser",body);
+  }
+
+  // Get Notification History
+  getNotificationHistory(data) {
+    return this.http.post<any>(`${this.baseURL}Admin/getAllBulkNotification`, data);
   }
 
 }

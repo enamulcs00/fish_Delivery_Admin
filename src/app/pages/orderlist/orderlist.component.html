@@ -52,7 +52,7 @@
                   </button>
                 </div>
               </div>
-              <button class="btn btn-primary mb-2 mr-2"><i class="sl-icon-cloud-download"></i> Export CSV</button>
+              <button class="btn btn-primary mb-2 mr-2" (click)="downloadCSV(0)"><i class="sl-icon-cloud-download"></i> Export CSV</button>
             </div>
             <div class="table-responsive" *ngIf="!noDataToggle;else noDataHolder">
               <table mat-table class=" w-100" [dataSource]="dataSource" matSort>
@@ -220,7 +220,7 @@
                   </button>
                 </div>
               </div>
-              <button class="btn btn-primary mb-2 mr-2"><i class="sl-icon-cloud-download"></i> Export CSV</button>
+              <button class="btn btn-primary mb-2 mr-2" (click)="downloadCSV(1)"><i class="sl-icon-cloud-download"></i> Export CSV</button>
             </div>
             <div class="table-responsive" *ngIf="!noDataToggle;else noOngoingData">
               <table mat-table class=" w-100" [dataSource]="dataSource" matSort>
@@ -390,7 +390,7 @@
                   </button>
                 </div>
               </div>
-              <button class="btn btn-primary mb-2 mr-2"><i class="sl-icon-cloud-download"></i> Export CSV</button>
+              <button class="btn btn-primary mb-2 mr-2" (click)="downloadCSV(2)"><i class="sl-icon-cloud-download"></i> Export CSV</button>
             </div>
             <div class="table-responsive" *ngIf="!noDataToggle;else noUpcomingData">
               <table mat-table class=" w-100" [dataSource]="dataSource" matSort>

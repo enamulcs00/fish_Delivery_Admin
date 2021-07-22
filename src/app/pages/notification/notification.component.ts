@@ -16,6 +16,10 @@ export class NotificationComponent implements OnInit {
   notificationForm: FormGroup;
   submitted: boolean = false;
   usersData: any;
+  permissions: any;
+  addPermission: boolean = false;
+  editPermission: boolean = false;
+  viewPermission:boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -41,7 +45,7 @@ export class NotificationComponent implements OnInit {
         [
           Validators.required,
           Validators.minLength(3),
-          Validators.maxLength(100),
+          Validators.maxLength(150),
         ],
       ],
     });
@@ -50,6 +54,17 @@ export class NotificationComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllUsers();
+
+    this.permissions = JSON.parse(sessionStorage.getItem("permission"));
+    if (this.permissions == null) {
+      this.addPermission = true;
+      this.editPermission = true;
+      this.viewPermission = true;
+    } else {
+      this.addPermission = this.permissions[7].isAdd;
+      this.editPermission = this.permissions[7].isEdit;
+      this.viewPermission = this.permissions[7].isView;
+    }
   }
 
   submit() {
@@ -61,18 +76,24 @@ export class NotificationComponent implements OnInit {
         title: this.notificationForm.value.title,
         message: this.notificationForm.value.message,
       };
-      // if (!obj.users){
-      //   delete obj.users
-      // }
+      if (obj.msgType=='particular'){
+        obj.msgType = 0
+      }
+      if (obj.msgType=='broadcast'){
+        obj.msgType = 1
+      }
+      if (obj.msgType==1){
+        delete obj.userId
+      }
       console.log(obj);
-      return;
+      // return;
       this.Srvc.sendNotification(obj).subscribe(
         (res: any) => {
           if (res.statusCode == 401) {
             this.sessionTerminate();
           }
           if (res.statusCode == 200) {
-            Swal.fire("Success", "Notification sent successfully", "success");
+            Swal.fire("Success", "Notification sent", "success");
             this.submitted = false;
             this.notificationForm.reset();
             // this.router.navigate(["/pages/drivers"]);

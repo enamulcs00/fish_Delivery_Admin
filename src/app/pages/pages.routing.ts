@@ -384,7 +384,7 @@ export const PagesRoutes: Routes = [
         canActivate: [AuthGuardGuard]
       },
       {
-        path: 'reviews',
+        path: 'report',
         component: ReviewsComponent,
         data: {
           title: 'Report',

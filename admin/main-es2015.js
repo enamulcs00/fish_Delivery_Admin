@@ -1431,7 +1431,7 @@ const ROUTES = [
     //     submenu: []
     // },
     {
-        path: '/pages/reviews',
+        path: '/pages/report',
         title: 'Report',
         icon: 'mdi mdi-account-star-variant',
         class: '',
