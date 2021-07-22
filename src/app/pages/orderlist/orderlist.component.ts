@@ -118,7 +118,7 @@ export class OrderlistComponent implements OnInit {
   permissions: any;
   addPermission: boolean = false;
   editPermission: boolean = false;
-  viewPermission:boolean = false;
+  viewPermission: boolean = false;
 
   constructor(
     private modalService: NgbModal,
@@ -153,18 +153,22 @@ export class OrderlistComponent implements OnInit {
         ],
       ],
 
-      startDate: ["",
-      //  [Validators.required]
+      startDate: [
+        "",
+        //  [Validators.required]
       ],
-      endDate: ["",
-      // [Validators.required]
-    ],
-      startTime: ["",
-      // [Validators.required]
-    ],
-      endTime: ["",
-      // [Validators.required]
-    ],
+      endDate: [
+        "",
+        // [Validators.required]
+      ],
+      startTime: [
+        "",
+        // [Validators.required]
+      ],
+      endTime: [
+        "",
+        // [Validators.required]
+      ],
 
       address: [
         "",
@@ -321,22 +325,27 @@ export class OrderlistComponent implements OnInit {
 
   // Calculate Duration(Difference b/w Start date & End date)
   getdiffDates(row) {
-    var date1 = new Date(row.startDate);
-    var date2 = new Date(row.endDate);
-    var Time = date2.getTime() - date1.getTime();
+    if (row?.startDate && row?.endDate) {
+      var date1 = new Date(row.startDate);
+      var date2 = new Date(row.endDate);
+      var Time = date2.getTime() - date1.getTime();
 
-    var Days = Time / (1000 * 3600 * 24); //Diference in Days
-    let hours = (Days - Math.floor(Days)) * 24;
-    if (hours == 0) {
-      if (Days == 1 || Days == 0) {
-        return Math.abs(Math.floor(Days)) + " Day ";
+      var Days = Time / (1000 * 3600 * 24); //Diference in Days
+      let hours = (Days - Math.floor(Days)) * 24;
+      if (hours == 0) {
+        if (Days == 1 || Days == 0) {
+          return Math.abs(Math.floor(Days)) + " Day ";
+        } else {
+          return Math.abs(Math.floor(Days)) + " Days ";
+        }
       } else {
-        return Math.abs(Math.floor(Days)) + " Days ";
+        return (
+          Math.abs(Math.floor(Days)) + " days " + hours.toFixed(2) + " hours"
+        );
       }
-    } else {
-      return (
-        Math.abs(Math.floor(Days)) + " days " + hours.toFixed(2) + " hours"
-      );
+    }
+    else {
+      return "TBD"
     }
   }
 
@@ -842,26 +851,26 @@ export class OrderlistComponent implements OnInit {
       if (!obj.eventType) {
         delete obj.eventType;
       }
-      if (!obj.maxLength){
-        delete obj.maxLength
+      if (!obj.maxLength) {
+        delete obj.maxLength;
       }
-      if (!obj.startDate){
-        delete obj.startDate
+      if (!obj.startDate) {
+        delete obj.startDate;
       }
-      if (!obj.endDate){
-        delete obj.endDate
+      if (!obj.endDate) {
+        delete obj.endDate;
       }
-      if (!obj.startTime){
-        delete obj.startTime
+      if (!obj.startTime) {
+        delete obj.startTime;
       }
-      if (!obj.endTime){
-        delete obj.endTime
+      if (!obj.endTime) {
+        delete obj.endTime;
       }
-      if (!obj.address){
-        delete obj.address
+      if (!obj.address) {
+        delete obj.address;
       }
-      if (!obj.description){
-        delete obj.description
+      if (!obj.description) {
+        delete obj.description;
       }
 
       this.Srvc.addEvent(obj).subscribe(
@@ -921,26 +930,26 @@ export class OrderlistComponent implements OnInit {
         delete obj.eventType;
       }
 
-      if (!obj.maxLength){
-        delete obj.maxLength
+      if (!obj.maxLength) {
+        delete obj.maxLength;
       }
-      if (!obj.startDate){
-        delete obj.startDate
+      if (!obj.startDate) {
+        delete obj.startDate;
       }
-      if (!obj.endDate){
-        delete obj.endDate
+      if (!obj.endDate) {
+        delete obj.endDate;
       }
-      if (!obj.startTime){
-        delete obj.startTime
+      if (!obj.startTime) {
+        delete obj.startTime;
       }
-      if (!obj.endTime){
-        delete obj.endTime
+      if (!obj.endTime) {
+        delete obj.endTime;
       }
-      if (!obj.address){
-        delete obj.address
+      if (!obj.address) {
+        delete obj.address;
       }
-      if (!obj.description){
-        delete obj.description
+      if (!obj.description) {
+        delete obj.description;
       }
 
       // console.log(obj);
@@ -1163,7 +1172,10 @@ export class OrderlistComponent implements OnInit {
   startTimeCheck(e) {
     // debugger;
     this.startTimeCheckValue = e.target.value;
-    if (this.startDateCheckValue || this.startDateCheckValue && this.endDateCheckValue) {
+    if (
+      this.startDateCheckValue ||
+      (this.startDateCheckValue && this.endDateCheckValue)
+    ) {
       this.dateTimeStrictCheck();
     } else {
       this.resetValues();
@@ -1223,9 +1235,9 @@ export class OrderlistComponent implements OnInit {
         console.log("All Good");
       }
     }
-    if (this.startDateCheckValue && this.startTimeCheckValue){
-      if (this.startDateCheckValue == this.currentDate){
-        if (this.startTimeCheckValue < this.currentTime){
+    if (this.startDateCheckValue && this.startTimeCheckValue) {
+      if (this.startDateCheckValue == this.currentDate) {
+        if (this.startTimeCheckValue < this.currentTime) {
           this.resetValues();
         }
       }

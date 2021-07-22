@@ -39549,13 +39549,17 @@ class OrderlistComponent {
                     _angular_forms__WEBPACK_IMPORTED_MODULE_10__["Validators"].maxLength(4),
                 ],
             ],
-            startDate: ["",
+            startDate: [
+                "",
             ],
-            endDate: ["",
+            endDate: [
+                "",
             ],
-            startTime: ["",
+            startTime: [
+                "",
             ],
-            endTime: ["",
+            endTime: [
+                "",
             ],
             address: [
                 "",
@@ -39694,21 +39698,26 @@ class OrderlistComponent {
     }
     // Calculate Duration(Difference b/w Start date & End date)
     getdiffDates(row) {
-        var date1 = new Date(row.startDate);
-        var date2 = new Date(row.endDate);
-        var Time = date2.getTime() - date1.getTime();
-        var Days = Time / (1000 * 3600 * 24); //Diference in Days
-        let hours = (Days - Math.floor(Days)) * 24;
-        if (hours == 0) {
-            if (Days == 1 || Days == 0) {
-                return Math.abs(Math.floor(Days)) + " Day ";
+        if ((row === null || row === void 0 ? void 0 : row.startDate) && (row === null || row === void 0 ? void 0 : row.endDate)) {
+            var date1 = new Date(row.startDate);
+            var date2 = new Date(row.endDate);
+            var Time = date2.getTime() - date1.getTime();
+            var Days = Time / (1000 * 3600 * 24); //Diference in Days
+            let hours = (Days - Math.floor(Days)) * 24;
+            if (hours == 0) {
+                if (Days == 1 || Days == 0) {
+                    return Math.abs(Math.floor(Days)) + " Day ";
+                }
+                else {
+                    return Math.abs(Math.floor(Days)) + " Days ";
+                }
             }
             else {
-                return Math.abs(Math.floor(Days)) + " Days ";
+                return (Math.abs(Math.floor(Days)) + " days " + hours.toFixed(2) + " hours");
             }
         }
         else {
-            return (Math.abs(Math.floor(Days)) + " days " + hours.toFixed(2) + " hours");
+            return "TBD";
         }
     }
     ngAfterViewInit() {
@@ -40445,7 +40454,8 @@ class OrderlistComponent {
     startTimeCheck(e) {
         // debugger;
         this.startTimeCheckValue = e.target.value;
-        if (this.startDateCheckValue || this.startDateCheckValue && this.endDateCheckValue) {
+        if (this.startDateCheckValue ||
+            (this.startDateCheckValue && this.endDateCheckValue)) {
             this.dateTimeStrictCheck();
         }
         else {
