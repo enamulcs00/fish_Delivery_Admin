@@ -1,54 +1,87 @@
 <div class="card">
-    <div class="card-body">
+  <div class="card-body">
 
-        <div class="row">
-            <div class="col-md-12">
-                <form class="form-horizontal form-material">
-                    <div class="form-group mb-3 d-flex">
-                        <mat-form-field>
-                            <mat-label>Notification</mat-label>
-                            <mat-select [formControl]="toppings">
-                                <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                        <!-- <div class="mx-auto">
+    <div class="row">
+      <div class="col-md-12">
+        <form class="form-horizontal form-material" [formGroup]="notificationForm">
+          <div class="form-group mb-3 d-flex">
+            <mat-form-field>
+              <mat-label>Notification</mat-label>
+              <mat-select  (selectionChange)="disableField()" formControlName="notification">
+                <mat-option value="particular">Particular UserIDs</mat-option>
+                  <mat-option value="broadcast">Broadcast Notification</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <!-- <div class="mx-auto">
                             <h4>Status : Disable</h4>
                             <mat-slide-toggle>
                             </mat-slide-toggle>
                         </div> -->
-                        <div class="ml-auto"><a routerLink="/pages/notificationhistory" class=" btn btn-primary ">View Notification History</a></div>
-                    </div>
-                    <!-- <div class="col-md-12">
+            <div class="ml-auto"><a routerLink="/pages/notificationhistory" class=" btn btn-primary ">View Notification
+                History</a></div>
+          </div>
+          <!-- <div class="col-md-12">
                         <div class="form-group">
                             <label>Add ID</label>
                             <input type="text" placeholder="" class="form-control form-control-line" placeholder="Add Specifc ID">
                         </div>
                     </div> -->
-                    <!-- <div class="col-md-12">
+          <!-- <div class="col-md-12">
                         <div class="form-group">
                             <label>Add Name</label>
                             <input type="text" placeholder="" class="form-control form-control-line" placeholder="Add ID Name Automatically Add">
                         </div>
                     </div> -->
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label>Add Heading</label>
-                            <input type="text" placeholder="" class="form-control form-control-line" placeholder="Add Heading">
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label>Add Content</label>
-                            <textarea class="form-control" rows="5" placeholder="Add Content"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-success">
+                    <!-- Specific Users/Drivers -->
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Select Specific Users</label>
+                <mat-form-field class="w-100">
+                  <mat-select formControlName="users" multiple >
+                    <mat-option *ngFor="let item of usersData" [value]="item?._id">{{item?.firstName}} {{item?.lastName}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <p class="text-danger d-inline-block pt-1" *ngIf="submitted && errorHandling('users', 'required')">
+                  *Please choose Specific Users
+                </p>
+              </div>
+            </div>
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Add Heading</label>
+              <input  #ref (keydown.space)="avoidBlankSpace($event ,ref.value)" formControlName="title" type="text" placeholder="" class="form-control form-control-line" placeholder="Add Heading">
+              <mat-error
+                *ngIf="notificationForm.controls['title'].touched && notificationForm.controls['title'].invalid"
+                class="text-danger d-inline-block pt-1">
+                *Please enter Notification Heading
+              </mat-error>
+                  <p class="text-danger" *ngIf="submitted && errorHandling('title', 'required')">
+                    *Heading is required
+                  </p>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Add Content</label>
+              <textarea #message (keydown.space)="avoidBlankSpace($event ,message.value)" formControlName="message" class="form-control" rows="5" placeholder="Add Content"></textarea>
+              <mat-error
+                *ngIf="notificationForm.controls['message'].touched && notificationForm.controls['message'].invalid"
+                class="text-danger d-inline-block pt-1">
+                *Please enter Notification content
+              </mat-error>
+                <p class="text-danger" *ngIf="submitted && errorHandling('message', 'required')">
+                  *Notification content is required
+                </p>
+            </div>
+            <button type="submit" class="btn btn-success" (click)="submit()">
               <i class="fa fa-check"></i> Send</button>
 
-                    </div>
-                </form>
+          </div>
+        </form>
 
-            </div>
-            <!-- <div class="col-md-6">
+      </div>
+      <!-- <div class="col-md-6">
         <div ngbDropdown placement="bottom" class="d-inline-block mb-3">
             <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
               Notifications
@@ -100,8 +133,8 @@
           </div>
         </form>
       </div> -->
-        </div>
-
-
     </div>
+
+
+  </div>
 </div>

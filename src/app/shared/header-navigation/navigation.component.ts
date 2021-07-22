@@ -64,6 +64,7 @@ export class NavigationComponent implements AfterViewInit {
     // Logout
   logout() {
     sessionStorage.removeItem("token");
+    sessionStorage.removeItem("permission");
     this.router.navigate(["/login"]);
   }
 

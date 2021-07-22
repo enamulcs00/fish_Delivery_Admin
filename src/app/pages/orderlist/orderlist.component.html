@@ -104,17 +104,17 @@
                 </ng-container>
                 <ng-container matColumnDef="Durationdate">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Date </th>
-                  <td mat-cell *matCellDef="let row" class="text-nowrap">{{moment(row?.startDate).format('DD-MM-YYYY')}}
-                    - {{moment(row?.endDate).format('DD-MM-YYYY')}}</td>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap">{{row?.startDate?moment(row?.startDate).format('DD-MM-YYYY'):'TBD'}}
+                    - {{row?.endDate?moment(row?.endDate).format('DD-MM-YYYY'):'TBD'}}</td>
                 </ng-container>
                 <ng-container matColumnDef="Durationtime">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Time </th>
-                  <td mat-cell *matCellDef="let row" class="text-nowrap">{{row?.startTime}} - {{row?.endTime}}</td>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap">{{row?.startTime || "TBD"}} - {{row?.endTime || "TBD"}}</td>
                 </ng-container>
                 <!-- Progress Column -->
                 <ng-container matColumnDef="box">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Description </th>
-                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.description || "-"}} </td>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row?.description || "-"}} </td>
                 </ng-container>
                 <ng-container matColumnDef="invited">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> People invited </th>
@@ -272,17 +272,17 @@
                 <ng-container matColumnDef="Durationdate">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Date </th>
                   <td mat-cell *matCellDef="let row" class="text-nowrap">
-                    {{moment(row?.startDate).format('DD-MM-YYYY')}} - {{moment(row?.endDate).format('DD-MM-YYYY')}}
+                    {{row?.startDate?moment(row?.startDate).format('DD-MM-YYYY'):'TBD'}} - {{row?.endDate?moment(row?.endDate).format('DD-MM-YYYY'):'TBD'}}
                   </td>
                 </ng-container>
                 <ng-container matColumnDef="Durationtime">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Time </th>
-                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row?.startTime}} - {{row?.endTime}} </td>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row?.startTime || "TBD"}} - {{row?.endTime || "TBD"}} </td>
                 </ng-container>
                 <!-- Progress Column -->
                 <ng-container matColumnDef="box">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Description </th>
-                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.description || "-"}} </td>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row?.description || "-"}} </td>
                 </ng-container>
                 <ng-container matColumnDef="invited">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> People invited </th>
@@ -442,17 +442,17 @@
                 <ng-container matColumnDef="Durationdate">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Date </th>
                   <td mat-cell *matCellDef="let row" class="text-nowrap">
-                    {{moment(row?.startDate).format('DD-MM-YYYY')}} - {{moment(row?.endDate).format('DD-MM-YYYY')}}
+                    {{row?.startDate?moment(row?.startDate).format('DD-MM-YYYY'):'TBD'}} - {{row?.endDate?moment(row?.endDate).format('DD-MM-YYYY'):'TBD'}}
                   </td>
                 </ng-container>
                 <ng-container matColumnDef="Durationtime">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Event Time </th>
-                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row?.startTime}} - {{row?.endTime}} </td>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row?.startTime || "TBD"}} - {{row?.endTime || "TBD"}} </td>
                 </ng-container>
                 <!-- Progress Column -->
                 <ng-container matColumnDef="box">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> Description </th>
-                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row.description || "-"}} </td>
+                  <td mat-cell *matCellDef="let row" class="text-nowrap"> {{row?.description || "-"}} </td>
                 </ng-container>
                 <ng-container matColumnDef="invited">
                   <th mat-header-cell *matHeaderCellDef class="text-nowrap"> People invited </th>

@@ -222,6 +222,7 @@ export class OrderlistComponent implements OnInit {
     this.getCurrentTime();
 
     this.permissions = JSON.parse(sessionStorage.getItem("permission"));
+    // console.log(this.permissions);
     if (this.permissions == null) {
       this.addPermission = true;
       this.editPermission = true;
@@ -231,8 +232,8 @@ export class OrderlistComponent implements OnInit {
       this.editPermission = this.permissions[3].isEdit;
       this.viewPermission = this.permissions[3].isView;
     }
-    console.log("Add", this.addPermission);
-    console.log("Edit", this.editPermission);
+    // console.log("Add", this.addPermission);
+    // console.log("Edit", this.editPermission);
     if (this.editPermission) {
       this.displayedColumns = [
         "Images",
@@ -841,6 +842,27 @@ export class OrderlistComponent implements OnInit {
       if (!obj.eventType) {
         delete obj.eventType;
       }
+      if (!obj.maxLength){
+        delete obj.maxLength
+      }
+      if (!obj.startDate){
+        delete obj.startDate
+      }
+      if (!obj.endDate){
+        delete obj.endDate
+      }
+      if (!obj.startTime){
+        delete obj.startTime
+      }
+      if (!obj.endTime){
+        delete obj.endTime
+      }
+      if (!obj.address){
+        delete obj.address
+      }
+      if (!obj.description){
+        delete obj.description
+      }
 
       this.Srvc.addEvent(obj).subscribe(
         (res: any) => {
@@ -897,6 +919,28 @@ export class OrderlistComponent implements OnInit {
 
       if (!obj.eventType) {
         delete obj.eventType;
+      }
+
+      if (!obj.maxLength){
+        delete obj.maxLength
+      }
+      if (!obj.startDate){
+        delete obj.startDate
+      }
+      if (!obj.endDate){
+        delete obj.endDate
+      }
+      if (!obj.startTime){
+        delete obj.startTime
+      }
+      if (!obj.endTime){
+        delete obj.endTime
+      }
+      if (!obj.address){
+        delete obj.address
+      }
+      if (!obj.description){
+        delete obj.description
       }
 
       // console.log(obj);
@@ -1119,7 +1163,7 @@ export class OrderlistComponent implements OnInit {
   startTimeCheck(e) {
     // debugger;
     this.startTimeCheckValue = e.target.value;
-    if (this.startDateCheckValue && this.endDateCheckValue) {
+    if (this.startDateCheckValue || this.startDateCheckValue && this.endDateCheckValue) {
       this.dateTimeStrictCheck();
     } else {
       this.resetValues();
@@ -1177,6 +1221,13 @@ export class OrderlistComponent implements OnInit {
         }
       } else {
         console.log("All Good");
+      }
+    }
+    if (this.startDateCheckValue && this.startTimeCheckValue){
+      if (this.startDateCheckValue == this.currentDate){
+        if (this.startTimeCheckValue < this.currentTime){
+          this.resetValues();
+        }
       }
     }
   }
