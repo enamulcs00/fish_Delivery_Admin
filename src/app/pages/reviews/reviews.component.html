@@ -31,9 +31,9 @@
               <tbody>
                 <tr *ngFor="let report of reportData">
                   <td>
-                    <img *ngIf="report?.reportedUserId?.image;else alterImage" [src]="report?.reportedUserId?.image" alt="image" width="60" class="rounded-circle">
+                    <img *ngIf="report?.reportedUserId?.image;else alterImage" [src]="report?.reportedUserId?.image" alt="image" width="60" height="60" class="rounded-circle">
                     <ng-template #alterImage>
-                      <img  [src]="alterImage" alt="image" width="60" class="rounded-circle">
+                      <img  [src]="alterImage" alt="image" width="60" height="60" class="rounded-circle">
                     </ng-template>
                   </td>
                   <td>{{report?.reportedUserId?.userName || "-"}} </td>
@@ -42,10 +42,9 @@
                                         <p class="text-warning mb-0 text-nowrap"> <i class="fas fa-star "> </i> <i class="fas fa-star"> </i>
                                             <i class="fas fa-star"> </i> <i class="fas fa-star"> </i> </p>
                                     </td> -->
-                  <td>Lorem ipsum dummy content It is useful for all type site and use for dummy content all type site
-                    and use for dummy content all type site and use for dummy content..... <a href="javascript:void(0)"
-                      (click)="reviewModal(review)">Read More</a></td>
-                  <td> Jason </td>
+                  <td>{{report?.comments|slice:0:50}} <a href="javascript:void(0)"
+                      (click)="reviewModal(review,report?.comments)">{{report?.comments.length>50?'Read More':''}}</a></td>
+                  <td> {{report?.userId?.userName || "-"}} </td>
                   <td *ngIf="editPermission">
                     <button class="btn btn-danger" (click)="reviewDeleteModal(reviewDelete,report?._id)">Delete</button>
                   </td>
@@ -87,13 +86,7 @@
             <div class="row pt-2">
               <div class="col-md-12">
                 <p>
-                  It is a long established fact that a reader will be distracted by the readable content of a page when
-                  looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
-                  distribution of letters, as opposed to using 'Content here,
-                  content here', making it look like readable English. Many desktop publishing packages and web page
-                  editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover
-                  many web sites
-                  still in their infancy.
+                  {{comment}}
                 </p>
               </div>
             </div>

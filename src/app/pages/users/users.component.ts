@@ -242,6 +242,7 @@ export class UsersComponent implements OnInit {
     this.router.navigate(["/login"]);
   }
 
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;

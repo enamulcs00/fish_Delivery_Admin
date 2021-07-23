@@ -111,7 +111,7 @@
                   </div> -->
 
                   <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                    <a style="cursor: pointer;" class="dropdown-item" routerLink="/pages/users_detail"><i
+                    <a style="cursor: pointer;" class="dropdown-item" (click)="sendIDview(row._id)"><i
                         class="ti-eye"></i>
                       View
                     </a>

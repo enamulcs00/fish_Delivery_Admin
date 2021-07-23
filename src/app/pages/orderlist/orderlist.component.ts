@@ -504,6 +504,8 @@ export class OrderlistComponent implements OnInit {
   // Filter Type
   changeFilterType(filter) {
     this.filterType = filter;
+    this.page= 10;
+    this.pageindec = 1;
     this.getAllEvents();
   }
 

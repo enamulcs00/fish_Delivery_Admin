@@ -1,10 +1,10 @@
 <div class="row">
-    <!-- Column -->
-    <div class="col-lg-12 col-xlg-3 col-md-5">
-        <a routerLink="/pages/users" class="btn btn-primary mb-3">Back</a>
-        <div class="card">
-            <div class="row">
-                <!-- <div class="col-md-3">
+  <!-- Column -->
+  <div class="col-lg-12 col-xlg-3 col-md-5">
+    <a routerLink="/pages/users" class="btn btn-primary mb-3">Back</a>
+    <div class="card">
+      <div class="row">
+        <!-- <div class="col-md-3">
           <div class="card-body p-3 bg-light">
             <div class=" text-center">
               <img src="assets/images/users/1.jpg" class="rounded-circle" width="150" />
@@ -12,39 +12,42 @@
 
           </div>
         </div> -->
-                <div class="col-md-12 pr-0 pt-2 pb-2">
-                    <div class="row pt-2 ml-0 mr-0 ">
-                        <div class="col-md-3">
-                            <ul class="list-block pl-0 list-style-none">
-                                <li class="list-block-listing pr-2 pb-2">Name: <span class="font-weight-600">Hanna Gover</span></li>
-                                <li class="list-block-listing pr-2 pb-2">Contact: <span class="font-weight-600">+91-9564345452</span></li>
-                                <li class="list-block-listing pr-2 pb-2">User ID: <span class="font-weight-600">elite2345</span></li>
-                            </ul>
-                        </div>
-                        <!-- <div class="col-md-3">
+        <div class="col-md-12 pr-0 pt-2 pb-2">
+          <div class="row pt-2 ml-0 mr-0 ">
+            <div class="col-md-3">
+              <ul class="list-block pl-0 list-style-none">
+                <li class="list-block-listing pr-2 pb-2">Name: <span class="font-weight-600">{{userDetail?.firstName}}
+                    {{userDetail?.lastName}}</span></li>
+                <li class="list-block-listing pr-2 pb-2">Contact: <span
+                    class="font-weight-600">{{userDetail?.dialCode}}-{{userDetail?.phoneNo}}</span>
+                </li>
+                <!-- <li class="list-block-listing pr-2 pb-2">User ID: <span class="font-weight-600">elite2345</span></li> -->
+              </ul>
+            </div>
+            <!-- <div class="col-md-3">
                             <ul class="list-block pl-0 list-style-none">
                                 <li class="list-block-listing pr-2 pb-2">Cancelation Rate: <span class="font-weight-600">10%</span></li>
                                 <li class="list-block-listing pr-2 pb-2">Payment Not Completed: <span class="font-weight-600">0</span></li>
                             </ul>
                         </div> -->
-                        <!-- <div class="col-md-3">
+            <!-- <div class="col-md-3">
                             <ul class="list-block pl-0 list-style-none">
                                 <li class="list-block-listing pr-2 pb-2">Amount Spent: <span class="font-weight-600"><i class="fas fa-euro-sign"></i>200</span></li>
                                 <li class="list-block-listing pr-2 pb-2"> Total Orders: <span class="font-weight-600">30</span></li>
                             </ul>
                         </div> -->
-                        <!-- <div class="col-md-3">
+            <!-- <div class="col-md-3">
                             <ul class="list-block pl-0 list-style-none">
                                 <li class="list-block-listing pr-2 pb-2"> Completed Orders: <span class="font-weight-600">28</span></li>
                                 <li class="list-block-listing pr-2 pb-2"> Canceled Orders: <span class="font-weight-600">2</span></li>
                                 <li class="list-block-listing pr-2 pb-2"> Pending Orders: <span class="font-weight-600">2</span></li>
                             </ul>
                         </div> -->
-                    </div>
-                    <div class="row mr-0 p-3">
-                        <!-- <div class="col-md-4"> -->
-                        <!-- Card -->
-                        <!-- <div class="card">
+          </div>
+          <div class="row mr-0 p-3">
+            <!-- <div class="col-md-4"> -->
+            <!-- Card -->
+            <!-- <div class="card">
                 <div class="card-body card-box p-2">
                     <div class="d-flex align-items-center">
                         <div class="m-r-10">
@@ -62,10 +65,10 @@
                     </div>
                 </div>
             </div> -->
-                        <!-- Card -->
-                        <!-- </div> -->
-                        <!-- col-md-4 -->
-                        <!-- <div class="col-md-4">
+            <!-- Card -->
+            <!-- </div> -->
+            <!-- col-md-4 -->
+            <!-- <div class="col-md-4">
                             <div class="card">
                                 <div class="card-body card-box p-2">
                                     <div class="d-flex align-items-center">
@@ -83,8 +86,8 @@
                                 </div>
                             </div>
                         </div> -->
-                        <!-- col-md-4 -->
-                        <!-- <div class="col-md-4">
+            <!-- col-md-4 -->
+            <!-- <div class="col-md-4">
                             <div class="card">
                                 <div class="card-body card-box p-2">
                                     <div class="d-flex align-items-center">
@@ -102,235 +105,172 @@
                                 </div>
                             </div>
                         </div> -->
-                        <!-- col-md-4 -->
-                        <ul class="nav nav-tabs cstm_tab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" href="#events" role="tab" data-toggle="tab">Number of events attended</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#hosted" role="tab" data-toggle="tab">Number of events hosted</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#groups" role="tab" data-toggle="tab">Number of Groups</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content w-100">
-                            <div role="tabpanel" class="tab-pane show active" id="events">
-                                <div class="col-md-12 table-responsive">
-                                    <h3 class="p-2 my-3">Number of events attended</h3>
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <th>Image</th>
-                                            <th class="text-nowrap">Event Name</th>
-                                            <th class="text-nowrap">Public/Private</th>
-                                            <th class="text-nowrap">Event Type</th>
-                                            <th class="text-nowrap">Date & Time</th>
-                                            <th class="text-nowrap">Description</th>
-                                            <th class="text-nowrap">Duration</th>
-                                            <th class="text-nowrap">Location</th>
-                                            <th class="text-nowrap">Number of likes</th>
-                                            <th class="text-nowrap">Action</th>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><img src="assets/images/gallery/wedding.jpg" alt="Event" width="60" class="rounded"></td>
-                                                <td>Event 1</td>
-                                                <td>Public</td>
-                                                <td>Drink</td>
-                                                <td> 05/05/20, 10:20 PM </td>
-                                                <td>Description will be shown here....</td>
-                                                <td>2 Days</td>
-                                                <td>London</td>
-                                                <td>15</td>
-                                                <td> <button class="btn btn-outline-primary btn-sm" id="dropdownBasic1"> Remove </button> </td>
-                                            </tr>
-                                            <tr>
-                                                <td><img src="assets/images/gallery/wedding.jpg" alt="Event" width="60" class="rounded"></td>
-                                                <td>Event 2</td>
-                                                <td>Public</td>
-                                                <td>Drink</td>
-                                                <td> 05/05/20, 10:20 PM </td>
-                                                <td>Description will be shown here....</td>
-                                                <td>2 Days</td>
-                                                <td>London</td>
-                                                <td>15</td>
-                                                <td> <button class="btn btn-outline-primary btn-sm" id="dropdownBasic1"> Remove </button> </td>
-                                            </tr>
-                                            <tr>
-                                                <td><img src="assets/images/gallery/wedding.jpg" alt="Event" width="60" class="rounded"></td>
-                                                <td>Event 3</td>
-                                                <td>Public</td>
-                                                <td>Drink</td>
-                                                <td> 05/05/20, 10:20 PM </td>
-                                                <td>Description will be shown here....</td>
-                                                <td>2 Days</td>
-                                                <td>London</td>
-                                                <td>15</td>
-                                                <td> <button class="btn btn-outline-primary btn-sm" id="dropdownBasic1"> Remove </button> </td>
-                                            </tr>
-                                            <tr>
-                                                <td><img src="assets/images/gallery/wedding.jpg" alt="Event" width="60" class="rounded"></td>
-                                                <td>Event 4</td>
-                                                <td>Public</td>
-                                                <td>Drink</td>
-                                                <td> 05/05/20, 10:20 PM </td>
-                                                <td>Description will be shown here....</td>
-                                                <td>2 Days</td>
-                                                <td>London</td>
-                                                <td>15</td>
-                                                <td> <button class="btn btn-outline-primary btn-sm" id="dropdownBasic1"> Remove </button> </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <div class="col-md-12 text-right">
-                                        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-                                    </div>
-                                </div>
-                            </div>
-                            <div role="tabpanel" class="tab-pane fade" id="hosted">
-                                <div class="col-md-12 table-responsive">
-                                    <h3 class="p-2 my-3">Number of events hosted</h3>
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <th>Image</th>
-                                            <th class="text-nowrap">Event Name</th>
-                                            <th class="text-nowrap">Public/Private</th>
-                                            <th class="text-nowrap">Event Type</th>
-                                            <th class="text-nowrap">Date & Time</th>
-                                            <th class="text-nowrap">Description</th>
-                                            <th class="text-nowrap">Duration</th>
-                                            <th class="text-nowrap">Location</th>
-                                            <th class="text-nowrap">Number of likes</th>
-                                            <th class="text-nowrap">Action</th>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><img src="assets/images/gallery/wedding.jpg" alt="Event" width="60" class="rounded"></td>
-                                                <td>Event 1</td>
-                                                <td>Public</td>
-                                                <td>Drink</td>
-                                                <td> 05/05/20, 10:20 PM </td>
-                                                <td>Description will be shown here....</td>
-                                                <td>2 Days</td>
-                                                <td>London</td>
-                                                <td>15</td>
-                                                <td> <button class="btn btn-outline-primary btn-sm" id="dropdownBasic1"> Remove </button> </td>
-                                            </tr>
-                                            <tr>
-                                                <td><img src="assets/images/gallery/wedding.jpg" alt="Event" width="60" class="rounded"></td>
-                                                <td>Event 2</td>
-                                                <td>Public</td>
-                                                <td>Drink</td>
-                                                <td> 05/05/20, 10:20 PM </td>
-                                                <td>Description will be shown here....</td>
-                                                <td>2 Days</td>
-                                                <td>London</td>
-                                                <td>15</td>
-                                                <td> <button class="btn btn-outline-primary btn-sm" id="dropdownBasic1"> Remove </button> </td>
-                                            </tr>
-                                            <tr>
-                                                <td><img src="assets/images/gallery/wedding.jpg" alt="Event" width="60" class="rounded"></td>
-                                                <td>Event 3</td>
-                                                <td>Public</td>
-                                                <td>Drink</td>
-                                                <td> 05/05/20, 10:20 PM </td>
-                                                <td>Description will be shown here....</td>
-                                                <td>2 Days</td>
-                                                <td>London</td>
-                                                <td>15</td>
-                                                <td> <button class="btn btn-outline-primary btn-sm" id="dropdownBasic1"> Remove </button> </td>
-                                            </tr>
-                                            <tr>
-                                                <td><img src="assets/images/gallery/wedding.jpg" alt="Event" width="60" class="rounded"></td>
-                                                <td>Event 4</td>
-                                                <td>Public</td>
-                                                <td>Drink</td>
-                                                <td> 05/05/20, 10:20 PM </td>
-                                                <td>Description will be shown here....</td>
-                                                <td>2 Days</td>
-                                                <td>London</td>
-                                                <td>15</td>
-                                                <td> <button class="btn btn-outline-primary btn-sm" id="dropdownBasic1"> Remove </button> </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <div class="col-md-12 text-right">
-                                        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-                                    </div>
-                                </div>
-                            </div>
-                            <div role="tabpanel" class="tab-pane fade" id="groups">
-                                <div class="col-md-12 table-responsive">
-                                    <h3 class="p-2 my-3">Number of Groups</h3>
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <th>Image</th>
-                                            <th class="text-nowrap">Group Name</th>
-                                            <th class="text-nowrap">Public/Private</th>
-                                            <th class="text-nowrap">Date</th>
-                                            <th class="text-nowrap">Group Members</th>
-                                            <th class="text-nowrap">Description</th>
-                                            <th class="text-nowrap">Visible to non-members</th>
-                                            <th class="text-nowrap">Action</th>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><img src="assets/images/gallery/wedding.jpg" alt="Event" width="60" class="rounded"></td>
-                                                <td>Group 1</td>
-                                                <td>Public</td>
-                                                <td> 05/05/20 </td>
-                                                <td>15</td>
-                                                <td>Description will be shown here....</td>
-                                                <td>Yes</td>
-                                                <td> <button class="btn btn-outline-primary btn-sm" id="dropdownBasic1"> Remove </button> </td>
-                                            </tr>
-                                            <tr>
-                                                <td><img src="assets/images/gallery/wedding.jpg" alt="Event" width="60" class="rounded"></td>
-                                                <td>Group 1</td>
-                                                <td>Public</td>
-                                                <td> 05/05/20 </td>
-                                                <td>15</td>
-                                                <td>Description will be shown here....</td>
-                                                <td>Yes</td>
-                                                <td> <button class="btn btn-outline-primary btn-sm" id="dropdownBasic1"> Remove </button> </td>
-                                            </tr>
-                                            <tr>
-                                                <td><img src="assets/images/gallery/wedding.jpg" alt="Event" width="60" class="rounded"></td>
-                                                <td>Group 1</td>
-                                                <td>Public</td>
-                                                <td> 05/05/20 </td>
-                                                <td>15</td>
-                                                <td>Description will be shown here....</td>
-                                                <td>Yes</td>
-                                                <td> <button class="btn btn-outline-primary btn-sm" id="dropdownBasic1"> Remove </button> </td>
-                                            </tr>
-                                            <tr>
-                                                <td><img src="assets/images/gallery/wedding.jpg" alt="Event" width="60" class="rounded"></td>
-                                                <td>Group 1</td>
-                                                <td>Public</td>
-                                                <td> 05/05/20 </td>
-                                                <td>15</td>
-                                                <td>Description will be shown here....</td>
-                                                <td>Yes</td>
-                                                <td> <button class="btn btn-outline-primary btn-sm" id="dropdownBasic1"> Remove </button> </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <div class="col-md-12 text-right">
-                                        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <!-- col-md-4 -->
+            <ul class="nav nav-tabs cstm_tab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" href="#events" role="tab" (click)="changeFilterType(1)"
+                  data-toggle="tab">Number of events attended</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#hosted" role="tab" (click)="changeFilterType(2)" data-toggle="tab">Number of
+                  events hosted</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#groups" role="tab" (click)="changeFilterType(3)" data-toggle="tab">Number of
+                  Groups</a>
+              </li>
+            </ul>
+            <div class="tab-content w-100">
+              <div role="tabpanel" class="tab-pane show active" id="events">
+                <div class="col-md-12 table-responsive" *ngIf="!noData;else noDataEventHolder">
+                  <h3 class="p-2 my-3">Number of events attended</h3>
+                  <table class="table table-bordered">
+                    <thead>
+                      <th>Image</th>
+                      <th class="text-nowrap">Event Name</th>
+                      <th class="text-nowrap">Public/Private</th>
+                      <!-- <th class="text-nowrap">Event Type</th> -->
+                      <th class="text-nowrap">Date & Time</th>
+                      <th class="text-nowrap">Description</th>
+                      <th class="text-nowrap">Duration</th>
+                      <th class="text-nowrap">Location</th>
+                      <th class="text-nowrap">Number of likes</th>
+                      <!-- <th class="text-nowrap">Action</th> -->
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of listingData">
+                        <td><img [src]="item?.eventImage" alt="Event" width="60" class="rounded imageListing"></td>
+                        <td>{{item?.eventName || "-"}}</td>
+                        <td>
+                          <span *ngIf="item?.eventFor==1">Public</span>
+                          <span *ngIf="item?.eventFor==2">Private</span>
+                        </td>
+                        <!-- <td>Drink</td> -->
+                        <td> {{item?.startDate?moment(item?.startDate).format('DD-MM-YYYY'):'-'}}, {{item?.startTime || "-"}} </td>
+                        <td>{{item?.description || "-"}}</td>
+                        <td>{{getdiffDates(item)}}</td>
+                        <td>{{item?.address||"-"}}</td>
+                        <td>{{item?.likeCount || "0"}}</td>
+                        <!-- <td> <button class="btn btn-outline-primary btn-sm" id="dropdownBasic1"> Remove </button> </td> -->
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="col-md-12 text-right">
+                    <mat-paginator [length]="total" [pageSize]="page" [pageSizeOptions]="[5, 10, 25, 100]"
+                      (page)="onPaginateChange($event)"></mat-paginator>
+                  </div>
                 </div>
+                <ng-template #noDataEventHolder>
+                  <h3 class="m-5 d-flex align-items-center justify-content-center w-100">No data found</h3>
+                </ng-template>
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="hosted">
+                <div class="col-md-12 table-responsive" *ngIf="!noData;else noDataHolder">
+                  <h3 class="p-2 my-3">Number of events hosted</h3>
+                  <table class="table table-bordered">
+                    <thead>
+                      <th>Image</th>
+                      <th class="text-nowrap">Event Name</th>
+                      <th class="text-nowrap">Public/Private</th>
+                      <!-- <th class="text-nowrap">Event Type</th> -->
+                      <th class="text-nowrap">Date & Time</th>
+                      <th class="text-nowrap">Description</th>
+                      <th class="text-nowrap">Duration</th>
+                      <th class="text-nowrap">Location</th>
+                      <th class="text-nowrap">Number of likes</th>
+                      <!-- <th class="text-nowrap">Action</th> -->
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of listingData">
+                        <td><img [src]="item?.eventImage" alt="Event" width="60" class="rounded imageListing"></td>
+                        <td>{{item?.eventName || "-"}}</td>
+                        <td>
+                          <span *ngIf="item?.eventFor==1">Public</span>
+                          <span *ngIf="item?.eventFor==2">Private</span>
+                        </td>
+                        <!-- <td>Drink</td> -->
+                        <td>{{item?.startDate?moment(item?.startDate).format('DD-MM-YYYY'):'-'}}, {{item?.startTime || "-"}}</td>
+                        <td>{{item?.description || "-"}}</td>
+                        <td>{{getdiffDates(item)}}</td>
+                        <td>{{item?.address||"-"}}</td>
+                        <td>{{item?.likeCount || "0"}}</td>
+                        <!-- <td> <button class="btn btn-outline-primary btn-sm" id="dropdownBasic1"> Remove </button> </td> -->
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <div class="col-md-12 text-right">
+                    <mat-paginator [length]="total" [pageSize]="page" [pageSizeOptions]="[5, 10, 25, 100]"
+                      (page)="onPaginateChange($event)"></mat-paginator>
+                  </div>
+                </div>
+                <ng-template #noDataHolder>
+                  <h3 class="m-5 d-flex align-items-center justify-content-center w-100">No data found</h3>
+                </ng-template>
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="groups">
+                <div class="col-md-12 table-responsive" *ngIf="!noData;else noDataGroupHolder">
+                  <h3 class="p-2 my-3">Number of Groups</h3>
+                  <table class="table table-bordered">
+                    <thead>
+                      <th>Image</th>
+                      <th class="text-nowrap">Group Name</th>
+                      <th class="text-nowrap">Public/Private</th>
+                      <th class="text-nowrap">Date</th>
+                      <th class="text-nowrap">Group Members</th>
+                      <th class="text-nowrap">Description</th>
+                      <th class="text-nowrap">Visible to non-members</th>
+                      <th class="text-nowrap">Action</th>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of listingData">
+                        <td>
+                          <img  *ngIf="item?.image;else alterImageGrp" [src]="item?.image" alt="img" width="60" height="60" class="rounded">
+                          <ng-template #alterImageGrp>
+
+                              <img src="assets/images/gallery/noimage.png" alt="img" width="60" height="60" class="rounded">
+                          </ng-template>
+                        </td>
+                        <td>{{item?.name || "-"}}</td>
+                        <td>
+                          <span *ngIf="item?.groupType===1;else privateGroup">Public</span>
+                          <ng-template #privateGroup>
+                            <span>Private</span>
+                          </ng-template>
+                        </td>
+                        <td>{{item?.createdAt | date:'medium'}}</td>
+                        <td>{{item?.join.length ||"0"}}</td>
+                        <td>{{item?.description || "-"}}</td>
+                        <td>
+                          <span *ngIf="item?.visibileTo;else nonVisible">Yes</span>
+                          <ng-template #nonVisible>
+                            <span>No</span>
+                          </ng-template>
+                        </td>
+                        <td> <button class="btn btn-outline-primary btn-sm" id="dropdownBasic1"> Remove </button> </td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                  <div class="col-md-12 text-right">
+                    <mat-paginator [length]="total" [pageSize]="page" [pageSizeOptions]="[5, 10, 25, 100]"
+                      (page)="onPaginateChange($event)"></mat-paginator>
+                  </div>
+                </div>
+                <ng-template #noDataGroupHolder>
+                  <h3 class="m-5 d-flex align-items-center justify-content-center w-100">No data found</h3>
+                </ng-template>
+              </div>
             </div>
-            <!-- end row -->
+          </div>
         </div>
+      </div>
+      <!-- end row -->
     </div>
-    <!-- Column -->
-    <!-- Column -->
-    <!-- <div class="col-lg-12">
+  </div>
+  <!-- Column -->
+  <!-- Column -->
+  <!-- <div class="col-lg-12">
         <h2 class="pt-2">Order History</h2>
         <div class="card ">
 
@@ -448,39 +388,39 @@
 
 </ng-template> -->
 <ng-template #discount let-modal>
-    <div class="modal-header">
-        <h4 class="modal-title">Most View Section</h4>
-        <button type="button" class="close-icon" aria-label="Close" (click)="modal.dismiss('Cross click')">
+  <div class="modal-header">
+    <h4 class="modal-title">Most View Section</h4>
+    <button type="button" class="close-icon" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
-    </div>
-    <div class="modal-body">
-        <div class="table-reponsive">
-            <table class="table table-sm">
-                <tbody>
-                    <tr>
-                        <td class="align-middle">Events</td>
-                        <td><span class="food-code ">
-        10/Min
-       </span></td>
-                    </tr>
-                    <tr>
-                        <td class="align-middle">Wedding</td>
-                        <td><span class="food-code ">
-         20/Min
-        </span></td>
-                    </tr>
-                    <tr>
-                        <td class="align-middle">Music</td>
-                        <td><span class="food-code ">
-         10/Min
-        </span></td>
-                    </tr>
+  </div>
+  <div class="modal-body">
+    <div class="table-reponsive">
+      <table class="table table-sm">
+        <tbody>
+          <tr>
+            <td class="align-middle">Events</td>
+            <td><span class="food-code ">
+                10/Min
+              </span></td>
+          </tr>
+          <tr>
+            <td class="align-middle">Wedding</td>
+            <td><span class="food-code ">
+                20/Min
+              </span></td>
+          </tr>
+          <tr>
+            <td class="align-middle">Music</td>
+            <td><span class="food-code ">
+                10/Min
+              </span></td>
+          </tr>
 
-                </tbody>
-            </table>
-        </div>
+        </tbody>
+      </table>
     </div>
+  </div>
 
 </ng-template>
 <!-- mat table -->

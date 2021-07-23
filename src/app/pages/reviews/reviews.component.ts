@@ -29,6 +29,7 @@ export class ReviewsComponent implements OnInit {
   editPermission: boolean = false;
   viewPermission:boolean = false;
   deleteID: any;
+  comment: any;
 
   constructor(
     private modalService: NgbModal,
@@ -128,7 +129,8 @@ export class ReviewsComponent implements OnInit {
   }
 
 
-  reviewModal(review) {
+  reviewModal(review,comment) {
+    this.comment = comment;
     this.modalService.open(review, {
       backdropClass: "light-blue-backdrop",
       centered: true,
