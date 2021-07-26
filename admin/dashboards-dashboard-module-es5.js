@@ -5822,19 +5822,47 @@
       /* harmony import */
 
 
-      var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      var src_app_services_dashboard_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! src/app/services/dashboard.service */
+      "./src/app/services/dashboard.service.ts");
+      /* harmony import */
+
+
+      var sweetalert2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! sweetalert2 */
+      "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+      /* harmony import */
+
+
+      var sweetalert2__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_3__);
+      /* harmony import */
+
+
+      var ngx_toastr__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! ngx-toastr */
+      "./node_modules/ngx-toastr/__ivy_ngcc__/fesm2015/ngx-toastr.js");
+      /* harmony import */
+
+
+      var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! @angular/router */
+      "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+      /* harmony import */
+
+
+      var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/common */
       "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
       /* harmony import */
 
 
-      var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! @angular/forms */
       "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
       /* harmony import */
 
 
-      var ng_chartist__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      var ng_chartist__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! ng-chartist */
       "./node_modules/ng-chartist/__ivy_ngcc__/fesm2015/ng-chartist.js");
 
@@ -6883,13 +6911,17 @@
       "./src/app/dashboards/dashboard-components/sales/data.json");
 
       var SalesComponent = /*#__PURE__*/function () {
-        function SalesComponent() {
+        function SalesComponent(Srvc, route, router, toaster) {
           _classCallCheck(this, SalesComponent);
 
+          this.Srvc = Srvc;
+          this.route = route;
+          this.router = router;
+          this.toaster = toaster;
           this.viewPermission = false;
           this.barChart1 = {
-            type: 'Bar',
-            data: data['Bar'],
+            type: "Bar",
+            data: data["Bar"],
             options: {
               seriesBarDistance: 15,
               height: 400,
@@ -6902,7 +6934,7 @@
                 offset: 50
               }
             },
-            responsiveOptions: [['screen and (min-width: 640px)', {
+            responsiveOptions: [["screen and (min-width: 640px)", {
               axisX: {
                 labelInterpolationFnc: function labelInterpolationFnc(value, index) {
                   return index % 1 === 0 ? "".concat(value) : null;
@@ -6912,8 +6944,8 @@
           }; // Line chart
 
           this.lineChart1 = {
-            type: 'Line',
-            data: data['LineWithArea'],
+            type: "Line",
+            data: data["LineWithArea"],
             options: {
               low: 0,
               height: 400,
@@ -6927,10 +6959,10 @@
           key: "ngAfterViewInit",
           value: function ngAfterViewInit() {
             var chart2 = c3__WEBPACK_IMPORTED_MODULE_1__["generate"]({
-              bindto: '#product-sales',
+              bindto: "#product-sales",
               data: {
-                columns: [['user', 5, 6, 3, 7, 9, 10, 14, 12, 11, 9, 8, 7, 10, 6, 12, 10, 8]],
-                type: 'spline'
+                columns: [["user", 5, 6, 3, 7, 9, 10, 14, 12, 11, 9, 8, 7, 10, 6, 12, 10, 8]],
+                type: "spline"
               },
               axis: {
                 y: {
@@ -6957,13 +6989,14 @@
                 hide: false
               },
               color: {
-                pattern: ['#fbb03b']
+                pattern: ["#fbb03b"]
               }
             });
           }
         }, {
           key: "ngOnInit",
           value: function ngOnInit() {
+            this.getData();
             this.permissions = JSON.parse(sessionStorage.getItem("permission"));
 
             if (this.permissions == null) {
@@ -6972,13 +7005,52 @@
               this.viewPermission = this.permissions[0].isView;
             }
           }
+        }, {
+          key: "getData",
+          value: function getData() {
+            var _this = this;
+
+            var data = {
+              type: this.type,
+              subType: this.subType
+            };
+
+            if (!this.type) {
+              delete data.type;
+            }
+
+            if (!this.subType) {
+              delete data.subType;
+            }
+
+            this.Srvc.getAll(data).subscribe(function (res) {
+              if (res.statusCode == 401) {
+                _this.sessionTerminate();
+              }
+
+              if (res.statusCode == 200) {// this.dataSource = new MatTableDataSource(res?.data?.user);
+              } else {
+                _this.toaster.error(res.message, "Error", {
+                  timeOut: 2000
+                });
+              }
+            });
+          } // Logout if Token is invalid
+
+        }, {
+          key: "sessionTerminate",
+          value: function sessionTerminate() {
+            sweetalert2__WEBPACK_IMPORTED_MODULE_3___default.a.fire("Oops", "Session is Terminated", "error");
+            sessionStorage.removeItem("token");
+            this.router.navigate(["/login"]);
+          }
         }]);
 
         return SalesComponent;
       }();
 
       SalesComponent.ɵfac = function SalesComponent_Factory(t) {
-        return new (t || SalesComponent)();
+        return new (t || SalesComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_services_dashboard_service__WEBPACK_IMPORTED_MODULE_2__["DashboardService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_5__["ActivatedRoute"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](ngx_toastr__WEBPACK_IMPORTED_MODULE_4__["ToastrService"]));
       };
 
       SalesComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
@@ -7000,7 +7072,7 @@
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.viewPermission)("ngIfElse", _r1);
           }
         },
-        directives: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["NgIf"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["NgSelectOption"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ɵangular_packages_forms_forms_x"], ng_chartist__WEBPACK_IMPORTED_MODULE_4__["ChartistComponent"]],
+        directives: [_angular_common__WEBPACK_IMPORTED_MODULE_6__["NgIf"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["NgSelectOption"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["ɵangular_packages_forms_forms_x"], ng_chartist__WEBPACK_IMPORTED_MODULE_8__["ChartistComponent"]],
         styles: ["@-webkit-keyframes dasharray-craziness {\n  0% {\n    stroke-dasharray: 5px;\n  }\n  50% {\n    stroke-dasharray: 6px;\n  }\n  100% {\n    stroke-dasharray: 7px;\n  }\n}\n\n@keyframes dasharray-craziness {\n  0% {\n    stroke-dasharray: 5px;\n  }\n  50% {\n    stroke-dasharray: 6px;\n  }\n  100% {\n    stroke-dasharray: 7px;\n  }\n}\n\n#ct-weather[_ngcontent-%COMP%]   .ct-series-a[_ngcontent-%COMP%]   .ct-line[_ngcontent-%COMP%], #ct-weather[_ngcontent-%COMP%]   .ct-series-a[_ngcontent-%COMP%]   .ct-point[_ngcontent-%COMP%] {\n  stroke: rgba(0, 0, 0, 0.4);\n  stroke-width: 2;\n}\n\n#ct-weather[_ngcontent-%COMP%]   .ct-series-a[_ngcontent-%COMP%]   .ct-area[_ngcontent-%COMP%] {\n  fill: none;\n}\n\n#ct-weather[_ngcontent-%COMP%]   .ct-grid[_ngcontent-%COMP%] {\n  stroke: rgba(255, 255, 255, 0.2);\n  stroke-dasharray: 0px;\n}\n\n#ct-weather[_ngcontent-%COMP%]   .ct-series-a[_ngcontent-%COMP%]   .ct-line[_ngcontent-%COMP%] {\n  -webkit-animation: dasharray-craziness 2s infinite;\n          animation: dasharray-craziness 2s infinite;\n}\n\n#weeksales-bar[_ngcontent-%COMP%]   .ct-series-a[_ngcontent-%COMP%]   .ct-bar[_ngcontent-%COMP%] {\n  stroke: rgba(0, 0, 0, 0.15);\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZGFzaGJvYXJkcy9kYXNoYm9hcmQtY29tcG9uZW50cy9zYWxlcy9zYWxlcy5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFO0lBQ0UscUJBQXFCO0VBQ3ZCO0VBQ0E7SUFDRSxxQkFBcUI7RUFDdkI7RUFDQTtJQUNFLHFCQUFxQjtFQUN2QjtBQUNGOztBQVZBO0VBQ0U7SUFDRSxxQkFBcUI7RUFDdkI7RUFDQTtJQUNFLHFCQUFxQjtFQUN2QjtFQUNBO0lBQ0UscUJBQXFCO0VBQ3ZCO0FBQ0Y7O0FBRUE7O0VBR0ksMEJBQTBCO0VBQzFCLGVBQWU7QUFBbkI7O0FBSkE7RUFRSSxVQUFVO0FBQWQ7O0FBUkE7RUFXSSxnQ0FBZ0M7RUFDaEMscUJBQXFCO0FBQ3pCOztBQWJBO0VBZUksa0RBQTBDO1VBQTFDLDBDQUEwQztBQUU5Qzs7QUFDQTtFQUVJLDJCQUEyQjtBQUMvQiIsImZpbGUiOiJzcmMvYXBwL2Rhc2hib2FyZHMvZGFzaGJvYXJkLWNvbXBvbmVudHMvc2FsZXMvc2FsZXMuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJAa2V5ZnJhbWVzIGRhc2hhcnJheS1jcmF6aW5lc3Mge1xyXG4gIDAlIHtcclxuICAgIHN0cm9rZS1kYXNoYXJyYXk6IDVweDtcclxuICB9XHJcbiAgNTAlIHtcclxuICAgIHN0cm9rZS1kYXNoYXJyYXk6IDZweDtcclxuICB9XHJcbiAgMTAwJSB7XHJcbiAgICBzdHJva2UtZGFzaGFycmF5OiA3cHg7XHJcbiAgfVxyXG59XHJcblxyXG4jY3Qtd2VhdGhlciB7XHJcbiAgLmN0LXNlcmllcy1hIC5jdC1saW5lLFxyXG4gIC5jdC1zZXJpZXMtYSAuY3QtcG9pbnQge1xyXG4gICAgc3Ryb2tlOiByZ2JhKDAsIDAsIDAsIDAuNCk7XHJcbiAgICBzdHJva2Utd2lkdGg6IDI7XHJcbiAgfVxyXG5cclxuICAuY3Qtc2VyaWVzLWEgLmN0LWFyZWEge1xyXG4gICAgZmlsbDogbm9uZTtcclxuICB9XHJcbiAgLmN0LWdyaWQge1xyXG4gICAgc3Ryb2tlOiByZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMik7XHJcbiAgICBzdHJva2UtZGFzaGFycmF5OiAwcHg7XHJcbiAgfVxyXG4gIC5jdC1zZXJpZXMtYSAuY3QtbGluZSB7XHJcbiAgICBhbmltYXRpb246IGRhc2hhcnJheS1jcmF6aW5lc3MgMnMgaW5maW5pdGU7XHJcbiAgfVxyXG59XHJcbiN3ZWVrc2FsZXMtYmFyIHtcclxuICAuY3Qtc2VyaWVzLWEgLmN0LWJhciB7XHJcbiAgICBzdHJva2U6IHJnYmEoMCwgMCwgMCwgMC4xNSk7XHJcbiAgfVxyXG59Il19 */"]
       });
       /*@__PURE__*/
@@ -7009,12 +7081,20 @@
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](SalesComponent, [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
           args: [{
-            selector: 'app-sales',
-            templateUrl: './sales.component.html',
-            styleUrls: ['./sales.component.scss']
+            selector: "app-sales",
+            templateUrl: "./sales.component.html",
+            styleUrls: ["./sales.component.scss"]
           }]
         }], function () {
-          return [];
+          return [{
+            type: src_app_services_dashboard_service__WEBPACK_IMPORTED_MODULE_2__["DashboardService"]
+          }, {
+            type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["ActivatedRoute"]
+          }, {
+            type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]
+          }, {
+            type: ngx_toastr__WEBPACK_IMPORTED_MODULE_4__["ToastrService"]
+          }];
         }, null);
       })();
       /***/
@@ -10587,6 +10667,84 @@
           }]
         }], function () {
           return [];
+        }, null);
+      })();
+      /***/
+
+    },
+
+    /***/
+    "./src/app/services/dashboard.service.ts":
+    /*!***********************************************!*\
+      !*** ./src/app/services/dashboard.service.ts ***!
+      \***********************************************/
+
+    /*! exports provided: DashboardService */
+
+    /***/
+    function srcAppServicesDashboardServiceTs(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "DashboardService", function () {
+        return DashboardService;
+      });
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! @angular/core */
+      "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+      /* harmony import */
+
+
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/common/http */
+      "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+
+      var DashboardService = /*#__PURE__*/function () {
+        function DashboardService(http) {
+          _classCallCheck(this, DashboardService);
+
+          this.http = http;
+          this.baseURL = "http://15.207.74.128:9045/api/v1/";
+        } // Get All
+
+
+        _createClass(DashboardService, [{
+          key: "getAll",
+          value: function getAll(data) {
+            return this.http.post("".concat(this.baseURL, "Admin/dashboard"), data);
+          }
+        }]);
+
+        return DashboardService;
+      }();
+
+      DashboardService.ɵfac = function DashboardService_Factory(t) {
+        return new (t || DashboardService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]));
+      };
+
+      DashboardService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({
+        token: DashboardService,
+        factory: DashboardService.ɵfac,
+        providedIn: 'root'
+      });
+      /*@__PURE__*/
+
+      (function () {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](DashboardService, [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
+          args: [{
+            providedIn: 'root'
+          }]
+        }], function () {
+          return [{
+            type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]
+          }];
         }, null);
       })();
       /***/
