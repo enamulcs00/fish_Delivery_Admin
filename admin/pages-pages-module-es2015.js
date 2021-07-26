@@ -51263,7 +51263,7 @@ __webpack_require__.r(__webpack_exports__);
 class AdminService {
     constructor(http) {
         this.http = http;
-        this.baseURL = "http://15.207.74.128:9041/api/v1/";
+        this.baseURL = "http://15.207.74.128:9045/api/v1/";
     }
     // Get All
     getAll(data) {
@@ -51321,7 +51321,7 @@ __webpack_require__.r(__webpack_exports__);
 class EventTypeService {
     constructor(http) {
         this.http = http;
-        this.baseURL = "http://15.207.74.128:9041/api/v1/";
+        this.baseURL = "http://15.207.74.128:9045/api/v1/";
     }
     // Get Admin Profile
     getEventType() {
@@ -51371,7 +51371,7 @@ __webpack_require__.r(__webpack_exports__);
 class EventsService {
     constructor(http) {
         this.http = http;
-        this.baseURL = "http://15.207.74.128:9041/api/v1/";
+        this.baseURL = "http://15.207.74.128:9045/api/v1/";
     }
     // Get All
     getAll(data) {
@@ -51442,7 +51442,7 @@ __webpack_require__.r(__webpack_exports__);
 class GroupsService {
     constructor(http) {
         this.http = http;
-        this.baseURL = "http://15.207.74.128:9041/api/v1/";
+        this.baseURL = "http://15.207.74.128:9045/api/v1/";
     }
     // Get All
     getAll(data) {
@@ -51500,7 +51500,7 @@ __webpack_require__.r(__webpack_exports__);
 class NotificationService {
     constructor(http) {
         this.http = http;
-        this.baseURL = "http://15.207.74.128:9041/api/v1/";
+        this.baseURL = "http://15.207.74.128:9045/api/v1/";
     }
     // Send Notification
     sendNotification(body) {
@@ -51542,7 +51542,7 @@ __webpack_require__.r(__webpack_exports__);
 class ReportService {
     constructor(http) {
         this.http = http;
-        this.baseURL = "http://15.207.74.128:9041/api/v1/";
+        this.baseURL = "http://15.207.74.128:9045/api/v1/";
     }
     // Get All
     getAll(data) {
@@ -51584,7 +51584,7 @@ __webpack_require__.r(__webpack_exports__);
 class UsersService {
     constructor(http) {
         this.http = http;
-        this.baseURL = "http://15.207.74.128:9041/api/v1/";
+        this.baseURL = "http://15.207.74.128:9045/api/v1/";
     }
     // Get All
     getAll(data) {

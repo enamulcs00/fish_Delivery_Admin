@@ -6,7 +6,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 })
 export class NotificationService {
 
-  baseURL = "http://15.207.74.128:9041/api/v1/";
+  baseURL = "http://15.207.74.128:9045/api/v1/";
 
   constructor(private http: HttpClient) {}
 
