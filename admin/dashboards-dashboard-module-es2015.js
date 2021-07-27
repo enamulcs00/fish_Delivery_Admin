@@ -3804,7 +3804,7 @@ class SalesComponent {
         });
     }
     ngOnInit() {
-        this.getData();
+        // this.getData();
         this.permissions = JSON.parse(sessionStorage.getItem("permission"));
         if (this.permissions == null) {
             this.viewPermission = true;

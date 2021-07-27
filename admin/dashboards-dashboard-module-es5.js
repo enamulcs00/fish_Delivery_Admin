@@ -6996,7 +6996,7 @@
         }, {
           key: "ngOnInit",
           value: function ngOnInit() {
-            this.getData();
+            // this.getData();
             this.permissions = JSON.parse(sessionStorage.getItem("permission"));
 
             if (this.permissions == null) {
