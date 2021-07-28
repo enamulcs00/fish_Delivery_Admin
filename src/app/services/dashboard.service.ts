@@ -14,4 +14,9 @@ export class DashboardService {
   getAll(data) {
     return this.http.post<any>(`${this.baseURL}Admin/dashboard`, data);
   }
+
+  // Get All
+  totalCount() {
+    return this.http.get<any>(`${this.baseURL}Admin/dashboardData`);
+  }
 }

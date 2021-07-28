@@ -1,439 +1,420 @@
-<div *ngIf="viewPermission;else noPermission" class="row">
-    <!-- Column -->
-    <div class="col-md-6 ">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex align-items-center">
-                    <div>
-                        <span class="btn-circle btn-lg btn btn-outline-secondary">
-                            <i class="sl-icon-people"></i>
-                        </span>
-                    </div>
-                    <div class="m-l-10">
-                        <h4 class="card-title ">Number of users</h4>
-                        <h3>600</h3>
-                    </div>
-                    <div class="ml-auto">
-                        <select class="custom-select b-0">
-                            <option selected=""> Daily </option>
-                            <option selected=""> Weekly </option>
-                            <option value="1"> Monthly </option>
-                        </select>
-                    </div>
-                </div>
-                <!-- <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels1" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" [colors]="barChartColors1" (chartClick)="chartClicked($event)">
-            </canvas> -->
-                <div class="linearea">
-                    <x-chartist class="" [data]="lineChart1.data" [type]="lineChart1.type" [options]="lineChart1.options" [responsiveOptions]="lineChart1.responsiveOptions" [events]="lineChart1.events"> </x-chartist>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <div class="col-md-6 ">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex align-items-center">
-                    <div>
-                        <span class="btn-circle btn-lg btn btn-outline-secondary">
-                            <i class="sl-icon-people"></i>
-                        </span>
-                    </div>
-                    <div class="m-l-10">
-                        <h4 class="card-title ">Number of active users</h4>
-                        <h3>100</h3>
-                    </div>
-                    <div class="ml-auto">
-                        <select class="custom-select b-0">
-                          <option selected=""> Daily </option>
-                            <option selected="">Weekly</option>
-                            <option value="1">Monthly</option>
-                        </select>
-                        <!--<ul class="list-inline font-12 dl m-r-10">
-                            <li class="list-inline-item">
-                                <i class="fas fa-dot-circle text-info"></i> Users
-                            </li>
-                             <li class="list-inline-item">
-                                <i class="fas fa-dot-circle text-danger"></i> Iphone</li>
-                        </ul>-->
-                    </div>
-                </div>
-                <!-- <canvas baseChart [datasets]="barChartData1" [labels]="barChartLabels2" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" [colors]="barChartColors1" (chartClick)="chartClicked($event)">
-            </canvas> -->
-                <div class="barchrt">
-                    <x-chartist class="" [data]="barChart1.data" [type]="barChart1.type" [options]="barChart1.options" [responsiveOptions]="barChart1.responsiveOptions" [events]="barChart1.events"> </x-chartist>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <div class="col-md-6 ">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex align-items-center">
-                    <div>
-                        <span class="btn-circle btn-lg btn btn-outline-secondary">
+<div *ngIf="viewPermission ;else noPermission" class="row">
+  <!-- Column -->
+  <div class="col-md-6 ">
+      <div class="card">
+          <div class="card-body">
+              <div class="d-flex align-items-center">
+                  <div>
+                      <span class="btn-circle btn-lg btn btn-outline-secondary">
                           <i class="sl-icon-people"></i>
                       </span>
-                    </div>
-                    <div class="m-l-10">
-                        <h4 class="card-title ">Number of Events</h4>
-                        <h3>600</h3>
-                    </div>
-                    <div class="ml-auto">
-                        <select class="custom-select b-0">
-                          <option selected=""> Daily </option>
-                          <option selected=""> Weekly </option>
-                          <option value="1"> Monthly </option>
+                  </div>
+                  <div class="m-l-10">
+                      <h4 class="card-title ">Number of users</h4>
+                      <h3>{{totalCount?.userCount || "-"}}</h3>
+                  </div>
+                  <div class="ml-auto">
+                      <select (change)="filter($event,1)" [(ngModel)]="one" class="custom-select b-0">
+                          <!-- <option selected=""> Daily </option> -->
+                          <option selected="" value="1"> Weekly </option>
+                          <option value="2"> Monthly </option>
                       </select>
-                    </div>
-                </div>
-                <!-- <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels1" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" [colors]="barChartColors1" (chartClick)="chartClicked($event)">
+                  </div>
+              </div>
+              <!-- <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels1" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" [colors]="barChartColors1" (chartClick)="chartClicked($event)">
           </canvas> -->
-                <div class="linearea">
-                    <x-chartist class="" [data]="lineChart1.data" [type]="lineChart1.type" [options]="lineChart1.options" [responsiveOptions]="lineChart1.responsiveOptions" [events]="lineChart1.events"> </x-chartist>
-                </div>
-            </div>
-        </div>
+              <div class="linearea" *ngIf="userCount && userCount.length>0">
+                  <x-chartist class="" [data]="lineChart1.data" [type]="lineChart1.type" [options]="lineChart1.options" [responsiveOptions]="lineChart1.responsiveOptions" [events]="lineChart1.events"> </x-chartist>
+              </div>
+          </div>
+      </div>
 
-    </div>
-    <div class="col-md-6 ">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex align-items-center">
-                    <div>
-                        <span class="btn-circle btn-lg btn btn-outline-secondary">
+  </div>
+  <div class="col-md-6 ">
+      <div class="card">
+          <div class="card-body">
+              <div class="d-flex align-items-center">
+                  <div>
+                      <span class="btn-circle btn-lg btn btn-outline-secondary">
                           <i class="sl-icon-people"></i>
                       </span>
-                    </div>
-                    <div class="m-l-10">
-                        <h4 class="card-title ">Number of Event attendees</h4>
-                        <h3>100</h3>
-                    </div>
-                    <div class="ml-auto">
-                        <select class="custom-select b-0">
-                          <option selected=""> Daily </option>
-                          <option selected="">Weekly</option>
-                          <option value="1">Monthly</option>
+                  </div>
+                  <div class="m-l-10">
+                      <h4 class="card-title ">Number of active users</h4>
+                      <h3>{{totalCount?.activeUserCount || "-"}}</h3>
+                  </div>
+                  <div class="ml-auto">
+                      <select [(ngModel)]="two" (change)="filter($event,2)" class="custom-select b-0">
+                        <!-- <option selected=""> Daily </option> -->
+                          <option selected="" value="1">Weekly</option>
+                          <option value="2">Monthly</option>
                       </select>
-                        <!--<ul class="list-inline font-12 dl m-r-10">
+                      <!--<ul class="list-inline font-12 dl m-r-10">
                           <li class="list-inline-item">
                               <i class="fas fa-dot-circle text-info"></i> Users
                           </li>
                            <li class="list-inline-item">
                               <i class="fas fa-dot-circle text-danger"></i> Iphone</li>
                       </ul>-->
-                    </div>
-                </div>
-                <!-- <canvas baseChart [datasets]="barChartData1" [labels]="barChartLabels2" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" [colors]="barChartColors1" (chartClick)="chartClicked($event)">
+                  </div>
+              </div>
+              <!-- <canvas baseChart [datasets]="barChartData1" [labels]="barChartLabels2" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" [colors]="barChartColors1" (chartClick)="chartClicked($event)">
           </canvas> -->
-                <div class="barchrt">
-                    <x-chartist class="" [data]="barChart1.data" [type]="barChart1.type" [options]="barChart1.options" [responsiveOptions]="barChart1.responsiveOptions" [events]="barChart1.events"> </x-chartist>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6 ">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex align-items-center">
-                    <div>
-                        <span class="btn-circle btn-lg btn btn-outline-secondary">
-                        <i class="sl-icon-people"></i>
-                    </span>
-                    </div>
-                    <div class="m-l-10">
-                        <h4 class="card-title ">Number of direct messages sent</h4>
-                        <h3>600</h3>
-                    </div>
-                    <div class="ml-auto">
-                        <select class="custom-select b-0">
-                        <option selected=""> Daily </option>
-                        <option selected=""> Weekly </option>
-                        <option value="1"> Monthly </option>
-                    </select>
-                    </div>
-                </div>
-                <!-- <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels1" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" [colors]="barChartColors1" (chartClick)="chartClicked($event)">
-        </canvas> -->
-                <div class="linearea">
-                    <x-chartist class="" [data]="lineChart1.data" [type]="lineChart1.type" [options]="lineChart1.options" [responsiveOptions]="lineChart1.responsiveOptions" [events]="lineChart1.events"> </x-chartist>
-                </div>
-            </div>
-        </div>
+              <div class="barchrt" *ngIf="activeUserCount && activeUserCount.length>0">
+                  <x-chartist class="" [data]="barChart1.data" [type]="barChart1.type" [options]="barChart1.options" [responsiveOptions]="barChart1.responsiveOptions" [events]="barChart1.events"> </x-chartist>
+              </div>
+          </div>
+      </div>
 
-    </div>
-    <div class="col-md-6 ">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex align-items-center">
-                    <div>
-                        <span class="btn-circle btn-lg btn btn-outline-secondary">
+  </div>
+  <div class="col-md-6 ">
+      <div class="card">
+          <div class="card-body">
+              <div class="d-flex align-items-center">
+                  <div>
+                      <span class="btn-circle btn-lg btn btn-outline-secondary">
                         <i class="sl-icon-people"></i>
                     </span>
-                    </div>
-                    <div class="m-l-10">
-                        <h4 class="card-title ">Number of group messages sent</h4>
-                        <h3>100</h3>
-                    </div>
-                    <div class="ml-auto">
-                        <select class="custom-select b-0">
-                          <option selected=""> Daily </option>
-                        <option selected="">Weekly</option>
-                        <option value="1">Monthly</option>
+                  </div>
+                  <div class="m-l-10">
+                      <h4 class="card-title ">Number of Events</h4>
+                      <h3>{{totalCount?.eventCount || "-"}}</h3>
+                  </div>
+
+                  <div class="ml-auto">
+                      <select [(ngModel)]="three" (change)="filter($event,3)" class="custom-select b-0">
+                        <!-- <option selected=""> Daily </option> -->
+                        <option selected="" value="1"> Weekly </option>
+                        <option value="2"> Monthly </option>
                     </select>
-                        <!--<ul class="list-inline font-12 dl m-r-10">
+                  </div>
+              </div>
+              <!-- <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels1" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" [colors]="barChartColors1" (chartClick)="chartClicked($event)">
+        </canvas> -->
+              <div class="linearea" *ngIf="eventCount && eventCount.length>0">
+                  <x-chartist class="" [data]="lineChart2.data" [type]="lineChart1.type" [options]="lineChart1.options" [responsiveOptions]="lineChart1.responsiveOptions" [events]="lineChart1.events"> </x-chartist>
+              </div>
+          </div>
+      </div>
+
+  </div>
+  <div class="col-md-6 ">
+      <div class="card">
+          <div class="card-body">
+              <div class="d-flex align-items-center">
+                  <div>
+                      <span class="btn-circle btn-lg btn btn-outline-secondary">
+                        <i class="sl-icon-people"></i>
+                    </span>
+                  </div>
+                  <div class="m-l-10">
+                      <h4 class="card-title ">Number of Event attendees</h4>
+                      <h3>{{totalCount?.attendingEventCount || "-"}}</h3>
+                  </div>
+                  <div class="ml-auto">
+                      <select [(ngModel)]="four" (change)="filter($event,4)" class="custom-select b-0">
+                        <!-- <option selected=""> Daily </option> -->
+                        <option selected="" value="1">Weekly</option>
+                        <option value="2">Monthly</option>
+                    </select>
+                      <!--<ul class="list-inline font-12 dl m-r-10">
                         <li class="list-inline-item">
                             <i class="fas fa-dot-circle text-info"></i> Users
                         </li>
                          <li class="list-inline-item">
                             <i class="fas fa-dot-circle text-danger"></i> Iphone</li>
                     </ul>-->
-                    </div>
-                </div>
-                <!-- <canvas baseChart [datasets]="barChartData1" [labels]="barChartLabels2" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" [colors]="barChartColors1" (chartClick)="chartClicked($event)">
+                  </div>
+              </div>
+              <!-- <canvas baseChart [datasets]="barChartData1" [labels]="barChartLabels2" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" [colors]="barChartColors1" (chartClick)="chartClicked($event)">
         </canvas> -->
-                <div class="barchrt">
-                    <x-chartist class="" [data]="barChart1.data" [type]="barChart1.type" [options]="barChart1.options" [responsiveOptions]="barChart1.responsiveOptions" [events]="barChart1.events"> </x-chartist>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <div class="col-md-6 ">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex align-items-center">
-                    <div>
-                        <span class="btn-circle btn-lg btn btn-outline-secondary">
+              <div class="barchrt" *ngIf="attendingEventCount && attendingEventCount.length>0">
+                  <x-chartist class="" [data]="barChart2.data" [type]="barChart2.type" [options]="barChart1.options" [responsiveOptions]="barChart1.responsiveOptions" [events]="barChart1.events"> </x-chartist>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="col-md-6 ">
+      <div class="card">
+          <div class="card-body">
+              <div class="d-flex align-items-center">
+                  <div>
+                      <span class="btn-circle btn-lg btn btn-outline-secondary">
                       <i class="sl-icon-people"></i>
                   </span>
-                    </div>
-                    <div class="m-l-10">
-                        <h4 class="card-title ">Number of event messages sent</h4>
-                        <h3>600</h3>
-                    </div>
-                    <div class="ml-auto">
-                        <select class="custom-select b-0">
-                      <option selected=""> Daily </option>
-                      <option selected=""> Weekly </option>
-                      <option value="1"> Monthly </option>
+                  </div>
+                  <div class="m-l-10">
+                      <h4 class="card-title ">Number of direct messages sent</h4>
+                      <h3>{{totalCount?.totalMessageCount || "-"}}</h3>
+                  </div>
+                  <div class="ml-auto">
+                      <select [(ngModel)]="five" (change)="filter($event,5)" class="custom-select b-0">
+                      <!-- <option selected=""> Daily </option> -->
+                      <option selected="" value="1"> Weekly </option>
+                      <option value="2"> Monthly </option>
                   </select>
-                    </div>
-                </div>
-                <!-- <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels1" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" [colors]="barChartColors1" (chartClick)="chartClicked($event)">
+                  </div>
+              </div>
+              <!-- <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels1" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" [colors]="barChartColors1" (chartClick)="chartClicked($event)">
       </canvas> -->
-                <div class="linearea">
-                    <x-chartist class="" [data]="lineChart1.data" [type]="lineChart1.type" [options]="lineChart1.options" [responsiveOptions]="lineChart1.responsiveOptions" [events]="lineChart1.events"> </x-chartist>
-                </div>
-            </div>
-        </div>
+              <div class="linearea" *ngIf="totalMessageCount && totalMessageCount.length>0">
+                  <x-chartist class="" [data]="lineChart3.data" [type]="lineChart1.type" [options]="lineChart1.options" [responsiveOptions]="lineChart1.responsiveOptions" [events]="lineChart1.events"> </x-chartist>
+              </div>
+          </div>
+      </div>
 
-    </div>
-    <div class="col-md-6 ">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex align-items-center">
-                    <div>
-                        <span class="btn-circle btn-lg btn btn-outline-secondary">
+  </div>
+  <div class="col-md-6 ">
+      <div class="card">
+          <div class="card-body">
+              <div class="d-flex align-items-center">
+                  <div>
+                      <span class="btn-circle btn-lg btn btn-outline-secondary">
                       <i class="sl-icon-people"></i>
                   </span>
-                    </div>
-                    <div class="m-l-10">
-                        <h4 class="card-title ">Number of groups</h4>
-                        <h3>100</h3>
-                    </div>
-                    <div class="ml-auto">
-                        <select class="custom-select b-0">
-                          <option selected=""> Daily </option>
-                      <option selected="">Weekly</option>
-                      <option value="1">Monthly</option>
+                  </div>
+                  <div class="m-l-10">
+                      <h4 class="card-title ">Number of group messages sent</h4>
+                      <h3>{{totalCount?.groupMessageCount || "-"}}</h3>
+                  </div>
+                  <div class="ml-auto">
+                      <select [(ngModel)]="six" (change)="filter($event,6)" class="custom-select b-0">
+                        <!-- <option selected=""> Daily </option> -->
+                      <option selected="" value="1">Weekly</option>
+                      <option value="2">Monthly</option>
                   </select>
-                        <!--<ul class="list-inline font-12 dl m-r-10">
+                      <!--<ul class="list-inline font-12 dl m-r-10">
                       <li class="list-inline-item">
                           <i class="fas fa-dot-circle text-info"></i> Users
                       </li>
                        <li class="list-inline-item">
                           <i class="fas fa-dot-circle text-danger"></i> Iphone</li>
                   </ul>-->
-                    </div>
-                </div>
-                <!-- <canvas baseChart [datasets]="barChartData1" [labels]="barChartLabels2" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" [colors]="barChartColors1" (chartClick)="chartClicked($event)">
+                  </div>
+              </div>
+              <!-- <canvas baseChart [datasets]="barChartData1" [labels]="barChartLabels2" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" [colors]="barChartColors1" (chartClick)="chartClicked($event)">
       </canvas> -->
-                <div class="barchrt">
-                    <x-chartist class="" [data]="barChart1.data" [type]="barChart1.type" [options]="barChart1.options" [responsiveOptions]="barChart1.responsiveOptions" [events]="barChart1.events"> </x-chartist>
-                </div>
-            </div>
-        </div>
+              <div class="barchrt" *ngIf="groupMessageCount && groupMessageCount.length>0">
+                  <x-chartist class="" [data]="barChart3.data" [type]="barChart1.type" [options]="barChart1.options" [responsiveOptions]="barChart1.responsiveOptions" [events]="barChart1.events"> </x-chartist>
+              </div>
+          </div>
+      </div>
 
-    </div>
-    <div class="col-md-6 ">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex align-items-center">
-                    <div>
-                        <span class="btn-circle btn-lg btn btn-outline-secondary">
-                          <i class="sl-icon-people"></i>
-                      </span>
-                    </div>
-                    <div class="m-l-10">
-                        <h4 class="card-title ">Event RSVPs Accepted</h4>
-                        <h3>600</h3>
-                    </div>
-                    <div class="ml-auto">
-                        <select class="custom-select b-0">
-                          <option selected=""> Daily </option>
-                          <option selected=""> Weekly </option>
-                          <option value="1"> Monthly </option>
-                      </select>
-                    </div>
-                </div>
-                <!-- <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels1" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" [colors]="barChartColors1" (chartClick)="chartClicked($event)">
-          </canvas> -->
-                <div class="linearea">
-                    <x-chartist class="" [data]="lineChart1.data" [type]="lineChart1.type" [options]="lineChart1.options" [responsiveOptions]="lineChart1.responsiveOptions" [events]="lineChart1.events"> </x-chartist>
-                </div>
-            </div>
-        </div>
+  </div>
+  <div class="col-md-6 ">
+      <div class="card">
+          <div class="card-body">
+              <div class="d-flex align-items-center">
+                  <div>
+                      <span class="btn-circle btn-lg btn btn-outline-secondary">
+                    <i class="sl-icon-people"></i>
+                </span>
+                  </div>
+                  <div class="m-l-10">
+                      <h4 class="card-title ">Number of event messages sent</h4>
+                      <h3>{{totalCount?.eventMessageCount || "-"}}</h3>
+                  </div>
+                  <div class="ml-auto">
+                      <select [(ngModel)]="seven" (change)="filter($event,7)" class="custom-select b-0">
+                    <!-- <option selected=""> Daily </option> -->
+                    <option selected="" value="1"> Weekly </option>
+                    <option value="2"> Monthly </option>
+                </select>
+                  </div>
+              </div>
+              <!-- <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels1" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" [colors]="barChartColors1" (chartClick)="chartClicked($event)">
+    </canvas> -->
+              <div class="linearea" *ngIf="eventMessageCount && eventMessageCount.length>0">
+                  <x-chartist class="" [data]="lineChart4.data" [type]="lineChart4.type" [options]="lineChart1.options" [responsiveOptions]="lineChart1.responsiveOptions" [events]="lineChart1.events"> </x-chartist>
+              </div>
+          </div>
+      </div>
 
-    </div>
-    <div class="col-md-6 ">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex align-items-center">
-                    <div>
-                        <span class="btn-circle btn-lg btn btn-outline-secondary">
-                          <i class="sl-icon-people"></i>
-                      </span>
-                    </div>
-                    <div class="m-l-10">
-                        <h4 class="card-title ">Event RSVPs Declined</h4>
-                        <h3>100</h3>
-                    </div>
-                    <div class="ml-auto">
-                        <select class="custom-select b-0">
-                        <option selected=""> Daily </option>
-                          <option selected="">Weekly</option>
-                          <option value="1">Monthly</option>
-                      </select>
-                        <!--<ul class="list-inline font-12 dl m-r-10">
-                          <li class="list-inline-item">
-                              <i class="fas fa-dot-circle text-info"></i> Users
-                          </li>
-                           <li class="list-inline-item">
-                              <i class="fas fa-dot-circle text-danger"></i> Iphone</li>
-                      </ul>-->
-                    </div>
-                </div>
-                <!-- <canvas baseChart [datasets]="barChartData1" [labels]="barChartLabels2" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" [colors]="barChartColors1" (chartClick)="chartClicked($event)">
-          </canvas> -->
-                <div class="barchrt">
-                    <x-chartist class="" [data]="barChart1.data" [type]="barChart1.type" [options]="barChart1.options" [responsiveOptions]="barChart1.responsiveOptions" [events]="barChart1.events"> </x-chartist>
-                </div>
-            </div>
-        </div>
+  </div>
+  <div class="col-md-6 ">
+      <div class="card">
+          <div class="card-body">
+              <div class="d-flex align-items-center">
+                  <div>
+                      <span class="btn-circle btn-lg btn btn-outline-secondary">
+                    <i class="sl-icon-people"></i>
+                </span>
+                  </div>
+                  <div class="m-l-10">
+                      <h4 class="card-title ">Number of groups</h4>
+                      <h3>{{totalCount?.groupCount || "-"}}</h3>
+                  </div>
+                  <div class="ml-auto">
+                      <select [(ngModel)]="eight" (change)="filter($event,8)" class="custom-select b-0">
+                        <!-- <option selected=""> Daily </option> -->
+                    <option selected="" value="1">Weekly</option>
+                    <option value="2">Monthly</option>
+                </select>
+                      <!--<ul class="list-inline font-12 dl m-r-10">
+                    <li class="list-inline-item">
+                        <i class="fas fa-dot-circle text-info"></i> Users
+                    </li>
+                     <li class="list-inline-item">
+                        <i class="fas fa-dot-circle text-danger"></i> Iphone</li>
+                </ul>-->
+                  </div>
+              </div>
+              <!-- <canvas baseChart [datasets]="barChartData1" [labels]="barChartLabels2" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" [colors]="barChartColors1" (chartClick)="chartClicked($event)">
+    </canvas> -->
+              <div class="barchrt" *ngIf="groupCount && groupCount.length>0">
+                  <x-chartist class="" [data]="barChart4.data" [type]="barChart1.type" [options]="barChart1.options" [responsiveOptions]="barChart1.responsiveOptions" [events]="barChart1.events"> </x-chartist>
+              </div>
+          </div>
+      </div>
 
-    </div>
-    <div class="col-md-6 ">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex align-items-center">
-                    <div>
-                        <span class="btn-circle btn-lg btn btn-outline-secondary">
+  </div>
+  <!-- <div class="col-md-6 ">
+      <div class="card">
+          <div class="card-body">
+              <div class="d-flex align-items-center">
+                  <div>
+                      <span class="btn-circle btn-lg btn btn-outline-secondary">
                         <i class="sl-icon-people"></i>
                     </span>
-                    </div>
-                    <div class="m-l-10">
-                        <h4 class="card-title ">Total Likes for All Events</h4>
-                        <h3>600</h3>
-                    </div>
-                    <div class="ml-auto">
-                        <select class="custom-select b-0">
+                  </div>
+                  <div class="m-l-10">
+                      <h4 class="card-title ">Event RSVPs Accepted</h4>
+                      <h3>600</h3>
+                  </div>
+                  <div class="ml-auto">
+                      <select class="custom-select b-0">
                         <option selected=""> Daily </option>
                         <option selected=""> Weekly </option>
                         <option value="1"> Monthly </option>
                     </select>
-                    </div>
-                </div>
-                <!-- <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels1" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" [colors]="barChartColors1" (chartClick)="chartClicked($event)">
-        </canvas> -->
-                <div class="linearea">
-                    <x-chartist class="" [data]="lineChart1.data" [type]="lineChart1.type" [options]="lineChart1.options" [responsiveOptions]="lineChart1.responsiveOptions" [events]="lineChart1.events"> </x-chartist>
-                </div>
-            </div>
-        </div>
+                  </div>
+              </div>
+              <div class="linearea">
+                  <x-chartist class="" [data]="lineChart1.data" [type]="lineChart1.type" [options]="lineChart1.options" [responsiveOptions]="lineChart1.responsiveOptions" [events]="lineChart1.events"> </x-chartist>
+              </div>
+          </div>
+      </div>
 
-    </div>
-    <div class="col-md-6 ">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex align-items-center">
-                    <div>
-                        <span class="btn-circle btn-lg btn btn-outline-secondary">
+  </div> -->
+  <!-- <div class="col-md-6 ">
+      <div class="card">
+          <div class="card-body">
+              <div class="d-flex align-items-center">
+                  <div>
+                      <span class="btn-circle btn-lg btn btn-outline-secondary">
                         <i class="sl-icon-people"></i>
                     </span>
-                    </div>
-                    <div class="m-l-10">
-                        <h4 class="card-title ">Push Notifications Sent</h4>
-                        <h3>100</h3>
-                    </div>
-                    <div class="ml-auto">
-                        <select class="custom-select b-0">
-                        <option selected=""> Daily </option>
+                  </div>
+                  <div class="m-l-10">
+                      <h4 class="card-title ">Event RSVPs Declined</h4>
+                      <h3>100</h3>
+                  </div>
+                  <div class="ml-auto">
+                      <select class="custom-select b-0">
+                      <option selected=""> Daily </option>
                         <option selected="">Weekly</option>
                         <option value="1">Monthly</option>
                     </select>
-                        <!--<ul class="list-inline font-12 dl m-r-10">
-                        <li class="list-inline-item">
-                            <i class="fas fa-dot-circle text-info"></i> Users
-                        </li>
-                         <li class="list-inline-item">
-                            <i class="fas fa-dot-circle text-danger"></i> Iphone</li>
-                    </ul>-->
-                    </div>
-                </div>
-                <!-- <canvas baseChart [datasets]="barChartData1" [labels]="barChartLabels2" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" [colors]="barChartColors1" (chartClick)="chartClicked($event)">
-        </canvas> -->
-                <div class="barchrt">
-                    <x-chartist class="" [data]="barChart1.data" [type]="barChart1.type" [options]="barChart1.options" [responsiveOptions]="barChart1.responsiveOptions" [events]="barChart1.events"> </x-chartist>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6 ">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex align-items-center">
-                    <div>
-                        <span class="btn-circle btn-lg btn btn-outline-secondary">
+                  </div>
+              </div>
+              <div class="barchrt">
+                  <x-chartist class="" [data]="barChart1.data" [type]="barChart1.type" [options]="barChart1.options" [responsiveOptions]="barChart1.responsiveOptions" [events]="barChart1.events"> </x-chartist>
+              </div>
+          </div>
+      </div>
+
+  </div> -->
+  <div class="col-md-6 ">
+      <div class="card">
+          <div class="card-body">
+              <div class="d-flex align-items-center">
+                  <div>
+                      <span class="btn-circle btn-lg btn btn-outline-secondary">
                       <i class="sl-icon-people"></i>
                   </span>
-                    </div>
-                    <div class="m-l-10">
-                        <h4 class="card-title ">Total Notifications sent</h4>
-                        <h3>600</h3>
-                    </div>
-                    <div class="ml-auto">
-                        <select class="custom-select b-0">
-                      <option selected=""> Daily </option>
-                      <option selected=""> Weekly </option>
-                      <option value="1"> Monthly </option>
+                  </div>
+                  <div class="m-l-10">
+                      <h4 class="card-title ">Total Likes for All Events</h4>
+                      <h3>{{totalCount?.likeCount || "-"}}</h3>
+                  </div>
+                  <div class="ml-auto">
+                      <select [(ngModel)]="nine" (change)="filter($event,9)" class="custom-select b-0">
+                      <!-- <option selected=""> Daily </option> -->
+                      <option selected="" value="1"> Weekly </option>
+                      <option value="2"> Monthly </option>
                   </select>
-                    </div>
-                </div>
-                <!-- <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels1" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" [colors]="barChartColors1" (chartClick)="chartClicked($event)">
+                  </div>
+              </div>
+              <!-- <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels1" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" [colors]="barChartColors1" (chartClick)="chartClicked($event)">
       </canvas> -->
-                <div class="linearea">
-                    <x-chartist class="" [data]="lineChart1.data" [type]="lineChart1.type" [options]="lineChart1.options" [responsiveOptions]="lineChart1.responsiveOptions" [events]="lineChart1.events"> </x-chartist>
-                </div>
-            </div>
-        </div>
+              <div class="linearea" *ngIf="likeCount && likeCount.length>0">
+                  <x-chartist class="" [data]="lineChart5.data" [type]="lineChart1.type" [options]="lineChart1.options" [responsiveOptions]="lineChart1.responsiveOptions" [events]="lineChart1.events"> </x-chartist>
+              </div>
+          </div>
+      </div>
 
-    </div>
+  </div>
+  <!-- <div class="col-md-6 ">
+      <div class="card">
+          <div class="card-body">
+              <div class="d-flex align-items-center">
+                  <div>
+                      <span class="btn-circle btn-lg btn btn-outline-secondary">
+                      <i class="sl-icon-people"></i>
+                  </span>
+                  </div>
+                  <div class="m-l-10">
+                      <h4 class="card-title ">Push Notifications Sent</h4>
+                      <h3>100</h3>
+                  </div>
+                  <div class="ml-auto">
+                      <select class="custom-select b-0">
+                      <option selected=""> Daily </option>
+                      <option selected="">Weekly</option>
+                      <option value="1">Monthly</option>
+                  </select>
+                  </div>
+              </div>
+              <div class="barchrt">
+                  <x-chartist class="" [data]="barChart1.data" [type]="barChart1.type" [options]="barChart1.options" [responsiveOptions]="barChart1.responsiveOptions" [events]="barChart1.events"> </x-chartist>
+              </div>
+          </div>
+      </div>
+  </div> -->
+  <div class="col-md-6 ">
+      <div class="card">
+          <div class="card-body">
+              <div class="d-flex align-items-center">
+                  <div>
+                      <span class="btn-circle btn-lg btn btn-outline-secondary">
+                    <i class="sl-icon-people"></i>
+                </span>
+                  </div>
+                  <div class="m-l-10">
+                      <h4 class="card-title ">Total Notifications sent</h4>
+                      <h3>{{totalCount?.notificationCount || "-"}}</h3>
+                  </div>
+                  <div class="ml-auto">
+                      <select [(ngModel)]="ten" (change)="filter($event,10)" class="custom-select b-0">
+                    <!-- <option selected=""> Daily </option> -->
+                    <option selected="" value="1"> Weekly </option>
+                    <option value="2"> Monthly </option>
+                </select>
+                  </div>
+              </div>
+              <!-- <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels1" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" [colors]="barChartColors1" (chartClick)="chartClicked($event)">
+    </canvas> -->
+              <div class="linearea" *ngIf="notificationCount && notificationCount.length>0">
+                  <x-chartist class="" [data]="barChart5.data" [type]="barChart5.type" [options]="barChart5.options" [responsiveOptions]="barChart5.responsiveOptions" [events]="barChart5.events"> </x-chartist>
+              </div>
+          </div>
+      </div>
+
+  </div>
 </div>
 
 <ng-template #noPermission>
-  <div class="card">
-    <h2 class="m-5 d-flex align-items-center justify-content-center w-100">Welcome to Lasso Sub Admin Panel</h2>
-  </div>
+<div class="card">
+  <h2 class="m-5 d-flex align-items-center justify-content-center w-100">Welcome to Lasso Sub Admin Panel</h2>
+</div>
 </ng-template>
