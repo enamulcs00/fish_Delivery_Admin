@@ -1,18 +1,18 @@
-<div class="row">  
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <div class="form-group">
-                    <select name="" id="" class="form-control">
-                        <option value="">Vendors</option>
-                        <option value="">Driver</option>
-                        <option value="">Users</option>
-                    </select>
-                </div>      
-                <quill-editor [style]="{height: '300px',display: 'inline-block'}"></quill-editor>
-                <button class="btn btn-primary mt-3">Save</button>
+<div class="row">
+  <div class="col-12">
+      <div class="card">
+          <div class="card-body">
+            <form [formGroup]="termsForm">
+              <div>
+              <quill-editor formControlName="data" [style]="{height: '300px',display: 'inline-block'}"></quill-editor>
+              <p class="text-danger" *ngIf="submitted && errorHandling('data', 'required')">
+                *Terms & Conditions are required!
+              </p>
             </div>
-        </div>
+              <button [disabled]="!termsForm.valid" (click)="update()" class="btn btn-primary mt-3">Save</button>
+            </form>
+          </div>
+      </div>
 
-    </div>
+  </div>
 </div>
