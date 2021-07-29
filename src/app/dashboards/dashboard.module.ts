@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
@@ -46,7 +46,7 @@ import {
     UsermapComponent,
     TopsellComponent,
     CheflistComponent,
-    
+
 } from './dashboard-components';
 
 @NgModule({
@@ -57,6 +57,7 @@ import {
         ChartsModule,
         MatSlideToggleModule,
         ChartistModule,
+        ReactiveFormsModule,
         RouterModule.forChild(DashboardRoutes),
         PerfectScrollbarModule,
         CalendarModule.forRoot({
@@ -71,7 +72,7 @@ import {
         Dashboard2Component,
         Dashboard3Component,
         InfocardComponent,
-        ChatComponent, 
+        ChatComponent,
         CommentComponent,
         UsermapComponent,
         ActivityComponent,
