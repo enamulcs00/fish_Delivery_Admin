@@ -30,6 +30,8 @@ import { PERFECT_SCROLLBAR_CONFIG } from "ngx-perfect-scrollbar";
 import { PerfectScrollbarConfigInterface } from "ngx-perfect-scrollbar";
 import { InterceptorInterceptor } from "./authentication/interceptor.interceptor";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { PrivacycmsComponent } from './privacycms/privacycms.component';
+import { TermscmsComponent } from './termscms/termscms.component';
 // import { NgxSpinnerModule } from "ngx-spinner";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -48,6 +50,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NavigationComponent,
     BreadcrumbComponent,
     SidebarComponent,
+    PrivacycmsComponent,
+    TermscmsComponent,
   ],
   imports: [
     // NgxSpinnerModule,

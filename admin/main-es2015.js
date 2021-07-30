@@ -35,6 +35,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Approutes", function() { return Approutes; });
 /* harmony import */ var _layouts_full_full_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./layouts/full/full.component */ "./src/app/layouts/full/full.component.ts");
 /* harmony import */ var _layouts_blank_blank_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./layouts/blank/blank.component */ "./src/app/layouts/blank/blank.component.ts");
+/* harmony import */ var _termscms_termscms_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./termscms/termscms.component */ "./src/app/termscms/termscms.component.ts");
+/* harmony import */ var _privacycms_privacycms_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./privacycms/privacycms.component */ "./src/app/privacycms/privacycms.component.ts");
+
+
 
 
 const Approutes = [
@@ -95,6 +99,14 @@ const Approutes = [
                 loadChildren: () => Promise.all(/*! import() | authentication-authentication-module */[__webpack_require__.e("default~authentication-authentication-module~pages-pages-module"), __webpack_require__.e("authentication-authentication-module")]).then(__webpack_require__.bind(null, /*! ./authentication/authentication.module */ "./src/app/authentication/authentication.module.ts")).then(m => m.AuthenticationModule)
             }
         ]
+    },
+    {
+        path: 'terms_conditions',
+        component: _termscms_termscms_component__WEBPACK_IMPORTED_MODULE_2__["TermscmsComponent"]
+    },
+    {
+        path: 'privacy_policy',
+        component: _privacycms_privacycms_component__WEBPACK_IMPORTED_MODULE_3__["PrivacycmsComponent"]
     },
     {
         path: '**',
@@ -179,6 +191,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material_slide_toggle__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @angular/material/slide-toggle */ "./node_modules/@angular/material/__ivy_ngcc__/fesm2015/slide-toggle.js");
 /* harmony import */ var ngx_perfect_scrollbar__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ngx-perfect-scrollbar */ "./node_modules/ngx-perfect-scrollbar/__ivy_ngcc__/fesm2015/ngx-perfect-scrollbar.js");
 /* harmony import */ var _authentication_interceptor_interceptor__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./authentication/interceptor.interceptor */ "./src/app/authentication/interceptor.interceptor.ts");
+/* harmony import */ var _privacycms_privacycms_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./privacycms/privacycms.component */ "./src/app/privacycms/privacycms.component.ts");
+/* harmony import */ var _termscms_termscms_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./termscms/termscms.component */ "./src/app/termscms/termscms.component.ts");
+
+
 
 
 
@@ -260,7 +276,9 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineInjector
         _layouts_blank_blank_component__WEBPACK_IMPORTED_MODULE_12__["BlankComponent"],
         _shared_header_navigation_navigation_component__WEBPACK_IMPORTED_MODULE_15__["NavigationComponent"],
         _shared_breadcrumb_breadcrumb_component__WEBPACK_IMPORTED_MODULE_17__["BreadcrumbComponent"],
-        _shared_sidebar_sidebar_component__WEBPACK_IMPORTED_MODULE_16__["SidebarComponent"]], imports: [
+        _shared_sidebar_sidebar_component__WEBPACK_IMPORTED_MODULE_16__["SidebarComponent"],
+        _privacycms_privacycms_component__WEBPACK_IMPORTED_MODULE_24__["PrivacycmsComponent"],
+        _termscms_termscms_component__WEBPACK_IMPORTED_MODULE_25__["TermscmsComponent"]], imports: [
         // NgxSpinnerModule,
         _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
         _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -281,6 +299,8 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineInjector
                     _shared_header_navigation_navigation_component__WEBPACK_IMPORTED_MODULE_15__["NavigationComponent"],
                     _shared_breadcrumb_breadcrumb_component__WEBPACK_IMPORTED_MODULE_17__["BreadcrumbComponent"],
                     _shared_sidebar_sidebar_component__WEBPACK_IMPORTED_MODULE_16__["SidebarComponent"],
+                    _privacycms_privacycms_component__WEBPACK_IMPORTED_MODULE_24__["PrivacycmsComponent"],
+                    _termscms_termscms_component__WEBPACK_IMPORTED_MODULE_25__["TermscmsComponent"],
                 ],
                 imports: [
                     // NgxSpinnerModule,
@@ -836,6 +856,114 @@ FullComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComp
             type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["HostListener"],
             args: ['window:resize', ['$event']]
         }] }); })();
+
+
+/***/ }),
+
+/***/ "./src/app/privacycms/privacycms.component.ts":
+/*!****************************************************!*\
+  !*** ./src/app/privacycms/privacycms.component.ts ***!
+  \****************************************************/
+/*! exports provided: PrivacycmsComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PrivacycmsComponent", function() { return PrivacycmsComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var src_app_services_cms_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/services/cms.service */ "./src/app/services/cms.service.ts");
+
+
+
+
+class PrivacycmsComponent {
+    constructor(Srvc) {
+        this.Srvc = Srvc;
+    }
+    ngOnInit() {
+        this.getData();
+    }
+    // Get Terms Data
+    getData() {
+        this.Srvc.getAll().subscribe((res) => {
+            var _a;
+            if (res.statusCode == 200) {
+                this.terms = (_a = res === null || res === void 0 ? void 0 : res.data) === null || _a === void 0 ? void 0 : _a.privacyPolicy;
+            }
+        });
+    }
+}
+PrivacycmsComponent.ɵfac = function PrivacycmsComponent_Factory(t) { return new (t || PrivacycmsComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_services_cms_service__WEBPACK_IMPORTED_MODULE_1__["CmsService"])); };
+PrivacycmsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: PrivacycmsComponent, selectors: [["app-privacycms"]], decls: 9, vars: 1, consts: [[1, "container"], [1, "col-12"], [1, "w-100", "text-center"], ["width", "100px", "src", "assets/images/logo2.svg", "alt", ""], [1, "text-center", "mt-4", "mb-2"], [3, "innerHtml"]], template: function PrivacycmsComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "figure", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "img", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "div", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "div");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "h2", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](7, "Privacy Policy");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](8, "p", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    } if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("innerHtml", ctx.terms, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsanitizeHtml"]);
+    } }, styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3ByaXZhY3ljbXMvcHJpdmFjeWNtcy5jb21wb25lbnQuY3NzIn0= */"] });
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](PrivacycmsComponent, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
+        args: [{
+                selector: 'app-privacycms',
+                templateUrl: './privacycms.component.html',
+                styleUrls: ['./privacycms.component.css']
+            }]
+    }], function () { return [{ type: src_app_services_cms_service__WEBPACK_IMPORTED_MODULE_1__["CmsService"] }]; }, null); })();
+
+
+/***/ }),
+
+/***/ "./src/app/services/cms.service.ts":
+/*!*****************************************!*\
+  !*** ./src/app/services/cms.service.ts ***!
+  \*****************************************/
+/*! exports provided: CmsService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CmsService", function() { return CmsService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+
+
+
+
+class CmsService {
+    constructor(http) {
+        this.http = http;
+        this.baseURL = "http://15.207.74.128:9045/api/v1/";
+    }
+    // Get All
+    getAll() {
+        return this.http.get(`${this.baseURL}Admin/getCms`);
+    }
+    //Update
+    update(data) {
+        return this.http.put(`${this.baseURL}Admin/addCms`, data);
+    }
+}
+CmsService.ɵfac = function CmsService_Factory(t) { return new (t || CmsService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"])); };
+CmsService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: CmsService, factory: CmsService.ɵfac, providedIn: 'root' });
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](CmsService, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return [{ type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] }]; }, null); })();
 
 
 /***/ }),
@@ -2468,6 +2596,72 @@ SpinnerComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineC
             }] }]; }, { backgroundColor: [{
             type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
         }] }); })();
+
+
+/***/ }),
+
+/***/ "./src/app/termscms/termscms.component.ts":
+/*!************************************************!*\
+  !*** ./src/app/termscms/termscms.component.ts ***!
+  \************************************************/
+/*! exports provided: TermscmsComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TermscmsComponent", function() { return TermscmsComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var src_app_services_cms_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/services/cms.service */ "./src/app/services/cms.service.ts");
+
+
+
+
+class TermscmsComponent {
+    constructor(Srvc) {
+        this.Srvc = Srvc;
+    }
+    ngOnInit() {
+        this.getData();
+    }
+    // Get Terms Data
+    getData() {
+        this.Srvc.getAll().subscribe((res) => {
+            var _a;
+            if (res.statusCode == 200) {
+                this.terms = (_a = res === null || res === void 0 ? void 0 : res.data) === null || _a === void 0 ? void 0 : _a.termsAndConditions;
+            }
+        });
+    }
+}
+TermscmsComponent.ɵfac = function TermscmsComponent_Factory(t) { return new (t || TermscmsComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_services_cms_service__WEBPACK_IMPORTED_MODULE_1__["CmsService"])); };
+TermscmsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: TermscmsComponent, selectors: [["app-termscms"]], decls: 9, vars: 1, consts: [[1, "container"], [1, "col-12", "mt-3"], [1, "w-100", "text-center"], ["width", "100px", "src", "assets/images/logo2.svg", "alt", ""], [1, "col-12"], [1, "text-center", "mt-4", "mb-2"], [3, "innerHtml"]], template: function TermscmsComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "figure", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "img", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "div", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "div");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "h2", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](7, "Terms & Conditions");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](8, "p", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    } if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("innerHtml", ctx.terms, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsanitizeHtml"]);
+    } }, styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3Rlcm1zY21zL3Rlcm1zY21zLmNvbXBvbmVudC5jc3MifQ== */"] });
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](TermscmsComponent, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
+        args: [{
+                selector: 'app-termscms',
+                templateUrl: './termscms.component.html',
+                styleUrls: ['./termscms.component.css']
+            }]
+    }], function () { return [{ type: src_app_services_cms_service__WEBPACK_IMPORTED_MODULE_1__["CmsService"] }]; }, null); })();
 
 
 /***/ }),

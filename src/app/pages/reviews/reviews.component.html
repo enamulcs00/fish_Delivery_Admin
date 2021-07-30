@@ -21,7 +21,7 @@
                 <tr>
                   <th>Photo</th>
                   <th>Name</th>
-                  <th>Email Id</th>
+                  <th>Number</th>
                   <!-- <th>Rating</th> -->
                   <th>Comments</th>
                   <th class="text-nowrap">Reported By</th>
@@ -31,13 +31,13 @@
               <tbody>
                 <tr *ngFor="let report of reportData">
                   <td>
-                    <img *ngIf="report?.reportedUserId?.image;else alterImage" [src]="report?.reportedUserId?.image" alt="image" width="60" height="60" class="rounded-circle">
-                    <ng-template #alterImage>
+                    <img *ngIf="report?.reportedUserId?.image;else alterImageHolder" [src]="report?.reportedUserId?.image" alt="image" width="60" height="60" class="rounded-circle">
+                    <ng-template #alterImageHolder>
                       <img  [src]="alterImage" alt="image" width="60" height="60" class="rounded-circle">
                     </ng-template>
                   </td>
                   <td>{{report?.reportedUserId?.userName || "-"}} </td>
-                  <td>{{report?.reportedUserId?.email || "-"}}</td>
+                  <td>{{report?.reportedUserId?.dialCode}}-{{report?.reportedUserId?.phoneNo}}</td>
                   <!-- <td>
                                         <p class="text-warning mb-0 text-nowrap"> <i class="fas fa-star "> </i> <i class="fas fa-star"> </i>
                                             <i class="fas fa-star"> </i> <i class="fas fa-star"> </i> </p>

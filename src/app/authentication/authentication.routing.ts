@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { PrivacycmsComponent } from '../privacycms/privacycms.component';
+import { TermscmsComponent } from '../termscms/termscms.component';
 
 import { NotfoundComponent } from './404/not-found.component';
 import { changepasswordComponent } from './lock/changepassword.component';
@@ -34,7 +36,7 @@ export const AuthenticationRoutes: Routes = [
       {
         path: 'signup2',
         component: Signup2Component
-      }
+      },
     ]
   }
 ];

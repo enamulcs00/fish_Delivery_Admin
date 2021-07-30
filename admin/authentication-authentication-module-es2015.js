@@ -823,7 +823,7 @@ const AuthenticationRoutes = [
             {
                 path: 'signup2',
                 component: _signup2_signup2_component__WEBPACK_IMPORTED_MODULE_5__["Signup2Component"]
-            }
+            },
         ]
     }
 ];

@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { FullComponent } from './layouts/full/full.component';
 import { BlankComponent } from './layouts/blank/blank.component';
+import { TermscmsComponent } from './termscms/termscms.component';
+import { PrivacycmsComponent } from './privacycms/privacycms.component';
 
 
 export const Approutes: Routes = [
@@ -11,7 +13,7 @@ export const Approutes: Routes = [
     component: FullComponent,
     children: [
       { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-      { 
+      {
         path: 'dashboard',
         loadChildren: () => import('./dashboards/dashboard.module').then(m => m.DashboardModule)
       },
@@ -65,6 +67,14 @@ export const Approutes: Routes = [
           () => import('./authentication/authentication.module').then(m => m.AuthenticationModule)
       }
     ]
+  },
+  {
+    path: 'terms_conditions',
+    component: TermscmsComponent
+  },
+  {
+    path: 'privacy_policy',
+    component: PrivacycmsComponent
   },
   {
     path: '**',
