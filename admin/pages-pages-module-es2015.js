@@ -40287,16 +40287,16 @@ class OrderlistComponent {
             if (!obj.maxLength) {
                 delete obj.maxLength;
             }
-            if (!obj.startDate) {
+            if (!obj.startDate || obj.startDate == 'Invalid date') {
                 delete obj.startDate;
             }
-            if (!obj.endDate) {
+            if (!obj.endDate || obj.endDate == 'Invalid date') {
                 delete obj.endDate;
             }
-            if (!obj.startTime) {
+            if (!obj.startTime || obj.startTime == ':undefined') {
                 delete obj.startTime;
             }
-            if (!obj.endTime) {
+            if (!obj.endTime || obj.endTime == ':undefined') {
                 delete obj.endTime;
             }
             if (!obj.address) {
@@ -40361,16 +40361,16 @@ class OrderlistComponent {
             if (!obj.maxLength) {
                 delete obj.maxLength;
             }
-            if (!obj.startDate) {
+            if (!obj.startDate || obj.startDate == 'Invalid date') {
                 delete obj.startDate;
             }
-            if (!obj.endDate) {
+            if (!obj.endDate || obj.endDate == 'Invalid date') {
                 delete obj.endDate;
             }
-            if (!obj.startTime) {
+            if (!obj.startTime || obj.startTime == ':undefined') {
                 delete obj.startTime;
             }
-            if (!obj.endTime) {
+            if (!obj.endTime || obj.endTime == ':undefined') {
                 delete obj.endTime;
             }
             if (!obj.address) {
@@ -40616,18 +40616,18 @@ class OrderlistComponent {
         this.toaster.error("End time cannot come before start time !");
     }
     dateTimeStrictCheck() {
-        // debugger
+        // debugger;
         if (this.startDateCheckValue &&
             this.endDateCheckValue &&
             this.startTimeCheckValue &&
             this.endTimeCheckValue) {
-            // console.log("Lvl 1");
-            if (this.startDateCheckValue == this.currentDate ||
+            console.log("Lvl 1");
+            if (this.startDateCheckValue == this.currentDate &&
                 this.startDateCheckValue == this.endDateCheckValue) {
-                // console.log("Lvl 2")
+                console.log("Lvl 2");
                 if (this.startTimeCheckValue > this.endTimeCheckValue ||
                     this.startTimeCheckValue < this.currentTime) {
-                    // console.log("Lvl 3")
+                    console.log("Lvl 3");
                     this.resetValues();
                 }
             }
@@ -40638,6 +40638,13 @@ class OrderlistComponent {
         if (this.startDateCheckValue && this.startTimeCheckValue) {
             if (this.startDateCheckValue == this.currentDate) {
                 if (this.startTimeCheckValue < this.currentTime) {
+                    this.resetValues();
+                }
+            }
+        }
+        if (this.startDateCheckValue && this.endDateCheckValue && this.startTimeCheckValue && this.endTimeCheckValue) {
+            if (this.startDateCheckValue === this.endDateCheckValue) {
+                if (this.endTimeCheckValue < this.startTimeCheckValue) {
                     this.resetValues();
                 }
             }
