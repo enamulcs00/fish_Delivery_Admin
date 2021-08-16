@@ -661,8 +661,14 @@ export class OrderlistComponent implements OnInit {
     }
 
     // console.log("endTime", this.endTimeCheckValue);
+    this.getEventType();
+    if (row?.eventType?._id){
+      this.selectIcon(row?.eventType?._id);
+    }
+    if (!row?.eventType?._id){
+      this.selectIcon(this.defaultSelection);
+    }
 
-    this.selectIcon(row?.eventType?._id);
     // console.log(row?.eventType?._id);
 
     this.modalService.open(Adddetail, {

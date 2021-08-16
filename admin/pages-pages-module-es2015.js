@@ -40033,7 +40033,7 @@ class OrderlistComponent {
         });
     }
     eventsedit(Adddetail, row) {
-        var _a;
+        var _a, _b, _c;
         this.getCurrentTime();
         this.isAdd = false;
         this.isEdit = true;
@@ -40096,7 +40096,13 @@ class OrderlistComponent {
             this.endTimeCheckValue = this.convertTime12to24(row === null || row === void 0 ? void 0 : row.endTime);
         }
         // console.log("endTime", this.endTimeCheckValue);
-        this.selectIcon((_a = row === null || row === void 0 ? void 0 : row.eventType) === null || _a === void 0 ? void 0 : _a._id);
+        this.getEventType();
+        if ((_a = row === null || row === void 0 ? void 0 : row.eventType) === null || _a === void 0 ? void 0 : _a._id) {
+            this.selectIcon((_b = row === null || row === void 0 ? void 0 : row.eventType) === null || _b === void 0 ? void 0 : _b._id);
+        }
+        if (!((_c = row === null || row === void 0 ? void 0 : row.eventType) === null || _c === void 0 ? void 0 : _c._id)) {
+            this.selectIcon(this.defaultSelection);
+        }
         // console.log(row?.eventType?._id);
         this.modalService.open(Adddetail, {
             backdropClass: "light-blue-backdrop",
