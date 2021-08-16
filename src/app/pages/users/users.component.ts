@@ -94,6 +94,7 @@ export class UsersComponent implements OnInit {
         "events",
         "hosted",
         "groups",
+        "contacts",
         "status",
         "action",
       ];
@@ -108,6 +109,7 @@ export class UsersComponent implements OnInit {
         "events",
         "hosted",
         "groups",
+        "contacts",
         "action",
       ];
     }
