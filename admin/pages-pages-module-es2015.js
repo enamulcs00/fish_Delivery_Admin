@@ -40047,10 +40047,18 @@ class OrderlistComponent {
         this.addEventForm.controls["eventName"].setValue(row === null || row === void 0 ? void 0 : row.eventName);
         this.addEventForm.controls["eventFor"].setValue(row === null || row === void 0 ? void 0 : row.eventFor);
         this.addEventForm.controls["maxLength"].setValue(row === null || row === void 0 ? void 0 : row.maxLength);
-        this.addEventForm.controls["startDate"].setValue(moment__WEBPACK_IMPORTED_MODULE_8__(row === null || row === void 0 ? void 0 : row.startDate).format("YYYY-MM-DD"));
-        this.addEventForm.controls["endDate"].setValue(moment__WEBPACK_IMPORTED_MODULE_8__(row === null || row === void 0 ? void 0 : row.endDate).format("YYYY-MM-DD"));
-        this.addEventForm.controls["startTime"].setValue(this.convertTime12to24(row === null || row === void 0 ? void 0 : row.startTime));
-        this.addEventForm.controls["endTime"].setValue(this.convertTime12to24(row === null || row === void 0 ? void 0 : row.endTime));
+        if (row === null || row === void 0 ? void 0 : row.startDate) {
+            this.addEventForm.controls["startDate"].setValue(moment__WEBPACK_IMPORTED_MODULE_8__(row === null || row === void 0 ? void 0 : row.startDate).format("YYYY-MM-DD"));
+        }
+        if (row === null || row === void 0 ? void 0 : row.endDate) {
+            this.addEventForm.controls["endDate"].setValue(moment__WEBPACK_IMPORTED_MODULE_8__(row === null || row === void 0 ? void 0 : row.endDate).format("YYYY-MM-DD"));
+        }
+        if (row === null || row === void 0 ? void 0 : row.startTime) {
+            this.addEventForm.controls["startTime"].setValue(this.convertTime12to24(row === null || row === void 0 ? void 0 : row.startTime));
+        }
+        if (row === null || row === void 0 ? void 0 : row.endTime) {
+            this.addEventForm.controls["endTime"].setValue(this.convertTime12to24(row === null || row === void 0 ? void 0 : row.endTime));
+        }
         this.addEventForm.controls["address"].setValue(row === null || row === void 0 ? void 0 : row.address);
         this.addEventForm.controls["description"].setValue(row === null || row === void 0 ? void 0 : row.description);
         if ((row === null || row === void 0 ? void 0 : row.eventFor) == 1) {
@@ -40080,9 +40088,13 @@ class OrderlistComponent {
         // console.log("startDate", this.startDateCheckValue);
         this.endDateCheckValue = moment__WEBPACK_IMPORTED_MODULE_8__(row === null || row === void 0 ? void 0 : row.endDate).format("YYYY-MM-DD");
         // console.log("endDate", this.endDateCheckValue);
-        this.startTimeCheckValue = this.convertTime12to24(row === null || row === void 0 ? void 0 : row.startTime);
+        if (row === null || row === void 0 ? void 0 : row.startTime) {
+            this.startTimeCheckValue = this.convertTime12to24(row === null || row === void 0 ? void 0 : row.startTime);
+        }
         // console.log("startTime", this.startTimeCheckValue);
-        this.endTimeCheckValue = this.convertTime12to24(row === null || row === void 0 ? void 0 : row.endTime);
+        if (row === null || row === void 0 ? void 0 : row.endTime) {
+            this.endTimeCheckValue = this.convertTime12to24(row === null || row === void 0 ? void 0 : row.endTime);
+        }
         // console.log("endTime", this.endTimeCheckValue);
         this.selectIcon((_a = row === null || row === void 0 ? void 0 : row.eventType) === null || _a === void 0 ? void 0 : _a._id);
         // console.log(row?.eventType?._id);
@@ -40262,8 +40274,13 @@ class OrderlistComponent {
     submitEvent() {
         this.submitted = true;
         if (this.addEventForm.valid) {
-            this.startTimeConvert = this.tConvert(this.addEventForm.value.startTime);
-            this.endTimeConvert = this.tConvert(this.addEventForm.value.endTime);
+            if (this.addEventForm.value.startTime) {
+                this.startTimeConvert = this.tConvert(this.addEventForm.value.startTime);
+            }
+            ;
+            if (this.addEventForm.value.endTime) {
+                this.endTimeConvert = this.tConvert(this.addEventForm.value.endTime);
+            }
             let obj = {
                 eventType: this.iconID,
                 invitedList: this.usersArray,
@@ -40316,7 +40333,7 @@ class OrderlistComponent {
                     this.iconID = null;
                     // this.ArrayImage = [];
                     this.modalService.dismissAll();
-                    sweetalert2__WEBPACK_IMPORTED_MODULE_5___default.a.fire("Success", res.message, "success");
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_5___default.a.fire("Success", "Event added successfully", "success");
                     this.startTimeCheckValue = "";
                     this.endTimeCheckValue = "";
                     this.startTimeConvert = "";
@@ -40341,6 +40358,13 @@ class OrderlistComponent {
     submitEventEdit() {
         this.submitted = true;
         if (this.addEventForm.valid) {
+            if (this.addEventForm.value.startTime) {
+                this.startTimeConvert = this.tConvert(this.addEventForm.value.startTime);
+            }
+            ;
+            if (this.addEventForm.value.endTime) {
+                this.endTimeConvert = this.tConvert(this.addEventForm.value.endTime);
+            }
             let obj = {
                 eventId: this.editEventID,
                 eventType: this.iconID,
@@ -40350,8 +40374,8 @@ class OrderlistComponent {
                 maxLength: this.addEventForm.value.maxLength,
                 startDate: this.addEventForm.value.startDate,
                 endDate: this.addEventForm.value.endDate,
-                startTime: this.addEventForm.value.startTime,
-                endTime: this.addEventForm.value.endTime,
+                startTime: this.startTimeConvert,
+                endTime: this.endTimeConvert,
                 address: this.addEventForm.value.address,
                 description: this.addEventForm.value.description,
             };
@@ -40395,6 +40419,8 @@ class OrderlistComponent {
                     this.endTimeCheckValue = "";
                     this.startDateCheckValue = "";
                     this.endDateCheckValue = "";
+                    this.startTimeConvert = null;
+                    this.endTimeConvert = null;
                     this.modalService.dismissAll();
                     this.showToggle = false;
                     sweetalert2__WEBPACK_IMPORTED_MODULE_5___default.a.fire("Success", res.message, "success");

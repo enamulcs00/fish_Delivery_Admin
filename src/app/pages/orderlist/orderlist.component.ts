@@ -595,18 +595,27 @@ export class OrderlistComponent implements OnInit {
     this.addEventForm.controls["eventName"].setValue(row?.eventName);
     this.addEventForm.controls["eventFor"].setValue(row?.eventFor);
     this.addEventForm.controls["maxLength"].setValue(row?.maxLength);
-    this.addEventForm.controls["startDate"].setValue(
-      moment(row?.startDate).format("YYYY-MM-DD")
-    );
-    this.addEventForm.controls["endDate"].setValue(
-      moment(row?.endDate).format("YYYY-MM-DD")
-    );
-    this.addEventForm.controls["startTime"].setValue(
-      this.convertTime12to24(row?.startTime)
-    );
-    this.addEventForm.controls["endTime"].setValue(
-      this.convertTime12to24(row?.endTime)
-    );
+    if (row?.startDate){
+      this.addEventForm.controls["startDate"].setValue(
+        moment(row?.startDate).format("YYYY-MM-DD")
+      );
+    }
+    if (row?.endDate){
+      this.addEventForm.controls["endDate"].setValue(
+        moment(row?.endDate).format("YYYY-MM-DD")
+      );
+    }
+    if (row?.startTime){
+      this.addEventForm.controls["startTime"].setValue(
+        this.convertTime12to24(row?.startTime)
+      );
+    }
+    if (row?.endTime){
+      this.addEventForm.controls["endTime"].setValue(
+        this.convertTime12to24(row?.endTime)
+      );
+    }
+
     this.addEventForm.controls["address"].setValue(row?.address);
     this.addEventForm.controls["description"].setValue(row?.description);
     if (row?.eventFor == 1) {
@@ -642,10 +651,15 @@ export class OrderlistComponent implements OnInit {
     this.endDateCheckValue = moment(row?.endDate).format("YYYY-MM-DD");
     // console.log("endDate", this.endDateCheckValue);
 
-    this.startTimeCheckValue = this.convertTime12to24(row?.startTime);
-    // console.log("startTime", this.startTimeCheckValue);
+    if (row?.startTime){
+      this.startTimeCheckValue = this.convertTime12to24(row?.startTime);
+    }
 
-    this.endTimeCheckValue = this.convertTime12to24(row?.endTime);
+    // console.log("startTime", this.startTimeCheckValue);
+    if (row?.endTime){
+      this.endTimeCheckValue = this.convertTime12to24(row?.endTime);
+    }
+
     // console.log("endTime", this.endTimeCheckValue);
 
     this.selectIcon(row?.eventType?._id);
@@ -847,8 +861,13 @@ export class OrderlistComponent implements OnInit {
   submitEvent() {
     this.submitted = true;
     if (this.addEventForm.valid) {
-      this.startTimeConvert = this.tConvert(this.addEventForm.value.startTime);
-      this.endTimeConvert = this.tConvert(this.addEventForm.value.endTime);
+      if (this.addEventForm.value.startTime){
+        this.startTimeConvert = this.tConvert(this.addEventForm.value.startTime);
+      };
+      if (this.addEventForm.value.endTime){
+        this.endTimeConvert = this.tConvert(this.addEventForm.value.endTime);
+      }
+
       let obj = {
         eventType: this.iconID,
         invitedList: this.usersArray,
@@ -903,11 +922,12 @@ export class OrderlistComponent implements OnInit {
             this.iconID = null;
             // this.ArrayImage = [];
             this.modalService.dismissAll();
-            Swal.fire("Success", res.message, "success");
+            Swal.fire("Success", "Event added successfully", "success");
             this.startTimeCheckValue = "";
             this.endTimeCheckValue = "";
             this.startTimeConvert = "";
             this.endTimeConvert = "";
+
             this.startDateCheckValue = "";
             this.endDateCheckValue = "";
             this.showToggle = false;
@@ -929,6 +949,12 @@ export class OrderlistComponent implements OnInit {
   submitEventEdit() {
     this.submitted = true;
     if (this.addEventForm.valid) {
+      if (this.addEventForm.value.startTime){
+        this.startTimeConvert = this.tConvert(this.addEventForm.value.startTime);
+      };
+      if (this.addEventForm.value.endTime){
+        this.endTimeConvert = this.tConvert(this.addEventForm.value.endTime);
+      }
       let obj = {
         eventId: this.editEventID,
         eventType: this.iconID,
@@ -938,8 +964,8 @@ export class OrderlistComponent implements OnInit {
         maxLength: this.addEventForm.value.maxLength,
         startDate: this.addEventForm.value.startDate,
         endDate: this.addEventForm.value.endDate,
-        startTime: this.addEventForm.value.startTime,
-        endTime: this.addEventForm.value.endTime,
+        startTime: this.startTimeConvert,
+        endTime: this.endTimeConvert,
         address: this.addEventForm.value.address,
         description: this.addEventForm.value.description,
       };
@@ -987,6 +1013,8 @@ export class OrderlistComponent implements OnInit {
             this.endTimeCheckValue = "";
             this.startDateCheckValue = "";
             this.endDateCheckValue = "";
+            this.startTimeConvert = null;
+            this.endTimeConvert = null;
             this.modalService.dismissAll();
             this.showToggle = false;
             Swal.fire("Success", res.message, "success");
