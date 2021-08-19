@@ -147,9 +147,9 @@ export class OrderlistComponent implements OnInit {
         [
           // Validators.required,
           Validators.min(0),
-          Validators.max(9999),
+          Validators.max(10000),
           Validators.minLength(1),
-          Validators.maxLength(4),
+          Validators.maxLength(5),
         ],
       ],
 

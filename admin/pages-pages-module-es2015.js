@@ -38747,7 +38747,7 @@ function OrderlistComponent_ng_template_12_small_28_Template(rf, ctx) { if (rf &
 } }
 function OrderlistComponent_ng_template_12_small_34_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "small", 151);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, " *Please enter valid Max Attendees, limit is 0-9999 ! ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, " *Please enter valid Max Attendees (Max limit - 10000) ");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } }
 function OrderlistComponent_ng_template_12_small_40_Template(rf, ctx) { if (rf & 1) {
@@ -39653,9 +39653,9 @@ class OrderlistComponent {
                 [
                     // Validators.required,
                     _angular_forms__WEBPACK_IMPORTED_MODULE_10__["Validators"].min(0),
-                    _angular_forms__WEBPACK_IMPORTED_MODULE_10__["Validators"].max(9999),
+                    _angular_forms__WEBPACK_IMPORTED_MODULE_10__["Validators"].max(10000),
                     _angular_forms__WEBPACK_IMPORTED_MODULE_10__["Validators"].minLength(1),
-                    _angular_forms__WEBPACK_IMPORTED_MODULE_10__["Validators"].maxLength(4),
+                    _angular_forms__WEBPACK_IMPORTED_MODULE_10__["Validators"].maxLength(5),
                 ],
             ],
             startDate: [
