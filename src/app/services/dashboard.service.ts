@@ -7,16 +7,17 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 export class DashboardService {
 
   baseURL = "http://15.207.74.128:9045/api/v1/";
+  clientURL = "https://api.thelassoapp.com/api/v1/";
 
   constructor(private http: HttpClient) {}
 
   // Get All
   getAll(data) {
-    return this.http.post<any>(`${this.baseURL}Admin/dashboard`, data);
+    return this.http.post<any>(`${this.clientURL}Admin/dashboard`, data);
   }
 
   // Get All
   totalCount() {
-    return this.http.get<any>(`${this.baseURL}Admin/dashboardData`);
+    return this.http.get<any>(`${this.clientURL}Admin/dashboardData`);
   }
 }

@@ -182,7 +182,7 @@ export class AdminformComponent implements OnInit {
           },
         ],
       };
-      console.log(obj);
+      // console.log(obj);
       // return;
       this.Srvc.addAdmin(obj).subscribe((res: any) => {
         if (res.statusCode == 401) {

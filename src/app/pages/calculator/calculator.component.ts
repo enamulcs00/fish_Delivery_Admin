@@ -142,27 +142,32 @@ export class CalculatorComponent implements OnInit {
   }
 
   uploadImage() {
-    const body = {
-      eventNumber: this.arrayLength + 1,
-      eventImage: this.imageResPath,
-    };
-    if (!this.imageResPath) {
-      delete body.eventImage;
+    if (this.imageResPath){
+      const body = {
+        eventNumber: this.arrayLength + 1,
+        eventImage: this.imageResPath,
+      };
+      if (!this.imageResPath) {
+        delete body.eventImage;
+      }
+
+      this.Srvc.addImage(body).subscribe((res: any) => {
+        if (res.statusCode == 401) {
+          this.sessionTerminate();
+        }
+        if (res.statusCode == 200) {
+          Swal.fire("Success", "Event image added successfully ", "success");
+          this.ArrayImage = [];
+          this.isUpload = true;
+          this.getAll();
+        } else {
+          Swal.fire("Oops", res.message, "error");
+        }
+      });
+    } else {
+      Swal.fire("Oops", "Please choose event image", "error");
     }
 
-    this.Srvc.addImage(body).subscribe((res: any) => {
-      if (res.statusCode == 401) {
-        this.sessionTerminate();
-      }
-      if (res.statusCode == 200) {
-        Swal.fire("Success", "Event image added successfully ", "success");
-        this.ArrayImage = [];
-        this.isUpload = true;
-        this.getAll();
-      } else {
-        Swal.fire("Oops", res.message, "error");
-      }
-    });
   }
 
   // Logout if Token is invalid

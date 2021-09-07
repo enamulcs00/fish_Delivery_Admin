@@ -85,7 +85,7 @@ export class NotificationComponent implements OnInit {
       if (obj.msgType==1){
         delete obj.userId
       }
-      console.log(obj);
+      // console.log(obj);
       // return;
       this.Srvc.sendNotification(obj).subscribe(
         (res: any) => {

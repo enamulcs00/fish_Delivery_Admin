@@ -7,36 +7,37 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 export class GroupsService {
 
   baseURL = "http://15.207.74.128:9045/api/v1/";
+  clientURL = "https://api.thelassoapp.com/api/v1/";
 
   constructor(private http: HttpClient) {}
 
   // Get All
   getAll(data) {
-    return this.http.post<any>(`${this.baseURL}Admin/getGroup`, data);
+    return this.http.post<any>(`${this.clientURL}Admin/getGroup`, data);
   }
 
   // Get by ID
   getGroup(body){
-    return this.http.post(this.baseURL+"Admin/getGroupById",body);
+    return this.http.post(this.clientURL+"Admin/getGroupById",body);
   }
 
   // Update
   updateGroup(body){
-    return this.http.put(this.baseURL+"Admin/updateGroup",body);
+    return this.http.put(this.clientURL+"Admin/updateGroup",body);
   }
 
   // Add Event
   addGroup(body) {
-    return this.http.post<any>(`${this.baseURL}Admin/createGroup`, body);
+    return this.http.post<any>(`${this.clientURL}Admin/createGroup`, body);
   }
 
   // Upload Photo
   uploadFile(data) {
-    return this.http.post(`${this.baseURL}User/uploadFile`, data);
+    return this.http.post(`${this.clientURL}User/uploadFile`, data);
   }
 
   // Remove Member
   removeMember(body){
-    return this.http.post(this.baseURL+"Admin/removeFromGroup",body);
+    return this.http.post(this.clientURL+"Admin/removeFromGroup",body);
   }
 }

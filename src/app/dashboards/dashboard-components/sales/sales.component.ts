@@ -395,7 +395,7 @@ export class SalesComponent implements AfterViewInit {
     // this.emptyData();
 
       this.Srvc.getAll(data).subscribe((res: any) => {
-        console.log(res.data);
+        // console.log(res.data);
         if (res.statusCode == 401) {
           this.sessionTerminate();
         }
@@ -452,7 +452,7 @@ export class SalesComponent implements AfterViewInit {
           this.barChart3.data.series[0]=this.groupMessageCount;
           this.barChart4.data.series[0]=this.groupCount;
           this.barChart5.data.series[0]=this.notificationCount;
-          console.log(this.lineChart1.data.labels);
+          // console.log(this.lineChart1.data.labels);
         } else {
           this.toaster.error(res.message, "Error", {
             timeOut: 2000,

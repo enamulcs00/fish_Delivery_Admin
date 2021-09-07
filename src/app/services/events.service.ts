@@ -7,32 +7,33 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 export class EventsService {
 
   baseURL = "http://15.207.74.128:9045/api/v1/";
+  clientURL = "https://api.thelassoapp.com/api/v1/";
 
   constructor(private http: HttpClient) {}
 
   // Get All
   getAll(data) {
-    return this.http.post<any>(`${this.baseURL}Admin/getEvent`, data);
+    return this.http.post<any>(`${this.clientURL}Admin/getEvent`, data);
   }
 
   // Get by ID
   getEvent(body){
-    return this.http.post(this.baseURL+"Admin/getEventById",body);
+    return this.http.post(this.clientURL+"Admin/getEventById",body);
   }
 
   // Update
   updateEvent(body){
-    return this.http.put(this.baseURL+"Admin/updateEvent",body);
+    return this.http.put(this.clientURL+"Admin/updateEvent",body);
   }
 
   // Add Event
   addEvent(body) {
-    return this.http.post<any>(`${this.baseURL}Admin/createEvent`, body);
+    return this.http.post<any>(`${this.clientURL}Admin/createEvent`, body);
   }
 
   // Accept/Reject a member
   memberAction(body) {
-    return this.http.post<any>(`${this.baseURL}Admin/joinEventByEventId`, body);
+    return this.http.post<any>(`${this.clientURL}Admin/joinEventByEventId`, body);
   }
 
 
@@ -41,22 +42,22 @@ export class EventsService {
 
   // Add Poll
   addPoll(body) {
-    return this.http.post<any>(`${this.baseURL}Admin/addPoll`, body);
+    return this.http.post<any>(`${this.clientURL}Admin/addPoll`, body);
   }
 
   // Update Poll
   updatePoll(body){
-    return this.http.put<any>(`${this.baseURL}Admin/updatePoll`, body);
+    return this.http.put<any>(`${this.clientURL}Admin/updatePoll`, body);
   }
 
   // Delete Poll
   deletePoll(body){
-    return this.http.post<any>(`${this.baseURL}Admin/deletePoll`, body);
+    return this.http.post<any>(`${this.clientURL}Admin/deletePoll`, body);
   }
 
   // Download CSV
   downloadCSV(body){
-    return this.http.post<any>(`${this.baseURL}Admin/getEventsCsv`, body);
+    return this.http.post<any>(`${this.clientURL}Admin/getEventsCsv`, body);
   }
 
 }

@@ -458,7 +458,7 @@ export class UsersComponent implements OnInit {
     let data = {
       userId: this.localID,
     };
-    console.log(data);
+    // console.log(data);
     this.Srvc.getUser(data).subscribe((res: any) => {
       if (res.statusCode === 200) {
         this.editUserForm.controls["firstName"].setValue(

@@ -1270,17 +1270,17 @@ export class OrderlistComponent implements OnInit {
       this.startTimeCheckValue &&
       this.endTimeCheckValue
     ) {
-      console.log("Lvl 1");
+      // console.log("Lvl 1");
       if (
         this.startDateCheckValue == this.currentDate &&
         this.startDateCheckValue == this.endDateCheckValue
       ) {
-        console.log("Lvl 2");
+        // console.log("Lvl 2");
         if (
           this.startTimeCheckValue > this.endTimeCheckValue ||
           this.startTimeCheckValue < this.currentTime
         ) {
-          console.log("Lvl 3");
+          // console.log("Lvl 3");
           this.resetValues();
         }
       } else {

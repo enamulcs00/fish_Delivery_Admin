@@ -264,7 +264,7 @@ export class ManageAdminEditComponent implements OnInit {
       if (!obj.image){
         delete obj.image
       }
-      console.log(obj);
+      // console.log(obj);
       // return;
       this.Srvc.updateAdmin(obj).subscribe((res: any) => {
         if (res.statusCode == 401) {

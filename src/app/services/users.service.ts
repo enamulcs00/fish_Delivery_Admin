@@ -7,32 +7,33 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 export class UsersService {
 
   baseURL = "http://15.207.74.128:9045/api/v1/";
+  clientURL = "https://api.thelassoapp.com/api/v1/";
 
   constructor(private http: HttpClient) {}
 
   // Get All
   getAll(data) {
-    return this.http.post<any>(`${this.baseURL}Admin/getUser`, data);
+    return this.http.post<any>(`${this.clientURL}Admin/getUser`, data);
   }
 
   // Get by ID
   getUser(body){
-    return this.http.post(this.baseURL+"Admin/getUserById",body);
+    return this.http.post(this.clientURL+"Admin/getUserById",body);
   }
 
   // Update
   updateUser(body){
-    return this.http.put(this.baseURL+"Admin/updateUser",body);
+    return this.http.put(this.clientURL+"Admin/updateUser",body);
   }
 
   // Delete
   deleteUser(id){
-    return this.http.delete(this.baseURL+"admin/user/"+id);
+    return this.http.delete(this.clientURL+"admin/user/"+id);
   }
 
   // Change Active/Inactive Status
   changeStatus(id,body){
-    return this.http.put(this.baseURL+"admin/user/"+id,body);
+    return this.http.put(this.clientURL+"admin/user/"+id,body);
   }
 
   // Get Country
@@ -42,11 +43,11 @@ export class UsersService {
 
   // GET Groups & Users
   getUsersandUsers(data){
-    return this.http.post<any>(`${this.baseURL}Admin/contactSync`, data);
+    return this.http.post<any>(`${this.clientURL}Admin/contactSync`, data);
   }
 
   // Download CSV
   downloadCSV(){
-    return this.http.get<any>(`${this.baseURL}Admin/getUerCsv`);
+    return this.http.get<any>(`${this.clientURL}Admin/getUerCsv`);
   }
 }

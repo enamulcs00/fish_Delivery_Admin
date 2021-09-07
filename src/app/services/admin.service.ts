@@ -7,32 +7,33 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 export class AdminService {
 
   baseURL = "http://15.207.74.128:9045/api/v1/";
+  clientURL = "https://api.thelassoapp.com/api/v1/";
 
   constructor(private http: HttpClient) {}
 
   // Get All
   getAll(data) {
-    return this.http.post<any>(`${this.baseURL}Admin/getSubAdmin`, data);
+    return this.http.post<any>(`${this.clientURL}Admin/getSubAdmin`, data);
   }
 
   // Get by ID
   getAdmin(body){
-    return this.http.post(this.baseURL+"Admin/getSubAdminById",body);
+    return this.http.post(this.clientURL+"Admin/getSubAdminById",body);
   }
 
   // Update Sub Admin
   updateAdmin(body){
-    return this.http.post(this.baseURL+"Admin/updateSubAdmin",body);
+    return this.http.post(this.clientURL+"Admin/updateSubAdmin",body);
   }
 
   // Add Sub Admin
   addAdmin(body) {
-    return this.http.post<any>(`${this.baseURL}Admin/addSubAdmin`, body);
+    return this.http.post<any>(`${this.clientURL}Admin/addSubAdmin`, body);
   }
 
   // Upload Photo
   uploadFile(data) {
-    return this.http.post(`${this.baseURL}User/uploadFile`, data);
+    return this.http.post(`${this.clientURL}User/uploadFile`, data);
   }
 
   // Get Country

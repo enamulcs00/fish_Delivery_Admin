@@ -12,37 +12,38 @@ export class OnboardingService {
   public $searchvalue = this.search_value.asObservable();
 
   baseURL = "http://15.207.74.128:9045/api/v1/";
+  clientURL = "https://api.thelassoapp.com/api/v1/";
 
   constructor(private http: HttpClient) {}
 
   // Login
   login(data) {
-    return this.http.post<any>(this.baseURL+"Admin/login",data);
+    return this.http.post<any>(this.clientURL+"Admin/login",data);
   }
 
   // Forgot Password
   forgotPassword(data) {
-    return this.http.post(`${this.baseURL}Admin/sendNewPasswordInEmail`, data);
+    return this.http.post(`${this.clientURL}Admin/sendNewPasswordInEmail`, data);
   }
 
   // Get Admin Profile
   getProfile() {
-    return this.http.get(`${this.baseURL}Admin/getProfile`);
+    return this.http.get(`${this.clientURL}Admin/getProfile`);
   }
 
   // Upload Photo
   uploadFile(data) {
-    return this.http.post(`${this.baseURL}User/uploadFile`, data);
+    return this.http.post(`${this.clientURL}User/uploadFile`, data);
   }
 
   // Update Admin
   updateAdmin(data) {
-    return this.http.put(`${this.baseURL}Admin/updateProfile`, data);
+    return this.http.put(`${this.clientURL}Admin/updateProfile`, data);
   }
 
   // Change Password
   changePassword(data) {
-    return this.http.post(`${this.baseURL}Admin/changePassword`, data);
+    return this.http.post(`${this.clientURL}Admin/changePassword`, data);
   }
 
   // Token Check
