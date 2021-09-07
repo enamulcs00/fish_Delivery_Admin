@@ -29,7 +29,7 @@
               User</button> -->
           </div>
         </div>
-        <div class="table-responsive">
+        <div class="table-responsive" *ngIf="!noDataToggle;else noDataHolder">
           <table mat-table class=" w-100" [dataSource]="dataSource" matSort>
 
             <ng-container matColumnDef="serial_no">
@@ -139,7 +139,10 @@
             </tr> -->
           </table>
         </div>
-        <mat-paginator [length]="totalUsers" [pageSize]="page" [pageSizeOptions]="[5, 10, 25, 100]"
+        <ng-template #noDataHolder>
+          <h3 class="m-5 d-flex align-items-center justify-content-center w-100">No data found</h3>
+        </ng-template>
+        <mat-paginator *ngIf="!noDataToggle" [length]="totalUsers" [pageSize]="page" [pageSizeOptions]="[5, 10, 25, 100]"
           (page)="onPaginateChange($event)"></mat-paginator>
       </div>
       <ng-template #noPermission>

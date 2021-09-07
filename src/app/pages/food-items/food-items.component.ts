@@ -76,7 +76,7 @@ export class FoodItemsComponent implements OnInit {
   deleteID: any;
   memberList: any;
   groupRemoveID: any;
-  noDataToggle: boolean=false;
+  noDataToggle: boolean=true;
   tempArray: any=[];
   saveStateArray: any=[];
   saveEditStateArray: any;

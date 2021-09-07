@@ -25,7 +25,7 @@ export class AdminComponent implements OnInit {
   totalAdmin: any;
   searchValue: any;
   alterImage: string = "../../../assets/images/users/admin.png";
-  noDataToggle: boolean=false;
+  noDataToggle: boolean=true;
   deleteID: any;
   permissions: any;
   addPermission: boolean = false;

@@ -23,7 +23,7 @@ export class ReviewsComponent implements OnInit {
   alterImage: string = "../../../assets/images/users/admin.png";
   reportData: any;
   searchValue: any;
-  noDataToggle: boolean=false;
+  noDataToggle: boolean=true;
   permissions: any;
   addPermission: boolean = false;
   editPermission: boolean = false;

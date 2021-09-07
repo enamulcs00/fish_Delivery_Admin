@@ -37,6 +37,7 @@ export class UsersComponent implements OnInit {
   closeResult: string;
   alterImage: any = "assets/images/users/admin.png";
   baseURL: any = "http://15.207.74.128:9041";
+  noDataToggle: boolean=true;
 
   //table: any
 
@@ -131,8 +132,16 @@ export class UsersComponent implements OnInit {
         this.sessionTerminate();
       }
       if (res.statusCode == 200) {
-        this.dataSource = new MatTableDataSource(res?.data?.user);
         this.totalUsers = res?.data?.count;
+        if (res?.data?.count){
+          this.noDataToggle = false;
+          this.dataSource = new MatTableDataSource(res?.data?.user);
+        }
+        else {
+          this.noDataToggle = true;
+          this.dataSource=null;
+        }
+
       } else {
         this.toaster.error(res.message, "Error", {
           timeOut: 2000,

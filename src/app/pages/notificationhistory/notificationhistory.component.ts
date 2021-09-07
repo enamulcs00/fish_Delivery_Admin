@@ -22,7 +22,7 @@ export class NotificationhistoryComponent implements OnInit {
   pageindec: any=1;
   searchitem: any;
   searchValue: any;
-  noDataToggle: boolean=false;
+  noDataToggle: boolean=true;
   permissions: any;
   addPermission: boolean = false;
   editPermission: boolean = false;

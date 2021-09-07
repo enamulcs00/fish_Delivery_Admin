@@ -106,7 +106,7 @@ export class OrderlistComponent implements OnInit {
   showToggle: boolean = false;
   memberActionId: any;
   defaultSelection: any;
-  noDataToggle: boolean = false;
+  noDataToggle: boolean = true;
   saveStateArray: any = [];
   dateTime: string;
   currentTime: string;
