@@ -119,6 +119,7 @@ export class OrderlistComponent implements OnInit {
   addPermission: boolean = false;
   editPermission: boolean = false;
   viewPermission: boolean = false;
+  timeZoneInSeconds: any;
 
   constructor(
     private modalService: NgbModal,
@@ -300,6 +301,8 @@ export class OrderlistComponent implements OnInit {
   }
 
   getCurrentTime() {
+    this.timeZoneInSeconds = new Date().getTimezoneOffset() * 60;
+
     this.currentTime = new Date().toLocaleTimeString("en-US", {
       hour12: false,
       hour: "numeric",
@@ -887,6 +890,7 @@ export class OrderlistComponent implements OnInit {
         address: this.addEventForm.value.address,
         description: this.addEventForm.value.description,
         isGuestInvites: this.isGuestInvited,
+        timeZone: this.timeZoneInSeconds
       };
       if (obj.eventFor == 1) {
         obj.isGuestInvites = true;
@@ -974,6 +978,7 @@ export class OrderlistComponent implements OnInit {
         endTime: this.endTimeConvert,
         address: this.addEventForm.value.address,
         description: this.addEventForm.value.description,
+        timeZone: this.timeZoneInSeconds
       };
 
       if (!obj.eventType) {
