@@ -301,7 +301,9 @@ export class OrderlistComponent implements OnInit {
   }
 
   getCurrentTime() {
-    this.timeZoneInSeconds = new Date().getTimezoneOffset() * 60;
+    let zone = new Date().getTimezoneOffset() * 60;
+    this.timeZoneInSeconds = zone * -1;
+    console.log("TimeZone Difference",this.timeZoneInSeconds);
 
     this.currentTime = new Date().toLocaleTimeString("en-US", {
       hour12: false,

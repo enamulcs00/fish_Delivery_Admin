@@ -37,11 +37,11 @@ export class UsersComponent implements OnInit {
   closeResult: string;
   alterImage: any = "assets/images/users/admin.png";
   baseURL: any = "http://15.207.74.128:9041";
-  noDataToggle: boolean=true;
+  noDataToggle: boolean = true;
 
   //table: any
 
-  displayedColumns: string[] = []
+  displayedColumns: string[] = [];
   dataSource: MatTableDataSource<UserData>;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -85,8 +85,8 @@ export class UsersComponent implements OnInit {
       this.editPermission = this.permissions[1].isEdit;
       this.viewPermission = this.permissions[1].isView;
     }
-    if (this.editPermission){
-      this.displayedColumns=[
+    if (this.editPermission) {
+      this.displayedColumns = [
         "serial_no",
         "name",
         "id",
@@ -100,8 +100,8 @@ export class UsersComponent implements OnInit {
         "action",
       ];
     }
-    if (!this.editPermission){
-      this.displayedColumns=[
+    if (!this.editPermission) {
+      this.displayedColumns = [
         "serial_no",
         "name",
         "id",
@@ -133,15 +133,13 @@ export class UsersComponent implements OnInit {
       }
       if (res.statusCode == 200) {
         this.totalUsers = res?.data?.count;
-        if (res?.data?.count){
+        if (res?.data?.count) {
           this.noDataToggle = false;
           this.dataSource = new MatTableDataSource(res?.data?.user);
-        }
-        else {
+        } else {
           this.noDataToggle = true;
-          this.dataSource=null;
+          this.dataSource = null;
         }
-
       } else {
         this.toaster.error(res.message, "Error", {
           timeOut: 2000,
@@ -180,7 +178,7 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  downloadCSV(){
+  downloadCSV() {
     this.Srvc.downloadCSV().subscribe((res: any) => {
       if (res.statusCode == 401) {
         this.sessionTerminate();
@@ -204,9 +202,11 @@ export class UsersComponent implements OnInit {
   search(event) {
     window.clearTimeout(this.timer);
     this.timer = window.setTimeout(() => {
+      this.page = 10;
+      this.pageindec = 1;
       this.searchValue = event.target.value;
       this.getAllUsers();
-    }, 1000);
+    }, 200);
   }
 
   // Pagination
@@ -252,7 +252,6 @@ export class UsersComponent implements OnInit {
     sessionStorage.removeItem("token");
     this.router.navigate(["/login"]);
   }
-
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
