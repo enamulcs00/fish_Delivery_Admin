@@ -34,11 +34,7 @@ export class NotificationhistoryComponent implements OnInit {
     private Srvc: NotificationService,
     private router: Router,
     private toaster: ToastrService
-  ) {}
-
-  ngOnInit(): void {
-    this.getNotifications();
-
+  ) {
     this.permissions = JSON.parse(sessionStorage.getItem("permission"));
     if (this.permissions == null) {
       this.addPermission = true;
@@ -49,6 +45,15 @@ export class NotificationhistoryComponent implements OnInit {
       this.editPermission = this.permissions[7].isEdit;
       this.viewPermission = this.permissions[7].isView;
     }
+  }
+
+  ngOnInit(): void {
+    if (this.viewPermission){
+      this.getNotifications();
+    }
+    
+
+    
   }
 
   getNotifications() {

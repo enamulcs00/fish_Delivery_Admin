@@ -70,11 +70,6 @@ export class UsersComponent implements OnInit {
     private formBuilder: FormBuilder,
     private toaster: ToastrService
   ) {
-    this.dataSource = new MatTableDataSource(this.table);
-  }
-  ngOnInit(): void {
-    this.getAllUsers();
-    this.getCountries();
     this.permissions = JSON.parse(sessionStorage.getItem("permission"));
     if (this.permissions == null) {
       this.addPermission = true;
@@ -113,6 +108,13 @@ export class UsersComponent implements OnInit {
         "contacts",
         "action",
       ];
+    }
+    this.dataSource = new MatTableDataSource(this.table);
+  }
+  ngOnInit(): void {
+    if (this.viewPermission){
+      this.getAllUsers();
+      this.getCountries();
     }
   }
 

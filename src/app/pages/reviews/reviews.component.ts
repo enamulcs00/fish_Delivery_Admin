@@ -36,11 +36,7 @@ export class ReviewsComponent implements OnInit {
     private router: Router,
     private Srvc: ReportService,
     private toaster: ToastrService
-  ) {}
-
-  ngOnInit(): void {
-    this.getAllReports();
-
+  ) {
     this.permissions = JSON.parse(sessionStorage.getItem("permission"));
     if (this.permissions == null) {
       this.addPermission = true;
@@ -50,6 +46,12 @@ export class ReviewsComponent implements OnInit {
       this.addPermission = this.permissions[5].isAdd;
       this.editPermission = this.permissions[5].isEdit;
       this.viewPermission = this.permissions[5].isView;
+    }
+  }
+
+  ngOnInit(): void {
+    if (this.viewPermission){
+      this.getAllReports();
     }
   }
 

@@ -96,8 +96,8 @@
                   <label class="col-md-12">Dial Code</label>
                   <div class="col-md-12">
                     <select type="text" formControlName="dialCode" id="dialCode" class="form-control" placeholder="+91">
-                      <option *ngFor="let dialCode of dialCodeList" value="{{'+'+dialCode.callingCodes}}">
-                        +{{dialCode.callingCodes}} - {{dialCode.name}}</option>
+                      <option *ngFor="let dialCode of dialCodeList" value="{{dialCode.dial_code}}">
+                        {{dialCode.dial_code}} - {{dialCode.name}}</option>
                     </select>
                     <mat-error *ngIf="signUpform.controls['dialCode'].invalid" class="text-danger d-inline-block pt-1">
                       *DialCode is invalid

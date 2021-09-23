@@ -37,8 +37,8 @@
               <div class="form-group">
                 <label class="control-label">Dial Code</label>
                 <select type="text" formControlName="dialCode" id="dialCode" class="form-control" placeholder="+1">
-                  <option *ngFor="let dialCode of dialCodeList" value="{{'+'+dialCode.callingCodes}}">
-                    +{{dialCode.callingCodes}} - {{dialCode.name}}</option>
+                  <option *ngFor="let dialCode of dialCodeList" value="{{dialCode.dial_code}}">
+                    {{dialCode.dial_code}} - {{dialCode.name}}</option>
                 </select>
                 <p class="text-danger" *ngIf="submitted && errorHandling('dialCode', 'required')">
                   *Dial Code is required!

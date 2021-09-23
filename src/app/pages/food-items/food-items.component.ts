@@ -33,7 +33,6 @@ export interface UserData {
   Ordertype: string;
   // foodStatus:string,
   orderStatus: string;
-
 }
 @Component({
   selector: "app-food-items",
@@ -42,7 +41,7 @@ export interface UserData {
 })
 export class FoodItemsComponent implements OnInit {
   closeResult: string;
-  displayedColumns: string[] = []
+  displayedColumns: string[] = [];
   dataSource: MatTableDataSource<UserData>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -51,8 +50,8 @@ export class FoodItemsComponent implements OnInit {
   searchitem: any;
   btnStatus: any = 0;
   isEdit: boolean = false;
-  showToggle: boolean=false;
-  filterName:string='All';
+  showToggle: boolean = false;
+  filterName: string = "All";
   groupData: any;
   totalGroups: any;
   searchValue: any;
@@ -60,9 +59,9 @@ export class FoodItemsComponent implements OnInit {
   fileName: any = "Choose File";
   searchitemUser: any;
   pageUser: any = 5;
-  usersData: any=[];
+  usersData: any = [];
   totalUsers: any;
-  usersInvited:any;
+  usersInvited: any;
   searchValueUser: any;
   visibleToNonMembers: boolean = false;
   addGroupForm: FormGroup;
@@ -76,14 +75,14 @@ export class FoodItemsComponent implements OnInit {
   deleteID: any;
   memberList: any;
   groupRemoveID: any;
-  noDataToggle: boolean=true;
-  tempArray: any=[];
-  saveStateArray: any=[];
+  noDataToggle: boolean = true;
+  tempArray: any = [];
+  saveStateArray: any = [];
   saveEditStateArray: any;
   permissions: any;
   addPermission: boolean = false;
   editPermission: boolean = false;
-  viewPermission:boolean = false;
+  viewPermission: boolean = false;
   constructor(
     private modalService: NgbModal,
     private Srvc: GroupsService,
@@ -93,6 +92,39 @@ export class FoodItemsComponent implements OnInit {
     private formBuilder: FormBuilder,
     private usersService: UsersService
   ) {
+    this.permissions = JSON.parse(sessionStorage.getItem("permission"));
+    if (this.permissions == null) {
+      this.addPermission = true;
+      this.editPermission = true;
+      this.viewPermission = true;
+    } else {
+      this.addPermission = this.permissions[4].isAdd;
+      this.editPermission = this.permissions[4].isEdit;
+      this.viewPermission = this.permissions[4].isView;
+    }
+    if (this.editPermission) {
+      this.displayedColumns = [
+        "Images",
+        "EventName",
+        "Eventtype",
+        "Date",
+        "email",
+        "groupdescription",
+        "Duration",
+        "action",
+      ];
+    }
+    if (!this.editPermission) {
+      this.displayedColumns = [
+        "Images",
+        "EventName",
+        "Eventtype",
+        "Date",
+        "email",
+        "groupdescription",
+        "Duration",
+      ];
+    }
     // this.dataSource = new MatTableDataSource(this.table);
     this.addGroupForm = formBuilder.group({
       groupName: [
@@ -105,13 +137,7 @@ export class FoodItemsComponent implements OnInit {
       ],
       groupFor: ["", [Validators.required]],
       // date: ["", [Validators.required]],
-      description: [
-        "",
-        [
-          Validators.minLength(1),
-          Validators.maxLength(250),
-        ],
-      ],
+      description: ["", [Validators.minLength(1), Validators.maxLength(250)]],
     });
   }
 
@@ -128,45 +154,10 @@ export class FoodItemsComponent implements OnInit {
   // cusinine: string[] = ['Indian', 'Italian ', 'Chiness',];
 
   ngOnInit(): void {
-    this.getAllGroups();
-    this.getUsers();
-
-    this.permissions = JSON.parse(sessionStorage.getItem("permission"));
-    if (this.permissions == null) {
-      this.addPermission = true;
-      this.editPermission = true;
-      this.viewPermission = true;
-    } else {
-      this.addPermission = this.permissions[4].isAdd;
-      this.editPermission = this.permissions[4].isEdit;
-      this.viewPermission = this.permissions[4].isView;
+    if (this.viewPermission) {
+      this.getAllGroups();
+      this.getUsers();
     }
-    // console.log("Add",this.addPermission);
-    // console.log("Edit",this.editPermission);
-    if (this.editPermission){
-      this.displayedColumns=[
-        "Images",
-        "EventName",
-        "Eventtype",
-        "Date",
-        "email",
-        "groupdescription",
-        "Duration",
-        "action",
-      ];
-    }
-    if (!this.editPermission){
-      this.displayedColumns=[
-        "Images",
-        "EventName",
-        "Eventtype",
-        "Date",
-        "email",
-        "groupdescription",
-        "Duration",
-      ];
-    }
-
   }
 
   ngAfterViewInit() {
@@ -210,14 +201,12 @@ export class FoodItemsComponent implements OnInit {
     });
   }
 
-  showInvites(e){
-    if (e.target.value=="2"){
+  showInvites(e) {
+    if (e.target.value == "2") {
       this.showToggle = true;
-    }
-    else {
+    } else {
       this.showToggle = false;
     }
-
   }
 
   // Get Users listing
@@ -264,8 +253,8 @@ export class FoodItemsComponent implements OnInit {
   }
 
   // Filter by Status(Public/Private)
-  filterStatus(value,name) {
-    this.filterName=name;
+  filterStatus(value, name) {
+    this.filterName = name;
     this.btnStatus = value;
     this.getAllGroups();
   }
@@ -306,7 +295,6 @@ export class FoodItemsComponent implements OnInit {
     }
   }
 
-
   userDeleteModal(userDelete, id) {
     this.deleteID = id;
     this.modalService.open(userDelete, {
@@ -336,7 +324,7 @@ export class FoodItemsComponent implements OnInit {
       size: "lg",
     });
   }
-  carModal(car,id) {
+  carModal(car, id) {
     const filteredData = this.groupData.find(
       (element: any) => element._id === id
     );
@@ -349,7 +337,7 @@ export class FoodItemsComponent implements OnInit {
     });
   }
   invitemodal(invite) {
-    this.pageindecUser=1;
+    this.pageindecUser = 1;
     this.getUsers();
     this.modalService.open(invite, {
       backdropClass: "light-blue-backdrop",
@@ -369,19 +357,19 @@ export class FoodItemsComponent implements OnInit {
     }
   }
 
-  saveArray(){
+  saveArray() {
     this.usersArray = this.tempArray;
     this.saveStateArray = this.usersArray;
     this.saveEditStateArray = this.usersArray;
     this.tempArray = [].concat(this.saveStateArray);
   }
 
-  removeArray(){
+  removeArray() {
     this.usersArray = this.saveStateArray;
-    this.tempArray=[].concat(this.usersArray);
+    this.tempArray = [].concat(this.usersArray);
   }
 
-  removeEditArray(){
+  removeEditArray() {
     this.usersArray = this.saveEditStateArray;
     this.tempArray = [].concat(this.usersArray);
   }
@@ -420,11 +408,10 @@ export class FoodItemsComponent implements OnInit {
       this.usersArray.push(user._id);
     }
 
-
     for (var user of row?.invite) {
       this.saveStateArray.push(user._id);
     }
-    this.saveEditStateArray = []
+    this.saveEditStateArray = [];
     this.tempArray = [];
     for (var user of this.usersArray) {
       this.tempArray.push(user);
@@ -433,11 +420,10 @@ export class FoodItemsComponent implements OnInit {
       this.saveEditStateArray.push(user);
     }
 
-
-    if (row?.groupType==1){
+    if (row?.groupType == 1) {
       this.showToggle = false;
     }
-    if (row?.groupType==2){
+    if (row?.groupType == 2) {
       this.showToggle = true;
     }
 
@@ -452,7 +438,6 @@ export class FoodItemsComponent implements OnInit {
   submitGroup() {
     this.submitted = true;
     if (this.addGroupForm.valid) {
-
       let obj = {
         invite: this.usersArray,
         name: this.addGroupForm.value.groupName,
@@ -462,8 +447,8 @@ export class FoodItemsComponent implements OnInit {
         visibileTo: this.visibleToNonMembers,
         image: this.imageResPath,
       };
-      if (obj.groupType==1){
-        obj.visibileTo=true;
+      if (obj.groupType == 1) {
+        obj.visibileTo = true;
       }
       // console.log(obj);
       // return;
@@ -479,7 +464,7 @@ export class FoodItemsComponent implements OnInit {
             this.fileName = "Choose File";
             this.imageResPath = null;
             this.isImageAttached = false;
-            this.showToggle=false;
+            this.showToggle = false;
             this.modalService.dismissAll();
             Swal.fire("Success", res.message, "success");
             this.getAllGroups();
@@ -491,8 +476,6 @@ export class FoodItemsComponent implements OnInit {
           Swal.fire("Oops", "Something went wrong", "error");
         }
       );
-
-
     } else {
       this.toaster.error("Please fill all the required fields");
     }
@@ -555,7 +538,7 @@ export class FoodItemsComponent implements OnInit {
             this.addGroupForm.reset();
             this.usersArray = [];
             this.isEdit = false;
-            this.showToggle=false;
+            this.showToggle = false;
             this.imageResPath = null;
             this.isImageAttached = false;
             this.modalService.dismissAll();
@@ -600,7 +583,7 @@ export class FoodItemsComponent implements OnInit {
   }
 
   // Remove a Member
-  removeMember(id){
+  removeMember(id) {
     const data = {
       groupId: this.groupRemoveID,
       userId: id,
@@ -616,7 +599,7 @@ export class FoodItemsComponent implements OnInit {
         this.modalService.dismissAll();
         setTimeout(() => {
           document.getElementById(this.groupRemoveID).click();
-        },100)
+        }, 100);
       } else {
         Swal.fire("Oops", "Failed to remove member", "error");
       }

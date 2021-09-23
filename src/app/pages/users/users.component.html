@@ -140,7 +140,7 @@
           </table>
         </div>
         <ng-template #noDataHolder>
-          <h3 class="m-5 d-flex align-items-center justify-content-center w-100">No data found</h3>
+          <h3 class="m-5 d-flex align-items-center justify-content-center w-100">Nothing to display right now</h3>
         </ng-template>
         <mat-paginator *ngIf="!noDataToggle" [length]="totalUsers" [pageSize]="page" [pageSizeOptions]="[5, 10, 25, 100]"
           (page)="onPaginateChange($event)"></mat-paginator>
@@ -346,8 +346,8 @@
                   <div class="form-group">
                     <label class="control-label">Dial Code</label>
                     <select type="text" formControlName="dialCode" id="dialCode" class="form-control" placeholder="+91">
-                      <option *ngFor="let dialCode of dialCodeList" value="{{'+'+dialCode.callingCodes}}">
-                        +{{dialCode.callingCodes}} - {{dialCode.name}}</option>
+                      <option *ngFor="let dialCode of dialCodeList" value="{{dialCode.dial_code}}">
+                        {{dialCode.dial_code}} - {{dialCode.name}}</option>
                     </select>
                     <mat-error *ngIf="editUserForm.controls['dialCode'].invalid"
                       class="text-danger d-inline-block pt-1">

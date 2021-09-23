@@ -131,6 +131,60 @@ export class OrderlistComponent implements OnInit {
     private formBuilder: FormBuilder,
     private usersService: UsersService
   ) {
+    this.permissions = JSON.parse(sessionStorage.getItem("permission"));
+    if (this.permissions == null) {
+      this.addPermission = true;
+      this.editPermission = true;
+      this.viewPermission = true;
+    } else {
+      this.addPermission = this.permissions[3].isAdd;
+      this.editPermission = this.permissions[3].isEdit;
+      this.viewPermission = this.permissions[3].isView;
+    }
+    if (this.editPermission) {
+      this.displayedColumns = [
+        "Images",
+        "EventName",
+        "Event_type",
+        "datetime",
+        "box",
+        "Duration",
+        "Durationtime",
+        "Durationdate",
+        "location",
+        "polls",
+        "invited",
+        "invited2",
+        "guest",
+        "attendees",
+        "Waiting",
+        "messagescount",
+        "likes",
+        "action",
+      ];
+    }
+    if (!this.editPermission) {
+      this.displayedColumns = [
+        "Images",
+        "EventName",
+        "Event_type",
+        "datetime",
+        "box",
+        "Duration",
+        "Durationtime",
+        "Durationdate",
+        "location",
+        "polls",
+        "invited",
+        "invited2",
+        "guest",
+        "attendees",
+        "Waiting",
+        "messagescount",
+        "likes",
+      ];
+    }
+
     this.addEventForm = formBuilder.group({
       eventName: [
         "",
@@ -222,72 +276,17 @@ export class OrderlistComponent implements OnInit {
     "Harry Roy",
   ];
   ngOnInit(): void {
-    this.getAllEvents();
-    this.getEventType();
-    this.getCurrentTime();
-
-    this.permissions = JSON.parse(sessionStorage.getItem("permission"));
-    // console.log(this.permissions);
-    if (this.permissions == null) {
-      this.addPermission = true;
-      this.editPermission = true;
-      this.viewPermission = true;
-    } else {
-      this.addPermission = this.permissions[3].isAdd;
-      this.editPermission = this.permissions[3].isEdit;
-      this.viewPermission = this.permissions[3].isView;
-    }
-    // console.log("Add", this.addPermission);
-    // console.log("Edit", this.editPermission);
-    if (this.editPermission) {
-      this.displayedColumns = [
-        "Images",
-        "EventName",
-        "Event_type",
-        "datetime",
-        "box",
-        "Duration",
-        "Durationtime",
-        "Durationdate",
-        "location",
-        "polls",
-        "invited",
-        "invited2",
-        "guest",
-        "attendees",
-        "Waiting",
-        "messagescount",
-        "likes",
-        "action",
-      ];
-    }
-    if (!this.editPermission) {
-      this.displayedColumns = [
-        "Images",
-        "EventName",
-        "Event_type",
-        "datetime",
-        "box",
-        "Duration",
-        "Durationtime",
-        "Durationdate",
-        "location",
-        "polls",
-        "invited",
-        "invited2",
-        "guest",
-        "attendees",
-        "Waiting",
-        "messagescount",
-        "likes",
-      ];
+    if (this.viewPermission) {
+      this.getAllEvents();
+      this.getEventType();
+      this.getCurrentTime();
     }
   }
 
-  downloadCSV(type){
+  downloadCSV(type) {
     let body = {
-      filterType:type
-    }
+      filterType: type,
+    };
     this.Srvc.downloadCSV(body).subscribe((res: any) => {
       if (res.statusCode == 401) {
         this.sessionTerminate();
@@ -303,7 +302,7 @@ export class OrderlistComponent implements OnInit {
   getCurrentTime() {
     let zone = new Date().getTimezoneOffset() * 60;
     this.timeZoneInSeconds = zone * -1;
-    console.log("TimeZone Difference",this.timeZoneInSeconds);
+    console.log("TimeZone Difference", this.timeZoneInSeconds);
 
     this.currentTime = new Date().toLocaleTimeString("en-US", {
       hour12: false,
@@ -364,9 +363,8 @@ export class OrderlistComponent implements OnInit {
           Math.abs(Math.floor(Days)) + " days " + hours.toFixed(2) + " hours"
         );
       }
-    }
-    else {
-      return "TBD"
+    } else {
+      return "TBD";
     }
   }
 
@@ -509,7 +507,7 @@ export class OrderlistComponent implements OnInit {
   // Filter Type
   changeFilterType(filter) {
     this.filterType = filter;
-    this.page= 10;
+    this.page = 10;
     this.pageindec = 1;
     this.getAllEvents();
   }
@@ -600,22 +598,22 @@ export class OrderlistComponent implements OnInit {
     this.addEventForm.controls["eventName"].setValue(row?.eventName);
     this.addEventForm.controls["eventFor"].setValue(row?.eventFor);
     this.addEventForm.controls["maxLength"].setValue(row?.maxLength);
-    if (row?.startDate){
+    if (row?.startDate) {
       this.addEventForm.controls["startDate"].setValue(
         moment(row?.startDate).format("YYYY-MM-DD")
       );
     }
-    if (row?.endDate){
+    if (row?.endDate) {
       this.addEventForm.controls["endDate"].setValue(
         moment(row?.endDate).format("YYYY-MM-DD")
       );
     }
-    if (row?.startTime){
+    if (row?.startTime) {
       this.addEventForm.controls["startTime"].setValue(
         this.convertTime12to24(row?.startTime)
       );
     }
-    if (row?.endTime){
+    if (row?.endTime) {
       this.addEventForm.controls["endTime"].setValue(
         this.convertTime12to24(row?.endTime)
       );
@@ -656,21 +654,21 @@ export class OrderlistComponent implements OnInit {
     this.endDateCheckValue = moment(row?.endDate).format("YYYY-MM-DD");
     // console.log("endDate", this.endDateCheckValue);
 
-    if (row?.startTime){
+    if (row?.startTime) {
       this.startTimeCheckValue = this.convertTime12to24(row?.startTime);
     }
 
     // console.log("startTime", this.startTimeCheckValue);
-    if (row?.endTime){
+    if (row?.endTime) {
       this.endTimeCheckValue = this.convertTime12to24(row?.endTime);
     }
 
     // console.log("endTime", this.endTimeCheckValue);
     this.getEventType();
-    if (row?.eventType?._id){
+    if (row?.eventType?._id) {
       this.selectIcon(row?.eventType?._id);
     }
-    if (!row?.eventType?._id){
+    if (!row?.eventType?._id) {
       this.selectIcon(this.defaultSelection);
     }
 
@@ -872,10 +870,12 @@ export class OrderlistComponent implements OnInit {
   submitEvent() {
     this.submitted = true;
     if (this.addEventForm.valid) {
-      if (this.addEventForm.value.startTime){
-        this.startTimeConvert = this.tConvert(this.addEventForm.value.startTime);
-      };
-      if (this.addEventForm.value.endTime){
+      if (this.addEventForm.value.startTime) {
+        this.startTimeConvert = this.tConvert(
+          this.addEventForm.value.startTime
+        );
+      }
+      if (this.addEventForm.value.endTime) {
         this.endTimeConvert = this.tConvert(this.addEventForm.value.endTime);
       }
 
@@ -892,7 +892,7 @@ export class OrderlistComponent implements OnInit {
         address: this.addEventForm.value.address,
         description: this.addEventForm.value.description,
         isGuestInvites: this.isGuestInvited,
-        timeZone: this.timeZoneInSeconds
+        timeZone: this.timeZoneInSeconds,
       };
       if (obj.eventFor == 1) {
         obj.isGuestInvites = true;
@@ -903,16 +903,16 @@ export class OrderlistComponent implements OnInit {
       if (!obj.maxLength) {
         delete obj.maxLength;
       }
-      if (!obj.startDate || obj.startDate=='Invalid date') {
+      if (!obj.startDate || obj.startDate == "Invalid date") {
         delete obj.startDate;
       }
-      if (!obj.endDate || obj.endDate=='Invalid date') {
+      if (!obj.endDate || obj.endDate == "Invalid date") {
         delete obj.endDate;
       }
-      if (!obj.startTime || obj.startTime==':undefined') {
+      if (!obj.startTime || obj.startTime == ":undefined") {
         delete obj.startTime;
       }
-      if (!obj.endTime || obj.endTime==':undefined') {
+      if (!obj.endTime || obj.endTime == ":undefined") {
         delete obj.endTime;
       }
       if (!obj.address) {
@@ -961,10 +961,12 @@ export class OrderlistComponent implements OnInit {
   submitEventEdit() {
     this.submitted = true;
     if (this.addEventForm.valid) {
-      if (this.addEventForm.value.startTime){
-        this.startTimeConvert = this.tConvert(this.addEventForm.value.startTime);
-      };
-      if (this.addEventForm.value.endTime){
+      if (this.addEventForm.value.startTime) {
+        this.startTimeConvert = this.tConvert(
+          this.addEventForm.value.startTime
+        );
+      }
+      if (this.addEventForm.value.endTime) {
         this.endTimeConvert = this.tConvert(this.addEventForm.value.endTime);
       }
       let obj = {
@@ -980,7 +982,7 @@ export class OrderlistComponent implements OnInit {
         endTime: this.endTimeConvert,
         address: this.addEventForm.value.address,
         description: this.addEventForm.value.description,
-        timeZone: this.timeZoneInSeconds
+        timeZone: this.timeZoneInSeconds,
       };
 
       if (!obj.eventType) {
@@ -990,16 +992,16 @@ export class OrderlistComponent implements OnInit {
       if (!obj.maxLength) {
         delete obj.maxLength;
       }
-      if (!obj.startDate || obj.startDate=='Invalid date') {
+      if (!obj.startDate || obj.startDate == "Invalid date") {
         delete obj.startDate;
       }
-      if (!obj.endDate || obj.endDate=='Invalid date') {
+      if (!obj.endDate || obj.endDate == "Invalid date") {
         delete obj.endDate;
       }
-      if (!obj.startTime || obj.startTime==':undefined') {
+      if (!obj.startTime || obj.startTime == ":undefined") {
         delete obj.startTime;
       }
-      if (!obj.endTime || obj.endTime==':undefined') {
+      if (!obj.endTime || obj.endTime == ":undefined") {
         delete obj.endTime;
       }
       if (!obj.address) {
@@ -1301,9 +1303,14 @@ export class OrderlistComponent implements OnInit {
         }
       }
     }
-    if (this.startDateCheckValue && this.endDateCheckValue && this.startTimeCheckValue && this.endTimeCheckValue){
-      if(this.startDateCheckValue === this.endDateCheckValue){
-        if (this.endTimeCheckValue<this.startTimeCheckValue){
+    if (
+      this.startDateCheckValue &&
+      this.endDateCheckValue &&
+      this.startTimeCheckValue &&
+      this.endTimeCheckValue
+    ) {
+      if (this.startDateCheckValue === this.endDateCheckValue) {
+        if (this.endTimeCheckValue < this.startTimeCheckValue) {
           this.resetValues();
         }
       }

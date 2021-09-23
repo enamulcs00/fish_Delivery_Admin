@@ -42,7 +42,7 @@ export class NavigationComponent implements AfterViewInit {
     }
 
     sessionTerminate() {
-      Swal.fire("Oops", "Session is Terminated", "error");
+      // Swal.fire("Oops", "Session is Terminated", "error");
       sessionStorage.removeItem("token");
       this.router.navigate(["/login"]);
     }

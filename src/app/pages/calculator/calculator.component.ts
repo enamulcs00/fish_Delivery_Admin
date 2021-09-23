@@ -35,11 +35,7 @@ export class CalculatorComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private toaster: ToastrService
-  ) {}
-
-  ngOnInit(): void {
-    this.getAll();
-
+  ) {
     this.permissions = JSON.parse(sessionStorage.getItem("permission"));
     if (this.permissions == null) {
       this.addPermission = true;
@@ -50,8 +46,12 @@ export class CalculatorComponent implements OnInit {
       this.editPermission = this.permissions[6].isEdit;
       this.viewPermission = this.permissions[6].isView;
     }
-    // console.log("Add",this.addPermission);
-    // console.log("Edit",this.editPermission);
+  }
+
+  ngOnInit(): void {
+    if (this.viewPermission){
+      this.getAll();
+    }
   }
 
   getAll() {

@@ -63,6 +63,6 @@ export class OnboardingService {
 
   // Get Country
   getCountry() {
-    return this.http.get(`https://restcountries.eu/rest/v2/all`);
+    return this.http.get('assets/country/data.json');
   }
 }

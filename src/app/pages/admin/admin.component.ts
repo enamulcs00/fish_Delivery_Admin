@@ -36,11 +36,7 @@ export class AdminComponent implements OnInit {
     private Srvc: AdminService,
     private toastr: ToastrService,
     private router: Router
-  ) {}
-
-  ngOnInit(): void {
-    this.getAllAdmins();
-
+  ) {
     this.permissions = JSON.parse(sessionStorage.getItem("permission"));
     if (this.permissions == null) {
       this.addPermission = true;
@@ -51,8 +47,12 @@ export class AdminComponent implements OnInit {
       this.editPermission = this.permissions[2].isEdit;
       this.viewPermission = this.permissions[2].isView;
     }
-    // console.log("Add",this.addPermission);
-    // console.log("Edit",this.editPermission);
+  }
+
+  ngOnInit(): void {
+    if (this.viewPermission){
+      this.getAllAdmins();
+    }
   }
 
   // Route to Edit
